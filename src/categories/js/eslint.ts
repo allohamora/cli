@@ -10,7 +10,7 @@ interface Config {
 const nodeTsConfig: Config = {
   dependencies: [
     '@typescript-eslint/eslint-plugin', 
-    '@typescript-eslint/parse',
+    '@typescript-eslint/parser',
     'eslint-config-prettier',
     'eslint-plugin-beautiful-sort',
     'eslint-plugin-prettier',
