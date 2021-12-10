@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "bin": "./bin/cli.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn src/index.ts",
+    "dev": "ts-node-dev --respawn -r tsconfig-paths/register src/index.ts",
     "build": "rimraf ./bin && rollup -c rollup.config.js",
     "start": "npm unlink @allohamora/cli && npm link @allohamora/cli && ./bin/cli.js"
   },
@@ -37,6 +37,7 @@
     "rollup-plugin-preserve-shebang": "^1.0.1",
     "rollup-plugin-typescript2": "^0.31.1",
     "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^3.12.0",
     "typescript": "^4.5.3"
   }
 }
