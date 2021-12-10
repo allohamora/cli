@@ -14,7 +14,9 @@ export default defineConfig({
   },
   external: pkg.dependencies ? Object.keys(pkg.dependencies) : [],
   plugins: [
-    typescript(),
+    typescript({
+      tsconfig: 'tsconfig.build.json'
+    }),
     commonjs(),
     json(),
     shebang()
