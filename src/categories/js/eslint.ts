@@ -1,10 +1,11 @@
 import { createLocalConfigManager, jsState } from "src/utils/config";
 import { addJsonFileToRoot } from "src/utils/fs";
-import { installDevelopmentDependencies } from "src/utils/npm";
+import { addScripts, installDevelopmentDependencies } from "src/utils/npm";
 
 interface Config {
   dependencies: string[],
-  config: Record<string, unknown>
+  config: Record<string, unknown>,
+  scripts: { name: string, script: string }[],
 };
 
 const nodeTsConfig: Config = {
@@ -44,12 +45,17 @@ const nodeTsConfig: Config = {
         },
       ],
     },
-  }
+  },
+  scripts: [
+    { name: 'lint', script: 'eslint' },
+    { name: 'lint:fix', script: 'npm run lint \"{src}/**/*.ts\" -- --fix' }
+  ]
 };
 
 const defaultConfig: Config = {
   dependencies: [],
-  config: {}
+  config: {},
+  scripts: []
 };
 
 const [getConfig] = createLocalConfigManager(jsState, {
@@ -58,8 +64,11 @@ const [getConfig] = createLocalConfigManager(jsState, {
 });
 
 export const eslint = async () => {
-  const { config, dependencies } = getConfig();
+  const { config, dependencies, scripts } = getConfig();
 
   await installDevelopmentDependencies('eslint', ...dependencies);
+  
   await addJsonFileToRoot('.eslintrc.json', config);
+
+  await addScripts(...scripts);
 };
