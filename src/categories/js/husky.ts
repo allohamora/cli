@@ -1,10 +1,10 @@
 import { addScripts, installDevelopmentDependencies, runScript } from "src/utils/npm";
-import { runCommand } from "src/utils/run-command";
+import { spawnCommand } from "src/utils/run-command";
 
 type HookName = 'pre-commit' | 'commit-msg';
 
 export const addHook = async (name: HookName, script: string) => {
-  await runCommand(`npx husky add .husky/${name} "${script}"`);
+  await spawnCommand('npx', ['husky', 'add', `.husky/${name}`, `'${script}'`]);
 };
 
 export const husky = async () => {
