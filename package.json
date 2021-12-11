@@ -1,6 +1,6 @@
 {
   "name": "@allohamora/cli",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Command Line Interface with useful installation scripts",
   "main": "src/index.ts",
   "bin": "./bin/cli.js",
