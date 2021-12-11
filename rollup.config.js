@@ -10,15 +10,15 @@ export default defineConfig({
   output: {
     file: pkg.bin,
     sourcemap: true,
-    format: 'cjs'
+    format: 'cjs',
   },
   external: pkg.dependencies ? Object.keys(pkg.dependencies) : [],
   plugins: [
     typescript({
-      tsconfig: 'tsconfig.build.json'
+      tsconfig: 'tsconfig.build.json',
     }),
     commonjs(),
     json(),
-    shebang()
-  ]
+    shebang(),
+  ],
 });
