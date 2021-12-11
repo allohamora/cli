@@ -12,7 +12,7 @@ const [getConfig] = createLocalConfigManager(jsState, {
   default: defaultConfig
 });
 
-export const commitLint = async () => {
+export const commitlint = async () => {
   const { config, rules } = getConfig();
 
   await installDevelopmentDependencies('@commitlint/cli', rules);

@@ -1,4 +1,4 @@
-import { commitLint } from './commitlint';
+import { commitlint } from './commitlint';
 import { eslint } from './eslint';
 import { husky } from './husky';
 import { lintStaged } from './lint-staged';
@@ -7,7 +7,7 @@ import { standardVersion } from './standard-verstion';
 
 export default {
   husky,
-  commitLint,
+  commitlint,
   prettier,
   standardVersion,
   eslint,
