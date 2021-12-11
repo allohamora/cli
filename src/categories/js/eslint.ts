@@ -48,7 +48,7 @@ const nodeTsConfig: Config = {
   },
   scripts: [
     { name: 'lint', script: 'eslint' },
-    { name: 'lint:fix', script: 'npm run lint "{src}/**/*.ts" -- --fix' },
+    { name: 'lint:fix', script: 'npm run lint "src/**/*.ts" -- --fix' },
   ],
 };
 
