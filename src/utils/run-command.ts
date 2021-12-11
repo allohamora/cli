@@ -7,7 +7,7 @@ export const runCommand = async (command: string) => {
 }
 
 export const spawnCommand = async (command: string, args: string[]) => new Promise((res, rej) => {
-  const child = spawn(command, args, {  stdio: 'inherit' });
+  const child = spawn(command, args);
   
   child.on('error', (err) => rej(err));
   child.on('exit', () => res(undefined));
