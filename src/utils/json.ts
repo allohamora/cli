@@ -1,3 +1,3 @@
-export const stringify = <O extends unknown>(object: O) => {
+export const stringify = <O>(object: O) => {
   return JSON.stringify(object, null, 2);
-}
+};

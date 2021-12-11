@@ -11,5 +11,5 @@ export default {
   prettier,
   standardVersion,
   eslint,
-  lintStaged
+  lintStaged,
 };

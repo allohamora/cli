@@ -1,16 +1,16 @@
-import { createLocalConfigManager, jsState } from "src/utils/config";
-import { addJsonFileToRoot } from "src/utils/fs";
-import { addScripts, installDevelopmentDependencies } from "src/utils/npm";
+import { createLocalConfigManager, jsState } from 'src/utils/config';
+import { addJsonFileToRoot } from 'src/utils/fs';
+import { addScripts, installDevelopmentDependencies } from 'src/utils/npm';
 
 interface Config {
-  dependencies: string[],
-  config: Record<string, unknown>,
-  scripts: { name: string, script: string }[],
-};
+  dependencies: string[];
+  config: Record<string, unknown>;
+  scripts: { name: string; script: string }[];
+}
 
 const nodeTsConfig: Config = {
   dependencies: [
-    '@typescript-eslint/eslint-plugin', 
+    '@typescript-eslint/eslint-plugin',
     '@typescript-eslint/parser',
     'eslint-config-prettier',
     'eslint-plugin-beautiful-sort',
@@ -36,7 +36,7 @@ const nodeTsConfig: Config = {
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-floating-promises': 'warn',
-  
+
       'beautiful-sort/import': [
         'error',
         {
@@ -48,26 +48,26 @@ const nodeTsConfig: Config = {
   },
   scripts: [
     { name: 'lint', script: 'eslint' },
-    { name: 'lint:fix', script: 'npm run lint \"{src}/**/*.ts\" -- --fix' }
-  ]
+    { name: 'lint:fix', script: 'npm run lint "{src}/**/*.ts" -- --fix' },
+  ],
 };
 
 const defaultConfig: Config = {
   dependencies: [],
   config: {},
-  scripts: []
+  scripts: [],
 };
 
 const [getConfig] = createLocalConfigManager(jsState, {
   default: defaultConfig,
-  'node:ts': nodeTsConfig
+  'node:ts': nodeTsConfig,
 });
 
 export const eslint = async () => {
   const { config, dependencies, scripts } = getConfig();
 
   await installDevelopmentDependencies('eslint', ...dependencies);
-  
+
   await addJsonFileToRoot('.eslintrc.json', config);
 
   await addScripts(...scripts);

@@ -17,7 +17,7 @@ export const manyOf = async <C extends string>(message: string, choices: C[]) =>
     name: message,
     message,
     choices,
-    validate: answers => answers.length !== 0
+    validate: (answers) => answers.length !== 0,
   });
 
   return res[message] as C[];

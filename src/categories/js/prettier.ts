@@ -1,6 +1,6 @@
-import { createLocalConfigManager, jsState } from "src/utils/config";
-import { addFileToRoot, addJsonFileToRoot } from "src/utils/fs";
-import { addScripts, installDevelopmentDependencies } from "src/utils/npm"
+import { createLocalConfigManager, jsState } from 'src/utils/config';
+import { addFileToRoot, addJsonFileToRoot } from 'src/utils/fs';
+import { addScripts, installDevelopmentDependencies } from 'src/utils/npm';
 
 const defaultConfig = {
   config: {
@@ -13,20 +13,20 @@ const defaultConfig = {
       {
         files: '*.yml',
         options: {
-          singleQuote: false
-        }
-      }
-    ]
+          singleQuote: false,
+        },
+      },
+    ],
   },
   ignore: ['dist', 'node_modules', 'public', '.husky', 'package-lock.json'],
   scripts: [
     { name: 'format', script: 'prettier' },
-    { name: 'format:fix', script: 'prettier --write .' }
-  ]
-}
+    { name: 'format:fix', script: 'prettier --write .' },
+  ],
+};
 
 const [getConfig] = createLocalConfigManager(jsState, {
-  default: defaultConfig
+  default: defaultConfig,
 });
 
 export const prettier = async () => {
@@ -34,8 +34,8 @@ export const prettier = async () => {
 
   await installDevelopmentDependencies('prettier');
   await addJsonFileToRoot('.prettierrc', config);
-  
+
   await addFileToRoot('.prettierignore', ignore.join('\n'));
-  
+
   await addScripts(...scripts);
-}
+};

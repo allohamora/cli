@@ -1,6 +1,6 @@
-import { createLocalConfigManager, jsState } from "src/utils/config";
-import { addJsonFileToRoot } from "src/utils/fs";
-import { addScripts, addToPackageJson, getPackageJson, installDevelopmentDependencies } from "src/utils/npm"
+import { createLocalConfigManager, jsState } from 'src/utils/config';
+import { addJsonFileToRoot } from 'src/utils/fs';
+import { addScripts, addToPackageJson, getPackageJson, installDevelopmentDependencies } from 'src/utils/npm';
 
 const defaultConfig = {
   createConfig: (repositoryUrl: string) => ({
@@ -12,24 +12,24 @@ const defaultConfig = {
       { type: 'style', hidden: true },
       { type: 'refactor', hidden: true },
       { type: 'perf', hidden: true },
-      { type: 'test', hidden: true }
+      { type: 'test', hidden: true },
     ],
     commitUrlFormat: `${repositoryUrl}/commits/{{hash}}`,
-    compareUrlFormat: `${repositoryUrl}/compare/{{previousTag}}...{{currentTag}}`
+    compareUrlFormat: `${repositoryUrl}/compare/{{previousTag}}...{{currentTag}}`,
   }),
   packageJsonConfig: {
-    skip: { tag: true }
+    skip: { tag: true },
   },
   scripts: [
     { name: 'release', script: 'standard-version' },
     { name: 'release:minor', script: 'standard-version --release-as minor' },
     { name: 'release:patch', script: 'standard-version --release-as patch' },
-    { name: 'release:major', script: 'standard-version --release-as major' }
-  ]
+    { name: 'release:major', script: 'standard-version --release-as major' },
+  ],
 };
 
 const [getConfig] = createLocalConfigManager(jsState, {
-  default: defaultConfig
+  default: defaultConfig,
 });
 
 export const standardVersion = async () => {
@@ -44,4 +44,4 @@ export const standardVersion = async () => {
   await addJsonFileToRoot('.versionrc.json', config);
   await addToPackageJson('standard-version', packageJsonConfig);
   await addScripts(...scripts);
-}
+};

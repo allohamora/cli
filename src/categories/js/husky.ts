@@ -1,8 +1,8 @@
-import { addScripts, installDevelopmentDependencies, runScript } from "src/utils/npm";
-import { spawnCommand } from "src/utils/run-command";
 import fps from 'fs/promises';
 import path from 'path';
-import { ROOT_PATH } from "src/utils/path";
+import { addScripts, installDevelopmentDependencies, runScript } from 'src/utils/npm';
+import { spawnCommand } from 'src/utils/run-command';
+import { ROOT_PATH } from 'src/utils/path';
 
 type HookName = 'pre-commit' | 'commit-msg';
 const ADD_HOOK_PLACEHOLDER = 'placeholder';

@@ -16,7 +16,7 @@
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major",
     "lint": "eslint",
-    "lint:fix": "npm run lint \"{src}/**/*.ts\" -- --fix"
+    "lint:fix": "npm run lint \"src/**/*.ts\" -- --fix"
   },
   "repository": {
     "type": "git",

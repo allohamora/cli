@@ -8,6 +8,6 @@ export const addFileToRoot = async (name: string, content: string) => {
   await fsp.writeFile(filePath, content, { encoding: 'utf-8' });
 };
 
-export const addJsonFileToRoot = async <C extends unknown>(name: string, content: C) => {
+export const addJsonFileToRoot = async <C>(name: string, content: C) => {
   await addFileToRoot(name, stringify(content));
 };
