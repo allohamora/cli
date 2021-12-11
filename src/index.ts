@@ -5,6 +5,7 @@ import { jsState, jsStateValues } from "./utils/config";
 import jsOptions from './categories/js';
 import ora from 'ora';
 import { white } from "./utils/console";
+import { camelize, kebablize } from "./utils/string";
 
 const categories = ['js'] as const;
 const configs = {
@@ -21,15 +22,16 @@ const main = async () => {
   const choosedConfig = await oneOf('choose a config', values);
   setConfig(choosedConfig);
 
-  const choosedOptions = await manyOf('choose a options', Object.keys(options));
+  const kebablizedOptions = Object.keys(options).map(kebablize);
+  const choosedKebablizedOptions = await manyOf('choose a options', kebablizedOptions);
 
   const spinner = ora('starting install').start();
 
-  await choosedOptions.reduce((chain, name) => {
+  await choosedKebablizedOptions.reduce((chain, kebabName) => {
     return chain.then(async () => {
-      const optionName = name as keyof typeof options;
+      const optionName = camelize(kebabName) as keyof typeof options;
 
-      spinner.text = `${name} is installing`;
+      spinner.text = `${kebabName} is installing`;
 
       return await options[optionName]()
     });
