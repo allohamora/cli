@@ -67,8 +67,6 @@ export const eslint = async () => {
   const { config, dependencies, scripts } = getConfig();
 
   await installDevelopmentDependencies('eslint', ...dependencies);
-
   await addJsonFileToRoot('.eslintrc.json', config);
-
   await addScripts(...scripts);
 };

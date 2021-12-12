@@ -34,8 +34,6 @@ export const prettier = async () => {
 
   await installDevelopmentDependencies('prettier');
   await addJsonFileToRoot('.prettierrc', config);
-
   await addFileToRoot('.prettierignore', ignore.join('\n'));
-
   await addScripts(...scripts);
 };
