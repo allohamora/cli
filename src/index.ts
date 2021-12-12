@@ -7,16 +7,16 @@ import { jsState, jsStateValues } from './utils/config';
 import { white } from './utils/console';
 import { camelize, kebablize } from './utils/string';
 
-const categories = ['js'] as const;
-const configs = {
+const categoriesKeys = ['js'] as const;
+const categories = {
   js: { state: jsState, values: jsStateValues, options: jsOptions },
 };
 
 const main = async () => {
   console.log(white(`Wellcome to Allohamora's cli`));
 
-  const choosedCategory = await oneOf('choose a category', categories);
-  const { state, values, options } = configs[choosedCategory];
+  const choosedCategory = await oneOf('choose a category', categoriesKeys);
+  const { state, values, options } = categories[choosedCategory];
 
   const [, setConfig] = state;
   const choosedConfig = await oneOf('choose a config', values);
