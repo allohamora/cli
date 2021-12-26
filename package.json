@@ -10,14 +10,14 @@
     "build": "rimraf ./bin && rollup -c rollup.config.js",
     "start": "npm unlink @allohamora/cli && npm link @allohamora/cli && ./bin/cli.js",
     "prepare": "husky install",
-    "format": "prettier",
+    "format": "prettier .",
     "format:fix": "prettier --write .",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major",
-    "lint": "eslint",
-    "lint:fix": "npm run lint \"src/**/*.ts\" -- --fix"
+    "lint": "eslint \"src/**/*.ts\"",
+    "lint:fix": "eslint \"src/**/*.ts\" --fix"
   },
   "repository": {
     "type": "git",
@@ -45,14 +45,14 @@
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-json": "^4.1.0",
     "@types/inquirer": "^8.1.3",
-    "@typescript-eslint/eslint-plugin": "^5.6.0",
-    "@typescript-eslint/parser": "^5.6.0",
-    "eslint": "^8.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
+    "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-beautiful-sort": "^1.0.6",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
-    "lint-staged": "^12.1.2",
+    "lint-staged": "^12.1.4",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.61.0",
@@ -74,7 +74,7 @@
     }
   },
   "lint-staged": {
-    "*.ts": "npm run lint -- --fix",
-    "*.{js,json,yml,md}": "npm run format -- --write"
+    "*.ts": "eslint --fix",
+    "*.{js,json,yml,md}": "prettier --write"
   }
 }
