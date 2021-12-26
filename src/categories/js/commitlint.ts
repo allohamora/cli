@@ -1,4 +1,4 @@
-import { createLocalConfigManager, jsState } from 'src/utils/config';
+import { jsCategoryState } from 'src/utils/categories';
 import { addJsonFileToRoot } from 'src/utils/fs';
 import { installDevelopmentDependencies } from 'src/utils/npm';
 import { addHook } from './husky';
@@ -8,7 +8,7 @@ const defaultConfig = {
   config: { extends: ['@commitlint/config-conventional'] },
 };
 
-const [getConfig] = createLocalConfigManager(jsState, {
+const [getConfig] = jsCategoryState.useConfigState({
   default: defaultConfig,
 });
 

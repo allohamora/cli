@@ -1,4 +1,4 @@
-import { createLocalConfigManager, jsState } from 'src/utils/config';
+import { jsCategoryState } from 'src/utils/categories';
 import { addFileToRoot, addJsonFileToRoot } from 'src/utils/fs';
 import { addScripts, installDevelopmentDependencies } from 'src/utils/npm';
 
@@ -25,7 +25,7 @@ const defaultConfig = {
   ],
 };
 
-const [getConfig] = createLocalConfigManager(jsState, {
+const [getConfig] = jsCategoryState.useConfigState({
   default: defaultConfig,
 });
 

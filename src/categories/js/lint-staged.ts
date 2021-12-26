@@ -1,4 +1,4 @@
-import { createLocalConfigManager, jsState } from 'src/utils/config';
+import { jsCategoryState } from 'src/utils/categories';
 import { addToPackageJson, installDevelopmentDependencies } from 'src/utils/npm';
 import { addHook } from './husky';
 
@@ -19,7 +19,7 @@ const nodeTsConfig: Config = {
   },
 };
 
-const [getConfig] = createLocalConfigManager(jsState, {
+const [getConfig] = jsCategoryState.useConfigState({
   default: defaultConfig,
   'node:ts': nodeTsConfig,
 });

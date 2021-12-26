@@ -1,25 +1,24 @@
 #!/usr/bin/env node
 
-import jsOptions from './categories/js';
+import categories from './categories';
 import ora from 'ora';
 import { manyOf, oneOf } from './utils/prompt';
-import { jsState, jsStateValues } from './utils/config';
 import { white } from './utils/console';
 import { camelize, kebablize } from './utils/string';
 
-const categoriesKeys = ['js'] as const;
-const categories = {
-  js: { state: jsState, values: jsStateValues, options: jsOptions },
-};
+const categoriesKeys = Object.keys(categories);
 
 const main = async () => {
   console.log(white(`Wellcome to Allohamora's cli`));
 
-  const choosedCategory = await oneOf('choose a category', categoriesKeys);
-  const { state, values, options } = categories[choosedCategory];
+  const choosedCategory = (await oneOf('choose a category', categoriesKeys)) as keyof typeof categories;
+  const {
+    state: { configState, configTypes },
+    options,
+  } = categories[choosedCategory];
 
-  const [, setConfig] = state;
-  const choosedConfig = await oneOf('choose a config', values);
+  const [, setConfig] = configState;
+  const choosedConfig = await oneOf('choose a config', configTypes);
   setConfig(choosedConfig);
 
   const kebablizedOptions = Object.keys(options).map(kebablize);
