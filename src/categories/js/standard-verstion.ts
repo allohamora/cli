@@ -21,10 +21,10 @@ const defaultConfig = {
     skip: { tag: true },
   },
   scripts: [
-    { name: 'release', script: 'standard-version' },
-    { name: 'release:minor', script: 'standard-version --release-as minor' },
-    { name: 'release:patch', script: 'standard-version --release-as patch' },
-    { name: 'release:major', script: 'standard-version --release-as major' },
+    { name: 'release', script: 'standard-version --tag-prefix=' },
+    { name: 'release:minor', script: 'standard-version --release-as minor --tag-prefix=' },
+    { name: 'release:patch', script: 'standard-version --release-as patch --tag-prefix=' },
+    { name: 'release:major', script: 'standard-version --release-as major --tag-prefix=' },
   ],
 };
 
