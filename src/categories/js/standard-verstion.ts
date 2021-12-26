@@ -14,7 +14,7 @@ const defaultConfig = {
       { type: 'perf', hidden: true },
       { type: 'test', hidden: true },
     ],
-    commitUrlFormat: `${repositoryUrl}/commits/{{hash}}`,
+    commitUrlFormat: `${repositoryUrl}/commit/{{hash}}`,
     compareUrlFormat: `${repositoryUrl}/compare/{{previousTag}}...{{currentTag}}`,
   }),
   packageJsonConfig: {
@@ -38,7 +38,7 @@ export const standardVersion = async () => {
   await installDevelopmentDependencies('standard-version');
 
   const packageJson = await getPackageJson();
-  const repositoryUrl = packageJson.homepage?.replace('#home', '') ?? '<repository url>';
+  const repositoryUrl = packageJson.homepage?.replace(/#.+$/, '') ?? '<repository url>';
   const config = createConfig(repositoryUrl);
 
   await addJsonFileToRoot('.versionrc.json', config);

@@ -20,7 +20,7 @@ const defaultConfig = {
   },
   ignore: ['dist', 'node_modules', 'public', '.husky', 'package-lock.json'],
   scripts: [
-    { name: 'format', script: 'prettier' },
+    { name: 'format', script: 'prettier .' },
     { name: 'format:fix', script: 'prettier --write .' },
   ],
 };

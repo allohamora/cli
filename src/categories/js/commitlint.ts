@@ -17,5 +17,5 @@ export const commitlint = async () => {
 
   await installDevelopmentDependencies('@commitlint/cli', rules);
   await addJsonFileToRoot('.commitlintrc.json', config);
-  await addHook('commit-msg', 'npx --no -- commitlint --edit "$1"');
+  await addHook('commit-msg', 'npx --no-install -- commitlint --edit "$1"');
 };

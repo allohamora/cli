@@ -8,13 +8,13 @@ interface Config {
 
 const defaultConfig: Config = {
   config: {
-    '*.{js,json,yml,md}': 'npm run format -- --write',
+    '*.{js,json,yml,md}': 'prettier --write',
   },
 };
 
 const nodeTsConfig: Config = {
   config: {
-    '*.ts': 'npm run lint -- --fix',
+    '*.ts': 'eslint --fix',
     ...defaultConfig.config,
   },
 };
