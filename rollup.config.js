@@ -6,7 +6,7 @@ import shebang from 'rollup-plugin-preserve-shebang';
 import pkg from './package.json';
 
 export default defineConfig({
-  input: pkg.main,
+  input: pkg.input,
   output: {
     file: pkg.bin,
     sourcemap: true,

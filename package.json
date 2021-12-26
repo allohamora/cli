@@ -2,7 +2,8 @@
   "name": "@allohamora/cli",
   "version": "1.0.0",
   "description": "Command Line Interface with useful installation scripts",
-  "main": "src/index.ts",
+  "input": "./src/index.ts",
+  "main": "./bin/cli.js",
   "bin": "./bin/cli.js",
   "scripts": {
     "dev": "ts-node-dev --respawn -r tsconfig-paths/register src/index.ts",
