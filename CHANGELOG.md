@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/Allohamora/cli/compare/1.0.0...1.1.0) (2021-12-26)
+
+### Bug Fixes
+
+- and style js scripts ([8e512e2](https://github.com/Allohamora/cli/commit/8e512e21ab7b501e08f30514a07d0afeaf61ef07))
+
 ## 1.0.0 (2021-12-11)
 
 ### Features
