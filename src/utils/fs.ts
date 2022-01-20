@@ -1,10 +1,29 @@
-import path from 'path';
 import fsp from 'fs/promises';
-import { ROOT_PATH } from './path';
+import { rootPath } from './path';
 import { stringify } from './json';
 
+export const existsInRoot = async (name: string) => {
+  const checkPath = rootPath(name);
+
+  return await fsp
+    .access(checkPath)
+    .then(() => true)
+    .catch(() => false);
+};
+
+export const addDirToRootIfNotExists = async (name: string) => {
+  const dirPath = rootPath(name);
+
+  if (await existsInRoot(name)) {
+    return;
+  }
+
+  await fsp.mkdir(dirPath);
+};
+
 export const addFileToRoot = async (name: string, content: string) => {
-  const filePath = path.join(ROOT_PATH, name);
+  const filePath = rootPath(name);
+
   await fsp.writeFile(filePath, content, { encoding: 'utf-8' });
 };
 
