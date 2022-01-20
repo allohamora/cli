@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/Allohamora/cli/compare/1.1.1...1.2.0) (2022-01-20)
+
+### Features
+
+- add github create release workflow ([9c6cbef](https://github.com/Allohamora/cli/commit/9c6cbefa2fb3a451094f7d57a17fa9396593f650))
+
 ### [1.1.1](https://github.com/Allohamora/cli/compare/1.1.0...1.1.1) (2021-12-26)
 
 ### Bug Fixes
@@ -14,7 +20,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 - and style js scripts ([8a3c5bf](https://github.com/Allohamora/cli/commit/8a3c5bf9460fbb555c2266b396bd3a856b0ababe))
 
-## [1.0.0](https://github.com/Allohamora/cli/compare/0.0.0...1.0.0) (2021-12-11)
+## 1.0.0 (2021-12-11)
 
 ### Features
 
