@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/Allohamora/cli/compare/1.2.1...1.2.2) (2022-01-20)
+
+### Bug Fixes
+
+- rename create-release-workflow to release-workflow ([608673f](https://github.com/Allohamora/cli/commit/608673f1201418e82ea9cb8c6cbfeb88c4fdcae4))
+
 ### [1.2.1](https://github.com/Allohamora/cli/compare/1.2.0...1.2.1) (2022-01-20)
 
 ### Bug Fixes
