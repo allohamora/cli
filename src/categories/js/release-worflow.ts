@@ -35,7 +35,7 @@ const [getConfig] = jsCategoryState.useConfigState({
   default: defaultConfig,
 });
 
-export const createReleaseWorflow = async () => {
+export const releaseWorkflow = async () => {
   const { filename, content } = getConfig();
 
   await addGithubWorkflow(filename, content);
