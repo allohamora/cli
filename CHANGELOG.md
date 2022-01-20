@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 - and style js scripts ([8a3c5bf](https://github.com/Allohamora/cli/commit/8a3c5bf9460fbb555c2266b396bd3a856b0ababe))
 
-## [1.0.0](https://github.com/Allohamora/cli/compare/0.0.0...1.0.0) (2021-12-11)
+## 1.0.0 (2021-12-11)
 
 ### Features
 
