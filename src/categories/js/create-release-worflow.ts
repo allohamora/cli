@@ -1,7 +1,7 @@
 import { jsCategoryState } from 'src/utils/categories';
 import { addGithubWorkflow } from 'src/utils/github';
 
-const content = `name: Create Release
+const content = `name: release
 
 on:
   push:
@@ -14,13 +14,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Parse CHANGELOG.md
-        id: changelog
-        uses: coditory/changelog-parser@v1
+      - name: Get release notes from CHANGELOG.md
+        uses: yashanand1910/standard-release-notes@v1.2.1
+        id: get_release_notes
+        with:
+          version: \${{ github.ref }}
       - name: Release to github
         uses: softprops/action-gh-release@v1
         with:
-          body: \${{ steps.changelog.outputs.description }}
+          body: \${{ steps.get_release_notes.outputs.release_notes }}
+
 `;
 
 const defaultConfig = {

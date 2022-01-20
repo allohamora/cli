@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/Allohamora/cli/compare/1.2.0...1.2.1) (2022-01-20)
+
+### Bug Fixes
+
+- change CHANGELOG.md parser to correct ([d4ab1fb](https://github.com/Allohamora/cli/commit/d4ab1fb8b8d7b5c835ab81d2a69380b06b1da4b5))
+
 ## [1.2.0](https://github.com/Allohamora/cli/compare/1.1.1...1.2.0) (2022-01-20)
 
 ### Features
