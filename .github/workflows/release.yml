@@ -1,0 +1,20 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Parse CHANGELOG.md
+        id: changelog
+        uses: coditory/changelog-parser@v1
+      - name: Release to github
+        uses: softprops/action-gh-release@v1
+        with:
+          body: ${{ steps.changelog.outputs.description }}
