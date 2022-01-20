@@ -5,7 +5,7 @@ import { husky } from './husky';
 import { lintStaged } from './lint-staged';
 import { prettier } from './prettier';
 import { standardVersion } from './standard-verstion';
-import { createReleaseAction } from './create-release-action';
+import { createReleaseWorflow } from './create-release-worflow';
 
 // order have matter
 const options = {
@@ -15,7 +15,7 @@ const options = {
   standardVersion,
   eslint,
   lintStaged,
-  createReleaseAction,
+  createReleaseWorflow,
 };
 
 export default {

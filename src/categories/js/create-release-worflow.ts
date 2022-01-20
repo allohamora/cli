@@ -1,5 +1,5 @@
 import { jsCategoryState } from 'src/utils/categories';
-import { addGithubAction } from 'src/utils/github';
+import { addGithubWorkflow } from 'src/utils/github';
 
 const content = `name: Create Release
 
@@ -32,8 +32,8 @@ const [getConfig] = jsCategoryState.useConfigState({
   default: defaultConfig,
 });
 
-export const createReleaseAction = async () => {
+export const createReleaseWorflow = async () => {
   const { filename, content } = getConfig();
 
-  await addGithubAction(filename, content);
+  await addGithubWorkflow(filename, content);
 };

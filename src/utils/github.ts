@@ -15,7 +15,7 @@ export const addWorkflowsDirIfNotExists = async () => {
   await addDirToRootIfNotExists(GITHUB_RELATIVE_WORKFLOWS_PATH);
 };
 
-export const addGithubAction = async (filename: string, content: string) => {
+export const addGithubWorkflow = async (filename: string, content: string) => {
   await addWorkflowsDirIfNotExists();
 
   const relativeFilePath = path.join(GITHUB_RELATIVE_WORKFLOWS_PATH, filename);
