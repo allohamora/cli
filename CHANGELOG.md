@@ -6,15 +6,15 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- standard-version without prefix incorrect behavior ([2ccb53a](https://github.com/Allohamora/cli/commit/2ccb53adbdf9b3d34d8790130746f741403a946a))
+- standard-version without prefix incorrect behavior ([34120bf](https://github.com/Allohamora/cli/commit/34120bf3a722106a0eefda2b8f69169072ac5d69))
 
 ## [1.1.0](https://github.com/Allohamora/cli/compare/1.0.0...1.1.0) (2021-12-26)
 
 ### Bug Fixes
 
-- and style js scripts ([8e512e2](https://github.com/Allohamora/cli/commit/8e512e21ab7b501e08f30514a07d0afeaf61ef07))
+- and style js scripts ([8a3c5bf](https://github.com/Allohamora/cli/commit/8a3c5bf9460fbb555c2266b396bd3a856b0ababe))
 
-## 1.0.0 (2021-12-11)
+## [1.0.0](https://github.com/Allohamora/cli/compare/0.0.0...1.0.0) (2021-12-11)
 
 ### Features
 
