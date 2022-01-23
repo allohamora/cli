@@ -21,7 +21,7 @@ npx @allohamora/cli
 
 - [**js**](/src/categories/js/index.ts) is a category with scripts to initialize js/ts projects, have default and node:ts config options.
   - [**commitlint**](/src/categories/js/commitlint.ts) is a script to initialize [commitlint](https://github.com/conventional-changelog/commitlint) with [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) config.
-  - [**eslint**](/src/categories/js/eslint.ts) is a script to initialize [eslint](https://github.com/eslint/eslint) with config and lint scripts.
+  - [**eslint**](/src/categories/js/eslint.ts) is a script to initialize [eslint](https://github.com/eslint/eslint) with [prettier-plugin](https://github.com/prettier/eslint-plugin-prettier), config and lint scripts.
   - [**husky**](/src/categories/js/husky.ts) is a script to initialize [husky](https://github.com/typicode/husky).
   - [**lint-staged**](/src/categories/js/lint-staged.ts) is a script to initialize [lint-staged](https://github.com/okonet/lint-staged) with [eslint](https://github.com/eslint/eslint) linting, [prettier](https://github.com/prettier/prettier) formating and [husky](https://github.com/typicode/husky) commit binding hook.
   - [**prettier**](/src/categories/js/prettier.ts) is a script to initialize [prettier](https://github.com/prettier/prettier) with config and format scripts.
