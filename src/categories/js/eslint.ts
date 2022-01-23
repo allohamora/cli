@@ -1,6 +1,6 @@
-import { jsCategoryState } from 'src/utils/categories';
-import { addJsonFileToRoot } from 'src/utils/fs';
-import { addScripts, installDevelopmentDependencies } from 'src/utils/npm';
+import { jsCategoryState } from 'src/libs/categories';
+import { addJsonFileToRoot } from 'src/libs/fs';
+import { addScripts, installDevelopmentDependencies } from 'src/libs/npm';
 
 interface Config {
   dependencies: string[];

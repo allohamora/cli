@@ -1,6 +1,6 @@
 {
   "name": "@allohamora/cli",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Command Line Interface with useful installation scripts",
   "input": "./src/index.ts",
   "main": "./bin/cli.js",
@@ -24,7 +24,16 @@
     "url": "git+https://github.com/Allohamora/cli.git"
   },
   "keywords": [
-    "cli"
+    "cli",
+    "nodejs",
+    "typescript",
+    "eslint",
+    "prettier",
+    "husky",
+    "lint-staged",
+    "standard-version",
+    "commitlint",
+    "workflow"
   ],
   "author": "https://github.com/Allohamora",
   "license": "MIT",

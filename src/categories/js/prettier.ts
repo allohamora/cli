@@ -1,6 +1,6 @@
-import { jsCategoryState } from 'src/utils/categories';
-import { addFileToRoot, addJsonFileToRoot } from 'src/utils/fs';
-import { addScripts, installDevelopmentDependencies } from 'src/utils/npm';
+import { jsCategoryState } from 'src/libs/categories';
+import { addFileToRoot, addJsonFileToRoot } from 'src/libs/fs';
+import { addScripts, installDevelopmentDependencies } from 'src/libs/npm';
 
 const defaultConfig = {
   config: {
