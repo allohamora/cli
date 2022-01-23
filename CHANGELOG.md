@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.3](https://github.com/Allohamora/cli/compare/1.2.2...1.2.3) (2022-01-23)
+
+### Bug Fixes
+
+- add format to release-worflow content ([1fd2cd9](https://github.com/Allohamora/cli/commit/1fd2cd926ed406faf084ee60c268306a06e7697c))
+
 ### [1.2.2](https://github.com/Allohamora/cli/compare/1.2.1...1.2.2) (2022-01-20)
 
 ### Bug Fixes
