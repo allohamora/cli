@@ -10,14 +10,14 @@ npx @allohamora/cli
 
 ## Table of content
 
-- js 
-  - commitlint
-  - eslint
-  - husky
-  - lint-staged
-  - prettier
-  - release-workflow
-  - standard-version
+- [js](#js) 
+  - [commitlint](#commitlint)
+  - [eslint](#eslint)
+  - [husky](#husky)
+  - [lint-staged](#lint-staged)
+  - [prettier](#prettier)
+  - [release-workflow](#release-worflow)
+  - [standard-version](#standard-version)
 
 ## Content
 
