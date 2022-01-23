@@ -1,6 +1,6 @@
 # CLI
 
-The [Allohamora](https://github.com/Allohamora) CLI is a command line interface with useful scripts for initialize projects and more, sorted by categories.
+The [Allohamora](https://github.com/Allohamora) CLI is a command line interface with scripts to initialize projects and more. Sorted by categories.
 
 ## Requirements
 
