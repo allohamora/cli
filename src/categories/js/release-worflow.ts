@@ -1,5 +1,5 @@
-import { jsCategoryState } from 'src/utils/categories';
-import { addGithubWorkflow } from 'src/utils/github';
+import { jsCategoryState } from 'src/libs/categories';
+import { addGithubWorkflow } from 'src/libs/github';
 
 const content = `name: release
 

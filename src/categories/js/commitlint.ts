@@ -1,6 +1,6 @@
-import { jsCategoryState } from 'src/utils/categories';
-import { addJsonFileToRoot } from 'src/utils/fs';
-import { installDevelopmentDependencies } from 'src/utils/npm';
+import { jsCategoryState } from 'src/libs/categories';
+import { addJsonFileToRoot } from 'src/libs/fs';
+import { installDevelopmentDependencies } from 'src/libs/npm';
 import { addHook } from './husky';
 
 const defaultConfig = {
