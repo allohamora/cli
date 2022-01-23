@@ -55,7 +55,7 @@ that script installs [prettier](https://github.com/prettier/prettier) with confi
 
 ### [release-worflow](src/categories/js/release-worflow.ts)
 
-that script installs github workflow what automatically generates a release from [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) CHANGELOG.md when you push a tag like \*.\*.\*(1.1.1, 0.1.1, 0.0.1, 0.0.0, etc).
+that script creates release.yml github workflow what automatically generates a release from [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) CHANGELOG.md when you push a tag like \*.\*.\*(1.1.1, 0.1.1, 0.0.1, 0.0.0, etc).
 
 ### [standard-version](src/categories/js/standard-verstion.ts)
 
