@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/Allohamora/cli/compare/1.2.3...1.3.0) (2022-01-23)
+
+### Features
+
+- add eslint default config ([662c865](https://github.com/Allohamora/cli/commit/662c8657701a35255bca566fe5b40eb21bbde150))
+
 ### [1.2.3](https://github.com/Allohamora/cli/compare/1.2.2...1.2.3) (2022-01-23)
 
 ### Bug Fixes
