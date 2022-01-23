@@ -24,7 +24,16 @@
     "url": "git+https://github.com/Allohamora/cli.git"
   },
   "keywords": [
-    "cli"
+    "cli",
+    "nodejs",
+    "typescript",
+    "eslint",
+    "prettier",
+    "husky",
+    "lint-staged",
+    "standard-version",
+    "commitlint",
+    "workflow"
   ],
   "author": "https://github.com/Allohamora",
   "license": "MIT",
