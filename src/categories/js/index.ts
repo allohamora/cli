@@ -6,6 +6,7 @@ import { lintStaged } from './lint-staged';
 import { prettier } from './prettier';
 import { standardVersion } from './standard-verstion';
 import { releaseWorkflow } from './release-worflow';
+import { jest } from './jest';
 
 // order have matter
 const options = {
@@ -16,6 +17,7 @@ const options = {
   eslint,
   lintStaged,
   releaseWorkflow,
+  jest,
 };
 
 export default {
