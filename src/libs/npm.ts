@@ -28,7 +28,7 @@ export const addToPackageJson = async <V>(name: keyof PackageJson, value: V) => 
   await setPackageJson(packageJson);
 };
 
-interface NpmScript {
+export interface NpmScript {
   name: string;
   script: string;
 }
