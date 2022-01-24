@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn -r tsconfig-paths/register src/index.ts",
     "build": "rimraf ./bin && rollup -c rollup.config.js",
+    "prestart": "npm run build",
     "start": "npm unlink @allohamora/cli && npm link @allohamora/cli && ./bin/cli.js",
     "prepare": "husky install",
     "format": "prettier .",
