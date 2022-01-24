@@ -28,6 +28,7 @@ npx @allohamora/cli
   - [**release-workflow**](/src/categories/js/release-worflow.ts) is script to initialize github release workflow what creates release from [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) CHANGELOG.md when you push tag like \*.\*.\*(1.1.0, 5.0.0, 0.0.0, etc).
   - [**standard-version**](/src/categories/js/standard-verstion.ts) is a script to initialize [standard-version](https://github.com/conventional-changelog/standard-version) with [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) config, custom options (like removed "v" tag prefix) and release scripts.
   - [**jest**](/src/categories/js/jest.ts) is a script to initialize [jest](https://github.com/facebook/jest) with config and test scripts.
+  - [**test-workflow**](/src/categories/js/test-workflow.ts) is a script to initialize github test workflow what runs test on each push to github.
 
 ## License
 
