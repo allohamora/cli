@@ -2,6 +2,8 @@ import { jsCategoryState } from 'src/libs/categories';
 import { addGithubWorkflow } from 'src/libs/github';
 import { prettyMultilineFormat } from 'src/libs/string';
 
+const WORKFLOW_FILENAME = 'release.yml';
+
 const content = prettyMultilineFormat`
   name: release
 
@@ -29,7 +31,6 @@ const content = prettyMultilineFormat`
 `;
 
 const defaultConfig = {
-  filename: 'release.yml',
   content,
 };
 
@@ -38,7 +39,7 @@ const [getConfig] = jsCategoryState.useConfigState({
 });
 
 export const releaseWorkflow = async () => {
-  const { filename, content } = getConfig();
+  const { content } = getConfig();
 
-  await addGithubWorkflow(filename, content);
+  await addGithubWorkflow(WORKFLOW_FILENAME, content);
 };
