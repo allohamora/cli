@@ -7,6 +7,7 @@ import { prettier } from './prettier';
 import { standardVersion } from './standard-verstion';
 import { releaseWorkflow } from './release-worflow';
 import { jest } from './jest';
+import { testWorkflow } from './test-workflow';
 
 // order have matter
 const options = {
@@ -18,6 +19,7 @@ const options = {
   lintStaged,
   releaseWorkflow,
   jest,
+  testWorkflow,
 };
 
 export default {
