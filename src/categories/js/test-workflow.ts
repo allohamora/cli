@@ -25,7 +25,7 @@ const content = prettyMultilineFormat`
         - name: Install dependencies
           run: npm i
         - name: Run tests
-          run: npm test
+          run: npm run test
 `;
 
 const defaultConfig = {
