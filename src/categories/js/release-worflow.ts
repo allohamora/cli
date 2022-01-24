@@ -13,7 +13,7 @@ const content = format`
         - "*.*.*"
 
   jobs:
-    build:
+    release:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout code
