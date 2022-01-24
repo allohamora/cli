@@ -40,3 +40,5 @@ export const templateWithFormat = (...funcs: Array<(value: string) => string>) =
 
 export const removeTabOnEachLine = (string: string) => string.replace(/\n(  |\t)/g, '\n');
 export const trim = (string: string) => string.trim();
+
+export const prettyMultilineFormat = templateWithFormat(trim, removeTabOnEachLine);

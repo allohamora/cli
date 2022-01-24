@@ -1,10 +1,8 @@
 import { jsCategoryState } from 'src/libs/categories';
 import { addGithubWorkflow } from 'src/libs/github';
-import { trim, removeTabOnEachLine, templateWithFormat } from 'src/libs/string';
+import { prettyMultilineFormat } from 'src/libs/string';
 
-const format = templateWithFormat(trim, removeTabOnEachLine);
-
-const content = format`
+const content = prettyMultilineFormat`
   name: release
 
   on:

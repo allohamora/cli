@@ -1,12 +1,10 @@
 import { jsCategoryState } from 'src/libs/categories';
 import { addGithubWorkflow } from 'src/libs/github';
-import { removeTabOnEachLine, templateWithFormat, trim } from 'src/libs/string';
+import { prettyMultilineFormat } from 'src/libs/string';
 
 const WORKFLOW_FILENAME = 'test.yml';
 
-const format = templateWithFormat(trim, removeTabOnEachLine);
-
-const content = format`
+const content = prettyMultilineFormat`
   name: test
 
   on:

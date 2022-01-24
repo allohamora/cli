@@ -1,7 +1,7 @@
 import { jsCategoryState } from 'src/libs/categories';
 import { addFileToRoot } from 'src/libs/fs';
 import { addScripts, installDevelopmentDependencies, NpmScript } from 'src/libs/npm';
-import { removeTabOnEachLine, templateWithFormat, trim } from 'src/libs/string';
+import { prettyMultilineFormat } from 'src/libs/string';
 
 interface Config {
   devDependencies: string[];
@@ -16,9 +16,7 @@ const scripts: NpmScript[] = [
   { name: 'test:coverage', script: 'jest --coverage' },
 ];
 
-const format = templateWithFormat(trim, removeTabOnEachLine);
-
-const defaultConfigFileContent = format`
+const defaultConfigFileContent = prettyMultilineFormat`
   module.exports = {
     testEnvironment: 'node',
     testRegex: '.*\\.(spec|test)\\.js$',
@@ -31,7 +29,7 @@ const defaultConfig: Config = {
   scripts,
 };
 
-const nodeTsConfigFileContent = format`
+const nodeTsConfigFileContent = prettyMultilineFormat`
   /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
   module.exports = {
     preset: 'ts-jest',
