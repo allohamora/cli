@@ -1,6 +1,6 @@
-import { jsCategoryState } from 'src/libs/categories';
-import { addGithubWorkflow } from 'src/libs/github';
-import { prettyMultilineFormat } from 'src/libs/string';
+import { jsCategoryState } from 'src/utils/categories';
+import { addGithubWorkflow } from 'src/utils/github';
+import { prettyMultilineFormat } from 'src/utils/string';
 
 const WORKFLOW_FILENAME = 'release.yml';
 

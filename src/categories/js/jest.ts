@@ -1,7 +1,7 @@
-import { jsCategoryState } from 'src/libs/categories';
-import { addFileToRoot } from 'src/libs/fs';
-import { addScripts, installDevelopmentDependencies, NpmScript } from 'src/libs/npm';
-import { prettyMultilineFormat } from 'src/libs/string';
+import { jsCategoryState } from 'src/utils/categories';
+import { addFileToRoot } from 'src/utils/fs';
+import { addScripts, installDevelopmentDependencies, NpmScript } from 'src/utils/npm';
+import { prettyMultilineFormat } from 'src/utils/string';
 
 interface Config {
   devDependencies: string[];

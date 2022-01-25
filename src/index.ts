@@ -2,10 +2,10 @@
 
 import categories from './categories';
 import ora from 'ora';
-import { manyOf, oneOf } from './libs/prompt';
-import { white } from './libs/console';
-import { camelize, kebablize } from './libs/string';
-import { Category } from './libs/category';
+import { manyOf, oneOf } from './utils/prompt';
+import { white } from './utils/console';
+import { camelize, kebablize } from './utils/string';
+import { Category } from './utils/category';
 
 const categoriesKeys = Object.keys(categories);
 

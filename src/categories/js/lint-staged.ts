@@ -1,5 +1,5 @@
-import { jsCategoryState } from 'src/libs/categories';
-import { addToPackageJson, installDevelopmentDependencies } from 'src/libs/npm';
+import { jsCategoryState } from 'src/utils/categories';
+import { addToPackageJson, installDevelopmentDependencies } from 'src/utils/npm';
 import { addHook } from './husky';
 
 interface Config {
