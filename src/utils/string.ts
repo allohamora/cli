@@ -25,7 +25,7 @@ export const buildTemplate = (strings: TemplateStringsArray, ...values: unknown[
     const value = values[index] ?? '';
 
     return `${state}${string}${value}`;
-  });
+  }, '');
 
   return result;
 };
