@@ -90,7 +90,10 @@
     }
   },
   "lint-staged": {
-    "*.ts": "eslint --fix",
+    "*.ts": [
+      "eslint --fix",
+      "jest --findRelatedTests"
+    ],
     "*.{js,json,yml,md}": "prettier --write"
   }
 }
