@@ -1,7 +1,7 @@
+import * as json from 'src/utils/json';
 import fsp from 'fs/promises';
 import { rootPath } from 'src/utils/path';
 import { addDirToRootIfNotExists, addFileToRoot, addJsonFileToRoot, existsInRoot } from 'src/utils/fs';
-import { mockObject } from '__tests__/test-utils/mock-object';
 
 const rootFile = 'hello.json';
 const rootDir = 'test';
@@ -11,6 +11,9 @@ const rootWithPath = root.map((file) => rootPath(file));
 
 jest.mock('fs/promises');
 const fspMocked = jest.mocked(fsp);
+
+jest.mock('src/utils/json');
+const jsonMocked = jest.mocked(json);
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -74,18 +77,6 @@ describe('addFileToRoot', () => {
 });
 
 describe('addJsonFileToRoot', () => {
-  const originalJSON = JSON;
-
-  beforeEach(() => {
-    global.JSON = mockObject({
-      stringify: jest.fn((...args: Parameters<JSON['stringify']>) => originalJSON.stringify(...args)),
-    }) as unknown as JSON;
-  });
-
-  afterAll(() => {
-    global.JSON = originalJSON;
-  });
-
   test('should add json file to root', async () => {
     const fileName = '__test__.json';
     const content = {};
@@ -94,8 +85,8 @@ describe('addJsonFileToRoot', () => {
 
     await addJsonFileToRoot(fileName, content);
 
-    expect(global.JSON.stringify).toBeCalledWith(content, null, 2);
-    expect(fspMocked.writeFile).toBeCalledWith(fileNameWithPath, originalJSON.stringify(content), {
+    expect(jsonMocked.stringify).toBeCalledWith(content);
+    expect(fspMocked.writeFile).toBeCalledWith(fileNameWithPath, json.stringify(content), {
       encoding: 'utf-8',
     });
   });
