@@ -1,6 +1,6 @@
 type TypeState<T extends string> = [() => T, (value: T) => void];
 
-const createTypeState = <T extends string>(types: readonly T[]): TypeState<T> => {
+export const createTypeState = <T extends string>(types: readonly T[]): TypeState<T> => {
   let type = types[0];
 
   const setType = (value: T) => {
