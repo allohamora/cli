@@ -29,7 +29,7 @@ export const createConfigState = <V, K extends string>(configState: TypeState<K>
 };
 
 export const createCategoryState = <N extends string, CT extends string>(name: N, restConfigTypes: readonly CT[]) => {
-  const configTypes = ['default', ...restConfigTypes];
+  const configTypes = ['default', ...restConfigTypes] as const;
   const configState = createTypeState(configTypes);
   const useConfigState = <V>(values: Values<V, CT>) => createConfigState(configState, values);
 

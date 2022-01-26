@@ -1,4 +1,4 @@
-import { createConfigState, createTypeState } from 'src/utils/state';
+import { createCategoryState, createConfigState, createTypeState } from 'src/utils/state';
 
 describe('createTypeState', () => {
   const types = ['1', '2'];
@@ -59,5 +59,51 @@ describe('createConfigState', () => {
     const expected = configValues.default;
 
     expect(actual).toBe(expected);
+  });
+});
+
+describe('createCategoryState', () => {
+  const name = '__test__';
+  const values = ['1', '2', '3'] as const;
+  const createNewCategoryState = () => createCategoryState(name, values);
+
+  let state = createNewCategoryState();
+
+  afterEach(() => {
+    state = createNewCategoryState();
+  });
+
+  test('should create and return configState', () => {
+    expect(state.configState).toBeDefined();
+  });
+
+  test('should return category name', () => {
+    const actual = state.name;
+    const expected = name;
+
+    expect(actual).toBe(expected);
+  });
+
+  test('should add default option to configOptions', () => {
+    const actual = state.configTypes;
+    const expected = ['default', ...values];
+
+    expect(actual).toEqual(expected);
+  });
+
+  test('should return useConfigValue', () => {
+    expect(state.useConfigState).toBeDefined();
+  });
+
+  test('should return useConfigValue what creates a local state', () => {
+    const values = { default: 'default', '1': '1' };
+
+    const [, setConfigKey] = state.configState;
+
+    const [getConfig] = state.useConfigState(values);
+    expect(getConfig()).toBe(values.default);
+
+    setConfigKey('1');
+    expect(getConfig()).toBe(values['1']);
   });
 });
