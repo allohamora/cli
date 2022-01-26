@@ -4,9 +4,4 @@ module.exports = {
   testEnvironment: 'node',
   moduleDirectories: ['<rootDir>', 'node_modules'],
   testRegex: '.*\.(spec|test)\.ts$',
-
-  // for esm modules
-  moduleNameMapper: {
-    '^(.+?)\.js$': '$1',
-  },
 };
