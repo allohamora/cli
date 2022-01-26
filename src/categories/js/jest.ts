@@ -13,6 +13,7 @@ const CONFIG_FILENAME = 'jest.config.cjs';
 
 const scripts: NpmScript[] = [
   { name: 'test', script: 'jest' },
+  { name: 'test:watch', script: 'jest --watch' },
   { name: 'test:coverage', script: 'jest --coverage' },
 ];
 
