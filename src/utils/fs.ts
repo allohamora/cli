@@ -2,7 +2,7 @@ import fsp from 'fs/promises';
 import { rootPath } from './path';
 import { stringify } from './json';
 
-export const existsInRoot = async (name: string) => {
+export const isExistsInRoot = async (name: string) => {
   const checkPath = rootPath(name);
 
   return await fsp
@@ -14,7 +14,7 @@ export const existsInRoot = async (name: string) => {
 export const addDirToRootIfNotExists = async (name: string) => {
   const dirPath = rootPath(name);
 
-  if (await existsInRoot(name)) {
+  if (await isExistsInRoot(name)) {
     return;
   }
 

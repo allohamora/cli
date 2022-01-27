@@ -1,7 +1,7 @@
 import * as json from 'src/utils/json';
 import fsp from 'fs/promises';
 import { rootPath } from 'src/utils/path';
-import { addDirToRootIfNotExists, addFileToRoot, addJsonFileToRoot, existsInRoot } from 'src/utils/fs';
+import { addDirToRootIfNotExists, addFileToRoot, addJsonFileToRoot, isExistsInRoot } from 'src/utils/fs';
 
 const rootFile = 'hello.json';
 const rootDir = 'test';
@@ -27,16 +27,16 @@ beforeEach(() => {
   });
 });
 
-describe('existsInRoot', () => {
+describe('isExistsInRoot', () => {
   test('should return true if file exists at root', async () => {
-    const actual = await existsInRoot(rootFile);
+    const actual = await isExistsInRoot(rootFile);
     const expected = true;
 
     expect(actual).toBe(expected);
   });
 
   test("should return false if file doesn't exist at root", async () => {
-    const actual = await existsInRoot('__test__.json');
+    const actual = await isExistsInRoot('__test__.json');
     const expected = false;
 
     expect(actual).toBe(expected);
