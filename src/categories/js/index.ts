@@ -4,7 +4,7 @@ import { eslint } from './eslint/eslint.entrypoint';
 import { husky } from './husky/husky.entrypoint';
 import { lintStaged } from './lint-staged/lint-staged.entrypoint';
 import { prettier } from './prettier/prettier.entrypoint';
-import { standardVersion } from './standard-verstion';
+import { standardVersion } from './standard-version/standard-version.entrypoint';
 import { releaseWorkflow } from './release-worflow';
 import { jest } from './jest/jest.entrypoint';
 import { testWorkflow } from './test-workflow';

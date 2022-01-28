@@ -1,8 +1,4 @@
-import { jsCategoryState } from 'src/states/categories';
-import { addJsonFileToRoot } from 'src/utils/fs';
-import { addScripts, addToPackageJson, getPackageJson, installDevelopmentDependencies } from 'src/utils/npm';
-
-const defaultConfig = {
+export const defaultConfig = {
   createConfig: (repositoryUrl: string) => ({
     types: [
       { type: 'feat', section: 'Features' },
@@ -26,22 +22,4 @@ const defaultConfig = {
     { name: 'release:patch', script: 'standard-version --release-as patch --tag-prefix=' },
     { name: 'release:major', script: 'standard-version --release-as major --tag-prefix=' },
   ],
-};
-
-const [getConfig] = jsCategoryState.useConfigState({
-  default: defaultConfig,
-});
-
-export const standardVersion = async () => {
-  const { createConfig, packageJsonConfig, scripts } = getConfig();
-
-  await installDevelopmentDependencies('standard-version');
-
-  const packageJson = await getPackageJson();
-  const repositoryUrl = packageJson.homepage?.replace(/#.+$/, '') ?? '<repository url>';
-  const config = createConfig(repositoryUrl);
-
-  await addJsonFileToRoot('.versionrc.json', config);
-  await addToPackageJson('standard-version', packageJsonConfig);
-  await addScripts(...scripts);
 };
