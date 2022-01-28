@@ -7,7 +7,7 @@ import { prettier } from './prettier/prettier.entrypoint';
 import { standardVersion } from './standard-version/standard-version.entrypoint';
 import { releaseWorkflow } from './release-workflow/release-worflow.entrypoint';
 import { jest } from './jest/jest.entrypoint';
-import { testWorkflow } from './test-workflow';
+import { testWorkflow } from './test-workflow/test-workflow.entrypoint';
 
 // order have matter
 const options = {
