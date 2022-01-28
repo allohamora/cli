@@ -12,6 +12,7 @@ const configFileContent = prettyMultilineFormat`
   module.exports = {
     testEnvironment: 'node',
     testRegex: '.*\\.(spec|test)\\.js$',
+    collectCoverageFrom: ['src/**/*.js'],
   };
 `;
 
