@@ -1,4 +1,4 @@
-import { jsCategoryState } from 'src/utils/categories';
+import { jsCategoryState } from 'src/states/categories';
 import { addJsonFileToRoot } from 'src/utils/fs';
 import { installDevelopmentDependencies } from 'src/utils/npm';
 import { addHook } from './husky';

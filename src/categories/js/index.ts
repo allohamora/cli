@@ -1,4 +1,4 @@
-import { jsCategoryState } from 'src/utils/categories';
+import { jsCategoryState } from 'src/states/categories';
 import { commitlint } from './commitlint';
 import { eslint } from './eslint/eslint.entrypoint';
 import { husky } from './husky';

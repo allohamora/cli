@@ -1,4 +1,4 @@
-import { jsCategoryState } from 'src/utils/categories';
+import { jsCategoryState } from 'src/states/categories';
 import { addFileToRoot } from 'src/utils/fs';
 import { addScripts, installDevelopmentDependencies, NpmScript } from 'src/utils/npm';
 import { prettyMultilineFormat } from 'src/utils/string';

@@ -1,4 +1,4 @@
-import { jsCategoryState } from 'src/utils/categories';
+import { jsCategoryState } from 'src/states/categories';
 import { addGithubWorkflow } from 'src/utils/github';
 import { prettyMultilineFormat } from 'src/utils/string';
 
