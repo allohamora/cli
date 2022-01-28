@@ -6,7 +6,7 @@ import { lintStaged } from './lint-staged';
 import { prettier } from './prettier/prettier.entrypoint';
 import { standardVersion } from './standard-verstion';
 import { releaseWorkflow } from './release-worflow';
-import { jest } from './jest';
+import { jest } from './jest/jest.entrypoint';
 import { testWorkflow } from './test-workflow';
 
 // order have matter
