@@ -1,4 +1,4 @@
-import { Mutator } from './config/config.interface';
+import { LintStagedConfig } from './config/config.interface';
 import { isPrettierInstalled } from '../prettier/prettier.utils';
 import { addHook, isHuskyInstalled } from '../husky/husky.utils';
 import { CLI_NAME } from './lint-staged.const';
@@ -10,7 +10,7 @@ export const huskyIntegration = async () => {
   }
 };
 
-export const prettierMutator: Mutator = async (config) => {
+export const prettierMutator = async (config: LintStagedConfig) => {
   if (await isPrettierInstalled()) {
     config['*.{js,json,yml,md}'] = `${PRETTIER_CLI_NAME} --write`;
   }

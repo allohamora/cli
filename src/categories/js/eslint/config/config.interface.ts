@@ -1,3 +1,5 @@
+import { Mutator } from 'src/utils/mutator';
+
 export interface EslintConfig {
   parser?: string;
   parserOptions?: {
@@ -22,4 +24,5 @@ export interface Config {
   dependencies: string[];
   eslintConfig: EslintConfig;
   scripts: { name: string; script: string }[];
+  mutators: Mutator<Config>[];
 }

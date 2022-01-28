@@ -3,7 +3,7 @@ import { isPrettierInstalled } from '../prettier/prettier.utils';
 import { Config } from './config/config.interface';
 import { CONFIG_FILE_NAME, SCRIPT_NAME } from './eslint.const';
 
-export const prettierIntegrationHandler = async (config: Config) => {
+export const prettierMutator = async (config: Config) => {
   if (await isPrettierInstalled()) {
     addPrettierToConfig(config);
   }

@@ -1,3 +1,4 @@
+import { prettierMutator } from '../eslint.utils';
 import { Config } from './config.interface';
 
 export const defaultConfig: Config = {
@@ -14,10 +15,11 @@ export const defaultConfig: Config = {
       jest: true,
     },
     root: true,
-    extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+    extends: ['eslint:recommended'],
   },
   scripts: [
     { name: 'lint', script: 'eslint "src/**/*.js"' },
     { name: 'lint:fix', script: 'eslint "src/**/*.js" --fix' },
   ],
+  mutators: [prettierMutator],
 };
