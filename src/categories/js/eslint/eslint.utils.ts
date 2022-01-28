@@ -1,12 +1,11 @@
-import { Context } from 'src/types/context';
 import { isPrettierInstalled } from '../prettier/prettier.utils';
 import { Config } from './config/config.interface';
 
 export const PACKAGE_NAME = 'eslint';
 export const CONFIG_FILE_NAME = '.eslintrc.json';
 
-export const prettierIntegrationHandler = async (ctx: Context, config: Config) => {
-  if (await isPrettierInstalled(ctx)) {
+export const prettierIntegrationHandler = async (config: Config) => {
+  if (await isPrettierInstalled()) {
     addPrettierToConfig(config);
   }
 };

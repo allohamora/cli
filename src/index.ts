@@ -6,7 +6,7 @@ import { manyOf, oneOf } from './utils/prompt';
 import { white } from './utils/console';
 import { camelize, kebablize } from './utils/string';
 import { Category } from './types/category';
-import { Context } from './types/context';
+import { setInstalling } from './states/context';
 
 const categoriesKeys = Object.keys(categories);
 
@@ -32,21 +32,17 @@ const chooseOptions = async (options: Category['options']) => {
   return choosedKebablizedOptions.map(camelize);
 };
 
-const createContext = ({ keys }: { keys: string[] }): Context => ({
-  installing: keys,
-});
-
 const installOptions = async (options: Category['options'], keys: string[]) => {
   const spinner = ora('starting install').start();
 
-  const context = createContext({ keys });
+  setInstalling(keys);
 
   await keys.reduce((chain, key) => {
     return chain.then(async () => {
       const kebablizeKey = kebablize(key);
       spinner.text = `${kebablizeKey} is installing`;
 
-      return await options[key](context);
+      return await options[key]();
     });
   }, Promise.resolve());
 

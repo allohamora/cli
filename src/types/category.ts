@@ -1,7 +1,6 @@
 import { createCategoryState } from '../utils/state';
-import { Context } from './context';
 
-type Handler = (ctx: Context) => Promise<void>;
+type Handler = () => Promise<void>;
 
 export type Category = {
   options: Record<string, Handler>;
