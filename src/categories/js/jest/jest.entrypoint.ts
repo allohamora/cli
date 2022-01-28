@@ -1,6 +1,7 @@
 import { addFileToRoot } from 'src/utils/fs';
 import { addScripts, installDevelopmentDependencies } from 'src/utils/npm';
-import { CONFIG_FILE_NAME, getConfig } from './jest.config';
+import { getConfig } from './jest.config';
+import { CONFIG_FILE_NAME } from './jest.const';
 
 export const jest = async () => {
   const { devDependencies, configFileContent, scripts } = getConfig();
