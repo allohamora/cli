@@ -3,7 +3,7 @@ import { isExistsInRoot } from './fs';
 
 type AdditionalHandler = () => Promise<boolean>;
 
-const isInstalling = (scriptName: string) => {
+export const isInstalling = (scriptName: string) => {
   const installing = getInstalling();
 
   return installing.includes(scriptName);
