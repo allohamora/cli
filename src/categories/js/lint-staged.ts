@@ -1,6 +1,6 @@
 import { jsCategoryState } from 'src/states/categories';
 import { addToPackageJson, installDevelopmentDependencies } from 'src/utils/npm';
-import { addHook } from './husky';
+import { addHook } from './husky/husky.utils';
 
 interface Config {
   config: Record<string, unknown>;
