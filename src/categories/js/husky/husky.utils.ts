@@ -2,9 +2,8 @@ import fps from 'fs/promises';
 import path from 'path';
 import { spawnCommand } from 'src/utils/run-command';
 import { ROOT_PATH } from 'src/utils/path';
-import { getInstalling } from 'src/states/context';
-import { isExistsInRoot } from 'src/utils/fs';
 import { HOOK_DIR, PACKAGE_NAME } from './husky.config';
+import { isInstalledAndInRootCheck } from 'src/utils/installed';
 
 export type HookName = 'pre-commit' | 'commit-msg';
 const ADD_HOOK_PLACEHOLDER = 'placeholder';
@@ -20,12 +19,4 @@ export const addHook = async (name: HookName, script: string) => {
   await fps.writeFile(filePath, fileWithScript, { encoding: 'utf-8' });
 };
 
-export const isHuskyInstalled = async () => {
-  const installing = getInstalling();
-
-  if (installing.includes(PACKAGE_NAME)) {
-    return true;
-  }
-
-  return await isExistsInRoot(HOOK_DIR);
-};
+export const isHuskyInstalled = isInstalledAndInRootCheck(PACKAGE_NAME, HOOK_DIR);
