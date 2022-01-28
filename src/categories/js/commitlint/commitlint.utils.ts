@@ -1,5 +1,6 @@
 import { addHook } from '../husky/husky.utils';
+import { CLI_NAME } from './commitlint.config';
 
-export const huskyHandler = async () => {
-  await addHook('commit-msg', 'npx --no-install -- commitlint --edit "$1"');
+export const huskyIntegration = async () => {
+  await addHook('commit-msg', `npx --no-install -- ${CLI_NAME} --edit "$1"`);
 };

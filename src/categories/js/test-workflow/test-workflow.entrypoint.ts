@@ -1,7 +1,5 @@
 import { addGithubWorkflow } from 'src/utils/github';
-import { getConfig } from './test-workflow.config';
-
-const WORKFLOW_FILENAME = 'test.yml';
+import { getConfig, WORKFLOW_FILENAME } from './test-workflow.config';
 
 export const testWorkflow = async () => {
   const { content } = getConfig();

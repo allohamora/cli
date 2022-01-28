@@ -1,5 +1,5 @@
 import { isEslintInstalled } from '../../eslint/eslint.utils';
-import { prettierConfigMutator } from '../lint-staged.utils';
+import { prettierMutator } from '../lint-staged.utils';
 import { Config, LintStagedConfig, Mutator } from './config.interface';
 
 const eslintNodeTsConfigMutator: Mutator = async (config) => {
@@ -14,5 +14,5 @@ const addEslintToConfig = (config: LintStagedConfig) => {
 
 export const nodeTsConfig: Config = {
   config: {},
-  mutators: [prettierConfigMutator, eslintNodeTsConfigMutator],
+  mutators: [prettierMutator, eslintNodeTsConfigMutator],
 };

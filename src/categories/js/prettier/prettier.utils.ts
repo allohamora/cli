@@ -1,9 +1,6 @@
 import { getInstalling } from 'src/states/context';
 import { isExistsInRoot } from 'src/utils/fs';
-
-export const PACKAGE_NAME = 'prettier';
-export const CONFIG_FILE_NAME = '.prettierrc';
-export const CONFIG_IGNORE_FILE_NAME = '.prettierignore';
+import { CONFIG_FILE_NAME, PACKAGE_NAME } from './prettier.config';
 
 export const isPrettierInstalled = async () => {
   const installing = getInstalling();

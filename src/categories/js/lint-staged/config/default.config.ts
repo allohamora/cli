@@ -1,7 +1,7 @@
-import { prettierConfigMutator } from '../lint-staged.utils';
+import { prettierMutator } from '../lint-staged.utils';
 import { Config } from './config.interface';
 
 export const defaultConfig: Config = {
   config: {},
-  mutators: [prettierConfigMutator],
+  mutators: [prettierMutator],
 };

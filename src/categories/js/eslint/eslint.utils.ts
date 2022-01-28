@@ -2,9 +2,7 @@ import { getInstalling } from 'src/states/context';
 import { isExistsInRoot } from 'src/utils/fs';
 import { isPrettierInstalled } from '../prettier/prettier.utils';
 import { Config } from './config/config.interface';
-
-export const PACKAGE_NAME = 'eslint';
-export const CONFIG_FILE_NAME = '.eslintrc.json';
+import { CONFIG_FILE_NAME, SCRIPT_NAME } from './eslint.config';
 
 export const prettierIntegrationHandler = async (config: Config) => {
   if (await isPrettierInstalled()) {
@@ -26,7 +24,7 @@ export const addPrettierToConfig = (config: Config) => {
 export const isEslintInstalled = async () => {
   const installing = getInstalling();
 
-  if (installing.includes('eslint')) {
+  if (installing.includes(SCRIPT_NAME)) {
     return true;
   }
 
