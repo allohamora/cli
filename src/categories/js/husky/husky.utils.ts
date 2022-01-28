@@ -2,7 +2,7 @@ import fps from 'fs/promises';
 import path from 'path';
 import { spawnCommand } from 'src/utils/run-command';
 import { ROOT_PATH } from 'src/utils/path';
-import { HOOK_DIR, PACKAGE_NAME } from './husky.config';
+import { HOOK_DIR, PACKAGE_NAME } from './husky.const';
 import { isInstalledAndInRootCheck } from 'src/utils/installed';
 
 export type HookName = 'pre-commit' | 'commit-msg';

@@ -1,5 +1,5 @@
 import { addHook, isHuskyInstalled } from '../husky/husky.utils';
-import { CLI_NAME } from './commitlint.config';
+import { CLI_NAME } from './commitlint.const';
 
 export const huskyIntegration = async () => {
   if (await isHuskyInstalled()) {

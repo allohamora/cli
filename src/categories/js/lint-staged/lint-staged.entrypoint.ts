@@ -1,6 +1,7 @@
 import { addToPackageJson, installDevelopmentDependencies } from 'src/utils/npm';
 import { LintStagedConfig, Mutator } from './config/config.interface';
-import { getConfig, PACKAGE_NAME } from './lint-staged.config';
+import { getConfig } from './lint-staged.config';
+import { PACKAGE_NAME } from './lint-staged.const';
 import { huskyIntegration } from './lint-staged.utils';
 
 const applyMutators = async (config: LintStagedConfig, mutators: Mutator[]) => {

@@ -1,6 +1,7 @@
 import { addJsonFileToRoot } from 'src/utils/fs';
 import { installDevelopmentDependencies } from 'src/utils/npm';
-import { CONFIG_FILE_NAME, getConfig, SCRIPT_NAME } from './commitlint.config';
+import { getConfig } from './commitlint.config';
+import { CONFIG_FILE_NAME, SCRIPT_NAME } from './commitlint.const';
 import { huskyIntegration } from './commitlint.utils';
 
 export const commitlint = async () => {

@@ -1,7 +1,7 @@
 import { isInstalledAndInRootCheck } from 'src/utils/installed';
 import { isPrettierInstalled } from '../prettier/prettier.utils';
 import { Config } from './config/config.interface';
-import { CONFIG_FILE_NAME, SCRIPT_NAME } from './eslint.config';
+import { CONFIG_FILE_NAME, SCRIPT_NAME } from './eslint.const';
 
 export const prettierIntegrationHandler = async (config: Config) => {
   if (await isPrettierInstalled()) {

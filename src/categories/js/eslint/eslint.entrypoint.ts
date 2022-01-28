@@ -1,7 +1,8 @@
-import { CONFIG_FILE_NAME, PACKAGE_NAME, getConfig as eslintGetConfig } from './eslint.config';
+import { getConfig as eslintGetConfig } from './eslint.config';
 import { addJsonFileToRoot } from 'src/utils/fs';
 import { addScripts, installDevelopmentDependencies } from 'src/utils/npm';
 import { prettierIntegrationHandler } from './eslint.utils';
+import { CONFIG_FILE_NAME, PACKAGE_NAME } from './eslint.const';
 
 export const getConfig = async () => {
   const config = eslintGetConfig();
