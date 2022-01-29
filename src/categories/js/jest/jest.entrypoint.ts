@@ -3,7 +3,7 @@ import { addScripts, installDevelopmentDependencies } from 'src/utils/npm';
 import { getConfig } from './jest.config';
 import { CONFIG_FILE_NAME } from './jest.const';
 
-export const jest = async () => {
+export const jestEntrypoint = async () => {
   const { devDependencies, configFileContent, scripts } = getConfig();
 
   await installDevelopmentDependencies(...devDependencies);
