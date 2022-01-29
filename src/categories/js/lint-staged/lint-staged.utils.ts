@@ -24,7 +24,7 @@ const stringOptionMutator: OptionMutator = {
   check: (config, key) => typeof config[key] === 'string',
   mutate: (config, key, value) => {
     const array = Array.from(new Set([config[key], value]));
-    config[key] = array.length === 0 ? array[0] : array;
+    config[key] = array.length === 1 ? array[0] : array;
   },
 };
 
