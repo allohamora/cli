@@ -9,7 +9,7 @@ export const prettierMutator = async (config: Config) => {
   }
 };
 
-export const addPrettierToConfig = (config: Config) => {
+const addPrettierToConfig = (config: Config) => {
   const dependenciesSet = new Set([...config.dependencies, 'eslint-plugin-prettier', 'eslint-config-prettier']);
   const dependencies = Array.from(dependenciesSet);
 
