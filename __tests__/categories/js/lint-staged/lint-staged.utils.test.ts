@@ -5,9 +5,9 @@ import * as eslintUtils from 'src/categories/js/eslint/eslint.utils';
 import {
   addOptionToLintStagedConfig,
   huskyIntegration,
-  jestMutator,
-  eslintMutator,
-  prettierMutator,
+  jestMutation,
+  eslintMutation,
+  prettierMutation,
 } from 'src/categories/js/lint-staged/lint-staged.utils';
 
 jest.mock('src/categories/js/husky/husky.utils');
@@ -118,13 +118,13 @@ describe('huskyIntegration', () => {
   });
 });
 
-describe('jestMutator', () => {
+describe('jestMutation', () => {
   test('should mutate config if jest installed', async () => {
     const ext = '*.js';
     const actual = {};
     jestUtilsMocked.isJestInstalled.mockResolvedValueOnce(true);
 
-    await jestMutator(ext)(actual);
+    await jestMutation(ext)(actual);
 
     const expected = { [ext]: 'jest --findRelatedTests' };
 
@@ -136,7 +136,7 @@ describe('jestMutator', () => {
     const actual = {};
     jestUtilsMocked.isJestInstalled.mockResolvedValueOnce(false);
 
-    await jestMutator(ext)(actual);
+    await jestMutation(ext)(actual);
 
     const expected = {};
 
@@ -144,13 +144,13 @@ describe('jestMutator', () => {
   });
 });
 
-describe('eslintMutator', () => {
+describe('eslintMutation', () => {
   test('should mutate config if eslint installed', async () => {
     const ext = '*.js';
     const actual = {};
     eslintUtilsMocked.isEslintInstalled.mockResolvedValueOnce(true);
 
-    await eslintMutator(ext)(actual);
+    await eslintMutation(ext)(actual);
 
     const expected = { [ext]: 'eslint --fix' };
 
@@ -162,7 +162,7 @@ describe('eslintMutator', () => {
     const actual = {};
     eslintUtilsMocked.isEslintInstalled.mockResolvedValueOnce(false);
 
-    await eslintMutator(ext)(actual);
+    await eslintMutation(ext)(actual);
 
     const expected = {};
 
@@ -170,13 +170,13 @@ describe('eslintMutator', () => {
   });
 });
 
-describe('prettierMutator', () => {
+describe('prettierMutation', () => {
   test('should mutate config if prettier installed', async () => {
     const ext = '*.{js,json,yml,md}';
     const actual = {};
     prettierUtilsMocked.isPrettierInstalled.mockResolvedValueOnce(true);
 
-    await prettierMutator(actual);
+    await prettierMutation(actual);
 
     const expected = { [ext]: 'prettier --write' };
 
@@ -187,7 +187,7 @@ describe('prettierMutator', () => {
     const actual = {};
     prettierUtilsMocked.isPrettierInstalled.mockResolvedValueOnce(false);
 
-    await prettierMutator(actual);
+    await prettierMutation(actual);
 
     const expected = {};
 

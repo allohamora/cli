@@ -1,6 +1,6 @@
 import * as installed from 'src/utils/installed';
 import * as prettierUtils from 'src/categories/js/prettier/prettier.utils';
-import { prettierMutator } from 'src/categories/js/eslint/eslint.utils';
+import { prettierMutation } from 'src/categories/js/eslint/eslint.utils';
 import { createConfig } from './eslint-test.utils';
 
 jest.mock('src/utils/installed', () => ({
@@ -19,13 +19,13 @@ afterEach(() => {
   jest.unmock('src/categories/js/prettier/prettier.utils');
 });
 
-describe('prettierMutator', () => {
+describe('prettierMutation', () => {
   test('should add prettier to empty config if prettier installed', async () => {
     prettierUtilsMocked.isPrettierInstalled.mockResolvedValueOnce(true);
 
     const actual = createConfig();
 
-    await prettierMutator(actual);
+    await prettierMutation(actual);
 
     const expected = createConfig({
       dependencies: ['eslint-plugin-prettier', 'eslint-config-prettier'],
@@ -43,7 +43,7 @@ describe('prettierMutator', () => {
       eslintConfig: { extends: ['__test__'] },
     });
 
-    await prettierMutator(actual);
+    await prettierMutation(actual);
 
     const expected = createConfig({
       dependencies: ['__test__', 'eslint-plugin-prettier', 'eslint-config-prettier'],

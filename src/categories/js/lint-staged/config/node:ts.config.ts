@@ -1,7 +1,7 @@
-import { eslintMutator, jestMutator, prettierMutator } from '../lint-staged.utils';
+import { eslintMutation, jestMutation, prettierMutation } from '../lint-staged.utils';
 import { Config } from './config.interface';
 
 export const nodeTsConfig: Config = {
   config: {},
-  mutators: [prettierMutator, eslintMutator('*.ts'), jestMutator('*.ts')],
+  mutations: [prettierMutation, eslintMutation('*.ts'), jestMutation('*.ts')],
 };

@@ -4,7 +4,7 @@ export const createConfig = ({
   dependencies = [],
   eslintConfig = {},
   scripts = [],
-  mutators = [],
+  mutations = [],
 }: Partial<Config> = {}) => {
-  return { dependencies, eslintConfig, scripts, mutators };
+  return { dependencies, eslintConfig, scripts, mutations };
 };

@@ -17,9 +17,9 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-const createConfig = ({ config = {}, mutators = [] }: Partial<Config> = {}) => ({
+const createConfig = ({ config = {}, mutations = [] }: Partial<Config> = {}) => ({
   config,
-  mutators,
+  mutations,
 });
 
 describe('lintStaged', () => {
@@ -31,19 +31,19 @@ describe('lintStaged', () => {
     expect(configMocked.getConfig).toBeCalled();
   });
 
-  test('should apply mutators to config', async () => {
+  test('should apply mutations to config', async () => {
     const key = '*.ts';
     const value = '__test__';
     const testMutator = (config: LintStagedConfig) => (config[key] = value);
     const mutators = [testMutator];
 
-    const actual = createConfig({ mutators });
+    const actual = createConfig({ mutations: mutators });
 
     configMocked.getConfig.mockReturnValueOnce(actual);
 
     await lintStaged();
 
-    const expected = createConfig({ config: { [key]: value }, mutators });
+    const expected = createConfig({ config: { [key]: value }, mutations: mutators });
 
     expect(actual).toEqual(expected);
   });

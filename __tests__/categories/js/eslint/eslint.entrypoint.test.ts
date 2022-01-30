@@ -1,8 +1,7 @@
 import * as fs from 'src/utils/fs';
 import * as npm from 'src/utils/npm';
-import * as mutator from 'src/utils/mutator';
+import * as mutation from 'src/utils/mutation';
 import * as config from 'src/categories/js/eslint/eslint.config';
-import * as utils from 'src/categories/js/eslint/eslint.utils';
 import { eslint } from 'src/categories/js/eslint/eslint.entrypoint';
 import { createConfig } from './eslint-test.utils';
 import { Config } from 'src/categories/js/eslint/config/config.interface';
@@ -13,14 +12,11 @@ const fsMocked = jest.mocked(fs);
 jest.mock('src/utils/npm');
 const npmMocked = jest.mocked(npm);
 
-jest.mock('src/utils/mutator');
-const mutatorMocked = jest.mocked(mutator);
+jest.mock('src/utils/mutation');
+const mutationMocked = jest.mocked(mutation);
 
 jest.mock('src/categories/js/eslint/eslint.config');
 const configMocked = jest.mocked(config);
-
-jest.mock('src/categories/js/eslint/eslint.utils');
-const utilsMocked = jest.mocked(utils);
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -35,16 +31,16 @@ describe('eslint', () => {
     expect(configMocked.getConfig).toBeCalled();
   });
 
-  test('should apply mutators to config', async () => {
+  test('should apply mutations to config', async () => {
     const testMutator = (config: Config) => {
       config.dependencies.push('__test__');
     };
-    const config = createConfig({ mutators: [testMutator] });
+    const config = createConfig({ mutations: [testMutator] });
     configMocked.getConfig.mockReturnValueOnce(config);
 
     await eslint();
 
-    expect(mutatorMocked.applyMutators).toBeCalledWith(config, config.mutators);
+    expect(mutationMocked.applyMutations).toBeCalledWith(config, config.mutations);
   });
 
   test('should install eslint and dependencies', async () => {
@@ -71,6 +67,6 @@ describe('eslint', () => {
 
     await eslint();
 
-    expect(npm.addScripts).toBeCalledWith(...config.scripts);
+    expect(npmMocked.addScripts).toBeCalledWith(...config.scripts);
   });
 });

@@ -1,4 +1,4 @@
-import { Mutator } from 'src/utils/mutator';
+import { Mutation } from 'src/utils/mutation';
 
 export interface EslintConfig {
   parser?: string;
@@ -24,5 +24,5 @@ export interface Config {
   dependencies: string[];
   eslintConfig: EslintConfig;
   scripts: { name: string; script: string }[];
-  mutators: Mutator<Config>[];
+  mutations: Mutation<Config>[];
 }

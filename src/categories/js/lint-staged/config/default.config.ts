@@ -1,7 +1,7 @@
-import { eslintMutator, jestMutator, prettierMutator } from '../lint-staged.utils';
+import { eslintMutation, jestMutation, prettierMutation } from '../lint-staged.utils';
 import { Config } from './config.interface';
 
 export const defaultConfig: Config = {
   config: {},
-  mutators: [prettierMutator, eslintMutator('*.js'), jestMutator('*.js')],
+  mutations: [prettierMutation, eslintMutation('*.js'), jestMutation('*.js')],
 };

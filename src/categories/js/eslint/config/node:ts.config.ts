@@ -1,4 +1,4 @@
-import { prettierMutator } from '../eslint.utils';
+import { prettierMutation } from '../eslint.utils';
 import { Config } from './config.interface';
 
 export const nodeTsConfig: Config = {
@@ -37,5 +37,5 @@ export const nodeTsConfig: Config = {
     { name: 'lint', script: 'eslint "src/**/*.ts"' },
     { name: 'lint:fix', script: 'eslint "src/**/*.ts" --fix' },
   ],
-  mutators: [prettierMutator],
+  mutations: [prettierMutation],
 };
