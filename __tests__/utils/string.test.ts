@@ -5,6 +5,7 @@ import {
   removeTabOnEachLine,
   multilineStringBuilderWithMiddlewares,
   trim,
+  readableMultilineString,
 } from 'src/utils/string';
 
 describe('kebablize', () => {
@@ -62,6 +63,22 @@ describe('removeTabOnEachLine', () => {
 describe('trim', () => {
   test('should trim string', () => {
     const actual = trim('   hello world!   ');
+    const expected = 'hello world!';
+
+    expect(actual).toBe(expected);
+  });
+});
+
+describe('readableMultilineString', () => {
+  test('should remove one tab on each line', () => {
+    const actual = readableMultilineString`\n\thello\n\tworld!`;
+    const expected = `hello\nworld!`;
+
+    expect(actual).toBe(expected);
+  });
+
+  test('should trim', () => {
+    const actual = readableMultilineString`   hello world!   `;
     const expected = 'hello world!';
 
     expect(actual).toBe(expected);
