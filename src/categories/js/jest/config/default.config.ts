@@ -1,5 +1,5 @@
 import { NpmScript } from 'src/utils/npm';
-import { prettyMultilineFormat } from 'src/utils/string';
+import { readableString } from 'src/utils/string';
 import { Config } from './config.interfrace';
 
 export const scripts: NpmScript[] = [
@@ -8,7 +8,7 @@ export const scripts: NpmScript[] = [
   { name: 'test:coverage', script: 'jest --coverage' },
 ];
 
-const configFileContent = prettyMultilineFormat`
+const configFileContent = readableString`
   module.exports = {
     testEnvironment: 'node',
     testRegex: '.*\\.(spec|test)\\.js$',

@@ -1,6 +1,6 @@
-import { prettyMultilineFormat } from 'src/utils/string';
+import { readableString } from 'src/utils/string';
 
-const content = prettyMultilineFormat`
+const content = readableString`
   name: release
 
   on:

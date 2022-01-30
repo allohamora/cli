@@ -1,4 +1,11 @@
-import { buildTemplate, camelize, kebablize, removeTabOnEachLine, templateWithFormat, trim } from 'src/utils/string';
+import {
+  multilineStringBuilder,
+  camelize,
+  kebablize,
+  removeTabOnEachLine,
+  multilineStringBuilderWithMiddlewares,
+  trim,
+} from 'src/utils/string';
 
 describe('kebablize', () => {
   test('should kebablize string', () => {
@@ -18,25 +25,25 @@ describe('camelize', () => {
   });
 });
 
-describe('buildTemplate', () => {
+describe('multilineStringBuilder', () => {
   test('should correctly build template string', () => {
-    const actual = buildTemplate`${'hello'} ${'world'}${'!'}`;
+    const actual = multilineStringBuilder`${'hello'} ${'world'}${'!'}`;
     const expected = 'hello world!';
 
     expect(actual).toBe(expected);
   });
 });
 
-describe('templateWithFormat', () => {
+describe('multilineStringBuilderWithMiddlewares', () => {
   test('should correctly build template', () => {
-    const actual = templateWithFormat()`${'hello'} ${'world'}${'!'}`;
+    const actual = multilineStringBuilderWithMiddlewares()`${'hello'} ${'world'}${'!'}`;
     const expected = 'hello world!';
 
     expect(actual).toBe(expected);
   });
 
   test('should apply format funcs', () => {
-    const actual = templateWithFormat((string) => string.trim())`   hello world!   `;
+    const actual = multilineStringBuilderWithMiddlewares((string) => string.trim())`   hello world!   `;
     const expected = 'hello world!';
 
     expect(actual).toBe(expected);

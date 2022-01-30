@@ -1,8 +1,8 @@
-import { prettyMultilineFormat } from 'src/utils/string';
+import { readableString } from 'src/utils/string';
 import { scripts } from './default.config';
 import { Config } from './config.interfrace';
 
-const configFileContent = prettyMultilineFormat`
+const configFileContent = readableString`
   /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
   module.exports = {
     preset: 'ts-jest',

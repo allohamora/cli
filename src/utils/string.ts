@@ -20,7 +20,7 @@ export const camelize = (kebab: string) => {
   return `${first}${capilazedRest}`;
 };
 
-export const buildTemplate = (strings: TemplateStringsArray, ...values: unknown[]) => {
+export const multilineStringBuilder = (strings: TemplateStringsArray, ...values: unknown[]) => {
   const result = strings.reduce((state, string, index) => {
     const value = values[index] ?? '';
 
@@ -30,15 +30,17 @@ export const buildTemplate = (strings: TemplateStringsArray, ...values: unknown[
   return result;
 };
 
-export const templateWithFormat = (...funcs: Array<(value: string) => string>) => {
-  return (...params: Parameters<typeof buildTemplate>) => {
-    const builded = buildTemplate(...params);
+type Middleware = (value: string) => string;
 
-    return compose(...funcs)(builded);
+export const multilineStringBuilderWithMiddlewares = (...middlewares: Middleware[]) => {
+  return (...params: Parameters<typeof multilineStringBuilder>) => {
+    const builded = multilineStringBuilder(...params);
+
+    return compose(...middlewares)(builded);
   };
 };
 
 export const removeTabOnEachLine = (string: string) => string.replace(/\n(  |\t)/g, '\n');
 export const trim = (string: string) => string.trim();
 
-export const prettyMultilineFormat = templateWithFormat(trim, removeTabOnEachLine);
+export const readableString = multilineStringBuilderWithMiddlewares(trim, removeTabOnEachLine);
