@@ -1,6 +1,6 @@
-import { readableString } from 'src/utils/string';
+import { readableMultilineString } from 'src/utils/string';
 
-const content = readableString`
+const content = readableMultilineString`
   name: test
 
   on:
