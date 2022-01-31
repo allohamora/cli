@@ -19,6 +19,7 @@ const options = {
   eslint,
   lintStaged,
   releaseWorkflow,
+  // named jestEntrypoint because in test environment jest name is reserved
   jest: jestEntrypoint,
   testWorkflow,
   codeQlWorkflow,
