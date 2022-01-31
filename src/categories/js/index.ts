@@ -9,6 +9,7 @@ import { releaseWorkflow } from './release-workflow/release-worflow.entrypoint';
 import { jestEntrypoint } from './jest/jest.entrypoint';
 import { testWorkflow } from './test-workflow/test-workflow.entrypoint';
 import { codeQlWorkflow } from './codeql-workflow/codeql-workflow.entrypoint';
+import { buildWorkflow } from './build-workflow/build-workflow.entrypoint';
 
 // order have matter
 const options = {
@@ -23,6 +24,7 @@ const options = {
   jest: jestEntrypoint,
   testWorkflow,
   codeQlWorkflow,
+  buildWorkflow,
 };
 
 export default {
