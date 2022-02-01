@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/Allohamora/cli/compare/1.3.0...1.4.0) (2022-02-01)
+
+### Features
+
+- add build-workflow ([efdad73](https://github.com/Allohamora/cli/commit/efdad73e6746f75d7a78fa13905be66e6e38c0b6))
+- add CI: true env to build and test workflows ([e08a2cf](https://github.com/Allohamora/cli/commit/e08a2cf842ca23a30ba1e421e45858c343151145))
+- add codeql-workflow ([39ce3ed](https://github.com/Allohamora/cli/commit/39ce3ed77b89d81ce0db9add3a2552ed05b2a7ed))
+- add jest mutation to eslint ([2ae637b](https://github.com/Allohamora/cli/commit/2ae637b0f480137b9fa73bb92ef41b2a748f4020))
+- add jest mutator to lint-staged and refactor lint-staged mutators ([eec68ac](https://github.com/Allohamora/cli/commit/eec68ac8c11f15e8ce6e0b04d466c1ad8a2c901d))
+- add jest script for js category ([7209ca1](https://github.com/Allohamora/cli/commit/7209ca15ea15163fcf9d97112d935d18047eb0be))
+- add jest:watch script to js/jest ([66d7d67](https://github.com/Allohamora/cli/commit/66d7d67c6d2cc6bb16bc90df2d443b0665b4c2c8))
+- add test-workflow script for js category ([1ffbcbb](https://github.com/Allohamora/cli/commit/1ffbcbb1773f936553ccaecffcc5f35df0e10758))
+- add tests for standard-version ([4134cfa](https://github.com/Allohamora/cli/commit/4134cfae73c0ef630916304900cc74385ad4970f))
+
+### Bug Fixes
+
+- add collectCoverageFrom to jest configs ([f2a341b](https://github.com/Allohamora/cli/commit/f2a341b37372ba00ce3e6b9d1e43651a0367bb19))
+- fix husky.entrypoint crash ([730c927](https://github.com/Allohamora/cli/commit/730c9270a6d954b13aa2e02d8641bdee039cd367))
+- fix invalid husky integration ([a48982e](https://github.com/Allohamora/cli/commit/a48982eef87caa75992a501da8e7985bde8d0241))
+- fix invalid path to husky in lint-staged ([a98ecfb](https://github.com/Allohamora/cli/commit/a98ecfbad3321902662f7e3054622c5854550d5b))
+- fix invalid reduce in buildTemplate ([cba23b9](https://github.com/Allohamora/cli/commit/cba23b9492ddc39d1b7f138ddb87b500cc7fc0f4))
+- rename main job in release-worflow to correct ([a07a8be](https://github.com/Allohamora/cli/commit/a07a8be4729ea0933a6f8d70dcaf835bf7cae0d8))
+- replace npm test to npm run test in test-workflow ([18e78e3](https://github.com/Allohamora/cli/commit/18e78e30565c717a62e6d2bbe3c7e3ce66694b9f))
+
 ## [1.3.0](https://github.com/Allohamora/cli/compare/1.2.3...1.3.0) (2022-01-23)
 
 ### Features
