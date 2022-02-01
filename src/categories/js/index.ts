@@ -8,7 +8,7 @@ import { standardVersion } from './standard-version/standard-version.entrypoint'
 import { releaseWorkflow } from './release-workflow/release-worflow.entrypoint';
 import { jestEntrypoint } from './jest/jest.entrypoint';
 import { testWorkflow } from './test-workflow/test-workflow.entrypoint';
-import { codeQlWorkflow } from './codeql-workflow/codeql-workflow.entrypoint';
+import { codeqlWorkflow } from './codeql-workflow/codeql-workflow.entrypoint';
 import { buildWorkflow } from './build-workflow/build-workflow.entrypoint';
 
 // order have matter
@@ -23,7 +23,7 @@ const options = {
   // named jestEntrypoint because in test environment jest name is reserved
   jest: jestEntrypoint,
   testWorkflow,
-  codeQlWorkflow,
+  codeqlWorkflow,
   buildWorkflow,
 };
 

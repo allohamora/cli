@@ -1,6 +1,6 @@
 import * as config from 'src/categories/js/codeql-workflow/codeql-workflow.config';
 import * as github from 'src/utils/github';
-import { codeQlWorkflow } from 'src/categories/js/codeql-workflow/codeql-workflow.entrypoint';
+import { codeqlWorkflow } from 'src/categories/js/codeql-workflow/codeql-workflow.entrypoint';
 
 jest.mock('src/categories/js/codeql-workflow/codeql-workflow.config');
 const configMocked = jest.mocked(config);
@@ -12,11 +12,11 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-describe('codeQlWorkflow', () => {
+describe('codeqlWorkflow', () => {
   test('should get config from getConfig', async () => {
     configMocked.getConfig.mockReturnValueOnce({ content: '' });
 
-    await codeQlWorkflow();
+    await codeqlWorkflow();
 
     expect(configMocked.getConfig).toBeCalled();
   });
@@ -25,7 +25,7 @@ describe('codeQlWorkflow', () => {
     const content = '__test__';
     configMocked.getConfig.mockReturnValueOnce({ content });
 
-    await codeQlWorkflow();
+    await codeqlWorkflow();
 
     expect(githubMocked.addGithubWorkflow).toBeCalledWith('codeql.yml', content);
   });
