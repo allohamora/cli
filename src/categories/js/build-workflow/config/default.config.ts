@@ -8,6 +8,8 @@ const content = readableMultilineString`
   jobs:
     build:
       runs-on: ubuntu-latest
+      env: 
+        CI: true
       steps:
         - name: Checkout code
           uses: actions/checkout@v2
