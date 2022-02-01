@@ -1,4 +1,4 @@
-import { prettierMutation } from '../eslint.utils';
+import { jestMutation, prettierMutation } from '../eslint.utils';
 import { Config } from './config.interface';
 
 export const defaultConfig: Config = {
@@ -12,7 +12,6 @@ export const defaultConfig: Config = {
       es6: true,
       node: true,
       browser: true,
-      jest: true,
     },
     root: true,
     extends: ['eslint:recommended'],
@@ -21,5 +20,5 @@ export const defaultConfig: Config = {
     { name: 'lint', script: 'eslint "src/**/*.js"' },
     { name: 'lint:fix', script: 'eslint "src/**/*.js" --fix' },
   ],
-  mutations: [prettierMutation],
+  mutations: [prettierMutation, jestMutation],
 };
