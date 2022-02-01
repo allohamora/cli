@@ -3,6 +3,8 @@ import { isPrettierInstalled } from '../prettier/prettier.utils';
 import { addHook, isHuskyInstalled } from '../husky/husky.utils';
 import { CLI_NAME } from './lint-staged.const';
 import { CLI_NAME as PRETTIER_CLI_NAME } from '../prettier/prettier.const';
+import { CLI_NAME as JEST_CLI_NAME } from '../jest/jest.const';
+import { CLI_NAME as ESLINT_CLI_NAME } from '../eslint/eslint.const';
 import { isJestInstalled } from '../jest/jest.utils';
 import { isEslintInstalled } from '../eslint/eslint.utils';
 
@@ -55,13 +57,13 @@ export const huskyIntegration = async () => {
 
 export const jestMutation = (fileExtension: ScriptFileExtension) => async (config: LintStagedConfig) => {
   if (await isJestInstalled()) {
-    addOptionToLintStagedConfig(config, fileExtension, 'jest --findRelatedTests');
+    addOptionToLintStagedConfig(config, fileExtension, `${JEST_CLI_NAME} --findRelatedTests`);
   }
 };
 
 export const eslintMutation = (fileExtension: ScriptFileExtension) => async (config: LintStagedConfig) => {
   if (await isEslintInstalled()) {
-    addOptionToLintStagedConfig(config, fileExtension, 'eslint --fix');
+    addOptionToLintStagedConfig(config, fileExtension, `${ESLINT_CLI_NAME} --fix`);
   }
 };
 
