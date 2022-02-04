@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/Allohamora/cli/compare/1.4.0...1.4.1) (2022-02-04)
+
+### Bug Fixes
+
+- replace any push to any branch push to fix double actions bug ([3f9440e](https://github.com/Allohamora/cli/commit/3f9440e2c44c15fd47a3146a043818d9eba35b44))
+
 ## [1.4.0](https://github.com/Allohamora/cli/compare/1.3.0...1.4.0) (2022-02-01)
 
 ### Features
