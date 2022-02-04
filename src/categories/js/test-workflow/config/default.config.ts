@@ -3,7 +3,10 @@ import { readableMultilineString } from 'src/utils/string';
 const content = readableMultilineString`
   name: test
 
-  on: push
+  on:
+    push:
+      branches:
+        - "**"
 
   jobs:
     test:
