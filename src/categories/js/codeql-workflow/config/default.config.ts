@@ -3,7 +3,10 @@ import { readableMultilineString } from 'src/utils/string';
 const content = readableMultilineString`
   name: codeql
 
-  on: push
+  on:
+    push:
+      branches:
+        - "**"
 
   jobs:
     analyse:
