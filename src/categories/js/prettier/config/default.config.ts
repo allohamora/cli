@@ -14,9 +14,9 @@ export const defaultConfig = {
       },
     ],
   },
-  ignore: ['dist', 'node_modules', 'public', '.husky', 'package-lock.json'],
+  ignore: ['dist', 'node_modules', 'public', '.husky', 'package-lock.json', 'coverage'],
   scripts: [
-    { name: 'format', script: 'prettier .' },
+    { name: 'format', script: 'prettier . --check' },
     { name: 'format:fix', script: 'prettier --write .' },
   ],
 };

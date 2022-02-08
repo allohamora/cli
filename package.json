@@ -11,7 +11,7 @@
     "prestart": "npm run build",
     "start": "npm unlink @allohamora/cli && npm link @allohamora/cli && ./bin/cli.js",
     "prepare": "husky install",
-    "format": "prettier .",
+    "format": "prettier . --check",
     "format:fix": "prettier --write .",
     "release": "standard-version --tag-prefix=",
     "release:minor": "standard-version --release-as minor --tag-prefix=",
