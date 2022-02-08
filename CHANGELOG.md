@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/Allohamora/cli/compare/1.4.1...1.5.0) (2022-02-08)
+
+### Features
+
+- improve prettier config ([dd5338c](https://github.com/Allohamora/cli/commit/dd5338cf5371252cd04fab80540047c1c89c980a))
+
 ### [1.4.1](https://github.com/Allohamora/cli/compare/1.4.0...1.4.1) (2022-02-04)
 
 ### Bug Fixes

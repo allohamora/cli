@@ -1,6 +1,6 @@
 {
   "name": "@allohamora/cli",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "cli to initialize projects and more",
   "input": "./src/index.ts",
   "main": "./bin/cli.js",
@@ -11,7 +11,7 @@
     "prestart": "npm run build",
     "start": "npm unlink @allohamora/cli && npm link @allohamora/cli && ./bin/cli.js",
     "prepare": "husky install",
-    "format": "prettier .",
+    "format": "prettier . --check",
     "format:fix": "prettier --write .",
     "release": "standard-version --tag-prefix=",
     "release:minor": "standard-version --release-as minor --tag-prefix=",
@@ -46,8 +46,8 @@
   },
   "homepage": "https://github.com/Allohamora/cli#readme",
   "engines": {
-    "node": "^16.13.0",
-    "npm": "^8.1.0"
+    "node": ">=16.13.0",
+    "npm": ">=8.1.0"
   },
   "files": [
     "bin/"
