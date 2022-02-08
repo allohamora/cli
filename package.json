@@ -1,6 +1,6 @@
 {
   "name": "@allohamora/cli",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "cli to initialize projects and more",
   "input": "./src/index.ts",
   "main": "./bin/cli.js",
