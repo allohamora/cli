@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.2](https://github.com/allohamora/cli/compare/1.5.1...1.5.2) (2022-03-02)
+
+### Bug Fixes
+
+- fix author link in README ([a5038b5](https://github.com/allohamora/cli/commit/a5038b5d785e8dbb48123b565e188af7ddc88275))
+
 ### [1.5.1](https://github.com/allohamora/cli/compare/1.5.0...1.5.1) (2022-03-02)
 
 ### Bug Fixes
