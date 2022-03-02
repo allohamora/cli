@@ -33,6 +33,6 @@
       "hidden": true
     }
   ],
-  "commitUrlFormat": "https://github.com/Allohamora/cli/commit/{{hash}}",
-  "compareUrlFormat": "https://github.com/Allohamora/cli/compare/{{previousTag}}...{{currentTag}}"
+  "commitUrlFormat": "https://github.com/allohamora/cli/commit/{{hash}}",
+  "compareUrlFormat": "https://github.com/allohamora/cli/compare/{{previousTag}}...{{currentTag}}"
 }
