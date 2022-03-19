@@ -21,3 +21,10 @@ export const addGithubWorkflow = async (filename: string, content: string) => {
   const relativeFilePath = path.join(GITHUB_RELATIVE_WORKFLOWS_PATH, filename);
   await addFileToRoot(relativeFilePath, content);
 };
+
+export const addToGithubDir = async (filename: string, content: string) => {
+  await addGithubDirIfNotExists();
+
+  const relativeFilePath = path.join(GITHUB_DIR_NAME, filename);
+  await addFileToRoot(relativeFilePath, content);
+};
