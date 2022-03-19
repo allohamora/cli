@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "inquirer": "^8.2.0",
-    "ora": "^5.4.1"
+    "ora": "^6.1.0"
   },
   "standard-version": {
     "skip": {
