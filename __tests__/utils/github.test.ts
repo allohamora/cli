@@ -1,6 +1,11 @@
 import * as fs from 'src/utils/fs';
 import path from 'path';
-import { addGithubDirIfNotExists, addGithubWorkflow, addWorkflowsDirIfNotExists } from 'src/utils/github';
+import {
+  addGithubDirIfNotExists,
+  addGithubWorkflow,
+  addWorkflowsDirIfNotExists,
+  addToGithubDir,
+} from 'src/utils/github';
 
 const GITHUB_DIR_NAME = '.github';
 const GITHUB_WORKFLOWS_DIR_NAME = 'workflows';
@@ -44,6 +49,24 @@ describe('addGithubWorkflow', () => {
 
   test(`should add workflow to ${GITHUB_RELATIVE_WORKFLOWS_PATH}`, async () => {
     await addGithubWorkflow(filename, content);
+
+    expect(fsMocked.addFileToRoot).toBeCalledWith(filePath, content);
+  });
+});
+
+describe('addToGithubDir', () => {
+  const filename = 'test.yml';
+  const content = '__test__';
+  const filePath = path.join(GITHUB_DIR_NAME, filename);
+
+  test('should create .github if not exists', async () => {
+    await addToGithubDir(filename, content);
+
+    expect(fsMocked.addDirToRootIfNotExists).toBeCalledWith(GITHUB_DIR_NAME);
+  });
+
+  test(`should add file to ${GITHUB_DIR_NAME}`, async () => {
+    await addToGithubDir(filename, content);
 
     expect(fsMocked.addFileToRoot).toBeCalledWith(filePath, content);
   });
