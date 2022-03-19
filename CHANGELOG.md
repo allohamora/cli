@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://github.com/allohamora/cli/compare/1.6.1...1.6.2) (2022-03-19)
+
+### Bug Fixes
+
+- codeql dependabot conflict ([e85a9ee](https://github.com/allohamora/cli/commit/e85a9ee39a238931efdc47819edd8f96d2dfa434))
+
 ### [1.6.1](https://github.com/allohamora/cli/compare/1.6.0...1.6.1) (2022-03-19)
 
 ### Features
