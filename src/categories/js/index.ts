@@ -10,6 +10,7 @@ import { jestEntrypoint } from './jest/jest.entrypoint';
 import { testWorkflow } from './test-workflow/test-workflow.entrypoint';
 import { codeqlWorkflow } from './codeql-workflow/codeql-workflow.entrypoint';
 import { buildWorkflow } from './build-workflow/build-workflow.entrypoint';
+import { dependabot } from './dependabot/dependabot.entrypoint';
 
 // order have matter
 const options = {
@@ -25,6 +26,7 @@ const options = {
   testWorkflow,
   codeqlWorkflow,
   buildWorkflow,
+  dependabot,
 };
 
 export default {
