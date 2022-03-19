@@ -2,8 +2,8 @@ name: codeql
 
 on:
   push:
-    branches:
-      - "**"
+    branches-ignore:
+      - "dependabot/**"
 
 jobs:
   analyse:
