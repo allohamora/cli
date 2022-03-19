@@ -5,8 +5,8 @@ const content = readableMultilineString`
 
   on:
     push:
-      branches:
-        - "**"
+      branches-ignore:
+        - "dependabot/**"
 
   jobs:
     analyse:
