@@ -39,6 +39,7 @@ npx @allohamora/cli
   - [**build-workflow**](/src/categories/js/build-workflow) is a script to initialize github build workflow that runs `npm run build` on each push to github.
   - [**codeql-workflow**](/src/categories/js/codeql-workflow) is a script to initialize github codeql workflow what runs codeql with default options on each push to github.
   - [**dependabot**](src/categories/js/dependabot/) is a script to initialize github dependabot what manages project dependencies vulnerabilities and opens pull requests with fixes.
+  - [**docker**](src/categories/js/docker/) is a script to initialize docker with Dockerfile and .dockerignore files
 
 \*integrations runs only if package is installing or installed.
 
