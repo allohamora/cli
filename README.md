@@ -1,5 +1,7 @@
 # CLI
 
+![build](https://github.com/allohamora/cli/actions/workflows/build.yml/badge.svg)
+
 The [Allohamora](https://github.com/allohamora) CLI is a command line interface with scripts to initialize projects and more. Sorted by categories.
 
 ## Requirements
