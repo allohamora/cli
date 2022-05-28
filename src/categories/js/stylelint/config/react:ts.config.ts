@@ -43,8 +43,8 @@ export const reactTsConfig: Config = {
     '@stylelint/postcss-css-in-js',
   ],
   scripts: [
-    { name: 'csslint', script: 'stylelint "src/**/*.{css,js,jsx,ts,tsx}"' },
-    { name: 'csslint:fix', script: 'stylelint "src/**/*.{css,js,jsx,ts,tsx}" --fix' },
+    { name: 'csslint', script: 'stylelint "src/**/*.{css,ts,tsx}"' },
+    { name: 'csslint:fix', script: 'stylelint "src/**/*.{css,ts,tsx}" --fix' },
   ],
   mutations: [prettierMutation],
 };

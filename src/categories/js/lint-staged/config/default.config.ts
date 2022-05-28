@@ -3,5 +3,5 @@ import { Config } from './config.interface';
 
 export const defaultConfig: Config = {
   config: {},
-  mutations: [prettierMutation, stylelintMutation, eslintMutation('*.js'), jestMutation('*.js')],
+  mutations: [prettierMutation, stylelintMutation('*.css'), eslintMutation('*.js'), jestMutation('*.js')],
 };

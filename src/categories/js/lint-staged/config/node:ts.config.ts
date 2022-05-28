@@ -3,5 +3,5 @@ import { Config } from './config.interface';
 
 export const nodeTsConfig: Config = {
   config: {},
-  mutations: [prettierMutation, stylelintMutation, eslintMutation('*.ts'), jestMutation('*.ts')],
+  mutations: [prettierMutation, stylelintMutation('*.css'), eslintMutation('*.ts'), jestMutation('*.ts')],
 };
