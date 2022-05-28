@@ -10,13 +10,19 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-const spawnMock = async <EV>(event: 'exit' | 'error' = 'exit', emitValue?: EV, delayMs = 200) => {
-  const ee = new EventEmitter();
+class ChildMock extends EventEmitter {
+  public stdout = new EventEmitter();
+}
 
-  const exitHandler = () => ee.emit(event, emitValue);
+const spawnMock = <EV>(event: 'exit' | 'error' = 'exit', emitValue?: EV, delayMs = 200) => {
+  const child = new ChildMock();
+
+  const exitHandler = () => child.emit(event, emitValue);
   delay(delayMs).then(exitHandler);
 
-  childProcessMocked.spawn.mockReturnValueOnce(ee as ReturnType<typeof childProcess.spawn>);
+  childProcessMocked.spawn.mockReturnValueOnce(child as ReturnType<typeof childProcess.spawn>);
+
+  return child;
 };
 
 describe('spawnCommand', () => {
@@ -50,6 +56,21 @@ describe('spawnCommand', () => {
     }
 
     throw new Error(`command doesn't crashed`);
+  });
+
+  test('should return stdout result', async () => {
+    const child = spawnMock('exit');
+    const chunks = ['Hello', 'World'].map((value) => Buffer.from(value, 'utf-8'));
+
+    const spawnResult = spawnCommand(command, args);
+
+    for (const chunk of chunks) {
+      child.stdout.emit('data', chunk);
+    }
+
+    const result = await spawnResult;
+
+    expect(result).toBe(chunks.join(''));
   });
 });
 

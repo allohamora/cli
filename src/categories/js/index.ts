@@ -11,6 +11,7 @@ import { testWorkflow } from './test-workflow/test-workflow.entrypoint';
 import { codeqlWorkflow } from './codeql-workflow/codeql-workflow.entrypoint';
 import { buildWorkflow } from './build-workflow/build-workflow.entrypoint';
 import { dependabot } from './dependabot/dependabot.entrypoint';
+import { docker } from './docker/docker.entrypoint';
 
 // order have matter
 const options = {
@@ -27,6 +28,7 @@ const options = {
   codeqlWorkflow,
   buildWorkflow,
   dependabot,
+  docker,
 };
 
 export default {
