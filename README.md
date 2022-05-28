@@ -26,11 +26,12 @@ npx @allohamora/cli
 
 ## Overview
 
-- [**js**](/src/categories/js/index.ts) is a category with scripts to initialize js/ts projects, have default and node:ts config options.
-  - [**commitlint**](/src/categories/js/commitlint) is a script to initialize [commitlint](https://github.com/conventional-changelog/commitlint) with [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) config. Have [husky](https://github.com/typicode/husky) integration.
-  - [**eslint**](/src/categories/js/eslint) is a script to initialize [eslint](https://github.com/eslint/eslint) with config and lint scripts. Have [prettier](https://github.com/prettier/prettier) integration.
+- [**js**](/src/categories/js/index.ts) is a category with scripts to initialize js/ts projects, have default and node:ts config options
+  - [**commitlint**](/src/categories/js/commitlint) is a script to initialize [commitlint](https://github.com/conventional-changelog/commitlint) with [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) config. Has [husky](https://github.com/typicode/husky) integration
+  - [**eslint**](/src/categories/js/eslint) is a script to initialize [eslint](https://github.com/eslint/eslint) with config and lint scripts. Has [prettier](https://github.com/prettier/prettier) integration
+  - [**stylelint**](/src/categories/js/stylelint/) is a script to initialize [stylelint](https://github.com/stylelint/stylelint) with config and lint scripts. Has [prettier](https://github.com/prettier/prettier) integration
   - [**husky**](/src/categories/js/husky) is a script to initialize [husky](https://github.com/typicode/husky).
-  - [**lint-staged**](/src/categories/js/lint-staged) is a script to initialize [lint-staged](https://github.com/okonet/lint-staged). Have [husky](https://github.com/typicode/husky), [jest](https://github.com/facebook/jest), [eslint](https://github.com/eslint/eslint), [prettier](https://github.com/prettier/prettier) integrations.
+  - [**lint-staged**](/src/categories/js/lint-staged) is a script to initialize [lint-staged](https://github.com/okonet/lint-staged). Has [husky](https://github.com/typicode/husky), [jest](https://github.com/facebook/jest), [eslint](https://github.com/eslint/eslint), [prettier](https://github.com/prettier/prettier), [stylelint](https://github.com/stylelint/stylelint) integrations
   - [**prettier**](/src/categories/js/prettier) is a script to initialize [prettier](https://github.com/prettier/prettier) with config and format scripts.
   - [**release-workflow**](/src/categories/js/release-worflow) is script to initialize github release workflow what creates release from [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) CHANGELOG.md when you push tag like \*.\*.\*(1.1.0, 5.0.0, 0.0.0, etc).
   - [**standard-version**](/src/categories/js/standard-verstion) is a script to initialize [standard-version](https://github.com/conventional-changelog/standard-version) with [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) config(with repository url if defined or "\<repository url\>" placeholder), custom options(like removed "v" tag prefix) and release scripts.
@@ -39,7 +40,7 @@ npx @allohamora/cli
   - [**build-workflow**](/src/categories/js/build-workflow) is a script to initialize github build workflow that runs `npm run build` on each push to github.
   - [**codeql-workflow**](/src/categories/js/codeql-workflow) is a script to initialize github codeql workflow what runs codeql with default options on each push to github.
   - [**dependabot**](src/categories/js/dependabot/) is a script to initialize github dependabot what manages project dependencies vulnerabilities and opens pull requests with fixes.
-  - [**docker**](src/categories/js/docker/) is a script to initialize docker with Dockerfile and .dockerignore files
+  - [**docker**](src/categories/js/docker/) is a script to initialize [docker](https://github.com/docker) with Dockerfile and .dockerignore files
 
 \*integrations runs only if package is installing or installed.
 
