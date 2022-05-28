@@ -13,7 +13,7 @@ const stylelintConfig: Config['stylelintConfig'] = {
       true,
       {
         'border-in-box-model': false,
-        'empty-line-between-groups': false,
+        'empty-line-between-groups': true,
       },
     ],
   },

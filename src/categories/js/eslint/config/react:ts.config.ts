@@ -31,9 +31,7 @@ export const reactTsConfig: Config = {
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-floating-promises': 'warn',
       '@typescript-eslint/no-empty-interface': 'warn',
-      'no-param-reassign': 'warn',
       '@typescript-eslint/ban-types': 'warn',
-      'max-classes-per-file': ['error', 2],
 
       'react/react-in-jsx-scope': 'off',
       'react/jsx-props-no-spreading': 'off',
@@ -44,6 +42,7 @@ export const reactTsConfig: Config = {
       'react/require-default-props': 'off',
       'react/no-array-index-key': 'warn',
 
+      'import/order': 'off',
       'beautiful-sort/import': [
         'error',
         {

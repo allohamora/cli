@@ -5,7 +5,7 @@ export const reactTsConfig: Config = {
   config: {},
   mutations: [
     prettierMutation,
-    stylelintMutation('*.{ts,tsx}'),
+    stylelintMutation('*.{css,ts,tsx}'),
     eslintMutation('*.{ts,tsx}'),
     jestMutation('*.{ts,tsx}'),
   ],

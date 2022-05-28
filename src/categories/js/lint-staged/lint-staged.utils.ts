@@ -10,7 +10,7 @@ import { isEslintInstalled } from '../eslint/eslint.utils';
 import { isStylelintInstalled } from '../stylelint/stylelint.utils';
 import { STYLELINT_CLI_NAME } from '../stylelint/stylelint.const';
 
-type ScriptFileExtension = '*.js' | '*.ts' | '*.css' | '*.{ts,tsx}';
+type ScriptFileExtension = '*.js' | '*.ts' | '*.css' | '*.{ts,tsx}' | '*.{css,ts,tsx}';
 
 interface OptionMutation {
   check: (config: LintStagedConfig, key: string, value: string) => boolean;
