@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/allohamora/cli/compare/1.6.2...1.7.0) (2022-05-28)
+
+### Features
+
+- add docker ([4f3ec35](https://github.com/allohamora/cli/commit/4f3ec3525527fdf86b08ee802dc47597123e4d5e))
+- add mutations support to stylelint entrypoint ([405727a](https://github.com/allohamora/cli/commit/405727ac579848ffd29eff2e3a3a1bbb68bd236c))
+- add npm badge ([a5cdfd6](https://github.com/allohamora/cli/commit/a5cdfd65faf04ecea395d6f7818c70ffc9b6444a))
+- add react:ts eslint config ([21b09fa](https://github.com/allohamora/cli/commit/21b09faf5f1915ccb93e34ac79ff13df35bb27c8))
+- add react:ts jest config ([331a4b5](https://github.com/allohamora/cli/commit/331a4b58dc32dba269a745d079e684cb537f0460))
+- add stylelint ([47047a8](https://github.com/allohamora/cli/commit/47047a8b895613f07410bea0ecfab0d1f526c9a1))
+- add stylelint description ([d0d8d25](https://github.com/allohamora/cli/commit/d0d8d2558c3a2c6284d48b991b32c04de5e4ab59))
+- add stylelint lint-staged integration ([df80edc](https://github.com/allohamora/cli/commit/df80edc5607461adb76fd1a8748a115e5e7864c6))
+- add stylelint prettier mutation ([75ab3ef](https://github.com/allohamora/cli/commit/75ab3efc68dbe41e5bcee68270fe0095eade81f7))
+- remove develop coverage badge ([cb15103](https://github.com/allohamora/cli/commit/cb1510339936962b45f74ced8ab860b7c8accd7d))
+
+### Bug Fixes
+
+- change stylelint configs to correct ([c03866f](https://github.com/allohamora/cli/commit/c03866f60776689d283a27311c2dc639fb622d44))
+- fix conflicts in react:ts configs ([215f3a4](https://github.com/allohamora/cli/commit/215f3a41d695aec7258fe2b3bc4103396283acb3))
+
 ### [1.6.2](https://github.com/allohamora/cli/compare/1.6.1...1.6.2) (2022-03-19)
 
 ### Bug Fixes
