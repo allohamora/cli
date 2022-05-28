@@ -9,6 +9,6 @@ export const stylelint = async () => {
   await installDevelopmentDependencies(...devDependencies);
   await addScripts(...scripts);
 
-  await addFileToRoot(STYLELINT_CONFIG_NAME, stylelintConfig);
+  await addFileToRoot(STYLELINT_CONFIG_NAME, JSON.stringify(stylelintConfig));
   await addFileToRoot(STYLELINT_IGNORE_NAME, stylelintIgnore);
 };
