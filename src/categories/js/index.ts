@@ -3,6 +3,7 @@ import { commitlint } from './commitlint/commitlint.entrypoint';
 import { eslint } from './eslint/eslint.entrypoint';
 import { husky } from './husky/husky.entrypoint';
 import { lintStaged } from './lint-staged/lint-staged.entrypoint';
+import { stylelint } from './stylelint/stylelint.entrypoint';
 import { prettier } from './prettier/prettier.entrypoint';
 import { standardVersion } from './standard-version/standard-version.entrypoint';
 import { releaseWorkflow } from './release-workflow/release-worflow.entrypoint';
@@ -11,6 +12,7 @@ import { testWorkflow } from './test-workflow/test-workflow.entrypoint';
 import { codeqlWorkflow } from './codeql-workflow/codeql-workflow.entrypoint';
 import { buildWorkflow } from './build-workflow/build-workflow.entrypoint';
 import { dependabot } from './dependabot/dependabot.entrypoint';
+import { docker } from './docker/docker.entrypoint';
 
 // order have matter
 const options = {
@@ -20,6 +22,7 @@ const options = {
   standardVersion,
   eslint,
   lintStaged,
+  stylelint,
   releaseWorkflow,
   // named jestEntrypoint because in test environment jest name is reserved
   jest: jestEntrypoint,
@@ -27,6 +30,7 @@ const options = {
   codeqlWorkflow,
   buildWorkflow,
   dependabot,
+  docker,
 };
 
 export default {

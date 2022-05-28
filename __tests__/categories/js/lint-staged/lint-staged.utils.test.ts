@@ -2,12 +2,14 @@ import * as huskyUtils from 'src/categories/js/husky/husky.utils';
 import * as prettierUtils from 'src/categories/js/prettier/prettier.utils';
 import * as jestUtils from 'src/categories/js/jest/jest.utils';
 import * as eslintUtils from 'src/categories/js/eslint/eslint.utils';
+import * as stylelintUtils from 'src/categories/js/stylelint/stylelint.utils';
 import {
   addOptionToLintStagedConfig,
   huskyIntegration,
   jestMutation,
   eslintMutation,
   prettierMutation,
+  stylelintMutation,
 } from 'src/categories/js/lint-staged/lint-staged.utils';
 
 jest.mock('src/categories/js/husky/husky.utils');
@@ -21,6 +23,9 @@ const jestUtilsMocked = jest.mocked(jestUtils);
 
 jest.mock('src/categories/js/eslint/eslint.utils');
 const eslintUtilsMocked = jest.mocked(eslintUtils);
+
+jest.mock('src/categories/js/stylelint/stylelint.utils');
+const stylelintUtilsMocked = jest.mocked(stylelintUtils);
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -188,6 +193,32 @@ describe('prettierMutation', () => {
     prettierUtilsMocked.isPrettierInstalled.mockResolvedValueOnce(false);
 
     await prettierMutation(actual);
+
+    const expected = {};
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('stylelintMutation', () => {
+  test('should mutate config if stylelint installed', async () => {
+    const ext = '*.{css,ts,tsx}';
+    const actual = {};
+    stylelintUtilsMocked.isStylelintInstalled.mockResolvedValueOnce(true);
+
+    await stylelintMutation(ext)(actual);
+
+    const expected = { [ext]: 'stylelint --fix' };
+
+    expect(actual).toEqual(expected);
+  });
+
+  test('should not mutate config if stylelint is not installed', async () => {
+    const ext = '*.{css,ts,tsx}';
+    const actual = {};
+    stylelintUtilsMocked.isStylelintInstalled.mockResolvedValueOnce(false);
+
+    await stylelintMutation(ext)(actual);
 
     const expected = {};
 

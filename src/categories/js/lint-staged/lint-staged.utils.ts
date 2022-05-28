@@ -7,8 +7,10 @@ import { CLI_NAME as JEST_CLI_NAME } from '../jest/jest.const';
 import { CLI_NAME as ESLINT_CLI_NAME } from '../eslint/eslint.const';
 import { isJestInstalled } from '../jest/jest.utils';
 import { isEslintInstalled } from '../eslint/eslint.utils';
+import { isStylelintInstalled } from '../stylelint/stylelint.utils';
+import { STYLELINT_CLI_NAME } from '../stylelint/stylelint.const';
 
-type ScriptFileExtension = '*.js' | '*.ts';
+type ScriptFileExtension = '*.js' | '*.ts' | '*.css' | '*.{ts,tsx}' | '*.{css,ts,tsx}';
 
 interface OptionMutation {
   check: (config: LintStagedConfig, key: string, value: string) => boolean;
@@ -40,13 +42,13 @@ const undefinedOptionMutation: OptionMutation = {
 const optionMutations: OptionMutation[] = [arrayOptionMutation, stringOptionMutation, undefinedOptionMutation];
 
 export const addOptionToLintStagedConfig = (config: LintStagedConfig, key: string, value: string) => {
-  const finded = optionMutations.find(({ check }) => check(config, key, value));
+  const found = optionMutations.find(({ check }) => check(config, key, value));
 
-  if (!finded) {
+  if (!found) {
     throw new Error('option mutator is not found!');
   }
 
-  finded.mutate(config, key, value);
+  found.mutate(config, key, value);
 };
 
 export const huskyIntegration = async () => {
@@ -71,4 +73,12 @@ export const prettierMutation = async (config: LintStagedConfig) => {
   if (await isPrettierInstalled()) {
     addOptionToLintStagedConfig(config, '*.{js,json,yml,md}', `${PRETTIER_CLI_NAME} --write`);
   }
+};
+
+export const stylelintMutation = (fileExtension: ScriptFileExtension) => {
+  return async (config: LintStagedConfig) => {
+    if (await isStylelintInstalled()) {
+      addOptionToLintStagedConfig(config, fileExtension, `${STYLELINT_CLI_NAME} --fix`);
+    }
+  };
 };

@@ -1,6 +1,6 @@
 import { NpmScript } from 'src/utils/npm';
 import { readableMultilineString } from 'src/utils/string';
-import { Config } from './config.interfrace';
+import { Config } from './config.interface';
 
 export const scripts: NpmScript[] = [
   { name: 'test', script: 'jest' },
