@@ -1,7 +1,7 @@
 import * as fs from 'src/utils/fs';
 import * as npm from 'src/utils/npm';
 import * as config from 'src/categories/js/jest/jest.config';
-import { Config } from 'src/categories/js/jest/config/config.interfrace';
+import { Config } from 'src/categories/js/jest/config/config.interface';
 import { jestEntrypoint } from 'src/categories/js/jest/jest.entrypoint';
 
 jest.mock('src/utils/fs');
