@@ -4,7 +4,8 @@
 ![codeql](https://github.com/allohamora/cli/actions/workflows/codeql.yml/badge.svg)
 ![test](https://github.com/allohamora/cli/actions/workflows/test.yml/badge.svg)
 ![release](https://github.com/allohamora/cli/actions/workflows/release.yml/badge.svg)
-[![codecov](https://codecov.io/gh/allohamora/cli/branch/master/graph/badge.svg?token=XVDXR2RWTI)](https://codecov.io/gh/allohamora/cli)
+[![master](https://codecov.io/gh/allohamora/cli/branch/master/graph/badge.svg?token=XVDXR2RWTI)](https://codecov.io/gh/allohamora/cli)
+[![develop](https://codecov.io/gh/allohamora/cli/branch/develop/graph/badge.svg?token=XVDXR2RWTI)](https://codecov.io/gh/allohamora/cli)
 
 The [Allohamora](https://github.com/allohamora) CLI is a command line interface with scripts to initialize projects and more. Sorted by categories.
 
