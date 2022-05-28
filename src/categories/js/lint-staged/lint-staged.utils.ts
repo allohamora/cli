@@ -7,6 +7,9 @@ import { CLI_NAME as JEST_CLI_NAME } from '../jest/jest.const';
 import { CLI_NAME as ESLINT_CLI_NAME } from '../eslint/eslint.const';
 import { isJestInstalled } from '../jest/jest.utils';
 import { isEslintInstalled } from '../eslint/eslint.utils';
+import { isStylelintInstalled } from '../stylelint/stylelint.utils';
+import { getPackageJson } from 'src/utils/npm';
+import { STYLELINT_CLI_NAME } from '../stylelint/stylelint.const';
 
 type ScriptFileExtension = '*.js' | '*.ts';
 
@@ -70,5 +73,15 @@ export const eslintMutation = (fileExtension: ScriptFileExtension) => async (con
 export const prettierMutation = async (config: LintStagedConfig) => {
   if (await isPrettierInstalled()) {
     addOptionToLintStagedConfig(config, '*.{js,json,yml,md}', `${PRETTIER_CLI_NAME} --write`);
+  }
+};
+
+export const stylelintMutation = async (config: LintStagedConfig) => {
+  if (await isStylelintInstalled()) {
+    const packageJson = await getPackageJson();
+    const react = packageJson?.dependencies?.['react'];
+    const extensions = react ? '*.{css,js,jsx,ts,tsx}' : '*.css';
+
+    addOptionToLintStagedConfig(config, extensions, `${STYLELINT_CLI_NAME} --fix`);
   }
 };
