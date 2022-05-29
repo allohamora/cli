@@ -1,11 +1,10 @@
+const log = jest.spyOn(global.console, 'log').mockImplementation(jest.fn());
+
 import * as consoleColors from 'src/utils/console';
 import * as mainUtils from 'src/utils/main';
 import { main } from 'src';
 import { createCategoryState } from 'src/utils/state';
 import { Category } from 'src/types/category';
-
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop = () => {};
 
 jest.mock('src/utils/console');
 const consoleColorsMocked = jest.mocked(consoleColors);
@@ -17,17 +16,11 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
+beforeAll(() => {
+  log.mockReset();
+});
+
 describe('main', () => {
-  const originalConsole = console;
-
-  beforeAll(() => {
-    global.console = { log: noop } as typeof console;
-  });
-
-  afterAll(() => {
-    global.console = originalConsole;
-  });
-
   test('should print welcome and bye message with white color', async () => {
     await main();
 
