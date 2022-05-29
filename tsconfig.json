@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
     "module": "CommonJS",
+    "moduleResolution": "Node",
     "declaration": false,
     "removeComments": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "target": "ESNext",
     "sourceMap": true,
     "outDir": "./bin",
     "baseUrl": "./",

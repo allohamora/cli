@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { white } from './utils/console';
 import { getCategory, getOptions, installOptions, chooseOptions } from './utils/main';
 
