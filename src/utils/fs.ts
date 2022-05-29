@@ -1,4 +1,4 @@
-import fsp from 'fs/promises';
+import fsp from 'node:fs/promises';
 import { rootPath } from './path';
 import { stringify } from './json';
 

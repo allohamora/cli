@@ -9,7 +9,7 @@ const content = readableMultilineString`
         - "dependabot/**"
 
   jobs:
-    analyse:
+    codeql:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout code

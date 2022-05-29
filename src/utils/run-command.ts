@@ -1,5 +1,5 @@
-import { spawn } from 'child_process';
-import { on } from 'events';
+import { spawn } from 'node:child_process';
+import { on } from 'node:events';
 
 export const spawnCommand = async (command: string, args: string[]): Promise<string> => {
   return new Promise(async (res, rej) => {

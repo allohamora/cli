@@ -6,7 +6,7 @@ import { lintStaged } from './lint-staged/lint-staged.entrypoint';
 import { stylelint } from './stylelint/stylelint.entrypoint';
 import { prettier } from './prettier/prettier.entrypoint';
 import { standardVersion } from './standard-version/standard-version.entrypoint';
-import { releaseWorkflow } from './release-workflow/release-worflow.entrypoint';
+import { releaseWorkflow } from './release-workflow/release-workflow.entrypoint';
 import { jestEntrypoint } from './jest/jest.entrypoint';
 import { testWorkflow } from './test-workflow/test-workflow.entrypoint';
 import { codeqlWorkflow } from './codeql-workflow/codeql-workflow.entrypoint';

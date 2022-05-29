@@ -1,6 +1,6 @@
 import * as config from 'src/categories/js/release-workflow/release-workflow.config';
 import * as github from 'src/utils/github';
-import { releaseWorkflow } from 'src/categories/js/release-workflow/release-worflow.entrypoint';
+import { releaseWorkflow } from 'src/categories/js/release-workflow/release-workflow.entrypoint';
 
 jest.mock('src/categories/js/release-workflow/release-workflow.config');
 const configMocked = jest.mocked(config);

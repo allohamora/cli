@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import { PACKAGE_JSON_PATH, rootPath, ROOT_PATH } from 'src/utils/path';
 
 describe('PATHS', () => {

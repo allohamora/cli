@@ -1,6 +1,6 @@
 import * as runCommand from 'src/utils/run-command';
 import * as installed from 'src/utils/installed';
-import fsp from 'fs/promises';
+import fsp from 'node:fs/promises';
 import { addHook } from 'src/categories/js/husky/husky.utils';
 import { clearMock } from '__tests__/test-utils/clear-mock';
 import { rootPath } from 'src/utils/path';
@@ -11,7 +11,7 @@ jest.mock('src/utils/installed', () => ({
 }));
 const installedMocked = jest.mocked(installed);
 
-jest.mock('fs/promises');
+jest.mock('node:fs/promises');
 const fspMocked = jest.mocked(fsp);
 
 jest.mock('src/utils/run-command');

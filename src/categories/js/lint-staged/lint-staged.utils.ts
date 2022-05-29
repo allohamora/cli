@@ -8,7 +8,7 @@ import { CLI_NAME as ESLINT_CLI_NAME } from '../eslint/eslint.const';
 import { isJestInstalled } from '../jest/jest.utils';
 import { isEslintInstalled } from '../eslint/eslint.utils';
 import { isStylelintInstalled } from '../stylelint/stylelint.utils';
-import { STYLELINT_CLI_NAME } from '../stylelint/stylelint.const';
+import { CLI_NAME as STYLELINT_CLI_NAME } from '../stylelint/stylelint.const';
 
 type ScriptFileExtension = '*.js' | '*.ts' | '*.css' | '*.{ts,tsx}' | '*.{css,ts,tsx}';
 

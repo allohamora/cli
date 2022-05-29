@@ -9,7 +9,7 @@ export const kebablize = (camel: string) => {
 
 export const camelize = (kebab: string) => {
   const [first, ...rest] = kebab.split('-');
-  const capilazedRest = rest
+  const capitalizedRest = rest
     .map((word) => {
       const [first, ...rest] = word;
 
@@ -17,7 +17,7 @@ export const camelize = (kebab: string) => {
     })
     .join('');
 
-  return `${first}${capilazedRest}`;
+  return `${first}${capitalizedRest}`;
 };
 
 export const multilineStringBuilder = (strings: TemplateStringsArray, ...values: unknown[]) => {

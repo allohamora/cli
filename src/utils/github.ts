@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import { addDirToRootIfNotExists, addFileToRoot } from './fs';
 
 const GITHUB_DIR_NAME = '.github';

@@ -1,9 +1,9 @@
-import * as childProcess from 'child_process';
-import { EventEmitter } from 'events';
+import * as childProcess from 'node:child_process';
+import { EventEmitter } from 'node:events';
 import { delay } from '__tests__/test-utils/delay';
 import { runCommand, spawnCommand } from 'src/utils/run-command';
 
-jest.mock('child_process');
+jest.mock('node:child_process');
 const childProcessMocked = jest.mocked(childProcess);
 
 beforeEach(() => {

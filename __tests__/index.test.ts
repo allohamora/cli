@@ -28,14 +28,14 @@ describe('main', () => {
     global.console = originalConsole;
   });
 
-  test('should print wellcome and bye message with white color', async () => {
+  test('should print welcome and bye message with white color', async () => {
     await main();
 
-    expect(consoleColorsMocked.white).toBeCalledWith(`Wellcome to Allohamora's cli`);
+    expect(consoleColorsMocked.white).toBeCalledWith(`Welcome to Allohamora's cli`);
     expect(consoleColorsMocked.white).toBeCalledWith('Installation completed');
   });
 
-  test('should run choosed scripts', async () => {
+  test('should run selected scripts', async () => {
     const options = { option: jest.fn() };
     const optionKeys = ['option'];
     const category = { options, state: createCategoryState('__state__', ['__test__']) } as Category;

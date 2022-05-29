@@ -1,4 +1,4 @@
-import fsp from 'fs/promises';
+import fsp from 'node:fs/promises';
 import type { PackageJson as BasePackageJson } from 'type-fest';
 import { stringify } from './json';
 import { PACKAGE_JSON_PATH } from './path';
