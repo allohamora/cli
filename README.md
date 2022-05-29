@@ -13,8 +13,8 @@ The [Allohamora](https://github.com/allohamora) CLI is a command line interface 
 
 ```json
 {
-  "node": ">=16.13.0",
-  "npm": ">=8.1.0"
+  "node": ">=16.14.2",
+  "npm": ">=8.5.0"
 }
 ```
 
