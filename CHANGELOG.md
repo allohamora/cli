@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/allohamora/cli/compare/1.7.0...1.8.0) (2022-05-29)
+
+### Features
+
+- add codecov workflow ([b11d9f0](https://github.com/allohamora/cli/commit/b11d9f0f044a3a0452c004ba5c95dbcb29273024))
+
 ## [1.7.0](https://github.com/allohamora/cli/compare/1.6.2...1.7.0) (2022-05-28)
 
 ### Features
