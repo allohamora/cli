@@ -1,1 +1,1 @@
-export const WORKFLOW_FILENAME = 'codeql.yml';
+export const WORKFLOW_FILENAME = 'codecov.yml';
