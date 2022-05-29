@@ -1,5 +1,5 @@
 import * as json from 'src/utils/json';
-import fsp from 'fs/promises';
+import fsp from 'node:fs/promises';
 import { rootPath } from 'src/utils/path';
 import { addDirToRootIfNotExists, addFileToRoot, addJsonFileToRoot, isExistsInRoot } from 'src/utils/fs';
 
@@ -9,7 +9,7 @@ const rootDir = 'test';
 const root = [rootFile, rootDir];
 const rootWithPath = root.map((file) => rootPath(file));
 
-jest.mock('fs/promises');
+jest.mock('node:fs/promises');
 const fspMocked = jest.mocked(fsp);
 
 jest.mock('src/utils/json');

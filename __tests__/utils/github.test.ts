@@ -1,5 +1,5 @@
 import * as fs from 'src/utils/fs';
-import path from 'path';
+import path from 'node:path';
 import {
   addGithubDirIfNotExists,
   addGithubWorkflow,

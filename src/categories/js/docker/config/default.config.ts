@@ -1,5 +1,5 @@
 import { readableMultilineString } from 'src/utils/string';
-import { DOCKER_FILE_NAME, DOCKER_IGNORE_NAME } from '../docker.const';
+import { FILE_NAME, IGNORE_NAME } from '../docker.const';
 
 interface GetDockerFileArgs {
   version: string;
@@ -29,8 +29,8 @@ export const dockerIgnore = readableMultilineString`
   .husky
   .git
 
-  ${DOCKER_IGNORE_NAME}
-  ${DOCKER_FILE_NAME}
+  ${IGNORE_NAME}
+  ${FILE_NAME}
   .docker-compose.yml
 `;
 

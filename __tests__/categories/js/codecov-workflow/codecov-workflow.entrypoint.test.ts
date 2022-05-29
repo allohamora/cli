@@ -1,8 +1,8 @@
-import * as config from 'src/categories/js/release-workflow/release-workflow.config';
+import * as config from 'src/categories/js/codecov-workflow/codecov-workflow.config';
 import * as github from 'src/utils/github';
-import { releaseWorkflow } from 'src/categories/js/release-workflow/release-workflow.entrypoint';
+import { codecovWorkflow } from 'src/categories/js/codecov-workflow/codecov-workflow.entrypoint';
 
-jest.mock('src/categories/js/release-workflow/release-workflow.config');
+jest.mock('src/categories/js/codecov-workflow/codecov-workflow.config');
 const configMocked = jest.mocked(config);
 
 jest.mock('src/utils/github');
@@ -12,11 +12,11 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-describe('releaseWorkflow', () => {
+describe('codecovWorkflow', () => {
   test('should get config from getConfig', async () => {
     configMocked.getConfig.mockReturnValueOnce({ content: '' });
 
-    await releaseWorkflow();
+    await codecovWorkflow();
 
     expect(configMocked.getConfig).toBeCalled();
   });
@@ -25,8 +25,8 @@ describe('releaseWorkflow', () => {
     const content = '__test__';
     configMocked.getConfig.mockReturnValueOnce({ content });
 
-    await releaseWorkflow();
+    await codecovWorkflow();
 
-    expect(githubMocked.addGithubWorkflow).toBeCalledWith('release.yml', content);
+    expect(githubMocked.addGithubWorkflow).toBeCalledWith('codecov.yml', content);
   });
 });

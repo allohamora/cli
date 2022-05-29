@@ -8,25 +8,25 @@ import { setInstalling } from 'src/states/context';
 const categoriesKeys = Object.keys(categories);
 
 export const getCategory = async () => {
-  const choosedCategory = (await oneOf('choose a category', categoriesKeys)) as keyof typeof categories;
-  const category = categories[choosedCategory];
+  const selectedCategory = (await oneOf('choose a category', categoriesKeys)) as keyof typeof categories;
+  const category = categories[selectedCategory];
 
   return category as Category;
 };
 
 export const getOptions = async ({ state: { configState, configTypes }, options }: Category) => {
   const [, setConfig] = configState;
-  const choosedConfig = await oneOf('choose a config', configTypes);
-  setConfig(choosedConfig);
+  const selectedConfig = await oneOf('choose a config', configTypes);
+  setConfig(selectedConfig);
 
   return options;
 };
 
 export const chooseOptions = async (options: Category['options']) => {
   const kebablizedOptions = Object.keys(options).map(kebablize);
-  const choosedKebablizedOptions = await manyOf('choose a options', kebablizedOptions);
+  const selectedKebablizedOptions = await manyOf('choose a options', kebablizedOptions);
 
-  return choosedKebablizedOptions.map(camelize);
+  return selectedKebablizedOptions.map(camelize);
 };
 
 export const installOptions = async (options: Category['options'], keys: string[]) => {

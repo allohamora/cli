@@ -61,7 +61,7 @@ jest.mock('src/states/context');
 const contextMocked = jest.mocked(context);
 
 describe('getCategory', () => {
-  test('should return choosed category', async () => {
+  test('should return selected category', async () => {
     promptMocked.oneOf.mockResolvedValueOnce('js');
 
     const actual = await getCategory();
@@ -73,7 +73,7 @@ describe('getCategory', () => {
 });
 
 describe('getOptions', () => {
-  test('should return choosed options', async () => {
+  test('should return selected options', async () => {
     const [, selectedOption] = js.state.configTypes;
 
     promptMocked.oneOf.mockResolvedValueOnce(selectedOption);
@@ -88,12 +88,12 @@ describe('getOptions', () => {
 });
 
 describe('chooseOptions', () => {
-  test('should print kebablized options and return choosed', async () => {
+  test('should print kebablized options and return selected', async () => {
     const kebablized = jsOptionKeys.map(kebablize);
-    const choosed = [kebablized[0]];
-    const expected = choosed.map(camelize);
+    const selected = [kebablized[0]];
+    const expected = selected.map(camelize);
 
-    promptMocked.manyOf.mockResolvedValueOnce(choosed);
+    promptMocked.manyOf.mockResolvedValueOnce(selected);
 
     const actual = await chooseOptions(js.options);
 
@@ -128,7 +128,7 @@ describe('installOptions', () => {
     expect(contextMocked.setInstalling).toBeCalledWith(keys);
   });
 
-  test('should run choosed scripts', async () => {
+  test('should run selected scripts', async () => {
     const option1 = jest.fn();
     const option2 = jest.fn();
     const options = { option1, option2 };

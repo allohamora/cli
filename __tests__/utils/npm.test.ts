@@ -1,6 +1,6 @@
 import * as json from 'src/utils/json';
 import * as runCommand from 'src/utils/run-command';
-import fsp from 'fs/promises';
+import fsp from 'node:fs/promises';
 import {
   addScripts,
   addToPackageJson,
@@ -11,7 +11,7 @@ import {
 } from 'src/utils/npm';
 import { PACKAGE_JSON_PATH } from 'src/utils/path';
 
-jest.mock('fs/promises');
+jest.mock('node:fs/promises');
 const fspMocked = jest.mocked(fsp);
 
 jest.mock('src/utils/json');

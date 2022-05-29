@@ -1,7 +1,8 @@
 import { addFileToRoot } from 'src/utils/fs';
+import { stringify } from 'src/utils/json';
 import { addScripts, installDevelopmentDependencies } from 'src/utils/npm';
 import { getConfig } from './stylelint.config';
-import { STYLELINT_CONFIG_NAME, STYLELINT_IGNORE_NAME } from './stylelint.const';
+import { CONFIG_NAME, IGNORE_NAME } from './stylelint.const';
 
 export const stylelint = async () => {
   const config = getConfig();
@@ -15,6 +16,6 @@ export const stylelint = async () => {
   await installDevelopmentDependencies(...devDependencies);
   await addScripts(...scripts);
 
-  await addFileToRoot(STYLELINT_CONFIG_NAME, JSON.stringify(stylelintConfig, null, 2));
-  await addFileToRoot(STYLELINT_IGNORE_NAME, stylelintIgnore);
+  await addFileToRoot(CONFIG_NAME, stringify(stylelintConfig));
+  await addFileToRoot(IGNORE_NAME, stylelintIgnore);
 };
