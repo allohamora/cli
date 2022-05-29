@@ -40,7 +40,7 @@ npx @allohamora/cli
   - [**test-workflow**](/src/categories/js/test-workflow.ts) is a script to initialize github test workflow what runs `npm run test` on each push to github.
   - [**build-workflow**](/src/categories/js/build-workflow) is a script to initialize github build workflow that runs `npm run build` on each push to github.
   - [**codeql-workflow**](/src/categories/js/codeql-workflow) is a script to initialize github codeql workflow what runs codeql with default options on each push to github.
-  - [**codecov-workflow**](/src/categories/js/codecov-workflow/) is a script to initialize codecov workflow that collects code coverage and send it to codecov. Requires codecov token that contains in github actions secret with name: `CODECOV_TOKEN`
+  - [**codecov-workflow**](/src/categories/js/codecov-workflow/) is a script to initialize codecov workflow that collects code coverage and send it to codecov. The workflow configured to work in public repositories (without codecov token), to run in private repository you need to modify the workflow and add token in codecov action
   - [**dependabot**](src/categories/js/dependabot/) is a script to initialize github dependabot what manages project dependencies vulnerabilities and opens pull requests with fixes.
 
 \*integrations runs only if package is installing or installed.

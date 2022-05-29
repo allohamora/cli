@@ -23,8 +23,6 @@ const content = readableMultilineString`
           run: npm run test:coverage
         - name: Upload coverage to Codecov
           uses: codecov/codecov-action@v2
-          with:
-            token: \${{ secrets.CODECOV_TOKEN }}
 `;
 
 export const defaultConfig = {
