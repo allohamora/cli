@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/allohamora/cli/compare/1.8.0...1.9.0) (2023-03-07)
+
+### Features
+
+- remove codeql ([7a669e5](https://github.com/allohamora/cli/commit/7a669e5ce49cfd19ea9e87418b9f86906cd26881))
+
+### Bug Fixes
+
+- fix release workflow ([d6f9cd3](https://github.com/allohamora/cli/commit/d6f9cd34d946d35f09e1db17d521101a4ea8e30a))
+
 ## [1.8.0](https://github.com/allohamora/cli/compare/1.7.0...1.8.0) (2022-05-29)
 
 ### Features
