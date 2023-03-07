@@ -10,7 +10,6 @@ import { jestEntrypoint } from './jest/jest.entrypoint';
 import { docker } from './docker/docker.entrypoint';
 import { releaseWorkflow } from './release-workflow/release-workflow.entrypoint';
 import { testWorkflow } from './test-workflow/test-workflow.entrypoint';
-import { codeqlWorkflow } from './codeql-workflow/codeql-workflow.entrypoint';
 import { buildWorkflow } from './build-workflow/build-workflow.entrypoint';
 import { codecovWorkflow } from './codecov-workflow/codecov-workflow.entrypoint';
 import { dependabot } from './dependabot/dependabot.entrypoint';
@@ -29,7 +28,6 @@ const options = {
   docker,
   releaseWorkflow,
   testWorkflow,
-  codeqlWorkflow,
   buildWorkflow,
   codecovWorkflow,
   dependabot,
