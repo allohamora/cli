@@ -8,6 +8,9 @@ const content = readableMultilineString`
       tags:
         - "*.*.*"
 
+  permissions:
+    contents: write
+
   jobs:
     release:
       runs-on: ubuntu-latest
