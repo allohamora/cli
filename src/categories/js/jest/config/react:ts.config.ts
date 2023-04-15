@@ -3,7 +3,7 @@ import { scripts } from './default.config';
 import { Config } from './config.interface';
 
 const configFileContent = readableMultilineString`
-  /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+  /** @type {import('ts-jest').JestConfigWithTsJest} */
   module.exports = {
     roots: ['<rootDir>'],
     testEnvironment: 'jsdom',
