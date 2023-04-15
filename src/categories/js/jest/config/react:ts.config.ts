@@ -17,6 +17,7 @@ const configFileContent = readableMultilineString`
     moduleNameMapper: {
       '\.(css|less|sass|scss|gif|ttf|eot|svg|png)$': 'identity-obj-proxy'
     },
+    passWithNoTests: true,
   };
 `;
 

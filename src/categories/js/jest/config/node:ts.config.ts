@@ -10,6 +10,7 @@ const configFileContent = readableMultilineString`
     moduleDirectories: ['<rootDir>', 'node_modules'],
     testRegex: '.*\\.(spec|test)\\.ts$',
     collectCoverageFrom: ['src/**/*.ts'],
+    passWithNoTests: true,
   };
 `;
 

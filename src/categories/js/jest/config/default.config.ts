@@ -14,6 +14,7 @@ const configFileContent = readableMultilineString`
     testEnvironment: 'node',
     testRegex: '.*\\.(spec|test)\\.js$',
     collectCoverageFrom: ['src/**/*.js'],
+    passWithNoTests: true,
   };
 `;
 
