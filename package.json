@@ -8,7 +8,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "ts-node-dev --respawn -r tsconfig-paths/register src/index.ts",
-    "build": "rimraf ./bin && rollup -c rollup.config.js",
+    "build": "rimraf ./bin && rollup -c rollup.config.js --bundleConfigAsCjs",
     "prestart": "npm run build",
     "start": "npm unlink @allohamora/cli && npm link @allohamora/cli && ./bin/cli.js",
     "prepare": "husky install",
