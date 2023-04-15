@@ -18,8 +18,8 @@
     "release:minor": "standard-version --release-as minor --tag-prefix=",
     "release:patch": "standard-version --release-as patch --tag-prefix=",
     "release:major": "standard-version --release-as major --tag-prefix=",
-    "lint": "eslint \"src/**/*.ts\"",
-    "lint:fix": "eslint \"src/**/*.ts\" --fix",
+    "lint": "eslint \"**/*.ts\"",
+    "lint:fix": "eslint \"**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"

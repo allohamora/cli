@@ -61,6 +61,15 @@ describe('eslint', () => {
     expect(fsMocked.addJsonFileToRoot).toBeCalledWith('.eslintrc.json', config.eslintConfig);
   });
 
+  test('should add .eslintignore to root', async () => {
+    const config = createConfig({ ignore: ['node_modules', 'dist'] });
+    configMocked.getConfig.mockReturnValueOnce(config);
+
+    await eslint();
+
+    expect(fsMocked.addFileToRoot).toBeCalledWith('.eslintignore', 'node_modules\ndist');
+  });
+
   test('should add npm script to package.json', async () => {
     const config = createConfig({ scripts: [{ name: 'test', script: '__test__' }] });
     configMocked.getConfig.mockReturnValueOnce(config);

@@ -32,9 +32,10 @@ export const nodeTsConfig: Config = {
       ],
     },
   },
+  ignore: ['node_modules', 'dist'],
   scripts: [
-    { name: 'lint', script: 'eslint "src/**/*.ts"' },
-    { name: 'lint:fix', script: 'eslint "src/**/*.ts" --fix' },
+    { name: 'lint', script: 'eslint "**/*.ts"' },
+    { name: 'lint:fix', script: 'eslint "**/*.ts" --fix' },
   ],
   mutations: [prettierMutation, jestMutation],
 };
