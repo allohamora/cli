@@ -23,6 +23,7 @@ export interface EslintConfig {
 export interface Config {
   dependencies: string[];
   eslintConfig: EslintConfig;
+  ignore: string[];
   scripts: { name: string; script: string }[];
   mutations: Mutation<Config>[];
 }

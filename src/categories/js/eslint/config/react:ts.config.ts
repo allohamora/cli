@@ -52,9 +52,10 @@ export const reactTsConfig: Config = {
       ],
     },
   },
+  ignore: ['node_modules', 'dist'],
   scripts: [
-    { name: 'lint', script: 'eslint "src/**/*.{ts,tsx}"' },
-    { name: 'lint:fix', script: 'eslint "src/**/*.{ts,tsx}" --fix' },
+    { name: 'lint', script: 'eslint "**/*.{ts,tsx}"' },
+    { name: 'lint:fix', script: 'eslint "**/*.{ts,tsx}" --fix' },
   ],
   mutations: [prettierMutation, jestMutation],
 };

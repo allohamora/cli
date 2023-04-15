@@ -4,7 +4,7 @@
 // "transformIgnorePatterns": ["node_modules/(?!(module-that-needs-to-be-transformed)/)"] doesn't work
 // "transform": { "module-that-needs-to-be-transformed": "babel-jest" } with esm to commonjs plugin doesn't work
 
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',

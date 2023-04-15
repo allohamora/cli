@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/allohamora/cli/compare/1.9.0...1.10.0) (2023-04-15)
+
+### Features
+
+- add 0 pull request limit to dependabot ([9a1012b](https://github.com/allohamora/cli/commit/9a1012b7ceeb20b35e0c637142e5e1c24c47dd1d))
+- add eslintignore to eslint ([40d0822](https://github.com/allohamora/cli/commit/40d0822f19223d49c2268c83da079d0fce99d7ba))
+- add jest config type to default jest config ([ab89333](https://github.com/allohamora/cli/commit/ab89333fc76979874f7c925d0285b3b666e27500))
+- add new ts-jest config type ([c7fff7c](https://github.com/allohamora/cli/commit/c7fff7c51b6437d55c87d07ee2e7da4ec6d1c77e))
+- add passWithNoTests to jest configs ([9980e13](https://github.com/allohamora/cli/commit/9980e13bfcc9baa82b68976f8432eb6f144e5836))
+
 ## [1.9.0](https://github.com/allohamora/cli/compare/1.8.0...1.9.0) (2023-03-07)
 
 ### Features

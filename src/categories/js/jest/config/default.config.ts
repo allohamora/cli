@@ -9,10 +9,12 @@ export const scripts: NpmScript[] = [
 ];
 
 const configFileContent = readableMultilineString`
+  /** @type {import('jest').Config} */
   module.exports = {
     testEnvironment: 'node',
     testRegex: '.*\\.(spec|test)\\.js$',
     collectCoverageFrom: ['src/**/*.js'],
+    passWithNoTests: true,
   };
 `;
 
