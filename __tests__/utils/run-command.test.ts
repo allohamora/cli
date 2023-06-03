@@ -12,6 +12,7 @@ beforeEach(() => {
 
 class ChildMock extends EventEmitter {
   public stdout = new EventEmitter();
+  public stderr = new EventEmitter();
 }
 
 const spawnMock = <EV>(event: 'exit' | 'error' = 'exit', emitValue?: EV, delayMs = 200) => {
@@ -71,6 +72,25 @@ describe('spawnCommand', () => {
     const result = await spawnResult;
 
     expect(result).toBe(chunks.join(''));
+  });
+
+  test('should write error messages', async () => {
+    const child = spawnMock('exit');
+    const chunks = ['Hello', 'World'].map((value) => Buffer.from(value, 'utf-8'));
+
+    const spy = jest.spyOn(global.console, 'error').mockImplementation(jest.fn());
+    const spawnResult = spawnCommand(command, args);
+
+    for (const chunk of chunks) {
+      child.stderr.emit('data', chunk);
+    }
+
+    await spawnResult;
+
+    expect(spy).toHaveBeenCalledWith('Hello');
+    expect(spy).toHaveBeenCalledWith('World');
+
+    spy.mockRestore();
   });
 });
 

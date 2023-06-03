@@ -32,7 +32,7 @@ describe('prettierMutation', () => {
     await prettierMutation(actual as unknown as Config);
 
     const expected = {
-      devDependencies: ['stylelint-config-prettier', 'stylelint-prettier'],
+      devDependencies: ['stylelint-prettier'],
       stylelintConfig: { extends: ['stylelint-prettier/recommended'] },
     };
 

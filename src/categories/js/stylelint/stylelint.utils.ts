@@ -7,7 +7,7 @@ export const isStylelintInstalled = isInstalledAndInRootCheck(PACKAGE_NAME, CONF
 
 export const prettierMutation = async (config: Config) => {
   if (await isPrettierInstalled()) {
-    config.devDependencies.push('stylelint-config-prettier', 'stylelint-prettier');
+    config.devDependencies.push('stylelint-prettier');
     config.stylelintConfig.extends.push('stylelint-prettier/recommended');
   }
 };

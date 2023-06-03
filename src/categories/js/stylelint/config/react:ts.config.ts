@@ -3,24 +3,11 @@ import { prettierMutation } from '../stylelint.utils';
 import { Config } from './config.interface';
 
 const stylelintConfig: Config['stylelintConfig'] = {
-  extends: ['stylelint-config-standard', 'stylelint-config-rational-order-fix'],
-  plugins: ['stylelint-order', 'stylelint-config-rational-order-fix/plugin'],
-  rules: {
-    'declaration-empty-line-before': null,
-    'no-empty-first-line': null,
-    'order/properties-order': [],
-    'plugin/rational-order': [
-      true,
-      {
-        'border-in-box-model': false,
-        'empty-line-between-groups': true,
-      },
-    ],
-  },
+  extends: ['stylelint-config-standard', 'stylelint-config-clean-order'],
   overrides: [
     {
       files: ['**/*.{js,jsx,ts,tsx}'],
-      customSyntax: '@stylelint/postcss-css-in-js',
+      customSyntax: 'postcss-styled-syntax',
     },
   ],
 };
@@ -35,13 +22,7 @@ const stylelintIgnore = readableMultilineString`
 export const reactTsConfig: Config = {
   stylelintConfig,
   stylelintIgnore,
-  devDependencies: [
-    'stylelint',
-    'stylelint-config-standard',
-    'stylelint-order',
-    'stylelint-config-rational-order-fix',
-    '@stylelint/postcss-css-in-js',
-  ],
+  devDependencies: ['stylelint', 'stylelint-config-standard', 'stylelint-config-clean-order', 'postcss-styled-syntax'],
   scripts: [
     { name: 'csslint', script: 'stylelint "src/**/*.{css,ts,tsx}"' },
     { name: 'csslint:fix', script: 'stylelint "src/**/*.{css,ts,tsx}" --fix' },

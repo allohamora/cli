@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/allohamora/cli/compare/1.11.0...1.12.0) (2023-06-03)
+
+### Features
+
+- add run-command error logs showing ([7073e1d](https://github.com/allohamora/cli/commit/7073e1d4995996e0b90af4f12be920114da61430))
+- update stylelint config ([037d0ae](https://github.com/allohamora/cli/commit/037d0ae385b2b6b7bafada561c07a38d1c330cc8))
+
 ## [1.11.0](https://github.com/allohamora/cli/compare/1.10.0...1.11.0) (2023-06-03)
 
 ### Features
