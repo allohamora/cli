@@ -6,6 +6,9 @@ export const spawnCommand = async (command: string, args: string[]): Promise<str
     const child = spawn(command, args);
     let result = Buffer.alloc(0);
 
+    child?.stderr?.on('data', (chunk) => {
+      console.error(chunk.toString());
+    });
     child.on('error', (err) => rej(err));
     child.on('exit', () => res(result.toString('utf-8')));
 
