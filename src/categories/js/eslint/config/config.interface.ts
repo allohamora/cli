@@ -12,6 +12,7 @@ export interface EslintConfig {
     node?: boolean;
     browser?: boolean;
     jest?: boolean;
+    es2020?: boolean;
   };
   root?: boolean;
   ignorePatterns?: string[];
