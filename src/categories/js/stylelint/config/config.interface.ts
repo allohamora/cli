@@ -3,8 +3,6 @@ import { NpmScript } from 'src/utils/npm';
 
 interface StylelintConfig {
   extends: string[];
-  plugins: string[];
-  rules: Record<string, null | true | [] | [true, Record<string, boolean>]>;
   overrides?: { files: string[]; customSyntax?: string }[];
 }
 
