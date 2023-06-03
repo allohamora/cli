@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/allohamora/cli/compare/1.10.0...1.11.0) (2023-06-03)
+
+### Features
+
+- update eslint config for react:ts ([2f2e58c](https://github.com/allohamora/cli/commit/2f2e58ce18a54f1cd9b16ed731dae2ad58296304))
+
 ## [1.10.0](https://github.com/allohamora/cli/compare/1.9.0...1.10.0) (2023-04-15)
 
 ### Features
