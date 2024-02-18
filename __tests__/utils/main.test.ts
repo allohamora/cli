@@ -114,7 +114,7 @@ describe('installOptions', () => {
     expect(optionHello).toBeCalled();
     expect(oraMocked.oraMocked).toBeCalledWith('starting install');
     expect(oraMocked.oraStart).toBeCalled();
-    expect(oraMocked.oraTextSet).toBeCalledWith('option-hello is installing');
+    expect(oraMocked.oraTextSet).toBeCalledWith('option-hello is installing\n');
     expect(oraMocked.oraStop).toBeCalled();
   });
 
