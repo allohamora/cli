@@ -37,7 +37,7 @@ export const installOptions = async (options: Category['options'], keys: string[
   await keys.reduce((chain, key) => {
     return chain.then(() => {
       const kebablizeKey = kebablize(key);
-      spinner.text = `${kebablizeKey} is installing`;
+      spinner.text = `${kebablizeKey} is installing\n`;
 
       return options[key]();
     });
