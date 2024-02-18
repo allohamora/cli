@@ -31,7 +31,6 @@ describe('addHook', () => {
 
     await addHook(hookType, script);
 
-    expect(runCommandMocked.spawnCommand).toBeCalledWith('npx', ['husky', 'add', `.husky/${hookType}`, placeholder]);
     expect(fspMocked.writeFile).toBeCalledWith(rootPath(`.husky/${hookType}`), script, { encoding: 'utf-8' });
   });
 });

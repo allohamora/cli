@@ -19,7 +19,7 @@ describe('husky', () => {
   test('should add husky prepare script', async () => {
     await husky();
 
-    expect(npmMocked.addScripts).toBeCalledWith({ name: 'prepare', script: 'husky install' });
+    expect(npmMocked.addScripts).toBeCalledWith({ name: 'prepare', script: 'husky' });
   });
 
   test('should run prepare script', async () => {
