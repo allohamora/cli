@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/allohamora/cli/compare/1.12.0...1.13.0) (2024-02-18)
+
+### Features
+
+- add better output for install warnings ([16cf67c](https://github.com/allohamora/cli/commit/16cf67c61ed38609b29508c3590b3953cc4617ba))
+- migrate to husky v9 ([396cdec](https://github.com/allohamora/cli/commit/396cdec3c68b29241759bae918699efb7c1f248d))
+
 ## [1.12.0](https://github.com/allohamora/cli/compare/1.11.0...1.12.0) (2023-06-03)
 
 ### Features
