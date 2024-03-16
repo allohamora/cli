@@ -1,6 +1,6 @@
-export interface Context {
+export type Context = {
   installing: string[];
-}
+};
 
 export const context: Context = { installing: [] };
 

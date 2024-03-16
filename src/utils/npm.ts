@@ -4,9 +4,9 @@ import { stringify } from './json';
 import { PACKAGE_JSON_PATH } from './path';
 import { runCommand } from './run-command';
 
-interface PackageJson extends BasePackageJson {
+type PackageJson = {
   [key: string]: unknown;
-}
+} & BasePackageJson;
 
 export const getPackageJson = async () => {
   const json = await fsp.readFile(PACKAGE_JSON_PATH, { encoding: 'utf-8' });
@@ -28,10 +28,10 @@ export const addToPackageJson = async <V>(name: keyof PackageJson, value: V) => 
   await setPackageJson(packageJson);
 };
 
-export interface NpmScript {
+export type NpmScript = {
   name: string;
   script: string;
-}
+};
 
 export const addScripts = async (...scripts: NpmScript[]) => {
   const packageJson = await getPackageJson();
@@ -39,7 +39,10 @@ export const addScripts = async (...scripts: NpmScript[]) => {
   packageJson.scripts ??= {};
 
   scripts.forEach(({ name, script }) => {
-    packageJson.scripts![name] = script;
+    // type-guard
+    if (!packageJson.scripts) throw new Error('packageJson.scripts is undefined');
+
+    packageJson.scripts[name] = script;
   });
 
   await setPackageJson(packageJson);

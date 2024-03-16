@@ -1,6 +1,6 @@
 import { Mutation } from 'src/utils/mutation';
 
-export interface EslintConfig {
+export type EslintConfig = {
   parser?: string;
   parserOptions?: {
     project?: string;
@@ -19,12 +19,12 @@ export interface EslintConfig {
   plugins?: string[];
   extends?: string[];
   rules?: Record<string, string | unknown[]>;
-}
+};
 
-export interface Config {
+export type Config = {
   dependencies: string[];
   eslintConfig: EslintConfig;
   ignore: string[];
   scripts: { name: string; script: string }[];
   mutations: Mutation<Config>[];
-}
+};

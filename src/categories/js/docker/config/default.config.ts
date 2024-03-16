@@ -1,9 +1,9 @@
 import { readableMultilineString } from 'src/utils/string';
 import { FILE_NAME, IGNORE_NAME } from '../docker.const';
 
-interface GetDockerFileArgs {
+type GetDockerFileArgs = {
   version: string;
-}
+};
 
 export const getDockerFile = ({ version }: GetDockerFileArgs) => readableMultilineString`
   FROM node:${version}

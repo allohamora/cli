@@ -14,5 +14,5 @@ export const main = async () => {
 };
 
 if (require.main) {
-  main();
+  void main();
 }
