@@ -10,6 +10,7 @@ export const reactTsConfig: Config = {
     'eslint-config-airbnb-typescript',
     'eslint-plugin-react-refresh',
     'eslint-plugin-react-hooks',
+    'eslint-plugin-deprecation',
   ],
   eslintConfig: {
     parser: '@typescript-eslint/parser',
@@ -25,6 +26,7 @@ export const reactTsConfig: Config = {
       'plugin:react-hooks/recommended',
       'airbnb',
       'airbnb-typescript',
+      'plugin:deprecation/recommended',
     ],
     root: true,
     env: {
