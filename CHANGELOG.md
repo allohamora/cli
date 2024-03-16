@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/allohamora/cli/compare/1.12.0...1.14.0) (2024-03-16)
+
+### Features
+
+- add better output for install warnings ([16cf67c](https://github.com/allohamora/cli/commit/16cf67c61ed38609b29508c3590b3953cc4617ba))
+- add eslint-plugin-deprecation to configs ([7e0924b](https://github.com/allohamora/cli/commit/7e0924b55ae379b1e894400e1b877bf44f5f3684))
+- add more eslint rules ([13fca82](https://github.com/allohamora/cli/commit/13fca82bdb21349845ed8c822c4f207e5279f0c9))
+- migrate to husky v9 ([396cdec](https://github.com/allohamora/cli/commit/396cdec3c68b29241759bae918699efb7c1f248d))
+- replace @typescript-eslint/no-use-before-define with no-use-before-define ([f46441f](https://github.com/allohamora/cli/commit/f46441f8666ca768e1af990765366a5560b01d3c))
+
 ## [1.13.0](https://github.com/allohamora/cli/compare/1.12.0...1.13.0) (2024-02-18)
 
 ### Features
