@@ -40,6 +40,7 @@ export const reactTsConfig: Config = {
       'no-use-before-define': 'error',
       'object-shorthand': 'warn',
 
+      '@typescript-eslint/no-use-before-define': 'off',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
