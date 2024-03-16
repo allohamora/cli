@@ -37,6 +37,10 @@ export const reactTsConfig: Config = {
     },
     ignorePatterns: ['.eslintrc.js'],
     rules: {
+      'no-use-before-define': 'error',
+      'object-shorthand': 'warn',
+
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
