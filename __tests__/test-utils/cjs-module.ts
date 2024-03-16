@@ -1,11 +1,11 @@
 import vm from 'node:vm';
 
-interface Context {
+type Context = {
   module: {
     exports?: Record<string, unknown>;
   };
   [key: string]: unknown;
-}
+};
 
 export const parse = (script: string) => {
   const context: Context = { module: { exports: {} } };

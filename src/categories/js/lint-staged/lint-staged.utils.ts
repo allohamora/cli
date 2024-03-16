@@ -12,10 +12,10 @@ import { CLI_NAME as STYLELINT_CLI_NAME } from '../stylelint/stylelint.const';
 
 type ScriptFileExtension = '*.js' | '*.ts' | '*.css' | '*.{ts,tsx}' | '*.{css,ts,tsx}';
 
-interface OptionMutation {
+type OptionMutation = {
   check: (config: LintStagedConfig, key: string, value: string) => boolean;
   mutate: (config: LintStagedConfig, key: string, value: string) => void;
-}
+};
 
 const arrayOptionMutation: OptionMutation = {
   check: (config, key) => Array.isArray(config[key]),

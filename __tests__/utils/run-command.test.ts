@@ -19,7 +19,7 @@ const spawnMock = <EV>(event: 'exit' | 'error' = 'exit', emitValue?: EV, delayMs
   const child = new ChildMock();
 
   const exitHandler = () => child.emit(event, emitValue);
-  delay(delayMs).then(exitHandler);
+  void delay(delayMs).then(exitHandler);
 
   childProcessMocked.spawn.mockReturnValueOnce(child as ReturnType<typeof childProcess.spawn>);
 

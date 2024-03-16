@@ -10,6 +10,7 @@ export const reactTsConfig: Config = {
     'eslint-config-airbnb-typescript',
     'eslint-plugin-react-refresh',
     'eslint-plugin-react-hooks',
+    'eslint-plugin-deprecation',
   ],
   eslintConfig: {
     parser: '@typescript-eslint/parser',
@@ -25,6 +26,7 @@ export const reactTsConfig: Config = {
       'plugin:react-hooks/recommended',
       'airbnb',
       'airbnb-typescript',
+      'plugin:deprecation/recommended',
     ],
     root: true,
     env: {
@@ -35,6 +37,11 @@ export const reactTsConfig: Config = {
     },
     ignorePatterns: ['.eslintrc.js'],
     rules: {
+      'no-use-before-define': 'error',
+      'object-shorthand': 'warn',
+
+      '@typescript-eslint/no-use-before-define': 'off',
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',

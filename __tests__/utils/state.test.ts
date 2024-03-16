@@ -31,7 +31,7 @@ describe('createConfigState', () => {
   const types = ['1', '2', '3'];
   const createNewTypeState = () => createTypeState(types);
   let state = createNewTypeState();
-  let [getType, setType] = state;
+  let [, setType] = state;
 
   const configValues = { default: 'default', '1': '1' };
   const createNewConfigState = () => createConfigState(state, configValues);
@@ -39,7 +39,7 @@ describe('createConfigState', () => {
 
   afterEach(() => {
     state = createNewTypeState();
-    [getType, setType] = state;
+    [, setType] = state;
     [getConfig] = createNewConfigState();
   });
 

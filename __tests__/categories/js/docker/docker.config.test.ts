@@ -1,10 +1,10 @@
 import { getConfig } from 'src/categories/js/docker/docker.config';
 import { expectJsConfig } from '__tests__/test-utils/js-config';
 
-interface ExpectDockerConfigArgs {
+type ExpectDockerConfigArgs = {
   getDockerFile: ({ version }: { version: string }) => string;
   dockerIgnore: string;
-}
+};
 
 const expectDockerConfig = ({ getDockerFile, dockerIgnore }: ExpectDockerConfigArgs) => {
   const version = '16.14.2';

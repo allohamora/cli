@@ -4,12 +4,6 @@ import { isPrettierInstalled } from '../prettier/prettier.utils';
 import { Config } from './config/config.interface';
 import { CONFIG_FILE_NAME, SCRIPT_NAME } from './eslint.const';
 
-export const prettierMutation = async (config: Config) => {
-  if (await isPrettierInstalled()) {
-    addPrettierToConfig(config);
-  }
-};
-
 export const jestMutation = async (config: Config) => {
   if (await isJestInstalled()) {
     config.eslintConfig.env = { ...config.eslintConfig.env, jest: true };
@@ -25,6 +19,12 @@ const addPrettierToConfig = (config: Config) => {
 
   config.dependencies = dependencies;
   config.eslintConfig.extends = eslintExtends;
+};
+
+export const prettierMutation = async (config: Config) => {
+  if (await isPrettierInstalled()) {
+    addPrettierToConfig(config);
+  }
 };
 
 export const isEslintInstalled = isInstalledAndInRootCheck(SCRIPT_NAME, CONFIG_FILE_NAME);

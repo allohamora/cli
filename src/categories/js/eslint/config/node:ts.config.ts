@@ -2,7 +2,12 @@ import { jestMutation, prettierMutation } from '../eslint.utils';
 import { Config } from './config.interface';
 
 export const nodeTsConfig: Config = {
-  dependencies: ['@typescript-eslint/eslint-plugin', '@typescript-eslint/parser', 'eslint-plugin-beautiful-sort'],
+  dependencies: [
+    '@typescript-eslint/eslint-plugin',
+    '@typescript-eslint/parser',
+    'eslint-plugin-beautiful-sort',
+    'eslint-plugin-deprecation',
+  ],
   eslintConfig: {
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -10,13 +15,17 @@ export const nodeTsConfig: Config = {
       sourceType: 'module',
     },
     plugins: ['@typescript-eslint/eslint-plugin', 'beautiful-sort'],
-    extends: ['plugin:@typescript-eslint/recommended'],
+    extends: ['plugin:@typescript-eslint/recommended', 'plugin:deprecation/recommended'],
     root: true,
     env: {
       node: true,
     },
     ignorePatterns: ['.eslintrc.js'],
     rules: {
+      'no-use-before-define': 'error',
+      'object-shorthand': 'warn',
+
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
