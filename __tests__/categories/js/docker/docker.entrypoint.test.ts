@@ -35,7 +35,7 @@ describe('docker', () => {
   test('should create Dockerfile', async () => {
     await docker();
 
-    expect(fsUtilsMocked.addFileToRoot).toHaveBeenCalledWith('DockerFile', dockerFile);
+    expect(fsUtilsMocked.addFileToRoot).toHaveBeenCalledWith('Dockerfile', dockerFile);
   });
 
   test('should create .dockerignore', async () => {
