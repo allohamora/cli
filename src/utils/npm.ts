@@ -40,9 +40,9 @@ export const addScripts = async (...scripts: NpmScript[]) => {
 
   scripts.forEach(({ name, script }) => {
     // type-guard
-    if (!packageJson.scripts) throw new Error('packageJson.scripts is undefined');
-
-    packageJson.scripts[name] = script;
+    if (packageJson.scripts) {
+      packageJson.scripts[name] = script;
+    }
   });
 
   await setPackageJson(packageJson);
