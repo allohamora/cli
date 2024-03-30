@@ -27,9 +27,9 @@ npx @allohamora/cli
 
 ## Categories
 
-| Category              | Description                                             | Options                    |
-| --------------------- | ------------------------------------------------------- | -------------------------- |
-| [**js**](#js-options) | is a category with scripts to initialize js/ts projects | default, node:ts, react:ts |
+| Category              | Description                                             | Presets                          |
+| --------------------- | ------------------------------------------------------- | -------------------------------- |
+| [**js**](#js-options) | is a category with scripts to initialize js/ts projects | `default`, `node:ts`, `react:ts` |
 
 ## JS Options
 
