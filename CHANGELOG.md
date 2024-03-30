@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.1](https://github.com/allohamora/cli/compare/1.18.0...1.18.1) (2024-03-30)
+
+### Bug Fixes
+
+- add .husky dir creation if it does not exist ([a436c4b](https://github.com/allohamora/cli/commit/a436c4bfacf4f838ab95c88c43413169868a7cef))
+
 ## [1.18.0](https://github.com/allohamora/cli/compare/1.17.0...1.18.0) (2024-03-30)
 
 ### Features
