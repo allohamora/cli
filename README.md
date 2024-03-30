@@ -27,28 +27,28 @@ npx @allohamora/cli
 
 ## Categories
 
-| Category              | Description                                             | Presets                          |
-| --------------------- | ------------------------------------------------------- | -------------------------------- |
-| [**js**](#js-options) | is a category with scripts to initialize js/ts projects | `default`, `node:ts`, `react:ts` |
+| Category              | Description                                   | Presets                          |
+| --------------------- | --------------------------------------------- | -------------------------------- |
+| [**js**](#js-options) | contains options to initialize js/ts projects | `default`, `node:ts`, `react:ts` |
 
 ## JS Options
 
-| Option               | Description                                                                                                                                                                                     | Integrations                                       |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| **commitlint**       | setup [commitlint](https://github.com/conventional-changelog/commitlint) with the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) config                                 | `husky`                                            |
-| **eslint**           | setup [eslint](https://github.com/eslint/eslint) with a config and lint scripts                                                                                                                 | `prettier`                                         |
-| **stylelint**        | setup [stylelint](https://github.com/stylelint/stylelint) with a config and lint scripts                                                                                                        | `prettier`                                         |
-| **husky**            | setup [husky](https://github.com/typicode/husky)                                                                                                                                                |                                                    |
-| **lint-staged**      | setup [lint-staged](https://github.com/okonet/lint-staged)                                                                                                                                      | `husky`, `jest`, `eslint`, `prettier`, `stylelint` |
-| **prettier**         | setup [prettier](https://github.com/prettier/prettier) with a config and format scripts                                                                                                         |                                                    |
-| **release-workflow** | setup a github release workflow that creates a release from the [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) CHANGELOG.md on a tag push           |                                                    |
-| **standard-version** | setup [standard-version](https://github.com/conventional-changelog/standard-version) with the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) config and release scripts |                                                    |
-| **jest**             | setup [jest](https://github.com/facebook/jest) with a config and test scripts                                                                                                                   |                                                    |
-| **docker**           | setup [docker](https://github.com/docker) with Dockerfile and .dockerignore files                                                                                                               |                                                    |
-| **test-workflow**    | setup a github test workflow that runs `npm run test` on each push                                                                                                                              |                                                    |
-| **build-workflow**   | setup a github build workflow that runs `npm run build` on each push                                                                                                                            |                                                    |
-| **codecov-workflow** | setup a codecov workflow that collects code coverage and sends it to codecov                                                                                                                    |                                                    |
-| **dependabot**       | setup github [dependabot](https://github.com/dependabot) that manages dependencies                                                                                                              |                                                    |
+| Option               | Description                                                                                                                                                                                      | Integrations                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
+| **commitlint**       | setups [commitlint](https://github.com/conventional-changelog/commitlint) with the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) config                                 | `husky`                                            |
+| **eslint**           | setups [eslint](https://github.com/eslint/eslint) with a config and lint scripts                                                                                                                 | `prettier`                                         |
+| **stylelint**        | setups [stylelint](https://github.com/stylelint/stylelint) with a config and lint scripts                                                                                                        | `prettier`                                         |
+| **husky**            | setups [husky](https://github.com/typicode/husky)                                                                                                                                                |                                                    |
+| **lint-staged**      | setups [lint-staged](https://github.com/okonet/lint-staged)                                                                                                                                      | `husky`, `jest`, `eslint`, `prettier`, `stylelint` |
+| **prettier**         | setups [prettier](https://github.com/prettier/prettier) with a config and format scripts                                                                                                         |                                                    |
+| **release-workflow** | setups a github release workflow that creates a release from the [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) CHANGELOG.md on a tag push           |                                                    |
+| **standard-version** | setups [standard-version](https://github.com/conventional-changelog/standard-version) with the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) config and release scripts |                                                    |
+| **jest**             | setups [jest](https://github.com/facebook/jest) with a config and test scripts                                                                                                                   |                                                    |
+| **docker**           | setups [docker](https://github.com/docker) with Dockerfile and .dockerignore files                                                                                                               |                                                    |
+| **test-workflow**    | setups a github test workflow that runs `npm run test` on each push                                                                                                                              |                                                    |
+| **build-workflow**   | setups a github build workflow that runs `npm run build` on each push                                                                                                                            |                                                    |
+| **codecov-workflow** | setups a codecov workflow that collects code coverage and sends it to codecov                                                                                                                    |                                                    |
+| **dependabot**       | setups github [dependabot](https://github.com/dependabot) that manages dependencies                                                                                                              |                                                    |
 
 \*_Integrations run only if the package is installing or installed._
 
