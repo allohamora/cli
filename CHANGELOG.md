@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.0](https://github.com/allohamora/cli/compare/1.16.0...1.17.0) (2024-03-30)
+
+### Features
+
+- update dependabot config ([69d5321](https://github.com/allohamora/cli/commit/69d532128af3de366710d2800f9a7c031813332f))
+
 ## [1.16.0](https://github.com/allohamora/cli/compare/1.15.1...1.16.0) (2024-03-30)
 
 ### Features
