@@ -28,7 +28,7 @@ describe('lintStaged', () => {
 
     await lintStaged();
 
-    expect(configMocked.getConfig).toBeCalled();
+    expect(configMocked.getConfig).toHaveBeenCalled();
   });
 
   test('should apply mutations to config', async () => {
@@ -53,7 +53,7 @@ describe('lintStaged', () => {
 
     await lintStaged();
 
-    expect(npmMocked.installDevelopmentDependencies).toBeCalledWith('lint-staged');
+    expect(npmMocked.installDevelopmentDependencies).toHaveBeenCalledWith('lint-staged');
   });
 
   test('should add config to package.json', async () => {
@@ -63,7 +63,7 @@ describe('lintStaged', () => {
 
     await lintStaged();
 
-    expect(npmMocked.addToPackageJson).toBeCalledWith('lint-staged', testConfig.config);
+    expect(npmMocked.addToPackageJson).toHaveBeenCalledWith('lint-staged', testConfig.config);
   });
 
   test('should run huskyIntegration', async () => {
@@ -71,6 +71,6 @@ describe('lintStaged', () => {
 
     await lintStaged();
 
-    expect(utilsMocked.huskyIntegration).toBeCalled();
+    expect(utilsMocked.huskyIntegration).toHaveBeenCalled();
   });
 });

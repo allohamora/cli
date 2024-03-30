@@ -18,7 +18,7 @@ describe('buildWorkflow', () => {
 
     await buildWorkflow();
 
-    expect(configMocked.getConfig).toBeCalled();
+    expect(configMocked.getConfig).toHaveBeenCalled();
   });
 
   test('should add github workflow', async () => {
@@ -27,6 +27,6 @@ describe('buildWorkflow', () => {
 
     await buildWorkflow();
 
-    expect(githubMocked.addGithubWorkflow).toBeCalledWith('build.yml', content);
+    expect(githubMocked.addGithubWorkflow).toHaveBeenCalledWith('build.yml', content);
   });
 });

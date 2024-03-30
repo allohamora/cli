@@ -33,12 +33,12 @@ const returnPackageJson = <T extends Record<string, unknown>>(value: T = {} as T
 };
 
 const expectPackageJsonWasGetted = () => {
-  expect(fspMocked.readFile).toBeCalledWith(PACKAGE_JSON_PATH, { encoding: 'utf-8' });
+  expect(fspMocked.readFile).toHaveBeenCalledWith(PACKAGE_JSON_PATH, { encoding: 'utf-8' });
 };
 
 const expectPackageJsonWasSaved = <T extends Record<string, unknown>>(target: T) => {
-  expect(jsonMocked.stringify).toBeCalledWith(target);
-  expect(fspMocked.writeFile).toBeCalledWith(PACKAGE_JSON_PATH, json.stringify(target), { encoding: 'utf-8' });
+  expect(jsonMocked.stringify).toHaveBeenCalledWith(target);
+  expect(fspMocked.writeFile).toHaveBeenCalledWith(PACKAGE_JSON_PATH, json.stringify(target), { encoding: 'utf-8' });
 };
 
 describe('getPackageJson', () => {
@@ -109,7 +109,7 @@ describe('runScript', () => {
     const scriptName = '__test__';
     await runScript(scriptName);
 
-    expect(runCommandMocked.runCommand).toBeCalledWith(`npm run ${scriptName}`);
+    expect(runCommandMocked.runCommand).toHaveBeenCalledWith(`npm run ${scriptName}`);
   });
 });
 
@@ -120,6 +120,6 @@ describe('installDevelopmentDependencies', () => {
 
     await installDevelopmentDependencies(...dependencies);
 
-    expect(runCommandMocked.runCommand).toBeCalledWith(`npm i -D ${joined}`);
+    expect(runCommandMocked.runCommand).toHaveBeenCalledWith(`npm i -D ${joined}`);
   });
 });

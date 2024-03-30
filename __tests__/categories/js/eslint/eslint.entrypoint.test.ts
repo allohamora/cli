@@ -28,7 +28,7 @@ describe('eslint', () => {
 
     await eslint();
 
-    expect(configMocked.getConfig).toBeCalled();
+    expect(configMocked.getConfig).toHaveBeenCalled();
   });
 
   test('should apply mutations to config', async () => {
@@ -40,7 +40,7 @@ describe('eslint', () => {
 
     await eslint();
 
-    expect(mutationMocked.applyMutations).toBeCalledWith(config, config.mutations);
+    expect(mutationMocked.applyMutations).toHaveBeenCalledWith(config, config.mutations);
   });
 
   test('should install eslint and dependencies', async () => {
@@ -49,7 +49,7 @@ describe('eslint', () => {
 
     await eslint();
 
-    expect(npmMocked.installDevelopmentDependencies).toBeCalledWith('eslint', ...config.dependencies);
+    expect(npmMocked.installDevelopmentDependencies).toHaveBeenCalledWith('eslint', ...config.dependencies);
   });
 
   test('should add .eslintrc.json to root', async () => {
@@ -58,7 +58,7 @@ describe('eslint', () => {
 
     await eslint();
 
-    expect(fsMocked.addJsonFileToRoot).toBeCalledWith('.eslintrc.json', config.eslintConfig);
+    expect(fsMocked.addJsonFileToRoot).toHaveBeenCalledWith('.eslintrc.json', config.eslintConfig);
   });
 
   test('should add .eslintignore to root', async () => {
@@ -67,7 +67,7 @@ describe('eslint', () => {
 
     await eslint();
 
-    expect(fsMocked.addFileToRoot).toBeCalledWith('.eslintignore', 'node_modules\ndist');
+    expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('.eslintignore', 'node_modules\ndist');
   });
 
   test('should add npm script to package.json', async () => {
@@ -76,6 +76,6 @@ describe('eslint', () => {
 
     await eslint();
 
-    expect(npmMocked.addScripts).toBeCalledWith(...config.scripts);
+    expect(npmMocked.addScripts).toHaveBeenCalledWith(...config.scripts);
   });
 });

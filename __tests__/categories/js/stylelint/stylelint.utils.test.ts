@@ -20,7 +20,7 @@ afterEach(() => {
 
 describe('isStylelintInstalled', () => {
   test('should use isInstalledAndInRootCheck with stylelint and .stylelintrc', () => {
-    expect(installedMocked.isInstalledAndInRootCheck).toBeCalledWith('stylelint', '.stylelintrc');
+    expect(installedMocked.isInstalledAndInRootCheck).toHaveBeenCalledWith('stylelint', '.stylelintrc');
   });
 });
 

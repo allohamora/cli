@@ -58,8 +58,8 @@ describe('isInstalled', () => {
     const actual = await isInstalled(notInstallingScript, [firstHandler, secondHandler])();
     const expected = true;
 
-    expect(firstHandler).toBeCalled();
-    expect(secondHandler).not.toBeCalled();
+    expect(firstHandler).toHaveBeenCalled();
+    expect(secondHandler).not.toHaveBeenCalled();
     expect(actual).toBe(expected);
   });
 
@@ -70,8 +70,8 @@ describe('isInstalled', () => {
     const actual = await isInstalled(notInstallingScript, [firstHandler, secondHandler])();
     const expected = false;
 
-    expect(firstHandler).toBeCalled();
-    expect(secondHandler).toBeCalled();
+    expect(firstHandler).toHaveBeenCalled();
+    expect(secondHandler).toHaveBeenCalled();
     expect(actual).toBe(expected);
   });
 });
@@ -85,7 +85,7 @@ describe('isInstalledAndInRootCheck', () => {
     const actual = await isInstalledAndInRootCheck(notInstallingScript, configFile)();
     const expected = true;
 
-    expect(fsMocked.isExistsInRoot).toBeCalledWith(configFile);
+    expect(fsMocked.isExistsInRoot).toHaveBeenCalledWith(configFile);
     expect(actual).toBe(expected);
   });
 
@@ -96,8 +96,8 @@ describe('isInstalledAndInRootCheck', () => {
     const actual = await isInstalledAndInRootCheck(notInstallingScript, configFile, [nextHandler])();
     const expected = true;
 
-    expect(fsMocked.isExistsInRoot).toBeCalled();
-    expect(nextHandler).toBeCalled();
+    expect(fsMocked.isExistsInRoot).toHaveBeenCalled();
+    expect(nextHandler).toHaveBeenCalled();
     expect(actual).toBe(expected);
   });
 
@@ -108,8 +108,8 @@ describe('isInstalledAndInRootCheck', () => {
     const actual = await isInstalledAndInRootCheck(installingScript, configFile, [nextHandler])();
     const expected = true;
 
-    expect(fsMocked.isExistsInRoot).not.toBeCalled();
-    expect(nextHandler).not.toBeCalled();
+    expect(fsMocked.isExistsInRoot).not.toHaveBeenCalled();
+    expect(nextHandler).not.toHaveBeenCalled();
     expect(actual).toBe(expected);
   });
 });

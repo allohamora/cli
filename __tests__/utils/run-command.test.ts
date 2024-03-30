@@ -31,7 +31,7 @@ describe('spawnCommand', () => {
   const args = ['1', '2', '3'];
 
   const expectSpawnWasCalledWithArgs = () => {
-    expect(childProcessMocked.spawn).toBeCalledWith(command, args);
+    expect(childProcessMocked.spawn).toHaveBeenCalledWith(command, args);
   };
 
   test('should spawn command with command name and args', async () => {
@@ -103,6 +103,6 @@ describe('runCommand', () => {
 
     await runCommand(fullCommand);
 
-    expect(childProcessMocked.spawn).toBeCalledWith(name, args);
+    expect(childProcessMocked.spawn).toHaveBeenCalledWith(name, args);
   });
 });

@@ -13,6 +13,6 @@ describe('getNodeVersion', () => {
     const actual = await getNodeVersion();
 
     expect(actual).toBe(expected);
-    expect(runCommandUtilsMocked.runCommand).toBeCalledWith('node -v');
+    expect(runCommandUtilsMocked.runCommand).toHaveBeenCalledWith('node -v');
   });
 });

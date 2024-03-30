@@ -18,7 +18,7 @@ describe('dependabot', () => {
 
     await dependabot();
 
-    expect(configMocked.getConfig).toBeCalled();
+    expect(configMocked.getConfig).toHaveBeenCalled();
   });
 
   test('should add dependabot.yml to github', async () => {
@@ -27,6 +27,6 @@ describe('dependabot', () => {
 
     await dependabot();
 
-    expect(githubMocked.addToGithubDir).toBeCalledWith('dependabot.yml', content);
+    expect(githubMocked.addToGithubDir).toHaveBeenCalledWith('dependabot.yml', content);
   });
 });

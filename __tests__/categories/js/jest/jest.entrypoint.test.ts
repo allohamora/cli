@@ -30,7 +30,7 @@ describe('jest', () => {
   test('should get config from getConfig', async () => {
     await jestEntrypoint();
 
-    expect(configMocked.getConfig).toBeCalled();
+    expect(configMocked.getConfig).toHaveBeenCalled();
   });
 
   test('should add config file to root', async () => {
@@ -38,7 +38,7 @@ describe('jest', () => {
 
     await jestEntrypoint();
 
-    expect(fsMocked.addFileToRoot).toBeCalledWith('jest.config.cjs', config.configFileContent);
+    expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('jest.config.cjs', config.configFileContent);
   });
 
   test('should add test scripts to package.json', async () => {
@@ -46,6 +46,6 @@ describe('jest', () => {
 
     await jestEntrypoint();
 
-    expect(npmMocked.addScripts).toBeCalledWith(config.scripts[0]);
+    expect(npmMocked.addScripts).toHaveBeenCalledWith(config.scripts[0]);
   });
 });

@@ -95,6 +95,6 @@ describe('jestMutation', () => {
 
 describe('isEslintInstalled', () => {
   test('should call isInstalledAndInRootCheck with eslint and .eslintrc.json', () => {
-    expect(installedMocked.isInstalledAndInRootCheck).toBeCalledWith('eslint', '.eslintrc.json');
+    expect(installedMocked.isInstalledAndInRootCheck).toHaveBeenCalledWith('eslint', '.eslintrc.json');
   });
 });

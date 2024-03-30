@@ -14,8 +14,8 @@ describe('huskyIntegration', () => {
 
     await huskyIntegration();
 
-    expect(huskyUtilsMocked.isHuskyInstalled).toBeCalled();
-    expect(huskyUtilsMocked.addHook).not.toBeCalled();
+    expect(huskyUtilsMocked.isHuskyInstalled).toHaveBeenCalled();
+    expect(huskyUtilsMocked.addHook).not.toHaveBeenCalled();
   });
 
   test('should run addHook if husky installed', async () => {
@@ -23,7 +23,7 @@ describe('huskyIntegration', () => {
 
     await huskyIntegration();
 
-    expect(huskyUtilsMocked.isHuskyInstalled).toBeCalled();
-    expect(huskyUtilsMocked.addHook).toBeCalledWith('commit-msg', 'npx --no-install -- commitlint --edit "$1"');
+    expect(huskyUtilsMocked.isHuskyInstalled).toHaveBeenCalled();
+    expect(huskyUtilsMocked.addHook).toHaveBeenCalledWith('commit-msg', 'npx --no-install -- commitlint --edit "$1"');
   });
 });

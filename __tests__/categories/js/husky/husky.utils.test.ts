@@ -31,12 +31,12 @@ describe('addHook', () => {
 
     await addHook(hookType, script);
 
-    expect(fspMocked.writeFile).toBeCalledWith(rootPath(`.husky/${hookType}`), script, { encoding: 'utf-8' });
+    expect(fspMocked.writeFile).toHaveBeenCalledWith(rootPath(`.husky/${hookType}`), script, { encoding: 'utf-8' });
   });
 });
 
 describe('isHuskyInstalled', () => {
   test('should use isInstalledAndInRootCheck with husky and .husky', () => {
-    expect(installedMocked.isInstalledAndInRootCheck).toBeCalledWith('husky', '.husky');
+    expect(installedMocked.isInstalledAndInRootCheck).toHaveBeenCalledWith('husky', '.husky');
   });
 });

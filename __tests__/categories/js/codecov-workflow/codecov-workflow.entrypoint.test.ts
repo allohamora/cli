@@ -18,7 +18,7 @@ describe('codecovWorkflow', () => {
 
     await codecovWorkflow();
 
-    expect(configMocked.getConfig).toBeCalled();
+    expect(configMocked.getConfig).toHaveBeenCalled();
   });
 
   test('should add github workflow', async () => {
@@ -27,6 +27,6 @@ describe('codecovWorkflow', () => {
 
     await codecovWorkflow();
 
-    expect(githubMocked.addGithubWorkflow).toBeCalledWith('codecov.yml', content);
+    expect(githubMocked.addGithubWorkflow).toHaveBeenCalledWith('codecov.yml', content);
   });
 });

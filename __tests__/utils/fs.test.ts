@@ -50,7 +50,7 @@ describe('addDirToRootIfNotExists', () => {
 
     await addDirToRootIfNotExists(dir);
 
-    expect(fspMocked.mkdir).toBeCalledWith(expected);
+    expect(fspMocked.mkdir).toHaveBeenCalledWith(expected);
   });
 
   test('should not create dir at root if it exists', async () => {
@@ -58,8 +58,8 @@ describe('addDirToRootIfNotExists', () => {
 
     await addDirToRootIfNotExists(rootDir);
 
-    expect(fspMocked.mkdir).not.toBeCalled();
-    expect(fspMocked.mkdir).not.toBeCalledWith(expected);
+    expect(fspMocked.mkdir).not.toHaveBeenCalled();
+    expect(fspMocked.mkdir).not.toHaveBeenCalledWith(expected);
   });
 });
 
@@ -72,7 +72,7 @@ describe('addFileToRoot', () => {
 
     await addFileToRoot(fileName, content);
 
-    expect(fspMocked.writeFile).toBeCalledWith(fileNameWithPath, content, { encoding: 'utf-8' });
+    expect(fspMocked.writeFile).toHaveBeenCalledWith(fileNameWithPath, content, { encoding: 'utf-8' });
   });
 });
 
@@ -85,8 +85,8 @@ describe('addJsonFileToRoot', () => {
 
     await addJsonFileToRoot(fileName, content);
 
-    expect(jsonMocked.stringify).toBeCalledWith(content);
-    expect(fspMocked.writeFile).toBeCalledWith(fileNameWithPath, json.stringify(content), {
+    expect(jsonMocked.stringify).toHaveBeenCalledWith(content);
+    expect(fspMocked.writeFile).toHaveBeenCalledWith(fileNameWithPath, json.stringify(content), {
       encoding: 'utf-8',
     });
   });

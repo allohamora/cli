@@ -68,7 +68,7 @@ describe('getCategory', () => {
     const expected = js;
 
     expect(actual).toBe(expected);
-    expect(promptMocked.oneOf).toBeCalledWith('choose a category', categoryKeys);
+    expect(promptMocked.oneOf).toHaveBeenCalledWith('choose a category', categoryKeys);
   });
 });
 
@@ -83,7 +83,7 @@ describe('getOptions', () => {
 
     expect(actual).toBe(expected);
     expect(js.state.configState[0]()).toBe(selectedOption);
-    expect(promptMocked.oneOf).toBeCalledWith('choose a config', js.state.configTypes);
+    expect(promptMocked.oneOf).toHaveBeenCalledWith('choose a config', js.state.configTypes);
   });
 });
 
@@ -98,7 +98,7 @@ describe('chooseOptions', () => {
     const actual = await chooseOptions(js.options);
 
     expect(actual).toEqual(expected);
-    expect(promptMocked.manyOf).toBeCalledWith('choose a options', kebablized);
+    expect(promptMocked.manyOf).toHaveBeenCalledWith('choose a options', kebablized);
   });
 });
 
@@ -111,11 +111,11 @@ describe('installOptions', () => {
     const optionHello = jest.fn();
     await installOptions({ optionHello }, ['optionHello']);
 
-    expect(optionHello).toBeCalled();
-    expect(oraMocked.oraMocked).toBeCalledWith('starting install');
-    expect(oraMocked.oraStart).toBeCalled();
-    expect(oraMocked.oraTextSet).toBeCalledWith('option-hello is installing\n');
-    expect(oraMocked.oraStop).toBeCalled();
+    expect(optionHello).toHaveBeenCalled();
+    expect(oraMocked.oraMocked).toHaveBeenCalledWith('starting install');
+    expect(oraMocked.oraStart).toHaveBeenCalled();
+    expect(oraMocked.oraTextSet).toHaveBeenCalledWith('option-hello is installing\n');
+    expect(oraMocked.oraStop).toHaveBeenCalled();
   });
 
   test('should set installing options', async () => {
@@ -125,7 +125,7 @@ describe('installOptions', () => {
 
     await installOptions(options, keys);
 
-    expect(contextMocked.setInstalling).toBeCalledWith(keys);
+    expect(contextMocked.setInstalling).toHaveBeenCalledWith(keys);
   });
 
   test('should run selected scripts', async () => {
@@ -136,7 +136,7 @@ describe('installOptions', () => {
 
     await installOptions(options, keys);
 
-    expect(option1).toBeCalled();
-    expect(option2).toBeCalled();
+    expect(option1).toHaveBeenCalled();
+    expect(option2).toHaveBeenCalled();
   });
 });

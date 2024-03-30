@@ -24,8 +24,8 @@ describe('main', () => {
   test('should print welcome and bye message with white color', async () => {
     await main();
 
-    expect(consoleColorsMocked.white).toBeCalledWith(`Welcome to Allohamora's cli`);
-    expect(consoleColorsMocked.white).toBeCalledWith('Installation completed');
+    expect(consoleColorsMocked.white).toHaveBeenCalledWith(`Welcome to Allohamora's cli`);
+    expect(consoleColorsMocked.white).toHaveBeenCalledWith('Installation completed');
   });
 
   test('should run selected scripts', async () => {
@@ -40,9 +40,9 @@ describe('main', () => {
 
     await main();
 
-    expect(mainUtils.getCategory).toBeCalled();
-    expect(mainUtils.getOptions).toBeCalledWith(category);
-    expect(mainUtils.chooseOptions).toBeCalledWith(options);
-    expect(mainUtils.installOptions).toBeCalledWith(options, optionKeys);
+    expect(mainUtils.getCategory).toHaveBeenCalled();
+    expect(mainUtils.getOptions).toHaveBeenCalledWith(category);
+    expect(mainUtils.chooseOptions).toHaveBeenCalledWith(options);
+    expect(mainUtils.installOptions).toHaveBeenCalledWith(options, optionKeys);
   });
 });

@@ -25,30 +25,30 @@ describe('prettier', () => {
   test('should get config from getConfig', async () => {
     await prettier();
 
-    expect(configMocked.getConfig).toBeCalled();
+    expect(configMocked.getConfig).toHaveBeenCalled();
   });
 
   test('should install prettier', async () => {
     await prettier();
 
-    expect(npmMocked.installDevelopmentDependencies).toBeCalledWith('prettier');
+    expect(npmMocked.installDevelopmentDependencies).toHaveBeenCalledWith('prettier');
   });
 
   test('should add config file to root', async () => {
     await prettier();
 
-    expect(fsMocked.addJsonFileToRoot).toBeCalledWith('.prettierrc', defaultConfig.config);
+    expect(fsMocked.addJsonFileToRoot).toHaveBeenCalledWith('.prettierrc', defaultConfig.config);
   });
 
   test('should add ignore config to root', async () => {
     await prettier();
 
-    expect(fsMocked.addFileToRoot).toBeCalledWith('.prettierignore', defaultConfig.ignore.join('\n'));
+    expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('.prettierignore', defaultConfig.ignore.join('\n'));
   });
 
   test('should add prettier scripts', async () => {
     await prettier();
 
-    expect(npmMocked.addScripts).toBeCalledWith(...defaultConfig.scripts);
+    expect(npmMocked.addScripts).toHaveBeenCalledWith(...defaultConfig.scripts);
   });
 });

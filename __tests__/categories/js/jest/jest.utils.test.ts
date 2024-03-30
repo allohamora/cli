@@ -9,6 +9,6 @@ const installedMocked = jest.mocked(installed);
 
 describe('isJestInstalled', () => {
   test('should use isInstalledAndInRootCheck with jest and jest.config.cjs', () => {
-    expect(installedMocked.isInstalledAndInRootCheck).toBeCalledWith('jest', 'jest.config.cjs');
+    expect(installedMocked.isInstalledAndInRootCheck).toHaveBeenCalledWith('jest', 'jest.config.cjs');
   });
 });

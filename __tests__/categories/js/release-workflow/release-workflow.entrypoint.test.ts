@@ -18,7 +18,7 @@ describe('releaseWorkflow', () => {
 
     await releaseWorkflow();
 
-    expect(configMocked.getConfig).toBeCalled();
+    expect(configMocked.getConfig).toHaveBeenCalled();
   });
 
   test('should add github workflow', async () => {
@@ -27,6 +27,6 @@ describe('releaseWorkflow', () => {
 
     await releaseWorkflow();
 
-    expect(githubMocked.addGithubWorkflow).toBeCalledWith('release.yml', content);
+    expect(githubMocked.addGithubWorkflow).toHaveBeenCalledWith('release.yml', content);
   });
 });

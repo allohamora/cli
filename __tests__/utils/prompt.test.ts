@@ -26,7 +26,7 @@ describe('oneOf', () => {
       choices,
     };
 
-    expect(inquirerMocked.prompt).toBeCalledWith(promptOptions);
+    expect(inquirerMocked.prompt).toHaveBeenCalledWith(promptOptions);
     expect(actual).toBe(expected);
   });
 });
@@ -63,7 +63,7 @@ describe('manyOf', () => {
       validate: miniumOneValidate,
     };
 
-    expect(inquirerMocked.prompt).toBeCalledWith(promptOptions);
+    expect(inquirerMocked.prompt).toHaveBeenCalledWith(promptOptions);
     expect(actual).toBe(expected);
   });
 });

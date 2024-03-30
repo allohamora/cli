@@ -18,12 +18,12 @@ describe('husky', () => {
   test('should install husky dependency', async () => {
     await husky();
 
-    expect(npmMocked.installDevelopmentDependencies).toBeCalledWith('husky');
+    expect(npmMocked.installDevelopmentDependencies).toHaveBeenCalledWith('husky');
   });
 
   test('should run husky init', async () => {
     await husky();
 
-    expect(runCommandMocked.runCommand).toBeCalledWith('npx husky init');
+    expect(runCommandMocked.runCommand).toHaveBeenCalledWith('npx husky init');
   });
 });

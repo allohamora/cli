@@ -22,13 +22,13 @@ describe('standardVersion', () => {
   test('should get config from getConfig', async () => {
     await standardVersion();
 
-    expect(configMocked.getConfig).toBeCalled();
+    expect(configMocked.getConfig).toHaveBeenCalled();
   });
 
   test('should install standard-version package', async () => {
     await standardVersion();
 
-    expect(npmMocked.installDevelopmentDependencies).toBeCalledWith('standard-version');
+    expect(npmMocked.installDevelopmentDependencies).toHaveBeenCalledWith('standard-version');
   });
 
   test('should create config with repository url and set it', async () => {
@@ -39,12 +39,15 @@ describe('standardVersion', () => {
 
     await standardVersion();
 
-    expect(fsMocked.addJsonFileToRoot).toBeCalledWith('.versionrc.json', defaultConfig.createConfig(withoutReadme));
+    expect(fsMocked.addJsonFileToRoot).toHaveBeenCalledWith(
+      '.versionrc.json',
+      defaultConfig.createConfig(withoutReadme),
+    );
   });
 
   test('should add release scripts', async () => {
     await standardVersion();
 
-    expect(npmMocked.addScripts).toBeCalledWith(...defaultConfig.scripts);
+    expect(npmMocked.addScripts).toHaveBeenCalledWith(...defaultConfig.scripts);
   });
 });

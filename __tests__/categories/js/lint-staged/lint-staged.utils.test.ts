@@ -101,7 +101,7 @@ describe('addOptionToLintStagedConfig', () => {
     const value = '__test__';
     const actual = { [key]: {} };
 
-    expect(() => addOptionToLintStagedConfig(actual, key, value)).toThrowError();
+    expect(() => addOptionToLintStagedConfig(actual, key, value)).toThrow();
   });
 });
 
@@ -111,7 +111,7 @@ describe('huskyIntegration', () => {
 
     await huskyIntegration();
 
-    expect(huskyUtilsMocked.addHook).toBeCalledWith('pre-commit', 'npx --no-install lint-staged');
+    expect(huskyUtilsMocked.addHook).toHaveBeenCalledWith('pre-commit', 'npx --no-install lint-staged');
   });
 
   test('should not add hook if husky not installed', async () => {
@@ -119,7 +119,7 @@ describe('huskyIntegration', () => {
 
     await huskyIntegration();
 
-    expect(huskyUtilsMocked.addHook).not.toBeCalled();
+    expect(huskyUtilsMocked.addHook).not.toHaveBeenCalled();
   });
 });
 

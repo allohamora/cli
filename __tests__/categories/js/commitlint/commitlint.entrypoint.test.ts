@@ -30,24 +30,24 @@ describe('commitlint', () => {
   test('should get config from getConfig', async () => {
     await commitlint();
 
-    expect(configMocked.getConfig).toBeCalled();
+    expect(configMocked.getConfig).toHaveBeenCalled();
   });
 
   test('should installs commitlint and rules', async () => {
     await commitlint();
 
-    expect(npmMocked.installDevelopmentDependencies).toBeCalledWith('@commitlint/cli', testConfig.rules);
+    expect(npmMocked.installDevelopmentDependencies).toHaveBeenCalledWith('@commitlint/cli', testConfig.rules);
   });
 
   test('should add json config to root', async () => {
     await commitlint();
 
-    expect(fsMocked.addJsonFileToRoot).toBeCalledWith('.commitlintrc.json', testConfig.config);
+    expect(fsMocked.addJsonFileToRoot).toHaveBeenCalledWith('.commitlintrc.json', testConfig.config);
   });
 
   test('should run husky integration', async () => {
     await commitlint();
 
-    expect(utilsMocked.huskyIntegration).toBeCalled();
+    expect(utilsMocked.huskyIntegration).toHaveBeenCalled();
   });
 });

@@ -9,6 +9,6 @@ const installedMocked = jest.mocked(installed);
 
 describe('isPrettierInstalled', () => {
   test('should use isInstalledAndInRootCheck with prettier and .prettierrc', () => {
-    expect(installedMocked.isInstalledAndInRootCheck).toBeCalledWith('prettier', '.prettierrc');
+    expect(installedMocked.isInstalledAndInRootCheck).toHaveBeenCalledWith('prettier', '.prettierrc');
   });
 });
