@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.5](https://github.com/allohamora/cli/compare/1.18.4...1.18.5) (2024-03-30)
+
+### Features
+
+- replace github asset with the video tag ([f7ae825](https://github.com/allohamora/cli/commit/f7ae8258fdedfa24d1b578346ce7d0e6f2bc29e1))
+
 ### [1.18.4](https://github.com/allohamora/cli/compare/1.18.3...1.18.4) (2024-03-30)
 
 ### Features
