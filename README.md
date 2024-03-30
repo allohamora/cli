@@ -47,7 +47,7 @@ npx @allohamora/cli
 | **docker**           | setups [docker](https://github.com/docker) with Dockerfile and .dockerignore files                                                                                                               |                                                    |
 | **test-workflow**    | setups a github test workflow that runs `npm run test` on a push                                                                                                                                 |                                                    |
 | **build-workflow**   | setups a github build workflow that runs `npm run build` on a push                                                                                                                               |                                                    |
-| **codecov-workflow** | setups a codecov workflow that collects code coverage and sends it to codecov                                                                                                                    |                                                    |
+| **codecov-workflow** | setups a codecov workflow that collects a code coverage and sends it to codecov                                                                                                                  |                                                    |
 | **dependabot**       | setups github [dependabot](https://github.com/dependabot) that manages dependencies                                                                                                              |                                                    |
 
 \*_Integrations run only if the package is installing or installed._
