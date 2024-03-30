@@ -16,7 +16,7 @@ const content = readableMultilineString`
       runs-on: ubuntu-latest
       steps:
         - name: Checkout code
-          uses: actions/checkout@v2
+          uses: actions/checkout@v4
         - name: Get release notes from CHANGELOG.md
           uses: yashanand1910/standard-release-notes@v1.2.1
           id: get_release_notes

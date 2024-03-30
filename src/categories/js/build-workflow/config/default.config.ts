@@ -15,7 +15,7 @@ const content = readableMultilineString`
         CI: true
       steps:
         - name: Checkout code
-          uses: actions/checkout@v2
+          uses: actions/checkout@v4
         - name: Install node
           uses: actions/setup-node@v2
           with:
