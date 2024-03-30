@@ -17,7 +17,7 @@ const content = readableMultilineString`
         - name: Checkout code
           uses: actions/checkout@v4
         - name: Install node
-          uses: actions/setup-node@v2
+          uses: actions/setup-node@v4
           with:
             cache: "npm"
         - name: Install dependencies
