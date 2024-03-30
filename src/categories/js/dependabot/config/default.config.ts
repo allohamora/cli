@@ -6,13 +6,15 @@ export const content = readableMultilineString`
     - package-ecosystem: "github-actions"
       directory: "/"
       schedule:
-        interval: daily
-      open-pull-requests-limit: 0
+        interval: "weekly"
+        day: "monday"
+      open-pull-requests-limit: 10
 
     - package-ecosystem: npm
       directory: "/"
       schedule:
-        interval: daily
+        interval: "weekly"
+        day: "monday"
       open-pull-requests-limit: 0
 `;
 
