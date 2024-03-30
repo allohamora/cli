@@ -2,7 +2,7 @@ import path from 'node:path';
 import { PACKAGE_JSON_PATH, rootPath, ROOT_PATH } from 'src/utils/path';
 
 describe('PATHS', () => {
-  test('ROOT_PATH should be proccess.cwd()', () => {
+  test('ROOT_PATH should be process.cwd()', () => {
     const actual = ROOT_PATH;
     const expected = process.cwd();
 
