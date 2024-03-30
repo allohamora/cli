@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.2](https://github.com/allohamora/cli/compare/1.18.1...1.18.2) (2024-03-30)
+
+### Bug Fixes
+
+- run husky prepare script instead of husky init ([4df55be](https://github.com/allohamora/cli/commit/4df55be57c2c88d1602fc01bcd92db185e2859a8))
+
 ### [1.18.1](https://github.com/allohamora/cli/compare/1.18.0...1.18.1) (2024-03-30)
 
 ### Bug Fixes
