@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.18.0](https://github.com/allohamora/cli/compare/1.17.0...1.18.0) (2024-03-30)
+
+### Features
+
+- bump actions/checkout@v4 ([b5223b2](https://github.com/allohamora/cli/commit/b5223b226b1742c14043fa6983bd0b15f0f1145a))
+- bump actions/setup-node ([e34ddce](https://github.com/allohamora/cli/commit/e34ddce0ef1e71284552a3f65a0ff6b96f513bfd))
+- bump codecov/codecov-action ([0c51c22](https://github.com/allohamora/cli/commit/0c51c229b4c59d13eb803ee3709350f06b5f913e))
+- bump softprops/action-gh-release ([7f9dd83](https://github.com/allohamora/cli/commit/7f9dd8367db2275a1a436db714f148a4f5ee6073))
+- bump yashanand1910/standard-release-notes ([421d0e0](https://github.com/allohamora/cli/commit/421d0e09d4a5084aaf8086d768412b9b4aae53fb))
+- move usage block to the top ([e74d24d](https://github.com/allohamora/cli/commit/e74d24da7312fda079e6fd0aef1f56f8657fc51b))
+- rename Script Name to Option ([394bfe9](https://github.com/allohamora/cli/commit/394bfe9e0f222dba5a1622e8c8fc0ffc6c20d8dc))
+- update README ([d698b5a](https://github.com/allohamora/cli/commit/d698b5a9d77385e778ff53b38a7ad6e5464888c2))
+
+### Bug Fixes
+
+- remove husky prepare script usage ([dcb61fc](https://github.com/allohamora/cli/commit/dcb61fcd872767a918a07ff2fc232fa201585526))
+
 ## [1.17.0](https://github.com/allohamora/cli/compare/1.16.0...1.17.0) (2024-03-30)
 
 ### Features
