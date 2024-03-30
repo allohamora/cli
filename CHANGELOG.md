@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.6](https://github.com/allohamora/cli/compare/1.18.5...1.18.6) (2024-03-30)
+
+### Features
+
+- rename Options to presets ([d0b33ba](https://github.com/allohamora/cli/commit/d0b33ba2f5762b4aeeaccf7c9f1c6bdfad6570d6))
+- update text in README ([d045ce2](https://github.com/allohamora/cli/commit/d045ce24e4735addae2a1486e0358ed2ff68f16c))
+- update text of js options ([335c4ee](https://github.com/allohamora/cli/commit/335c4ee442b03bb268a60ed67d8baac4a560dcd3))
+
 ### [1.18.5](https://github.com/allohamora/cli/compare/1.18.4...1.18.5) (2024-03-30)
 
 ### Features
