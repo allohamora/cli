@@ -1,5 +1,6 @@
 import * as runCommand from 'src/utils/run-command';
 import * as installed from 'src/utils/installed';
+import * as fsUtils from 'src/utils/fs';
 import fsp from 'node:fs/promises';
 import { addHook } from 'src/categories/js/husky/husky.utils';
 import { clearMock } from '__tests__/test-utils/clear-mock';
@@ -17,9 +18,13 @@ const fspMocked = jest.mocked(fsp);
 jest.mock('src/utils/run-command');
 const runCommandMocked = jest.mocked(runCommand);
 
+jest.mock('src/utils/fs');
+const fsUtilsMocked = jest.mocked(fsUtils);
+
 beforeEach(() => {
   clearMock(fspMocked);
   clearMock(runCommandMocked);
+  clearMock(fsUtilsMocked);
 });
 
 describe('addHook', () => {
@@ -31,6 +36,7 @@ describe('addHook', () => {
 
     await addHook(hookType, script);
 
+    expect(fsUtilsMocked.addDirToRootIfNotExists).toHaveBeenCalledWith('.husky');
     expect(fspMocked.writeFile).toHaveBeenCalledWith(rootPath(`.husky/${hookType}`), script, { encoding: 'utf-8' });
   });
 });
