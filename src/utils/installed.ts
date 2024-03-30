@@ -9,8 +9,8 @@ export const isInstalling = (scriptName: string) => {
   return installing.includes(scriptName);
 };
 
-export const isInstalled = (scriptName: string, aditionalHandlers: AdditionalHandler[] = []) => {
-  const handlers = [async () => isInstalling(scriptName), ...aditionalHandlers];
+export const isInstalled = (scriptName: string, additionalHandlers: AdditionalHandler[] = []) => {
+  const handlers = [async () => isInstalling(scriptName), ...additionalHandlers];
 
   const handler = async () => {
     for (const handler of handlers) {
