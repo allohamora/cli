@@ -54,4 +54,4 @@ npx @allohamora/cli
 
 ## License
 
-CLI is [MIT licensed](/LICENSE).
+@allohamora/cli is [MIT licensed](/LICENSE).
