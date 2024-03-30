@@ -14,11 +14,7 @@ is a command line interface what helps you to initialize projects and more
 npx @allohamora/cli
 ```
 
-
-
 https://github.com/allohamora/cli/assets/54174661/86239f05-d0e6-426c-b20f-490feded41e2
-
-
 
 ## Requirements
 
