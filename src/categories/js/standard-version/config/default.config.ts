@@ -13,9 +13,6 @@ export const defaultConfig = {
     commitUrlFormat: `${repositoryUrl}/commit/{{hash}}`,
     compareUrlFormat: `${repositoryUrl}/compare/{{previousTag}}...{{currentTag}}`,
   }),
-  packageJsonConfig: {
-    skip: { tag: true },
-  },
   scripts: [
     { name: 'release', script: 'standard-version --tag-prefix=' },
     { name: 'release:minor', script: 'standard-version --release-as minor --tag-prefix=' },

@@ -85,11 +85,6 @@
     "inquirer": "^8.2.4",
     "ora": "^5.4.1"
   },
-  "standard-version": {
-    "skip": {
-      "tag": true
-    }
-  },
   "lint-staged": {
     "*.ts": [
       "eslint --fix",

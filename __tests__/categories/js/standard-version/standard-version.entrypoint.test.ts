@@ -42,12 +42,6 @@ describe('standardVersion', () => {
     expect(fsMocked.addJsonFileToRoot).toBeCalledWith('.versionrc.json', defaultConfig.createConfig(withoutReadme));
   });
 
-  test('should add config to package.json', async () => {
-    await standardVersion();
-
-    expect(npmMocked.addToPackageJson).toBeCalledWith('standard-version', defaultConfig.packageJsonConfig);
-  });
-
   test('should add release scripts', async () => {
     await standardVersion();
 
