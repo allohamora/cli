@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.3](https://github.com/allohamora/cli/compare/1.18.2...1.18.3) (2024-03-30)
+
+### Features
+
+- update README text ([42f11fc](https://github.com/allohamora/cli/commit/42f11fcb9052ac88e9b5c07fb3cc7fdda4b960e4))
+
+### Bug Fixes
+
+- remove addDirToRootIfNotExists from addHook ([5b0c6dc](https://github.com/allohamora/cli/commit/5b0c6dc19c75151d1543b87fd4eb6bbc20d5a031))
+
 ### [1.18.2](https://github.com/allohamora/cli/compare/1.18.1...1.18.2) (2024-03-30)
 
 ### Bug Fixes
