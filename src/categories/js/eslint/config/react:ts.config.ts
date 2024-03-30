@@ -50,7 +50,8 @@ export const reactTsConfig: Config = {
       '@typescript-eslint/no-empty-interface': 'warn',
       '@typescript-eslint/ban-types': 'warn',
 
-      'react/jsx-no-leaked-render': 'error',
+      // https://github.com/jsx-eslint/eslint-plugin-react/issues/3292
+      'react/jsx-no-leaked-render': 'warn',
       'react/react-in-jsx-scope': 'off',
       'react/jsx-props-no-spreading': 'off',
       'react/function-component-definition': 'off',
