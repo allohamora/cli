@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.4](https://github.com/allohamora/cli/compare/1.18.3...1.18.4) (2024-03-30)
+
+### Features
+
+- add usage.mp4 to README ([02f5899](https://github.com/allohamora/cli/commit/02f589965a71e164c75cf573fd1f85031ffde078))
+
 ### [1.18.3](https://github.com/allohamora/cli/compare/1.18.2...1.18.3) (2024-03-30)
 
 ### Features
