@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.7](https://github.com/allohamora/cli/compare/1.18.6...1.18.7) (2024-03-30)
+
+### Features
+
+- add a to code coverage ([bfcb21f](https://github.com/allohamora/cli/commit/bfcb21f70a472feab13ef28655ed6756e34b6687))
+- add descriptions to husky and lints-staged ([6ac5772](https://github.com/allohamora/cli/commit/6ac5772db8f079447076eb646a50e2d701c32dde))
+- add integration tags instead of links ([af8b351](https://github.com/allohamora/cli/commit/af8b351b71cb59e891cb203e7316238e18aabb39))
+- add link to develop ([b2be74d](https://github.com/allohamora/cli/commit/b2be74d68a8ce56920f3d77006803782158fcdca))
+- add one style for options and categories ([e36f5b1](https://github.com/allohamora/cli/commit/e36f5b1ffdf30e3decec13b0a0302220f98a83f8))
+- add release scripts to standard-version description ([17188e6](https://github.com/allohamora/cli/commit/17188e6874cb8e08e7b317043db0112c779c5aea))
+- remove a from on a push ([527cc05](https://github.com/allohamora/cli/commit/527cc05e4f1daf8e1886e4273fb9afee0f53d26e))
+- rename CLI to @allohamora/cli ([64e400d](https://github.com/allohamora/cli/commit/64e400deca1646a8ad37ece72090c70769caa0d6))
+- rename on each push to on a push ([9cc5fc8](https://github.com/allohamora/cli/commit/9cc5fc87401cbe6c81e549aaf29f9fa8e34943cb))
+
+### Bug Fixes
+
+- dependabot description typo ([1185a1f](https://github.com/allohamora/cli/commit/1185a1f1116b294d344c33447a6b3273eaead55c))
+- release-workflow the CHANGELOG.md typo ([ce6e83a](https://github.com/allohamora/cli/commit/ce6e83a07a25c4b760c4789059da2a183b920bda))
+
 ### [1.18.6](https://github.com/allohamora/cli/compare/1.18.5...1.18.6) (2024-03-30)
 
 ### Features
