@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/allohamora/cli/compare/1.15.1...1.16.0) (2024-03-30)
+
+### Features
+
+- remove tag skipping for standard-version ([5842ffb](https://github.com/allohamora/cli/commit/5842ffb9d9373b727ae4390c35ed459e4ad3f71b))
+
 ### [1.15.1](https://github.com/allohamora/cli/compare/1.14.0...1.15.1) (2024-03-30)
 
 ### Bug Fixes
