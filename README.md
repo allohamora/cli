@@ -8,6 +8,12 @@
 
 is a command line interface with scripts to initialize projects and more
 
+## Usage
+
+```bash
+npx @allohamora/cli
+```
+
 ## Requirements
 
 ```json
@@ -15,12 +21,6 @@ is a command line interface with scripts to initialize projects and more
   "node": ">=16.14.2",
   "npm": ">=8.5.0"
 }
-```
-
-## Usage
-
-```bash
-npx @allohamora/cli
 ```
 
 ## Categories
