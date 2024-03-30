@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/allohamora/cli/compare/1.14.0...1.15.0) (2024-03-30)
+
+### Features
+
+- add "react/jsx-no-leaked-render" rule ([12852dd](https://github.com/allohamora/cli/commit/12852ddb567a9fec21973caddabde541e4083231))
+- move react/jsx-no-leaked-render to warn ([372f078](https://github.com/allohamora/cli/commit/372f07832adcef22cb808823d3da8645d385e137))
+
+### Bug Fixes
+
+- fix DockerFile typo ([ca7c4e3](https://github.com/allohamora/cli/commit/ca7c4e33911764ca8115cc5b9e7d3bd309bde33c))
+
 ### [1.14.1](https://github.com/allohamora/cli/compare/1.14.0...1.14.1) (2024-03-23)
 
 ### Bug Fixes

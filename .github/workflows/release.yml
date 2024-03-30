@@ -11,6 +11,8 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      CI: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -23,3 +25,15 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           body: ${{ steps.get_release_notes.outputs.release_notes }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+      - name: Install dependencies
+        run: npm ci
+        with:
+          cache: "npm"
+      - name: Build
+        run: npm run build
+      - name: Publish to npm
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
