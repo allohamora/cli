@@ -22,7 +22,7 @@ const content = readableMultilineString`
         - name: Collect coverage
           run: npm run test:coverage
         - name: Upload coverage to Codecov
-          uses: codecov/codecov-action@v2
+          uses: codecov/codecov-action@v4
 `;
 
 export const defaultConfig = {
