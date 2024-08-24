@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Get release notes from CHANGELOG.md
-        uses: yashanand1910/standard-release-notes@v1.4.0
+        uses: yashanand1910/standard-release-notes@v1.5.0
         id: get_release_notes
         with:
           version: ${{ github.ref }}
