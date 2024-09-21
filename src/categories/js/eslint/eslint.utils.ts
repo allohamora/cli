@@ -6,19 +6,26 @@ import { CONFIG_FILE_NAME, SCRIPT_NAME } from './eslint.const';
 
 export const jestMutation = async (config: Config) => {
   if (await isJestInstalled()) {
-    config.eslintConfig.env = { ...config.eslintConfig.env, jest: true };
+    if (!config.eslintConfig.languageOptions) {
+      config.eslintConfig.languageOptions = { globals: [] };
+    }
+
+    config.eslintConfig.languageOptions?.globals?.push('jest');
   }
 };
 
 const addPrettierToConfig = (config: Config) => {
   const dependenciesSet = new Set([...config.dependencies, 'eslint-plugin-prettier', 'eslint-config-prettier']);
-  const dependencies = Array.from(dependenciesSet);
+  config.dependencies = Array.from(dependenciesSet);
 
-  const eslintExtendsSet = new Set([...(config.eslintConfig.extends || []), 'plugin:prettier/recommended']);
-  const eslintExtends = Array.from(eslintExtendsSet);
+  const importsSet = new Set([
+    ...config.imports,
+    "import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'",
+  ]);
+  config.imports = Array.from(importsSet);
 
-  config.dependencies = dependencies;
-  config.eslintConfig.extends = eslintExtends;
+  const configsSet = new Set([...config.configs, 'eslintPluginPrettierRecommended']);
+  config.configs = Array.from(configsSet);
 };
 
 export const prettierMutation = async (config: Config) => {

@@ -56,16 +56,17 @@
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
+    "@eslint/js": "^9.11.0",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@types/inquirer": "8.2.10",
     "@types/jest": "^29.5.13",
     "@typescript-eslint/eslint-plugin": "^8.6.0",
     "@typescript-eslint/parser": "^8.6.0",
-    "eslint": "8.57.0",
+    "eslint": "^9.11.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-beautiful-sort": "^3.0.1",
-    "eslint-plugin-deprecation": "^3.0.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.9.0",
     "husky": "^9.1.6",
     "jest": "^29.7.0",
     "lint-staged": "^15.2.10",
@@ -79,6 +80,7 @@
     "tsconfig-paths": "^4.2.0",
     "type-fest": "2.19.0",
     "typescript": "^5.6.2",
+    "typescript-eslint": "^8.6.0",
     "yaml": "^2.5.1"
   },
   "dependencies": {
@@ -90,6 +92,6 @@
       "eslint --fix",
       "jest --findRelatedTests"
     ],
-    "*.{js,json,yml,md}": "prettier --write"
+    "*.{js,mjs,json,yml,md}": "prettier --write"
   }
 }

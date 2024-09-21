@@ -40,7 +40,7 @@ export const multilineStringBuilderWithMiddlewares = (...middlewares: Middleware
   };
 };
 
-export const removeTabOnEachLine = (string: string) => string.replace(/\n(  |\t)/g, '\n');
+export const removeTabOnEachLine = (string: string) => string.replace(/\n( {2}|\t)/g, '\n');
 export const trim = (string: string) => string.trim();
 
 export const readableMultilineString = multilineStringBuilderWithMiddlewares(trim, removeTabOnEachLine);

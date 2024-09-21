@@ -52,22 +52,130 @@ describe('eslint', () => {
     expect(npmMocked.installDevelopmentDependencies).toHaveBeenCalledWith('eslint', ...config.dependencies);
   });
 
-  test('should add .eslintrc.json to root', async () => {
-    const config = createConfig({ eslintConfig: { extends: ['__test__'] } });
+  test('should add eslint.config.mjs to root', async () => {
+    const config = createConfig({ eslintConfig: { ignores: ['__test__'] } });
     configMocked.getConfig.mockReturnValueOnce(config);
+
+    const configFile = `export default [
+  {
+    ignores: [
+      '__test__'
+    ],
+  }
+];`;
 
     await eslint();
 
-    expect(fsMocked.addJsonFileToRoot).toHaveBeenCalledWith('.eslintrc.json', config.eslintConfig);
+    expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('eslint.config.mjs', configFile);
   });
 
-  test('should add .eslintignore to root', async () => {
-    const config = createConfig({ ignore: ['node_modules', 'dist'] });
+  test('should handle empty eslintConfig gracefully', async () => {
+    const config = createConfig({ eslintConfig: {} });
     configMocked.getConfig.mockReturnValueOnce(config);
+
+    const configFile = `export default [
+  {\n
+  }
+];`;
 
     await eslint();
 
-    expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('.eslintignore', 'node_modules\ndist');
+    expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('eslint.config.mjs', configFile);
+  });
+
+  test('should handle empty parserOptions correctly', async () => {
+    const config = createConfig({
+      eslintConfig: {
+        languageOptions: {
+          parserOptions: undefined,
+        },
+      },
+    });
+    configMocked.getConfig.mockReturnValueOnce(config);
+
+    const configFile = `export default [
+  {
+    languageOptions: {
+      globals: {\n
+      }
+    },
+  }
+];`;
+
+    await eslint();
+
+    expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('eslint.config.mjs', configFile);
+  });
+
+  test('should handle configs mapping correctly', async () => {
+    const config = createConfig({
+      configs: ['__test1__', '__test2__'],
+    });
+    configMocked.getConfig.mockReturnValueOnce(config);
+
+    const configFile = `export default [
+  __test1__,
+  __test2__,
+  {\n
+  }
+];`;
+
+    await eslint();
+
+    expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('eslint.config.mjs', configFile);
+  });
+
+  test('should handle complex eslintConfig correctly', async () => {
+    const config = createConfig({
+      typescript: true,
+      imports: ['import globals from "globals";'],
+      eslintConfig: {
+        files: ['src/**/*.ts'],
+        ignores: ['node_modules'],
+        languageOptions: {
+          globals: ['window'],
+          parserOptions: {
+            ecmaVersion: 2020,
+          },
+        },
+        plugins: {
+          '@typescript-eslint': 'eslintPluginTs',
+        },
+        rules: {
+          'no-console': 'warn',
+        },
+      },
+    });
+    configMocked.getConfig.mockReturnValueOnce(config);
+
+    const configFile = `// @ts-check
+import globals from "globals";\n
+export default tseslint.config(
+  {
+    files: ['src/**/*.ts'],
+    ignores: [
+      'node_modules'
+    ],
+    languageOptions: {
+      globals: {
+        ...globals.window
+      },
+      parserOptions: {
+        ecmaVersion: 2020
+      }
+    },
+    plugins: { 
+      '@typescript-eslint': eslintPluginTs
+    },
+    rules: {
+      'no-console': 'warn'
+    },
+  }
+);`;
+
+    await eslint();
+
+    expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('eslint.config.mjs', configFile);
   });
 
   test('should add npm script to package.json', async () => {
