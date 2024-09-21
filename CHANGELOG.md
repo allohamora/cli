@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.19.0](https://github.com/allohamora/cli/compare/1.18.7...1.19.0) (2024-09-21)
+
+### Features
+
+- add eslint flat config ([f778f46](https://github.com/allohamora/cli/commit/f778f4607bd0b74f5b30ef3d05648c3d2b05b047))
+
 ### [1.18.7](https://github.com/allohamora/cli/compare/1.18.6...1.18.7) (2024-03-30)
 
 ### Features
