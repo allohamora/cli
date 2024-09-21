@@ -2,21 +2,15 @@ import { jestMutation, prettierMutation } from '../eslint.utils';
 import { Config } from './config.interface';
 
 export const defaultConfig: Config = {
-  dependencies: [],
+  dependencies: ['globals', '@eslint/js'],
+  imports: [`import globals from 'globals'`, `import eslint from '@eslint/js'`],
+  configs: [`eslint.configs.recommended`],
   eslintConfig: {
-    parserOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
+    languageOptions: {
+      globals: ['node'],
     },
-    env: {
-      es6: true,
-      node: true,
-      browser: true,
-    },
-    root: true,
-    extends: ['eslint:recommended'],
+    ignores: ['node_modules', 'dist'],
   },
-  ignore: ['node_modules', 'dist'],
   scripts: [
     { name: 'lint', script: 'eslint "**/*.js"' },
     { name: 'lint:fix', script: 'eslint "**/*.js" --fix' },

@@ -3,35 +3,46 @@ import { Config } from './config.interface';
 
 export const nodeTsConfig: Config = {
   dependencies: [
+    'globals',
+    '@eslint/js',
+    'typescript-eslint',
     '@typescript-eslint/eslint-plugin',
     '@typescript-eslint/parser',
     'eslint-plugin-beautiful-sort',
-    'eslint-plugin-deprecation',
   ],
+  imports: [
+    `import globals from 'globals'`,
+    `import eslint from '@eslint/js'`,
+    `import tseslint from 'typescript-eslint'`,
+    `import tsPlugin from '@typescript-eslint/eslint-plugin'`,
+    `import beautifulSort from 'eslint-plugin-beautiful-sort'`,
+    `import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'`,
+  ],
+  configs: ['eslint.configs.recommended', '...tseslint.configs.recommended'],
   eslintConfig: {
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-      project: 'tsconfig.json',
-      sourceType: 'module',
+    files: ['**/*.ts'],
+    languageOptions: {
+      globals: ['node'],
+      parserOptions: {
+        project: true,
+      },
     },
-    plugins: ['@typescript-eslint/eslint-plugin', 'beautiful-sort'],
-    extends: ['plugin:@typescript-eslint/recommended', 'plugin:deprecation/recommended'],
-    root: true,
-    env: {
-      node: true,
+    ignores: ['node_modules', 'dist'],
+    plugins: {
+      '@typescript-eslint': 'tsPlugin',
+      'beautiful-sort': 'beautifulSort',
     },
-    ignorePatterns: ['.eslintrc.js'],
     rules: {
       'no-use-before-define': 'error',
       'object-shorthand': 'warn',
-
+      'no-async-promise-executor': 'warn',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-floating-promises': 'warn',
-
+      '@typescript-eslint/no-misused-promises': 'warn',
+      '@typescript-eslint/no-deprecated': 'error',
       'beautiful-sort/import': [
         'error',
         {
@@ -41,7 +52,7 @@ export const nodeTsConfig: Config = {
       ],
     },
   },
-  ignore: ['node_modules', 'dist'],
+  typescript: true,
   scripts: [
     { name: 'lint', script: 'eslint "**/*.ts"' },
     { name: 'lint:fix', script: 'eslint "**/*.ts" --fix' },

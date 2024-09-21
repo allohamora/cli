@@ -33,7 +33,8 @@ describe('prettierMutation', () => {
 
     const expected = createConfig({
       dependencies: ['eslint-plugin-prettier', 'eslint-config-prettier'],
-      eslintConfig: { extends: ['plugin:prettier/recommended'] },
+      imports: [`import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'`],
+      configs: ['eslintPluginPrettierRecommended'],
     });
 
     expect(actual).toEqual(expected);
@@ -44,14 +45,16 @@ describe('prettierMutation', () => {
 
     const actual = createConfig({
       dependencies: ['__test__'],
-      eslintConfig: { extends: ['__test__'] },
+      imports: ['__test__'],
+      configs: ['__test__'],
     });
 
     await prettierMutation(actual);
 
     const expected = createConfig({
       dependencies: ['__test__', 'eslint-plugin-prettier', 'eslint-config-prettier'],
-      eslintConfig: { extends: ['__test__', 'plugin:prettier/recommended'] },
+      imports: ['__test__', `import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'`],
+      configs: ['__test__', 'eslintPluginPrettierRecommended'],
     });
 
     expect(actual).toEqual(expected);
@@ -60,8 +63,8 @@ describe('prettierMutation', () => {
 
 describe('jestMutation', () => {
   test('should add jest env if jest installed', async () => {
-    const actual = createConfig({ eslintConfig: { env: {} } });
-    const expected = createConfig({ eslintConfig: { env: { jest: true } } });
+    const actual = createConfig({ eslintConfig: { languageOptions: { globals: [] } } });
+    const expected = createConfig({ eslintConfig: { languageOptions: { globals: ['jest'] } } });
 
     jestUtilsMocked.isJestInstalled.mockResolvedValue(true);
 
@@ -72,7 +75,7 @@ describe('jestMutation', () => {
 
   test('should add jest env object if not exists', async () => {
     const actual = createConfig();
-    const expected = createConfig({ eslintConfig: { env: { jest: true } } });
+    const expected = createConfig({ eslintConfig: { languageOptions: { globals: ['jest'] } } });
 
     jestUtilsMocked.isJestInstalled.mockResolvedValueOnce(true);
 
@@ -94,7 +97,7 @@ describe('jestMutation', () => {
 });
 
 describe('isEslintInstalled', () => {
-  test('should call isInstalledAndInRootCheck with eslint and .eslintrc.json', () => {
-    expect(installedMocked.isInstalledAndInRootCheck).toHaveBeenCalledWith('eslint', '.eslintrc.json');
+  test('should call isInstalledAndInRootCheck with eslint and eslint.config.mjs', () => {
+    expect(installedMocked.isInstalledAndInRootCheck).toHaveBeenCalledWith('eslint', 'eslint.config.mjs');
   });
 });
