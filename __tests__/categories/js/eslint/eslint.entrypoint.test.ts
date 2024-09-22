@@ -62,7 +62,8 @@ describe('eslint', () => {
       '__test__'
     ],
   }
-];`;
+];
+`;
 
     await eslint();
 
@@ -76,7 +77,8 @@ describe('eslint', () => {
     const configFile = `export default [
   {\n
   }
-];`;
+];
+`;
 
     await eslint();
 
@@ -100,7 +102,8 @@ describe('eslint', () => {
       }
     },
   }
-];`;
+];
+`;
 
     await eslint();
 
@@ -118,7 +121,8 @@ describe('eslint', () => {
   __test2__,
   {\n
   }
-];`;
+];
+`;
 
     await eslint();
 
@@ -171,7 +175,8 @@ export default tseslint.config(
       'no-console': 'warn'
     },
   }
-);`;
+);
+`;
 
     await eslint();
 
