@@ -71,7 +71,7 @@ export const eslintMutation = (fileExtension: ScriptFileExtension) => async (con
 
 export const prettierMutation = async (config: LintStagedConfig) => {
   if (await isPrettierInstalled()) {
-    addOptionToLintStagedConfig(config, '*.{js,json,yml,md}', `${PRETTIER_CLI_NAME} --write`);
+    addOptionToLintStagedConfig(config, '*.{js,cjs,mjs,json,yml,md}', `${PRETTIER_CLI_NAME} --write`);
   }
 };
 

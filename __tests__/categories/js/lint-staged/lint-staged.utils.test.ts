@@ -177,7 +177,7 @@ describe('eslintMutation', () => {
 
 describe('prettierMutation', () => {
   test('should mutate config if prettier installed', async () => {
-    const ext = '*.{js,json,yml,md}';
+    const ext = '*.{js,cjs,mjs,json,yml,md}';
     const actual = {};
     prettierUtilsMocked.isPrettierInstalled.mockResolvedValueOnce(true);
 

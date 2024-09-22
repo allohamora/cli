@@ -90,6 +90,6 @@
       "eslint --fix",
       "jest --findRelatedTests"
     ],
-    "*.{js,mjs,json,yml,md}": "prettier --write"
+    "*.{js,cjs,mjs,json,yml,md}": "prettier --write"
   }
 }
