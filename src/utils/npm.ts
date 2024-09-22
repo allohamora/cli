@@ -1,8 +1,11 @@
 import fsp from 'node:fs/promises';
 import type { PackageJson as BasePackageJson } from 'type-fest';
-import { stringify } from './json';
-import { PACKAGE_JSON_PATH } from './path';
+import { rootPath } from './path';
 import { runCommand } from './run-command';
+import { addJsonFileToRoot } from './fs';
+
+export const PACKAGE_JSON_NAME = 'package.json';
+export const PACKAGE_JSON_PATH = rootPath(PACKAGE_JSON_NAME);
 
 type PackageJson = {
   [key: string]: unknown;
@@ -15,9 +18,7 @@ export const getPackageJson = async () => {
 };
 
 export const setPackageJson = async (packageJson: PackageJson) => {
-  const string = stringify(packageJson);
-
-  await fsp.writeFile(PACKAGE_JSON_PATH, string, { encoding: 'utf-8' });
+  await addJsonFileToRoot(PACKAGE_JSON_NAME, packageJson);
 };
 
 export const addToPackageJson = async <V>(name: keyof PackageJson, value: V) => {

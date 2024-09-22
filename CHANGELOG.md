@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.20.0](https://github.com/allohamora/cli/compare/1.19.0...1.20.0) (2024-09-22)
+
+### Features
+
+- add \n to the end of all files ([7ccea1d](https://github.com/allohamora/cli/commit/7ccea1d5a26e8410eb5372e8619df0782d761d7a))
+- add \n to the end of eslint.config.mjs ([ee69d08](https://github.com/allohamora/cli/commit/ee69d08bbd4767349bdbbe759c502f9a7e633397))
+- add cjs and mjs to the prettier integration ([586c345](https://github.com/allohamora/cli/commit/586c345ea210d3eb072539333a8732d6c013f16f))
+- add eslint-plugin-jsx-a11y to react:ts config ([16d1d5a](https://github.com/allohamora/cli/commit/16d1d5a267652ff24c2c478bc6ff72e52ecda85e))
+- add files to default eslint config ([b12945a](https://github.com/allohamora/cli/commit/b12945a629354aa3eb57ddebf833beab63902852))
+- add react:ts eslint config ([5259ae4](https://github.com/allohamora/cli/commit/5259ae4cbf20aac5c2916d606528787ca7a6ba3c))
+- bump yashanand1910/standard-release-notes to 1.5.0 ([d4a7dfd](https://github.com/allohamora/cli/commit/d4a7dfd4e2e25c247162515d481eeebf619fc9cc))
+- remove [@typescript-eslint](https://github.com/typescript-eslint) usage ([f664f0d](https://github.com/allohamora/cli/commit/f664f0d0c6617090aff99ec32fb74d9cbe1e7733))
+- remove spaces after env: in workflow ([0496220](https://github.com/allohamora/cli/commit/049622020b3f655f055080684139eb4eeea5146b))
+
+### Bug Fixes
+
+- add handling for last ";" in imports ([dec8afc](https://github.com/allohamora/cli/commit/dec8afc759d99534a6fb2682b4344f28e8a763aa))
+- remove eslintPluginPrettierRecommended import from node:ts config ([680980e](https://github.com/allohamora/cli/commit/680980e1488ffce4f271602d2373b47458bac63b))
+
 ## [1.19.0](https://github.com/allohamora/cli/compare/1.18.7...1.19.0) (2024-09-21)
 
 ### Features

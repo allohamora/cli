@@ -1,19 +1,33 @@
 import { jestMutation, prettierMutation } from '../eslint.utils';
 import { Config } from './config.interface';
 
-export const nodeTsConfig: Config = {
-  dependencies: ['globals', '@eslint/js', 'typescript-eslint', 'eslint-plugin-beautiful-sort'],
+export const reactTsConfig: Config = {
+  dependencies: [
+    'globals',
+    '@eslint/js',
+    'typescript-eslint',
+    'eslint-plugin-react',
+    'eslint-plugin-jsx-a11y',
+    'eslint-plugin-beautiful-sort',
+  ],
   imports: [
     `import globals from 'globals'`,
     `import eslint from '@eslint/js'`,
     `import tseslint from 'typescript-eslint'`,
+    `import pluginReact from 'eslint-plugin-react'`,
+    `import pluginJsxA11y from 'eslint-plugin-jsx-a11y'`,
     `import beautifulSort from 'eslint-plugin-beautiful-sort'`,
   ],
-  configs: ['eslint.configs.recommended', '...tseslint.configs.recommended'],
+  configs: [
+    'eslint.configs.recommended',
+    '...tseslint.configs.recommended',
+    `pluginReact.configs.flat['jsx-runtime']`,
+    'pluginJsxA11y.flatConfigs.recommended',
+  ],
   eslintConfig: {
-    files: ['**/*.ts'],
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      globals: ['node'],
+      globals: ['browser'],
       parserOptions: {
         project: true,
       },
@@ -44,8 +58,8 @@ export const nodeTsConfig: Config = {
   },
   typescript: true,
   scripts: [
-    { name: 'lint', script: 'eslint "**/*.ts"' },
-    { name: 'lint:fix', script: 'eslint "**/*.ts" --fix' },
+    { name: 'lint', script: 'eslint "**/*.{ts,tsx}"' },
+    { name: 'lint:fix', script: 'eslint "**/*.{ts,tsx}" --fix' },
   ],
   mutations: [prettierMutation, jestMutation],
 };

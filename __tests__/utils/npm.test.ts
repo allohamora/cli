@@ -1,6 +1,7 @@
-import * as json from 'src/utils/json';
 import * as runCommand from 'src/utils/run-command';
+import * as fs from 'src/utils/fs';
 import fsp from 'node:fs/promises';
+import path from 'node:path';
 import {
   addScripts,
   addToPackageJson,
@@ -8,17 +9,19 @@ import {
   installDevelopmentDependencies,
   runScript,
   setPackageJson,
+  PACKAGE_JSON_PATH,
+  PACKAGE_JSON_NAME,
 } from 'src/utils/npm';
-import { PACKAGE_JSON_PATH } from 'src/utils/path';
+import { ROOT_PATH } from 'src/utils/path';
 
 jest.mock('node:fs/promises');
 const fspMocked = jest.mocked(fsp);
 
-jest.mock('src/utils/json');
-const jsonMocked = jest.mocked(json);
-
 jest.mock('src/utils/run-command');
 const runCommandMocked = jest.mocked(runCommand);
+
+jest.mock('src/utils/fs');
+const fsMocked = jest.mocked(fs);
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -37,9 +40,17 @@ const expectPackageJsonWasGetted = () => {
 };
 
 const expectPackageJsonWasSaved = <T extends Record<string, unknown>>(target: T) => {
-  expect(jsonMocked.stringify).toHaveBeenCalledWith(target);
-  expect(fspMocked.writeFile).toHaveBeenCalledWith(PACKAGE_JSON_PATH, json.stringify(target), { encoding: 'utf-8' });
+  expect(fsMocked.addJsonFileToRoot).toHaveBeenCalledWith(PACKAGE_JSON_NAME, target);
 };
+
+describe('PATHS', () => {
+  test('PACKAGE_JSON_PATH should be ROOT_PATH/package.json', () => {
+    const actual = PACKAGE_JSON_PATH;
+    const expected = path.join(ROOT_PATH, 'package.json');
+
+    expect(actual).toBe(expected);
+  });
+});
 
 describe('getPackageJson', () => {
   test('should return package.json', async () => {

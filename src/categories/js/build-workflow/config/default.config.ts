@@ -11,7 +11,7 @@ const content = readableMultilineString`
   jobs:
     build:
       runs-on: ubuntu-latest
-      env: 
+      env:
         CI: true
       steps:
         - name: Checkout code

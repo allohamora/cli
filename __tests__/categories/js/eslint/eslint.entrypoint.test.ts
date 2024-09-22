@@ -128,7 +128,7 @@ describe('eslint', () => {
   test('should handle complex eslintConfig correctly', async () => {
     const config = createConfig({
       typescript: true,
-      imports: ['import globals from "globals";'],
+      imports: ['import globals from "globals"'],
       eslintConfig: {
         files: ['src/**/*.ts'],
         ignores: ['node_modules'],

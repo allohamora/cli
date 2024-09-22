@@ -6,6 +6,7 @@ export const defaultConfig: Config = {
   imports: [`import globals from 'globals'`, `import eslint from '@eslint/js'`],
   configs: [`eslint.configs.recommended`],
   eslintConfig: {
+    files: ['**/*.{js,mjs,cjs}'],
     languageOptions: {
       globals: ['node'],
     },

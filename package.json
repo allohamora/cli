@@ -1,6 +1,6 @@
 {
   "name": "@allohamora/cli",
-  "version": "1.19.0",
+  "version": "1.20.0",
   "description": "cli to initialize projects and more",
   "input": "./src/index.ts",
   "main": "./bin/cli.js",
@@ -60,8 +60,6 @@
     "@rollup/plugin-commonjs": "^26.0.1",
     "@types/inquirer": "8.2.10",
     "@types/jest": "^29.5.13",
-    "@typescript-eslint/eslint-plugin": "^8.6.0",
-    "@typescript-eslint/parser": "^8.6.0",
     "eslint": "^9.11.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-beautiful-sort": "^3.0.1",
@@ -92,6 +90,6 @@
       "eslint --fix",
       "jest --findRelatedTests"
     ],
-    "*.{js,mjs,json,yml,md}": "prettier --write"
+    "*.{js,cjs,mjs,json,yml,md}": "prettier --write"
   }
 }

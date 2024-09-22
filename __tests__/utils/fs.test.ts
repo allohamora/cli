@@ -72,7 +72,7 @@ describe('addFileToRoot', () => {
 
     await addFileToRoot(fileName, content);
 
-    expect(fspMocked.writeFile).toHaveBeenCalledWith(fileNameWithPath, content, { encoding: 'utf-8' });
+    expect(fspMocked.writeFile).toHaveBeenCalledWith(fileNameWithPath, `${content}\n`, { encoding: 'utf-8' });
   });
 });
 
@@ -86,7 +86,7 @@ describe('addJsonFileToRoot', () => {
     await addJsonFileToRoot(fileName, content);
 
     expect(jsonMocked.stringify).toHaveBeenCalledWith(content);
-    expect(fspMocked.writeFile).toHaveBeenCalledWith(fileNameWithPath, json.stringify(content), {
+    expect(fspMocked.writeFile).toHaveBeenCalledWith(fileNameWithPath, `${json.stringify(content)}\n`, {
       encoding: 'utf-8',
     });
   });
