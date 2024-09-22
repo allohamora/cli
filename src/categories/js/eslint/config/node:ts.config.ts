@@ -16,7 +16,6 @@ export const nodeTsConfig: Config = {
     `import tseslint from 'typescript-eslint'`,
     `import tsPlugin from '@typescript-eslint/eslint-plugin'`,
     `import beautifulSort from 'eslint-plugin-beautiful-sort'`,
-    `import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'`,
   ],
   configs: ['eslint.configs.recommended', '...tseslint.configs.recommended'],
   eslintConfig: {
