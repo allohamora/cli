@@ -11,7 +11,7 @@ const buildConfig = (config: Config) => {
   const exportStart = config.typescript ? `export default tseslint.config(` : `export default [`;
   const exportEnd = config.typescript ? `);` : `];`;
 
-  const imports = `${start}${config.imports.join(';\n')}${config.imports.length ? '\n' : ''}`;
+  const imports = `${start}${config.imports.join(';\n')}${config.imports.length ? ';\n' : ''}`;
   const configs = config.configs.map((item) => `  ${item},`).join('\n');
 
   const files = config.eslintConfig.files
