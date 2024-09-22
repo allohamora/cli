@@ -24,7 +24,7 @@ export const addDirToRootIfNotExists = async (name: string) => {
 export const addFileToRoot = async (name: string, content: string) => {
   const filePath = rootPath(name);
 
-  await fsp.writeFile(filePath, content, { encoding: 'utf-8' });
+  await fsp.writeFile(filePath, `${content}\n`, { encoding: 'utf-8' });
 };
 
 export const addJsonFileToRoot = async <C>(name: string, content: C) => {

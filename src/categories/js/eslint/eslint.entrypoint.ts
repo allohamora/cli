@@ -9,7 +9,7 @@ const buildConfig = (config: Config) => {
   const start = config.typescript ? `// @ts-check\n` : '';
 
   const exportStart = config.typescript ? `export default tseslint.config(` : `export default [`;
-  const exportEnd = config.typescript ? `);\n` : `];\n`;
+  const exportEnd = config.typescript ? `);` : `];`;
 
   const imports = `${start}${config.imports.join(';\n')}${config.imports.length ? ';\n' : ''}`;
   const configs = config.configs.map((item) => `  ${item},`).join('\n');
