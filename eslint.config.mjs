@@ -1,7 +1,6 @@
 // @ts-check
 import globals from 'globals';
 import eslint from '@eslint/js';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
 import beautifulSort from 'eslint-plugin-beautiful-sort';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import tseslint from 'typescript-eslint';
@@ -23,7 +22,6 @@ export default tseslint.config(
       },
     },
     plugins: {
-      '@typescript-eslint': tsPlugin,
       'beautiful-sort': beautifulSort,
     },
     rules: {
