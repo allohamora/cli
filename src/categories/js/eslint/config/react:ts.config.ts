@@ -2,15 +2,28 @@ import { jestMutation, prettierMutation } from '../eslint.utils';
 import { Config } from './config.interface';
 
 export const reactTsConfig: Config = {
-  dependencies: ['globals', '@eslint/js', 'typescript-eslint', 'eslint-plugin-react', 'eslint-plugin-beautiful-sort'],
+  dependencies: [
+    'globals',
+    '@eslint/js',
+    'typescript-eslint',
+    'eslint-plugin-react',
+    'eslint-plugin-jsx-a11y',
+    'eslint-plugin-beautiful-sort',
+  ],
   imports: [
     `import globals from 'globals'`,
     `import eslint from '@eslint/js'`,
     `import tseslint from 'typescript-eslint'`,
     `import pluginReact from 'eslint-plugin-react'`,
+    `import pluginJsxA11y from 'eslint-plugin-jsx-a11y'`,
     `import beautifulSort from 'eslint-plugin-beautiful-sort'`,
   ],
-  configs: ['eslint.configs.recommended', '...tseslint.configs.recommended', `pluginReact.configs.flat['jsx-runtime']`],
+  configs: [
+    'eslint.configs.recommended',
+    '...tseslint.configs.recommended',
+    `pluginReact.configs.flat['jsx-runtime']`,
+    'pluginJsxA11y.flatConfigs.recommended',
+  ],
   eslintConfig: {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
