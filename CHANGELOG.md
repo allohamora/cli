@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.21.0](https://github.com/allohamora/cli/compare/1.20.0...1.21.0) (2025-01-30)
+
+### Features
+
+- add prettier format for eslint config ([d9b8176](https://github.com/allohamora/cli/commit/d9b8176c77c00324ef6b0d8daa25e8c10aae927d))
+- move ignores to separate config ([cfc0a2f](https://github.com/allohamora/cli/commit/cfc0a2f264534dd39925f7632a6a3f987c483f93))
+
 ## [1.20.0](https://github.com/allohamora/cli/compare/1.19.0...1.20.0) (2024-09-22)
 
 ### Features
