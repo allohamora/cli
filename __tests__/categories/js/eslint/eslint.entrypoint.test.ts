@@ -150,6 +150,7 @@ __test2__,
 
     const configFile = `// @ts-check
 import globals from "globals";
+
 export default tseslint.config(
 {ignores: ["node_modules"]},
 {files: ["src/**/*.ts"],languageOptions: {globals: {...globals.window},parserOptions: {"ecmaVersion":2020}},plugins: {'@typescript-eslint': eslintPluginTs},rules: {"no-console":"warn"}}
