@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.1](https://github.com/allohamora/cli/compare/1.21.0...1.21.1) (2025-01-30)
+
+### Bug Fixes
+
+- add missing \n after imports in eslint.config.mjs ([b26602c](https://github.com/allohamora/cli/commit/b26602ce5d95421fd5c789b25f8715cbade17bc7))
+
 ## [1.21.0](https://github.com/allohamora/cli/compare/1.20.0...1.21.0) (2025-01-30)
 
 ### Features
