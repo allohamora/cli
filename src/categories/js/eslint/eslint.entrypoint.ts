@@ -4,55 +4,50 @@ import { addScripts, installDevelopmentDependencies } from 'src/utils/npm';
 import { CONFIG_FILE_NAME, PACKAGE_NAME } from './eslint.const';
 import { applyMutations } from 'src/utils/mutation';
 import { Config } from './config/config.interface';
+import { format } from 'src/utils/javascript';
 
-const buildConfig = (config: Config) => {
-  const start = config.typescript ? `// @ts-check\n` : '';
+const optional = <T>(value: T | undefined, map: (value: T) => string) => (value ? map(value) : '');
+
+export const buildConfig = (config: Config) => {
+  const start = optional(config.typescript, () => '// @ts-check');
+
+  const imports = `${config.imports.map((item) => `${item};`).join('\n')}\n`.trim();
 
   const exportStart = config.typescript ? `export default tseslint.config(` : `export default [`;
   const exportEnd = config.typescript ? `);` : `];`;
 
-  const imports = `${start}${config.imports.join(';\n')}${config.imports.length ? ';\n' : ''}`;
-  const configs = config.configs.map((item) => `  ${item},`).join('\n');
+  const configs = config.configs.map((item) => `${item},`).join('\n');
 
-  const files = config.eslintConfig.files
-    ? `    files: ${JSON.stringify(config.eslintConfig.files).replace(/"/gim, `'`)},`
-    : '';
-  const ignores = config.eslintConfig.ignores
-    ? `    ignores: [\n${config.eslintConfig.ignores.map((item) => `      '${item}'`).join(',\n')}\n    ],`
-    : '';
+  const files = optional(config.eslintConfig.files, (value) => `files: ${JSON.stringify(value)}`);
+  const ignores = optional(config.eslintConfig.ignores, (value) => `ignores: ${JSON.stringify(value)}`);
 
-  const globals = config.eslintConfig.languageOptions?.globals
-    ? config.eslintConfig.languageOptions.globals.map((item) => `        ...globals.${item}`).join(',\n')
-    : '';
-  const parserOptions = config.eslintConfig.languageOptions?.parserOptions
-    ? `      parserOptions: {\n${Object.entries(config.eslintConfig.languageOptions.parserOptions)
-        .map(([key, value]) => `        ${key}: ${value}`)
-        .join(',\n')}\n      }`
-    : '';
+  const plugins = optional(
+    config.eslintConfig.plugins,
+    (values) =>
+      `plugins: {${Object.entries(values)
+        .map(([key, value]) => `'${key}': ${value}`)
+        .join(',')}}`,
+  );
 
-  const plugins = config.eslintConfig.plugins
-    ? `    plugins: { ${Object.entries(config.eslintConfig.plugins)
-        .map(([key, value]) => `\n      '${key}': ${value}`)
-        .join(',')}\n    },`
-    : '';
-  const rules = config.eslintConfig.rules
-    ? `    rules: ${JSON.stringify(config.eslintConfig.rules, null, 2)
-        .replace(/"/gim, "'")
-        .replace(/\n {2}/gim, '\n' + ' '.repeat(6))
-        .replace('\n}', '\n    }')},`
-    : '';
+  const rules = optional(config.eslintConfig.rules, (value) => `rules: ${JSON.stringify(value)}`);
 
-  const languageOptions = config.eslintConfig.languageOptions
-    ? `    languageOptions: {
-      globals: {
-${globals}
-      }${parserOptions ? `,\n${parserOptions}` : ''}
-    },`
-    : '';
+  const globals = optional(
+    config.eslintConfig.languageOptions?.globals,
+    (value) => `globals: {${value.map((item) => `...globals.${item}`).join(',')}}`,
+  );
+  const parserOptions = optional(
+    config.eslintConfig.languageOptions?.parserOptions,
+    (value) => `parserOptions: ${JSON.stringify(value)}`,
+  );
 
-  const mainConfig = `  {\n${[files, ignores, languageOptions, plugins, rules].filter(Boolean).join('\n')}\n  }`;
+  const languageOptions = optional(
+    config.eslintConfig.languageOptions,
+    () => `languageOptions: {${[globals, parserOptions].filter(Boolean).join(',')}}`,
+  );
 
-  return [imports, exportStart, configs, mainConfig, exportEnd].filter(Boolean).join('\n');
+  const mainConfig = `{${[files, ignores, languageOptions, plugins, rules].filter(Boolean).join(',')}}`;
+
+  return [start, imports, exportStart, configs, mainConfig, exportEnd].filter(Boolean).join('\n');
 };
 
 export const eslint = async () => {
@@ -63,7 +58,7 @@ export const eslint = async () => {
 
   await installDevelopmentDependencies(PACKAGE_NAME, ...dependencies);
 
-  const eslintConfig = buildConfig(config);
+  const eslintConfig = await format(buildConfig(config));
 
   await addFileToRoot(CONFIG_FILE_NAME, eslintConfig);
   await addScripts(...scripts);

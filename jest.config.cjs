@@ -9,7 +9,8 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   moduleDirectories: ['<rootDir>', 'node_modules'],
-  testRegex: '.*\.(spec|test)\.ts$',
+  testRegex: '.*.(spec|test).ts$',
   collectCoverageFrom: ['src/**/*.ts'],
   passWithNoTests: true,
+  setupFilesAfterEnv: ['./__tests__/setup-after-env.ts'],
 };

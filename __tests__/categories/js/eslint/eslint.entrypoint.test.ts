@@ -2,6 +2,7 @@ import * as fs from 'src/utils/fs';
 import * as npm from 'src/utils/npm';
 import * as mutation from 'src/utils/mutation';
 import * as config from 'src/categories/js/eslint/eslint.config';
+import * as javascript from 'src/utils/javascript';
 import { eslint } from 'src/categories/js/eslint/eslint.entrypoint';
 import { createConfig } from './eslint-test.utils';
 import { Config } from 'src/categories/js/eslint/config/config.interface';
@@ -17,6 +18,14 @@ const mutationMocked = jest.mocked(mutation);
 
 jest.mock('src/categories/js/eslint/eslint.config');
 const configMocked = jest.mocked(config);
+
+// we need to mock prettier because it doesn't work with jest
+// TypeError: A dynamic import callback was invoked without --experimental-vm-modules
+// https://github.com/prettier/prettier/issues/15769
+jest.mock('src/utils/javascript', () => ({
+  format: jest.fn().mockImplementation(async (config) => config),
+}));
+const javascriptMocked = jest.mocked(javascript);
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -57,15 +66,12 @@ describe('eslint', () => {
     configMocked.getConfig.mockReturnValueOnce(config);
 
     const configFile = `export default [
-  {
-    ignores: [
-      '__test__'
-    ],
-  }
+{ignores: ["__test__"]}
 ];`;
 
     await eslint();
 
+    expect(javascriptMocked.format).toHaveBeenCalledWith(configFile);
     expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('eslint.config.mjs', configFile);
   });
 
@@ -74,12 +80,12 @@ describe('eslint', () => {
     configMocked.getConfig.mockReturnValueOnce(config);
 
     const configFile = `export default [
-  {\n
-  }
+{}
 ];`;
 
     await eslint();
 
+    expect(javascriptMocked.format).toHaveBeenCalledWith(configFile);
     expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('eslint.config.mjs', configFile);
   });
 
@@ -94,16 +100,12 @@ describe('eslint', () => {
     configMocked.getConfig.mockReturnValueOnce(config);
 
     const configFile = `export default [
-  {
-    languageOptions: {
-      globals: {\n
-      }
-    },
-  }
+{languageOptions: {}}
 ];`;
 
     await eslint();
 
+    expect(javascriptMocked.format).toHaveBeenCalledWith(configFile);
     expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('eslint.config.mjs', configFile);
   });
 
@@ -114,14 +116,14 @@ describe('eslint', () => {
     configMocked.getConfig.mockReturnValueOnce(config);
 
     const configFile = `export default [
-  __test1__,
-  __test2__,
-  {\n
-  }
+__test1__,
+__test2__,
+{}
 ];`;
 
     await eslint();
 
+    expect(javascriptMocked.format).toHaveBeenCalledWith(configFile);
     expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('eslint.config.mjs', configFile);
   });
 
@@ -149,32 +151,14 @@ describe('eslint', () => {
     configMocked.getConfig.mockReturnValueOnce(config);
 
     const configFile = `// @ts-check
-import globals from "globals";\n
+import globals from "globals";
 export default tseslint.config(
-  {
-    files: ['src/**/*.ts'],
-    ignores: [
-      'node_modules'
-    ],
-    languageOptions: {
-      globals: {
-        ...globals.window
-      },
-      parserOptions: {
-        ecmaVersion: 2020
-      }
-    },
-    plugins: { 
-      '@typescript-eslint': eslintPluginTs
-    },
-    rules: {
-      'no-console': 'warn'
-    },
-  }
+{files: ["src/**/*.ts"],ignores: ["node_modules"],languageOptions: {globals: {...globals.window},parserOptions: {"ecmaVersion":2020}},plugins: {'@typescript-eslint': eslintPluginTs},rules: {"no-console":"warn"}}
 );`;
 
     await eslint();
 
+    expect(javascriptMocked.format).toHaveBeenCalledWith(configFile);
     expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('eslint.config.mjs', configFile);
   });
 
