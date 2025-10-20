@@ -26,7 +26,7 @@ jobs:
         with:
           body: ${{ steps.get_release_notes.outputs.release_notes }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           cache: "npm"
       - name: Install dependencies
