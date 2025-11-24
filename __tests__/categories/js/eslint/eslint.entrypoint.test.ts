@@ -65,9 +65,11 @@ describe('eslint', () => {
     const config = createConfig({ eslintConfig: { ignores: ['__test__'] } });
     configMocked.getConfig.mockReturnValueOnce(config);
 
-    const configFile = `export default [
+    const configFile = `import { defineConfig } from 'eslint/config';
+
+export default defineConfig(
 {ignores: ["__test__"]},
-];`;
+);`;
 
     await eslint();
 
@@ -79,8 +81,10 @@ describe('eslint', () => {
     const config = createConfig({ eslintConfig: {} });
     configMocked.getConfig.mockReturnValueOnce(config);
 
-    const configFile = `export default [
-];`;
+    const configFile = `import { defineConfig } from 'eslint/config';
+
+export default defineConfig(
+);`;
 
     await eslint();
 
@@ -98,9 +102,11 @@ describe('eslint', () => {
     });
     configMocked.getConfig.mockReturnValueOnce(config);
 
-    const configFile = `export default [
+    const configFile = `import { defineConfig } from 'eslint/config';
+
+export default defineConfig(
 {languageOptions: {}}
-];`;
+);`;
 
     await eslint();
 
@@ -114,10 +120,12 @@ describe('eslint', () => {
     });
     configMocked.getConfig.mockReturnValueOnce(config);
 
-    const configFile = `export default [
+    const configFile = `import { defineConfig } from 'eslint/config';
+
+export default defineConfig(
 __test1__,
 __test2__,
-];`;
+);`;
 
     await eslint();
 
@@ -150,8 +158,9 @@ __test2__,
 
     const configFile = `// @ts-check
 import globals from "globals";
+import { defineConfig } from 'eslint/config';
 
-export default tseslint.config(
+export default defineConfig(
 {ignores: ["node_modules"]},
 {files: ["src/**/*.ts"],languageOptions: {globals: {...globals.window},parserOptions: {"ecmaVersion":2020}},plugins: {'@typescript-eslint': eslintPluginTs},rules: {"no-console":"warn"}}
 );`;
