@@ -22,6 +22,7 @@ export const reactTsConfig: Config = {
     'eslint.configs.recommended',
     '...tseslint.configs.recommended',
     `pluginReact.configs.flat['jsx-runtime']`,
+    `// @ts-expect-error types are not compatible`,
     'pluginJsxA11y.flatConfigs.recommended',
   ],
   eslintConfig: {
