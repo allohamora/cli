@@ -11,10 +11,12 @@ const optional = <T>(value: T | undefined, map: (value: T) => string) => (value 
 export const buildConfig = (config: Config) => {
   const start = optional(config.typescript, () => '// @ts-check');
 
-  const imports = config.imports.map((item) => `${item};\n`).join('');
+  const imports = [...config.imports, `import { defineConfig } from 'eslint/config'`]
+    .map((item) => `${item};\n`)
+    .join('');
 
-  const exportStart = config.typescript ? `export default tseslint.config(` : `export default [`;
-  const exportEnd = config.typescript ? `);` : `];`;
+  const exportStart = 'export default defineConfig(';
+  const exportEnd = ');';
 
   const configs = config.configs.map((item) => `${item},`).join('\n');
 
