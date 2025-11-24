@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.22.0](https://github.com/allohamora/cli/compare/1.21.1...1.22.0) (2025-11-24)
+
+### Features
+
+- add [@ts-expect-error](https://github.com/ts-expect-error) to react:ts eslint config ([fec6039](https://github.com/allohamora/cli/commit/fec603990d2dd61f9ffbe31aba1b0e73735a3f9a))
+- add define-config to eslint ([679cb3b](https://github.com/allohamora/cli/commit/679cb3bd620164df8626ed157c763594f224bf67))
+
 ### [1.21.1](https://github.com/allohamora/cli/compare/1.21.0...1.21.1) (2025-01-30)
 
 ### Bug Fixes
