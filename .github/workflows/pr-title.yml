@@ -22,7 +22,7 @@ jobs:
             }
             const current = context.payload.pull_request.title;
             const expected = branch.charAt(0).toUpperCase() + branch.slice(1);
-            if (current === expected) return;
+            if (current === expected || context.payload.pull_request.head.repo.fork) return;
             await github.rest.pulls.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
