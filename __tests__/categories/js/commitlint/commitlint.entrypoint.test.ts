@@ -4,20 +4,20 @@ import * as config from 'src/categories/js/commitlint/commitlint.config';
 import * as utils from 'src/categories/js/commitlint/commitlint.utils';
 import { commitlint } from 'src/categories/js/commitlint/commitlint.entrypoint';
 
-jest.mock('src/utils/fs');
-const fsMocked = jest.mocked(fs);
+vi.mock('src/utils/fs');
+const fsMocked = vi.mocked(fs);
 
-jest.mock('src/utils/npm');
-const npmMocked = jest.mocked(npm);
+vi.mock('src/utils/npm');
+const npmMocked = vi.mocked(npm);
 
-jest.mock('src/categories/js/commitlint/commitlint.config');
-const configMocked = jest.mocked(config);
+vi.mock('src/categories/js/commitlint/commitlint.config');
+const configMocked = vi.mocked(config);
 
-jest.mock('src/categories/js/commitlint/commitlint.utils');
-const utilsMocked = jest.mocked(utils);
+vi.mock('src/categories/js/commitlint/commitlint.utils');
+const utilsMocked = vi.mocked(utils);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('commitlint', () => {

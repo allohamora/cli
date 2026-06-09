@@ -3,19 +3,19 @@ import * as prettierUtils from 'src/categories/js/prettier/prettier.utils';
 import { prettierMutation } from 'src/categories/js/stylelint/stylelint.utils';
 import { Config } from 'src/categories/js/stylelint/config/config.interface';
 
-jest.mock('src/utils/installed', () => ({
-  ...jest.requireActual('src/utils/installed'),
-  isInstalledAndInRootCheck: jest.fn().mockImplementation(jest.fn()),
+vi.mock('src/utils/installed', async (importOriginal) => ({
+  ...(await importOriginal()),
+  isInstalledAndInRootCheck: vi.fn().mockImplementation(vi.fn()),
 }));
-const installedMocked = jest.mocked(installed);
+const installedMocked = vi.mocked(installed);
 
-jest.mock('src/categories/js/prettier/prettier.utils', () => ({
-  isPrettierInstalled: jest.fn(),
+vi.mock('src/categories/js/prettier/prettier.utils', () => ({
+  isPrettierInstalled: vi.fn(),
 }));
-const prettierUtilsMocked = jest.mocked(prettierUtils);
+const prettierUtilsMocked = vi.mocked(prettierUtils);
 
 afterEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('isStylelintInstalled', () => {

@@ -1,11 +1,11 @@
 import * as installed from 'src/utils/installed';
 import 'src/categories/js/prettier/prettier.utils';
 
-jest.mock('src/utils/installed', () => ({
-  ...jest.requireActual('src/utils/installed'),
-  isInstalledAndInRootCheck: jest.fn().mockImplementation(jest.fn()),
+vi.mock('src/utils/installed', async (importOriginal) => ({
+  ...(await importOriginal()),
+  isInstalledAndInRootCheck: vi.fn().mockImplementation(vi.fn()),
 }));
-const installedMocked = jest.mocked(installed);
+const installedMocked = vi.mocked(installed);
 
 describe('isPrettierInstalled', () => {
   test('should use isInstalledAndInRootCheck with prettier and .prettierrc', () => {

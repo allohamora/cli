@@ -3,11 +3,11 @@ import { EventEmitter } from 'node:events';
 import { delay } from '__tests__/test-utils/delay';
 import { runCommand, spawnCommand } from 'src/utils/run-command';
 
-jest.mock('node:child_process');
-const childProcessMocked = jest.mocked(childProcess);
+vi.mock('node:child_process');
+const childProcessMocked = vi.mocked(childProcess);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 class ChildMock extends EventEmitter {
@@ -78,7 +78,7 @@ describe('spawnCommand', () => {
     const child = spawnMock('exit');
     const chunks = ['Hello', 'World'].map((value) => Buffer.from(value, 'utf-8'));
 
-    const spy = jest.spyOn(global.console, 'error').mockImplementation(jest.fn());
+    const spy = vi.spyOn(global.console, 'error').mockImplementation(vi.fn());
     const spawnResult = spawnCommand(command, args);
 
     for (const chunk of chunks) {

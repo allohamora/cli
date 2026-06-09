@@ -4,24 +4,17 @@ import * as jestUtils from 'src/categories/js/jest/jest.utils';
 import { prettierMutation, jestMutation } from 'src/categories/js/eslint/eslint.utils';
 import { createConfig } from './eslint-test.utils';
 
-jest.mock('src/utils/installed', () => ({
-  ...jest.requireActual('src/utils/installed'),
-  isInstalledAndInRootCheck: jest.fn().mockReturnValue(jest.fn()),
+vi.mock('src/utils/installed', async (importOriginal) => ({
+  ...(await importOriginal()),
+  isInstalledAndInRootCheck: vi.fn().mockReturnValue(vi.fn()),
 }));
-const installedMocked = jest.mocked(installed);
+const installedMocked = vi.mocked(installed);
 
-const jestUtilsMocked = jest.mocked(jestUtils);
-const prettierUtilsMocked = jest.mocked(prettierUtils);
+const jestUtilsMocked = vi.mocked(jestUtils);
+const prettierUtilsMocked = vi.mocked(prettierUtils);
 
-beforeEach(() => {
-  jest.mock('src/categories/js/jest/jest.utils');
-  jest.mock('src/categories/js/prettier/prettier.utils');
-});
-
-afterEach(() => {
-  jest.unmock('src/categories/js/jest/jest.utils');
-  jest.unmock('src/categories/js/prettier/prettier.utils');
-});
+vi.mock('src/categories/js/jest/jest.utils');
+vi.mock('src/categories/js/prettier/prettier.utils');
 
 describe('prettierMutation', () => {
   test('should add prettier to empty config if prettier installed', async () => {
@@ -56,6 +49,17 @@ describe('prettierMutation', () => {
       imports: ['__test__', `import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'`],
       configs: ['__test__', 'eslintPluginPrettierRecommended'],
     });
+
+    expect(actual).toEqual(expected);
+  });
+
+  test('should not add prettier if prettier is not installed', async () => {
+    prettierUtilsMocked.isPrettierInstalled.mockResolvedValueOnce(false);
+
+    const actual = createConfig();
+    const expected = createConfig();
+
+    await prettierMutation(actual);
 
     expect(actual).toEqual(expected);
   });

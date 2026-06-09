@@ -2,14 +2,14 @@ import * as config from 'src/categories/js/release-workflow/release-workflow.con
 import * as github from 'src/utils/github';
 import { releaseWorkflow } from 'src/categories/js/release-workflow/release-workflow.entrypoint';
 
-jest.mock('src/categories/js/release-workflow/release-workflow.config');
-const configMocked = jest.mocked(config);
+vi.mock('src/categories/js/release-workflow/release-workflow.config');
+const configMocked = vi.mocked(config);
 
-jest.mock('src/utils/github');
-const githubMocked = jest.mocked(github);
+vi.mock('src/utils/github');
+const githubMocked = vi.mocked(github);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('releaseWorkflow', () => {

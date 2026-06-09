@@ -4,14 +4,14 @@ import * as config from 'src/categories/js/jest/jest.config';
 import { Config } from 'src/categories/js/jest/config/config.interface';
 import { jestEntrypoint } from 'src/categories/js/jest/jest.entrypoint';
 
-jest.mock('src/utils/fs');
-const fsMocked = jest.mocked(fs);
+vi.mock('src/utils/fs');
+const fsMocked = vi.mocked(fs);
 
-jest.mock('src/utils/npm');
-const npmMocked = jest.mocked(npm);
+vi.mock('src/utils/npm');
+const npmMocked = vi.mocked(npm);
 
-jest.mock('src/categories/js/jest/jest.config');
-const configMocked = jest.mocked(config);
+vi.mock('src/categories/js/jest/jest.config');
+const configMocked = vi.mocked(config);
 
 describe('jest', () => {
   const createConfig = ({ devDependencies = [], configFileContent = '', scripts = [] }: Partial<Config> = {}) => ({

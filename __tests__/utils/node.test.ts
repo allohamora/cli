@@ -1,8 +1,8 @@
 import * as runCommandUtils from 'src/utils/run-command';
 import { getNodeVersion } from 'src/utils/node';
 
-jest.mock('src/utils/run-command');
-const runCommandUtilsMocked = jest.mocked(runCommandUtils);
+vi.mock('src/utils/run-command');
+const runCommandUtilsMocked = vi.mocked(runCommandUtils);
 
 describe('getNodeVersion', () => {
   test('should return nodejs version', async () => {

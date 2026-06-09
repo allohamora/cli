@@ -3,16 +3,15 @@ import { getConfig } from 'src/categories/js/prettier/prettier.config';
 import { defaultConfig } from 'src/categories/js/prettier/config/default.config';
 import { format } from 'src/utils/javascript';
 
-// we need to mock prettier because it doesn't work with jest
-// TypeError: A dynamic import callback was invoked without --experimental-vm-modules
-// https://github.com/prettier/prettier/issues/15769
-jest.mock('prettier', () => ({
-  format: jest.fn(),
+vi.mock('prettier', () => ({
+  default: {
+    format: vi.fn(),
+  },
 }));
-const prettierMocked = jest.mocked(prettier);
+const prettierMocked = vi.mocked(prettier);
 
-jest.mock('src/categories/js/prettier/prettier.config', () => ({ getConfig: jest.fn() }));
-const getConfigMocked = jest.mocked(getConfig);
+vi.mock('src/categories/js/prettier/prettier.config', () => ({ getConfig: vi.fn() }));
+const getConfigMocked = vi.mocked(getConfig);
 
 describe('format', () => {
   test('formats input with default config', async () => {

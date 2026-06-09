@@ -1,11 +1,11 @@
 import * as huskyUtils from 'src/categories/js/husky/husky.utils';
 import { huskyIntegration } from 'src/categories/js/commitlint/commitlint.utils';
 
-jest.mock('src/categories/js/husky/husky.utils');
-const huskyUtilsMocked = jest.mocked(huskyUtils);
+vi.mock('src/categories/js/husky/husky.utils');
+const huskyUtilsMocked = vi.mocked(huskyUtils);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('huskyIntegration', () => {

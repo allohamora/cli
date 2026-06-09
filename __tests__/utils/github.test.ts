@@ -11,11 +11,11 @@ const GITHUB_DIR_NAME = '.github';
 const GITHUB_WORKFLOWS_DIR_NAME = 'workflows';
 const GITHUB_RELATIVE_WORKFLOWS_PATH = path.join(GITHUB_DIR_NAME, GITHUB_WORKFLOWS_DIR_NAME);
 
-jest.mock('src/utils/fs');
-const fsMocked = jest.mocked(fs);
+vi.mock('src/utils/fs');
+const fsMocked = vi.mocked(fs);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('addGithubDirIfNotExists', () => {

@@ -12,23 +12,23 @@ import {
   stylelintMutation,
 } from 'src/categories/js/lint-staged/lint-staged.utils';
 
-jest.mock('src/categories/js/husky/husky.utils');
-const huskyUtilsMocked = jest.mocked(huskyUtils);
+vi.mock('src/categories/js/husky/husky.utils');
+const huskyUtilsMocked = vi.mocked(huskyUtils);
 
-jest.mock('src/categories/js/prettier/prettier.utils');
-const prettierUtilsMocked = jest.mocked(prettierUtils);
+vi.mock('src/categories/js/prettier/prettier.utils');
+const prettierUtilsMocked = vi.mocked(prettierUtils);
 
-jest.mock('src/categories/js/jest/jest.utils');
-const jestUtilsMocked = jest.mocked(jestUtils);
+vi.mock('src/categories/js/jest/jest.utils');
+const jestUtilsMocked = vi.mocked(jestUtils);
 
-jest.mock('src/categories/js/eslint/eslint.utils');
-const eslintUtilsMocked = jest.mocked(eslintUtils);
+vi.mock('src/categories/js/eslint/eslint.utils');
+const eslintUtilsMocked = vi.mocked(eslintUtils);
 
-jest.mock('src/categories/js/stylelint/stylelint.utils');
-const stylelintUtilsMocked = jest.mocked(stylelintUtils);
+vi.mock('src/categories/js/stylelint/stylelint.utils');
+const stylelintUtilsMocked = vi.mocked(stylelintUtils);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('addOptionToLintStagedConfig', () => {

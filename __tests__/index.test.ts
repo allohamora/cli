@@ -1,4 +1,4 @@
-const log = jest.spyOn(global.console, 'log').mockImplementation(jest.fn());
+const log = vi.spyOn(global.console, 'log').mockImplementation(vi.fn());
 
 import * as consoleColors from 'src/utils/console';
 import * as mainUtils from 'src/utils/main';
@@ -6,14 +6,14 @@ import { main } from 'src';
 import { createCategoryState } from 'src/utils/state';
 import { Category } from 'src/types/category';
 
-jest.mock('src/utils/console');
-const consoleColorsMocked = jest.mocked(consoleColors);
+vi.mock('src/utils/console');
+const consoleColorsMocked = vi.mocked(consoleColors);
 
-jest.mock('src/utils/main');
-const mainUtilsMocked = jest.mocked(mainUtils);
+vi.mock('src/utils/main');
+const mainUtilsMocked = vi.mocked(mainUtils);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 beforeAll(() => {
@@ -29,7 +29,7 @@ describe('main', () => {
   });
 
   test('should run selected scripts', async () => {
-    const options = { option: jest.fn() };
+    const options = { option: vi.fn() };
     const optionKeys = ['option'];
     const category = { options, state: createCategoryState('__state__', ['__test__']) } as Category;
 
