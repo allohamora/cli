@@ -1,4 +1,3 @@
-import * as runCommand from '#src/utils/run-command.ts';
 import * as installed from '#src/utils/installed.ts';
 import * as fs from '#src/utils/fs.ts';
 import fsp from 'node:fs/promises';
@@ -17,13 +16,9 @@ const fspMocked = vi.mocked(fsp);
 vi.mock('#src/utils/fs.ts');
 const fsMocked = vi.mocked(fs);
 
-vi.mock('#src/utils/run-command.ts');
-const runCommandMocked = vi.mocked(runCommand);
-
 beforeEach(() => {
   clearMock(fsMocked);
   clearMock(fspMocked);
-  clearMock(runCommandMocked);
 });
 
 describe('addHook', () => {

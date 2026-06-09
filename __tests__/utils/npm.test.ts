@@ -1,7 +1,7 @@
-import * as runCommand from '#src/utils/run-command.ts';
 import * as fs from '#src/utils/fs.ts';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
+import { execa } from 'execa';
 import {
   addScripts,
   addToPackageJson,
@@ -14,11 +14,11 @@ import {
 } from '#src/utils/npm.ts';
 import { ROOT_PATH } from '#src/utils/path.ts';
 
+vi.mock('execa');
+const execaMocked = vi.mocked(execa);
+
 vi.mock('node:fs/promises');
 const fspMocked = vi.mocked(fsp);
-
-vi.mock('#src/utils/run-command.ts');
-const runCommandMocked = vi.mocked(runCommand);
 
 vi.mock('#src/utils/fs.ts');
 const fsMocked = vi.mocked(fs);
@@ -120,17 +120,16 @@ describe('runScript', () => {
     const scriptName = '__test__';
     await runScript(scriptName);
 
-    expect(runCommandMocked.runCommand).toHaveBeenCalledWith(`npm run ${scriptName}`);
+    expect(execaMocked).toHaveBeenCalledWith(expect.arrayContaining(['npm run ', '']), scriptName);
   });
 });
 
 describe('installDevelopmentDependencies', () => {
   test('should install development dependencies', async () => {
     const dependencies = ['turbo', 'test', 'hello'];
-    const joined = dependencies.join(' ');
 
     await installDevelopmentDependencies(...dependencies);
 
-    expect(runCommandMocked.runCommand).toHaveBeenCalledWith(`npm i -D ${joined}`);
+    expect(execaMocked).toHaveBeenCalledWith(expect.arrayContaining(['npm i -D ', '']), dependencies);
   });
 });

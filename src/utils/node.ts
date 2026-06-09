@@ -1,7 +1,7 @@
-import { runCommand } from '#src/utils/run-command.ts';
+import { execa } from 'execa';
 
 export const getNodeVersion = async () => {
-  const versionConsoleOutput = await runCommand('node -v');
+  const { stdout } = await execa`node -v`;
 
-  return versionConsoleOutput.trim().replace('v', '');
+  return stdout.trim().replace('v', '');
 };
