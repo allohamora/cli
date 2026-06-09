@@ -10,13 +10,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+
       - name: Install node
         uses: actions/setup-node@v6
         with:
+          node-version-file: ".nvmrc"
           cache: "npm"
+
       - name: Install dependencies
-        run: npm i
+        run: npm ci
+
       - name: Collect coverage
         run: npm run test:coverage
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v7

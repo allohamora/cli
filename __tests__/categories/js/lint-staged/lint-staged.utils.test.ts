@@ -11,6 +11,7 @@ import {
   prettierMutation,
   stylelintMutation,
 } from '#src/categories/js/lint-staged/lint-staged.utils.ts';
+import type { LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
 
 vi.mock('#src/categories/js/husky/husky.utils.ts');
 const huskyUtilsMocked = vi.mocked(huskyUtils);
@@ -99,7 +100,7 @@ describe('addOptionToLintStagedConfig', () => {
   test('should throw error if received invalid config', () => {
     const key = '*.ts';
     const value = '__test__';
-    const actual = { [key]: {} };
+    const actual = { [key]: {} } as unknown as LintStagedConfig;
 
     expect(() => addOptionToLintStagedConfig(actual, key, value)).toThrow();
   });

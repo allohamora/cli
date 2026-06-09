@@ -20,15 +20,16 @@ type OptionMutation = {
 const arrayOptionMutation: OptionMutation = {
   check: (config, key) => Array.isArray(config[key]),
   mutate: (config, key, value) => {
-    config[key] = Array.from(new Set([...(config[key] as unknown[]), value]));
+    config[key] = Array.from(new Set([...(config[key] as string[]), value]));
   },
 };
 
 const stringOptionMutation: OptionMutation = {
   check: (config, key) => typeof config[key] === 'string',
   mutate: (config, key, value) => {
-    const array = Array.from(new Set([config[key], value]));
-    config[key] = array.length === 1 ? array[0] : array;
+    const currentValue = config[key] as string;
+    const array = Array.from(new Set([currentValue, value]));
+    config[key] = array.length === 1 ? currentValue : array;
   },
 };
 
