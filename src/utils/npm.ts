@@ -1,5 +1,4 @@
 import fsp from 'node:fs/promises';
-import sortPackageJson from 'sort-package-json';
 import { execa } from 'execa';
 import type { JsonValue, PackageJson as BasePackageJson } from 'type-fest';
 import { rootPath } from '#src/utils/path.ts';
@@ -19,7 +18,7 @@ export const getPackageJson = async () => {
 };
 
 export const setPackageJson = async (packageJson: PackageJson) => {
-  await addJsonFileToRoot(PACKAGE_JSON_NAME, sortPackageJson(packageJson));
+  await addJsonFileToRoot(PACKAGE_JSON_NAME, packageJson);
 };
 
 export const addToPackageJson = async <V extends JsonValue>(name: keyof PackageJson, value: V) => {

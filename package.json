@@ -87,8 +87,7 @@
     "execa": "^9.6.1",
     "inquirer": "^14.0.2",
     "ora": "^9.4.0",
-    "prettier": "^3.8.3",
-    "sort-package-json": "^4.0.0"
+    "prettier": "^3.8.3"
   },
   "lint-staged": {
     "*.ts": [

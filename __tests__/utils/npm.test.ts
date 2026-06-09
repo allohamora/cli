@@ -70,20 +70,6 @@ describe('setPackageJson', () => {
     await setPackageJson(target);
     expectPackageJsonWasSaved(target);
   });
-
-  test('should sort package.json fields before saving', async () => {
-    await setPackageJson({
-      scripts: {},
-      version: '1.0.0',
-      name: 'test',
-    });
-
-    expect(fsMocked.addJsonFileToRoot).toHaveBeenCalledTimes(1);
-
-    const [, actual] = fsMocked.addJsonFileToRoot.mock.calls[0] as [string, Record<string, unknown>];
-
-    expect(Object.keys(actual)).toEqual(['name', 'version', 'scripts']);
-  });
 });
 
 describe('addToPackageJson', () => {
