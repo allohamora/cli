@@ -2,14 +2,14 @@ import * as config from 'src/categories/js/build-workflow/build-workflow.config'
 import * as github from 'src/utils/github';
 import { buildWorkflow } from 'src/categories/js/build-workflow/build-workflow.entrypoint';
 
-jest.mock('src/categories/js/build-workflow/build-workflow.config');
-const configMocked = jest.mocked(config);
+vi.mock('src/categories/js/build-workflow/build-workflow.config');
+const configMocked = vi.mocked(config);
 
-jest.mock('src/utils/github');
-const githubMocked = jest.mocked(github);
+vi.mock('src/utils/github');
+const githubMocked = vi.mocked(github);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('buildWorkflow', () => {

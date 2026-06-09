@@ -6,19 +6,20 @@ import { chooseOptions, getCategory, getOptions, installOptions } from 'src/util
 import { Category } from 'src/types/category';
 import { camelize, kebablize } from 'src/utils/string';
 import { clearMock } from '__tests__/test-utils/clear-mock';
+import type { Mock } from 'vitest';
 
 const oraMocked = ora as unknown as {
-  oraMocked: jest.Mock;
-  oraStart: jest.Mock;
-  oraStop: jest.Mock;
-  oraTextSet: jest.Mock;
+  oraMocked: Mock;
+  oraStart: Mock;
+  oraStop: Mock;
+  oraTextSet: Mock;
 };
 
-jest.mock('ora', () => {
-  const oraMocked = jest.fn();
-  const oraStart = jest.fn();
-  const oraStop = jest.fn();
-  const oraTextSet = jest.fn();
+vi.mock('ora', () => {
+  const oraMocked = vi.fn();
+  const oraStart = vi.fn();
+  const oraStop = vi.fn();
+  const oraTextSet = vi.fn();
 
   return {
     __esModule: true,
@@ -38,27 +39,28 @@ jest.mock('ora', () => {
   };
 });
 
-jest.mock('src/categories', () => {
+vi.mock('src/categories', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('src/categories')>();
   const js = {
-    ...jest.requireActual('src/categories').default.js,
+    ...actual.default.js,
     options: {
-      jest: jest.fn(),
-      lintStaged: jest.fn(),
+      jest: vi.fn(),
+      lintStaged: vi.fn(),
     },
   } as Category;
 
-  return { js };
+  return { default: { js } };
 });
 
 const js = categories.js as Category;
 const categoryKeys = Object.keys(categories);
 const jsOptionKeys = Object.keys(js.options);
 
-jest.mock('src/utils/prompt');
-const promptMocked = jest.mocked(prompt);
+vi.mock('src/utils/prompt');
+const promptMocked = vi.mocked(prompt);
 
-jest.mock('src/states/context');
-const contextMocked = jest.mocked(context);
+vi.mock('src/states/context');
+const contextMocked = vi.mocked(context);
 
 describe('getCategory', () => {
   test('should return selected category', async () => {
@@ -108,7 +110,7 @@ describe('installOptions', () => {
   });
 
   test('should start spinner on start and stop on stop and print kebablize name', async () => {
-    const optionHello = jest.fn();
+    const optionHello = vi.fn();
     await installOptions({ optionHello }, ['optionHello']);
 
     expect(optionHello).toHaveBeenCalled();
@@ -119,7 +121,7 @@ describe('installOptions', () => {
   });
 
   test('should set installing options', async () => {
-    const option = jest.fn();
+    const option = vi.fn();
     const options = { option };
     const keys = ['option'];
 
@@ -129,8 +131,8 @@ describe('installOptions', () => {
   });
 
   test('should run selected scripts', async () => {
-    const option1 = jest.fn();
-    const option2 = jest.fn();
+    const option1 = vi.fn();
+    const option2 = vi.fn();
     const options = { option1, option2 };
     const keys = ['option1', 'option2'];
 

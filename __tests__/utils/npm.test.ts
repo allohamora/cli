@@ -14,17 +14,17 @@ import {
 } from 'src/utils/npm';
 import { ROOT_PATH } from 'src/utils/path';
 
-jest.mock('node:fs/promises');
-const fspMocked = jest.mocked(fsp);
+vi.mock('node:fs/promises');
+const fspMocked = vi.mocked(fsp);
 
-jest.mock('src/utils/run-command');
-const runCommandMocked = jest.mocked(runCommand);
+vi.mock('src/utils/run-command');
+const runCommandMocked = vi.mocked(runCommand);
 
-jest.mock('src/utils/fs');
-const fsMocked = jest.mocked(fs);
+vi.mock('src/utils/fs');
+const fsMocked = vi.mocked(fs);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 const returnPackageJson = <T extends Record<string, unknown>>(value: T = {} as T) => {

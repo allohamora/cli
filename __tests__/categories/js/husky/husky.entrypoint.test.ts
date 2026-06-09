@@ -2,8 +2,8 @@ import * as npm from 'src/utils/npm';
 import { husky } from 'src/categories/js/husky/husky.entrypoint';
 import { clearMock } from '__tests__/test-utils/clear-mock';
 
-jest.mock('src/utils/npm');
-const npmMocked = jest.mocked(npm);
+vi.mock('src/utils/npm');
+const npmMocked = vi.mocked(npm);
 
 beforeEach(() => {
   clearMock(npmMocked);

@@ -5,20 +5,20 @@ import fsp from 'node:fs/promises';
 import { addHook } from 'src/categories/js/husky/husky.utils';
 import { clearMock } from '__tests__/test-utils/clear-mock';
 
-jest.mock('src/utils/installed', () => ({
-  ...jest.requireActual('src/utils/installed'),
-  isInstalledAndInRootCheck: jest.fn().mockReturnValue(jest.fn()),
+vi.mock('src/utils/installed', async (importOriginal) => ({
+  ...(await importOriginal()),
+  isInstalledAndInRootCheck: vi.fn().mockReturnValue(vi.fn()),
 }));
-const installedMocked = jest.mocked(installed);
+const installedMocked = vi.mocked(installed);
 
-jest.mock('node:fs/promises');
-const fspMocked = jest.mocked(fsp);
+vi.mock('node:fs/promises');
+const fspMocked = vi.mocked(fsp);
 
-jest.mock('src/utils/fs');
-const fsMocked = jest.mocked(fs);
+vi.mock('src/utils/fs');
+const fsMocked = vi.mocked(fs);
 
-jest.mock('src/utils/run-command');
-const runCommandMocked = jest.mocked(runCommand);
+vi.mock('src/utils/run-command');
+const runCommandMocked = vi.mocked(runCommand);
 
 beforeEach(() => {
   clearMock(fsMocked);

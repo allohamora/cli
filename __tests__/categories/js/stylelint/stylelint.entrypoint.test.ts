@@ -4,14 +4,14 @@ import * as config from 'src/categories/js/stylelint/stylelint.config';
 import { stylelint } from 'src/categories/js/stylelint/stylelint.entrypoint';
 import { Config } from 'src/categories/js/stylelint/config/config.interface';
 
-jest.mock('src/utils/fs');
-const fsUtilsMocked = jest.mocked(fsUtils);
+vi.mock('src/utils/fs');
+const fsUtilsMocked = vi.mocked(fsUtils);
 
-jest.mock('src/utils/npm');
-const npmUtilsMocked = jest.mocked(npmUtils);
+vi.mock('src/utils/npm');
+const npmUtilsMocked = vi.mocked(npmUtils);
 
-jest.mock('src/categories/js/stylelint/stylelint.config');
-const configMocked = jest.mocked(config);
+vi.mock('src/categories/js/stylelint/stylelint.config');
+const configMocked = vi.mocked(config);
 
 const baseConfig = (partial: Partial<Config> = {}) => {
   return {
@@ -33,7 +33,7 @@ describe('stylelint', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test('should use value from getConfig', async () => {

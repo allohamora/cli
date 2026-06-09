@@ -2,11 +2,11 @@ import * as context from 'src/states/context';
 import * as fs from 'src/utils/fs';
 import { isInstalled, isInstalledAndInRootCheck, isInstalling } from 'src/utils/installed';
 
-jest.mock('src/states/context');
-const contextMocked = jest.mocked(context);
+vi.mock('src/states/context');
+const contextMocked = vi.mocked(context);
 
-jest.mock('src/utils/fs');
-const fsMocked = jest.mocked(fs);
+vi.mock('src/utils/fs');
+const fsMocked = vi.mocked(fs);
 
 const installingScript = '__test__';
 const notInstallingScript = 'undefined';
@@ -17,7 +17,7 @@ contextMocked.getInstalling.mockImplementation(() => {
 });
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('isInstalling', () => {
@@ -52,8 +52,8 @@ describe('isInstalled', () => {
   });
 
   test('should execute handlers until one of returns true if script is not installing', async () => {
-    const firstHandler = jest.fn().mockResolvedValueOnce(true);
-    const secondHandler = jest.fn().mockResolvedValueOnce(true);
+    const firstHandler = vi.fn().mockResolvedValueOnce(true);
+    const secondHandler = vi.fn().mockResolvedValueOnce(true);
 
     const actual = await isInstalled(notInstallingScript, [firstHandler, secondHandler])();
     const expected = true;
@@ -64,8 +64,8 @@ describe('isInstalled', () => {
   });
 
   test('should return false if no one of handlers return true', async () => {
-    const firstHandler = jest.fn().mockResolvedValueOnce(false);
-    const secondHandler = jest.fn().mockResolvedValueOnce(false);
+    const firstHandler = vi.fn().mockResolvedValueOnce(false);
+    const secondHandler = vi.fn().mockResolvedValueOnce(false);
 
     const actual = await isInstalled(notInstallingScript, [firstHandler, secondHandler])();
     const expected = false;
@@ -90,7 +90,7 @@ describe('isInstalledAndInRootCheck', () => {
   });
 
   test('should add additional handlers', async () => {
-    const nextHandler = jest.fn().mockResolvedValue(true);
+    const nextHandler = vi.fn().mockResolvedValue(true);
     fsMocked.isExistsInRoot.mockResolvedValueOnce(false);
 
     const actual = await isInstalledAndInRootCheck(notInstallingScript, configFile, [nextHandler])();
@@ -102,7 +102,7 @@ describe('isInstalledAndInRootCheck', () => {
   });
 
   test('should return true if installing and do not execute handlers', async () => {
-    const nextHandler = jest.fn().mockResolvedValue(true);
+    const nextHandler = vi.fn().mockResolvedValue(true);
     fsMocked.isExistsInRoot.mockResolvedValueOnce(false);
 
     const actual = await isInstalledAndInRootCheck(installingScript, configFile, [nextHandler])();

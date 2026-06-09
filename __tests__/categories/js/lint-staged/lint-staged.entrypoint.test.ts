@@ -4,17 +4,17 @@ import * as utils from 'src/categories/js/lint-staged/lint-staged.utils';
 import { lintStaged } from 'src/categories/js/lint-staged/lint-staged.entrypoint';
 import { Config, LintStagedConfig } from 'src/categories/js/lint-staged/config/config.interface';
 
-jest.mock('src/utils/npm');
-const npmMocked = jest.mocked(npm);
+vi.mock('src/utils/npm');
+const npmMocked = vi.mocked(npm);
 
-jest.mock('src/categories/js/lint-staged/lint-staged.config');
-const configMocked = jest.mocked(config);
+vi.mock('src/categories/js/lint-staged/lint-staged.config');
+const configMocked = vi.mocked(config);
 
-jest.mock('src/categories/js/lint-staged/lint-staged.utils');
-const utilsMocked = jest.mocked(utils);
+vi.mock('src/categories/js/lint-staged/lint-staged.utils');
+const utilsMocked = vi.mocked(utils);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 const createConfig = ({ config = {}, mutations = [] }: Partial<Config> = {}) => ({

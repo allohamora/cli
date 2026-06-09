@@ -7,28 +7,25 @@ import { eslint } from 'src/categories/js/eslint/eslint.entrypoint';
 import { createConfig } from './eslint-test.utils';
 import { Config } from 'src/categories/js/eslint/config/config.interface';
 
-jest.mock('src/utils/fs');
-const fsMocked = jest.mocked(fs);
+vi.mock('src/utils/fs');
+const fsMocked = vi.mocked(fs);
 
-jest.mock('src/utils/npm');
-const npmMocked = jest.mocked(npm);
+vi.mock('src/utils/npm');
+const npmMocked = vi.mocked(npm);
 
-jest.mock('src/utils/mutation');
-const mutationMocked = jest.mocked(mutation);
+vi.mock('src/utils/mutation');
+const mutationMocked = vi.mocked(mutation);
 
-jest.mock('src/categories/js/eslint/eslint.config');
-const configMocked = jest.mocked(config);
+vi.mock('src/categories/js/eslint/eslint.config');
+const configMocked = vi.mocked(config);
 
-// we need to mock prettier because it doesn't work with jest
-// TypeError: A dynamic import callback was invoked without --experimental-vm-modules
-// https://github.com/prettier/prettier/issues/15769
-jest.mock('src/utils/javascript', () => ({
-  format: jest.fn().mockImplementation(async (config) => config),
+vi.mock('src/utils/javascript', () => ({
+  format: vi.fn().mockImplementation(async (config) => config),
 }));
-const javascriptMocked = jest.mocked(javascript);
+const javascriptMocked = vi.mocked(javascript);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('eslint', () => {

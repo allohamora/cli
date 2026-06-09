@@ -9,14 +9,14 @@ const rootDir = 'test';
 const root = [rootFile, rootDir];
 const rootWithPath = root.map((file) => rootPath(file));
 
-jest.mock('node:fs/promises');
-const fspMocked = jest.mocked(fsp);
+vi.mock('node:fs/promises');
+const fspMocked = vi.mocked(fsp);
 
-jest.mock('src/utils/json');
-const jsonMocked = jest.mocked(json);
+vi.mock('src/utils/json');
+const jsonMocked = vi.mocked(json);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 
   fspMocked.access.mockImplementation(async (path) => {
     const isExists = rootWithPath.includes(path.toString());

@@ -3,14 +3,14 @@ import * as fsUtils from 'src/utils/fs';
 import * as config from 'src/categories/js/docker/docker.config';
 import { docker } from 'src/categories/js/docker/docker.entrypoint';
 
-jest.mock('src/utils/node');
-const nodeUtilsMocked = jest.mocked(nodeUtils);
+vi.mock('src/utils/node');
+const nodeUtilsMocked = vi.mocked(nodeUtils);
 
-jest.mock('src/utils/fs');
-const fsUtilsMocked = jest.mocked(fsUtils);
+vi.mock('src/utils/fs');
+const fsUtilsMocked = vi.mocked(fsUtils);
 
-jest.mock('src/categories/js/docker/docker.config');
-const configMocked = jest.mocked(config);
+vi.mock('src/categories/js/docker/docker.config');
+const configMocked = vi.mocked(config);
 
 describe('docker', () => {
   const dockerFile = '__dockerfile__';
@@ -23,7 +23,7 @@ describe('docker', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test('should use value from getConfig', async () => {

@@ -4,14 +4,14 @@ import * as config from 'src/categories/js/standard-version/standard-version.con
 import { defaultConfig } from 'src/categories/js/standard-version/config/default.config';
 import { standardVersion } from 'src/categories/js/standard-version/standard-version.entrypoint';
 
-jest.mock('src/utils/fs');
-const fsMocked = jest.mocked(fs);
+vi.mock('src/utils/fs');
+const fsMocked = vi.mocked(fs);
 
-jest.mock('src/utils/npm');
-const npmMocked = jest.mocked(npm);
+vi.mock('src/utils/npm');
+const npmMocked = vi.mocked(npm);
 
-jest.mock('src/categories/js/standard-version/standard-version.config');
-const configMocked = jest.mocked(config);
+vi.mock('src/categories/js/standard-version/standard-version.config');
+const configMocked = vi.mocked(config);
 
 describe('standardVersion', () => {
   beforeEach(() => {

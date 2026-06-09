@@ -1,11 +1,20 @@
 import * as inquirer from 'inquirer';
 import { manyOf, miniumOneValidate, oneOf } from 'src/utils/prompt';
 
-jest.mock('inquirer');
-const inquirerMocked = jest.mocked(inquirer);
+vi.mock('inquirer', () => {
+  const prompt = vi.fn();
+
+  return {
+    prompt,
+    default: {
+      prompt,
+    },
+  };
+});
+const inquirerMocked = vi.mocked(inquirer);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 const message = '__test__';

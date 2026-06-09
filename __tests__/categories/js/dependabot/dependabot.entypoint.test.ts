@@ -2,14 +2,14 @@ import * as config from 'src/categories/js/dependabot/dependabot.config';
 import * as github from 'src/utils/github';
 import { dependabot } from 'src/categories/js/dependabot/dependabot.entrypoint';
 
-jest.mock('src/categories/js/dependabot/dependabot.config');
-const configMocked = jest.mocked(config);
+vi.mock('src/categories/js/dependabot/dependabot.config');
+const configMocked = vi.mocked(config);
 
-jest.mock('src/utils/github');
-const githubMocked = jest.mocked(github);
+vi.mock('src/utils/github');
+const githubMocked = vi.mocked(github);
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('dependabot', () => {
