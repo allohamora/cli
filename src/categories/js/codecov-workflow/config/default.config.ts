@@ -18,7 +18,7 @@ const content = readableMultilineString`
           with:
             cache: "npm"
         - name: Install dependencies
-          run: npm i
+          run: npm ci
         - name: Collect coverage
           run: npm run test:coverage
         - name: Upload coverage to Codecov

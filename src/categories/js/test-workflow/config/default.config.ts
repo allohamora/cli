@@ -21,7 +21,7 @@ const content = readableMultilineString`
           with:
             cache: "npm"
         - name: Install dependencies
-          run: npm i
+          run: npm ci
         - name: Run tests
           run: npm run test
 `;
