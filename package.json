@@ -47,8 +47,8 @@
   },
   "homepage": "https://github.com/allohamora/cli#readme",
   "engines": {
-    "node": ">=16.14.2",
-    "npm": ">=8.5.0"
+    "node": ">=24.14.1",
+    "npm": ">=11.11.0"
   },
   "files": [
     "bin/"
