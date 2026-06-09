@@ -1,4 +1,4 @@
-import * as inquirer from 'inquirer';
+import inquirer from 'inquirer';
 import { manyOf, miniumOneValidate, oneOf } from '#src/utils/prompt.ts';
 
 vi.mock('inquirer', () => {
