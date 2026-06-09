@@ -1,11 +1,11 @@
 import * as ora from 'ora';
-import * as prompt from 'src/utils/prompt';
-import * as context from 'src/states/context';
-import categories from 'src/categories';
-import { chooseOptions, getCategory, getOptions, installOptions } from 'src/utils/main';
-import { Category } from 'src/types/category';
-import { camelize, kebablize } from 'src/utils/string';
-import { clearMock } from '__tests__/test-utils/clear-mock';
+import * as prompt from '#src/utils/prompt.ts';
+import * as context from '#src/states/context.ts';
+import categories from '#src/categories/index.ts';
+import { chooseOptions, getCategory, getOptions, installOptions } from '#src/utils/main.ts';
+import type { Category } from '#src/types/category.ts';
+import { camelize, kebablize } from '#src/utils/string.ts';
+import { clearMock } from '#__tests__/test-utils/clear-mock.ts';
 import type { Mock } from 'vitest';
 
 const oraMocked = ora as unknown as {
@@ -39,8 +39,8 @@ vi.mock('ora', () => {
   };
 });
 
-vi.mock('src/categories', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('src/categories')>();
+vi.mock('#src/categories/index.ts', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('#src/categories/index.ts')>();
   const js = {
     ...actual.default.js,
     options: {
@@ -56,10 +56,10 @@ const js = categories.js as Category;
 const categoryKeys = Object.keys(categories);
 const jsOptionKeys = Object.keys(js.options);
 
-vi.mock('src/utils/prompt');
+vi.mock('#src/utils/prompt.ts');
 const promptMocked = vi.mocked(prompt);
 
-vi.mock('src/states/context');
+vi.mock('#src/states/context.ts');
 const contextMocked = vi.mocked(context);
 
 describe('getCategory', () => {
@@ -76,7 +76,7 @@ describe('getCategory', () => {
 
 describe('getOptions', () => {
   test('should return selected options', async () => {
-    const [, selectedOption] = js.state.configTypes;
+    const selectedOption = js.state.configTypes[1]!;
 
     promptMocked.oneOf.mockResolvedValueOnce(selectedOption);
 
@@ -92,7 +92,7 @@ describe('getOptions', () => {
 describe('chooseOptions', () => {
   test('should print kebablized options and return selected', async () => {
     const kebablized = jsOptionKeys.map(kebablize);
-    const selected = [kebablized[0]];
+    const selected = [kebablized[0]!];
     const expected = selected.map(camelize);
 
     promptMocked.manyOf.mockResolvedValueOnce(selected);

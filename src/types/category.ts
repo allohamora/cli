@@ -1,4 +1,4 @@
-import { createCategoryState } from '../utils/state';
+import { createCategoryState } from '#src/utils/state.ts';
 
 type Handler = () => Promise<void>;
 

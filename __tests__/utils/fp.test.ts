@@ -1,4 +1,4 @@
-import { compose } from 'src/utils/fp';
+import { compose } from '#src/utils/fp.ts';
 
 describe('compose', () => {
   test('should compose funcs to one', () => {

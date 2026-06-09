@@ -1,7 +1,7 @@
-import * as installed from 'src/utils/installed';
-import 'src/categories/js/prettier/prettier.utils';
+import * as installed from '#src/utils/installed.ts';
+import '#src/categories/js/prettier/prettier.utils.ts';
 
-vi.mock('src/utils/installed', async (importOriginal) => ({
+vi.mock('#src/utils/installed.ts', async (importOriginal) => ({
   ...(await importOriginal()),
   isInstalledAndInRootCheck: vi.fn().mockImplementation(vi.fn()),
 }));

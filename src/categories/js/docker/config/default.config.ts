@@ -1,5 +1,5 @@
-import { readableMultilineString } from 'src/utils/string';
-import { FILE_NAME, IGNORE_NAME } from '../docker.const';
+import { readableMultilineString } from '#src/utils/string.ts';
+import { FILE_NAME, IGNORE_NAME } from '#src/categories/js/docker/docker.const.ts';
 
 type GetDockerFileArgs = {
   version: string;

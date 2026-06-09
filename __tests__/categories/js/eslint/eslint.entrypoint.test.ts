@@ -1,25 +1,25 @@
-import * as fs from 'src/utils/fs';
-import * as npm from 'src/utils/npm';
-import * as mutation from 'src/utils/mutation';
-import * as config from 'src/categories/js/eslint/eslint.config';
-import * as javascript from 'src/utils/javascript';
-import { eslint } from 'src/categories/js/eslint/eslint.entrypoint';
-import { createConfig } from './eslint-test.utils';
-import { Config } from 'src/categories/js/eslint/config/config.interface';
+import * as fs from '#src/utils/fs.ts';
+import * as npm from '#src/utils/npm.ts';
+import * as mutation from '#src/utils/mutation.ts';
+import * as config from '#src/categories/js/eslint/eslint.config.ts';
+import * as javascript from '#src/utils/javascript.ts';
+import { eslint } from '#src/categories/js/eslint/eslint.entrypoint.ts';
+import { createConfig } from '#__tests__/categories/js/eslint/eslint-test.utils.ts';
+import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
 
-vi.mock('src/utils/fs');
+vi.mock('#src/utils/fs.ts');
 const fsMocked = vi.mocked(fs);
 
-vi.mock('src/utils/npm');
+vi.mock('#src/utils/npm.ts');
 const npmMocked = vi.mocked(npm);
 
-vi.mock('src/utils/mutation');
+vi.mock('#src/utils/mutation.ts');
 const mutationMocked = vi.mocked(mutation);
 
-vi.mock('src/categories/js/eslint/eslint.config');
+vi.mock('#src/categories/js/eslint/eslint.config.ts');
 const configMocked = vi.mocked(config);
 
-vi.mock('src/utils/javascript', () => ({
+vi.mock('#src/utils/javascript.ts', () => ({
   format: vi.fn().mockImplementation(async (config) => config),
 }));
 const javascriptMocked = vi.mocked(javascript);

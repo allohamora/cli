@@ -1,11 +1,11 @@
-import * as config from 'src/categories/js/build-workflow/build-workflow.config';
-import * as github from 'src/utils/github';
-import { buildWorkflow } from 'src/categories/js/build-workflow/build-workflow.entrypoint';
+import * as config from '#src/categories/js/build-workflow/build-workflow.config.ts';
+import * as github from '#src/utils/github.ts';
+import { buildWorkflow } from '#src/categories/js/build-workflow/build-workflow.entrypoint.ts';
 
-vi.mock('src/categories/js/build-workflow/build-workflow.config');
+vi.mock('#src/categories/js/build-workflow/build-workflow.config.ts');
 const configMocked = vi.mocked(config);
 
-vi.mock('src/utils/github');
+vi.mock('#src/utils/github.ts');
 const githubMocked = vi.mocked(github);
 
 beforeEach(() => {

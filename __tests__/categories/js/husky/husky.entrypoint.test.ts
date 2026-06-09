@@ -1,8 +1,8 @@
-import * as npm from 'src/utils/npm';
-import { husky } from 'src/categories/js/husky/husky.entrypoint';
-import { clearMock } from '__tests__/test-utils/clear-mock';
+import * as npm from '#src/utils/npm.ts';
+import { husky } from '#src/categories/js/husky/husky.entrypoint.ts';
+import { clearMock } from '#__tests__/test-utils/clear-mock.ts';
 
-vi.mock('src/utils/npm');
+vi.mock('#src/utils/npm.ts');
 const npmMocked = vi.mocked(npm);
 
 beforeEach(() => {

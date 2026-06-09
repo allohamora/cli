@@ -1,11 +1,11 @@
-import * as runCommand from 'src/utils/run-command';
-import * as installed from 'src/utils/installed';
-import * as fs from 'src/utils/fs';
+import * as runCommand from '#src/utils/run-command.ts';
+import * as installed from '#src/utils/installed.ts';
+import * as fs from '#src/utils/fs.ts';
 import fsp from 'node:fs/promises';
-import { addHook } from 'src/categories/js/husky/husky.utils';
-import { clearMock } from '__tests__/test-utils/clear-mock';
+import { addHook } from '#src/categories/js/husky/husky.utils.ts';
+import { clearMock } from '#__tests__/test-utils/clear-mock.ts';
 
-vi.mock('src/utils/installed', async (importOriginal) => ({
+vi.mock('#src/utils/installed.ts', async (importOriginal) => ({
   ...(await importOriginal()),
   isInstalledAndInRootCheck: vi.fn().mockReturnValue(vi.fn()),
 }));
@@ -14,10 +14,10 @@ const installedMocked = vi.mocked(installed);
 vi.mock('node:fs/promises');
 const fspMocked = vi.mocked(fsp);
 
-vi.mock('src/utils/fs');
+vi.mock('#src/utils/fs.ts');
 const fsMocked = vi.mocked(fs);
 
-vi.mock('src/utils/run-command');
+vi.mock('#src/utils/run-command.ts');
 const runCommandMocked = vi.mocked(runCommand);
 
 beforeEach(() => {

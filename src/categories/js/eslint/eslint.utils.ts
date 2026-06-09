@@ -1,8 +1,8 @@
-import { isInstalledAndInRootCheck } from 'src/utils/installed';
-import { isJestInstalled } from '../jest/jest.utils';
-import { isPrettierInstalled } from '../prettier/prettier.utils';
-import { Config } from './config/config.interface';
-import { CONFIG_FILE_NAME, SCRIPT_NAME } from './eslint.const';
+import { isInstalledAndInRootCheck } from '#src/utils/installed.ts';
+import { isJestInstalled } from '#src/categories/js/jest/jest.utils.ts';
+import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.utils.ts';
+import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
+import { CONFIG_FILE_NAME, SCRIPT_NAME } from '#src/categories/js/eslint/eslint.const.ts';
 
 export const jestMutation = async (config: Config) => {
   if (await isJestInstalled()) {

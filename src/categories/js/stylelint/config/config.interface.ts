@@ -1,5 +1,5 @@
-import { Mutation } from 'src/utils/mutation';
-import { NpmScript } from 'src/utils/npm';
+import type { Mutation } from '#src/utils/mutation.ts';
+import type { NpmScript } from '#src/utils/npm.ts';
 
 type StylelintConfig = {
   extends: string[];

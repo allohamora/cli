@@ -1,19 +1,19 @@
-import * as fs from 'src/utils/fs';
-import * as npm from 'src/utils/npm';
-import * as config from 'src/categories/js/commitlint/commitlint.config';
-import * as utils from 'src/categories/js/commitlint/commitlint.utils';
-import { commitlint } from 'src/categories/js/commitlint/commitlint.entrypoint';
+import * as fs from '#src/utils/fs.ts';
+import * as npm from '#src/utils/npm.ts';
+import * as config from '#src/categories/js/commitlint/commitlint.config.ts';
+import * as utils from '#src/categories/js/commitlint/commitlint.utils.ts';
+import { commitlint } from '#src/categories/js/commitlint/commitlint.entrypoint.ts';
 
-vi.mock('src/utils/fs');
+vi.mock('#src/utils/fs.ts');
 const fsMocked = vi.mocked(fs);
 
-vi.mock('src/utils/npm');
+vi.mock('#src/utils/npm.ts');
 const npmMocked = vi.mocked(npm);
 
-vi.mock('src/categories/js/commitlint/commitlint.config');
+vi.mock('#src/categories/js/commitlint/commitlint.config.ts');
 const configMocked = vi.mocked(config);
 
-vi.mock('src/categories/js/commitlint/commitlint.utils');
+vi.mock('#src/categories/js/commitlint/commitlint.utils.ts');
 const utilsMocked = vi.mocked(utils);
 
 beforeEach(() => {

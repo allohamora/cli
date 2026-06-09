@@ -1,15 +1,15 @@
 const log = vi.spyOn(global.console, 'log').mockImplementation(vi.fn());
 
-import * as consoleColors from 'src/utils/console';
-import * as mainUtils from 'src/utils/main';
-import { main } from 'src';
-import { createCategoryState } from 'src/utils/state';
-import { Category } from 'src/types/category';
+import * as consoleColors from '#src/utils/console.ts';
+import * as mainUtils from '#src/utils/main.ts';
+import { main } from '#src/index.ts';
+import { createCategoryState } from '#src/utils/state.ts';
+import type { Category } from '#src/types/category.ts';
 
-vi.mock('src/utils/console');
+vi.mock('#src/utils/console.ts');
 const consoleColorsMocked = vi.mocked(consoleColors);
 
-vi.mock('src/utils/main');
+vi.mock('#src/utils/main.ts');
 const mainUtilsMocked = vi.mocked(mainUtils);
 
 beforeEach(() => {

@@ -1,4 +1,5 @@
 type TypeState<T extends string> = [() => T, (value: T) => void];
+type ConfigState<V> = [() => V];
 
 export const createTypeState = <T extends string>(types: readonly T[]): TypeState<T> => {
   let type = types[0];
@@ -17,7 +18,10 @@ export type Values<V, K extends string = string> = {
   [key in K]?: V;
 };
 
-export const createConfigState = <V, K extends string>(configState: TypeState<K>, values: Values<V, K>) => {
+export const createConfigState = <V, K extends string>(
+  configState: TypeState<K>,
+  values: Values<V, K>,
+): ConfigState<V> => {
   const getConfig = () => {
     const [getKey] = configState;
     const value = values[getKey()] ?? values.default;

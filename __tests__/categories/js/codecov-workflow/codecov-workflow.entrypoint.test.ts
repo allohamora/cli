@@ -1,11 +1,11 @@
-import * as config from 'src/categories/js/codecov-workflow/codecov-workflow.config';
-import * as github from 'src/utils/github';
-import { codecovWorkflow } from 'src/categories/js/codecov-workflow/codecov-workflow.entrypoint';
+import * as config from '#src/categories/js/codecov-workflow/codecov-workflow.config.ts';
+import * as github from '#src/utils/github.ts';
+import { codecovWorkflow } from '#src/categories/js/codecov-workflow/codecov-workflow.entrypoint.ts';
 
-vi.mock('src/categories/js/codecov-workflow/codecov-workflow.config');
+vi.mock('#src/categories/js/codecov-workflow/codecov-workflow.config.ts');
 const configMocked = vi.mocked(config);
 
-vi.mock('src/utils/github');
+vi.mock('#src/utils/github.ts');
 const githubMocked = vi.mocked(github);
 
 beforeEach(() => {

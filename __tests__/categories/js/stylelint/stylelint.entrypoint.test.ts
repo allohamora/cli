@@ -1,16 +1,16 @@
-import * as fsUtils from 'src/utils/fs';
-import * as npmUtils from 'src/utils/npm';
-import * as config from 'src/categories/js/stylelint/stylelint.config';
-import { stylelint } from 'src/categories/js/stylelint/stylelint.entrypoint';
-import { Config } from 'src/categories/js/stylelint/config/config.interface';
+import * as fsUtils from '#src/utils/fs.ts';
+import * as npmUtils from '#src/utils/npm.ts';
+import * as config from '#src/categories/js/stylelint/stylelint.config.ts';
+import { stylelint } from '#src/categories/js/stylelint/stylelint.entrypoint.ts';
+import type { Config } from '#src/categories/js/stylelint/config/config.interface.ts';
 
-vi.mock('src/utils/fs');
+vi.mock('#src/utils/fs.ts');
 const fsUtilsMocked = vi.mocked(fsUtils);
 
-vi.mock('src/utils/npm');
+vi.mock('#src/utils/npm.ts');
 const npmUtilsMocked = vi.mocked(npmUtils);
 
-vi.mock('src/categories/js/stylelint/stylelint.config');
+vi.mock('#src/categories/js/stylelint/stylelint.config.ts');
 const configMocked = vi.mocked(config);
 
 const baseConfig = (partial: Partial<Config> = {}) => {

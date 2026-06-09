@@ -1,16 +1,16 @@
-import * as fs from 'src/utils/fs';
-import * as npm from 'src/utils/npm';
-import * as config from 'src/categories/js/jest/jest.config';
-import { Config } from 'src/categories/js/jest/config/config.interface';
-import { jestEntrypoint } from 'src/categories/js/jest/jest.entrypoint';
+import * as fs from '#src/utils/fs.ts';
+import * as npm from '#src/utils/npm.ts';
+import * as config from '#src/categories/js/jest/jest.config.ts';
+import type { Config } from '#src/categories/js/jest/config/config.interface.ts';
+import { jestEntrypoint } from '#src/categories/js/jest/jest.entrypoint.ts';
 
-vi.mock('src/utils/fs');
+vi.mock('#src/utils/fs.ts');
 const fsMocked = vi.mocked(fs);
 
-vi.mock('src/utils/npm');
+vi.mock('#src/utils/npm.ts');
 const npmMocked = vi.mocked(npm);
 
-vi.mock('src/categories/js/jest/jest.config');
+vi.mock('#src/categories/js/jest/jest.config.ts');
 const configMocked = vi.mocked(config);
 
 describe('jest', () => {

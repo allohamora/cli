@@ -1,9 +1,9 @@
-import categories from 'src/categories';
+import categories from '#src/categories/index.ts';
 import ora from 'ora';
-import { manyOf, oneOf } from 'src/utils/prompt';
-import { camelize, kebablize } from 'src/utils/string';
-import { Category } from 'src/types/category';
-import { setInstalling } from 'src/states/context';
+import { manyOf, oneOf } from '#src/utils/prompt.ts';
+import { camelize, kebablize } from '#src/utils/string.ts';
+import type { Category } from '#src/types/category.ts';
+import { setInstalling } from '#src/states/context.ts';
 
 const categoriesKeys = Object.keys(categories);
 
@@ -39,7 +39,7 @@ export const installOptions = async (options: Category['options'], keys: string[
       const kebablizeKey = kebablize(key);
       spinner.text = `${kebablizeKey} is installing\n`;
 
-      return options[key]();
+      return options[key]?.();
     });
   }, Promise.resolve());
 

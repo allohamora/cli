@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { addDirToRootIfNotExists, addFileToRoot } from './fs';
+import { addDirToRootIfNotExists, addFileToRoot } from '#src/utils/fs.ts';
 
 const GITHUB_DIR_NAME = '.github';
 const GITHUB_WORKFLOWS_DIR_NAME = 'workflows';

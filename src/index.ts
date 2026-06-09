@@ -1,5 +1,5 @@
-import { white } from './utils/console';
-import { getCategory, getOptions, installOptions, chooseOptions } from './utils/main';
+import { white } from '#src/utils/console.ts';
+import { getCategory, getOptions, installOptions, chooseOptions } from '#src/utils/main.ts';
 
 export const main = async () => {
   console.log(white(`Welcome to Allohamora's cli`));
@@ -13,7 +13,7 @@ export const main = async () => {
   console.log(white('Installation completed'));
 };
 
-/* v8 ignore next 3 -- CLI bootstrap path is exercised by the built binary. */
-if (require.main) {
+/* v8 ignore next 3 -- CLI bootstrap path is exercised by direct Node startup. */
+if (import.meta.main) {
   void main();
 }

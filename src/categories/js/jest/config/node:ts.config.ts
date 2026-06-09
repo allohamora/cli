@@ -1,6 +1,6 @@
-import { readableMultilineString } from 'src/utils/string';
-import { scripts } from './default.config';
-import { Config } from './config.interface';
+import { readableMultilineString } from '#src/utils/string.ts';
+import { scripts } from '#src/categories/js/jest/config/default.config.ts';
+import type { Config } from '#src/categories/js/jest/config/config.interface.ts';
 
 const configFileContent = readableMultilineString`
   /** @type {import('ts-jest').JestConfigWithTsJest} */

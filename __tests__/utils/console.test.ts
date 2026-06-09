@@ -1,4 +1,4 @@
-import { white } from 'src/utils/console';
+import { white } from '#src/utils/console.ts';
 
 describe('white', () => {
   test('should return string with white and reset codes', () => {

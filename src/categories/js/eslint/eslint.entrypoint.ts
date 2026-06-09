@@ -1,10 +1,10 @@
-import { getConfig } from './eslint.config';
-import { addFileToRoot } from 'src/utils/fs';
-import { addScripts, installDevelopmentDependencies } from 'src/utils/npm';
-import { CONFIG_FILE_NAME, PACKAGE_NAME } from './eslint.const';
-import { applyMutations } from 'src/utils/mutation';
-import { Config } from './config/config.interface';
-import { format } from 'src/utils/javascript';
+import { getConfig } from '#src/categories/js/eslint/eslint.config.ts';
+import { addFileToRoot } from '#src/utils/fs.ts';
+import { addScripts, installDevelopmentDependencies } from '#src/utils/npm.ts';
+import { CONFIG_FILE_NAME, PACKAGE_NAME } from '#src/categories/js/eslint/eslint.const.ts';
+import { applyMutations } from '#src/utils/mutation.ts';
+import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
+import { format } from '#src/utils/javascript.ts';
 
 const optional = <T>(value: T | undefined, map: (value: T) => string) => (value ? map(value) : '');
 

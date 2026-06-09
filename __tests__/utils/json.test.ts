@@ -1,4 +1,4 @@
-import { stringify } from 'src/utils/json';
+import { stringify } from '#src/utils/json.ts';
 
 describe('stringify', () => {
   test('should stringify json with 2 spaces', () => {

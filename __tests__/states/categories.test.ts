@@ -1,4 +1,4 @@
-import { jsCategoryState } from 'src/states/categories';
+import { jsCategoryState } from '#src/states/categories.ts';
 
 describe('jsCategoryState', () => {
   test('should be initialized', () => {

@@ -1,4 +1,4 @@
-import { setInstalling, getInstalling } from 'src/states/context';
+import { setInstalling, getInstalling } from '#src/states/context.ts';
 
 const expectSetAndGet = () => {
   const installing = ['__test__'];

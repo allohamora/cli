@@ -1,5 +1,5 @@
-import * as runCommand from 'src/utils/run-command';
-import * as fs from 'src/utils/fs';
+import * as runCommand from '#src/utils/run-command.ts';
+import * as fs from '#src/utils/fs.ts';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 import {
@@ -11,16 +11,16 @@ import {
   setPackageJson,
   PACKAGE_JSON_PATH,
   PACKAGE_JSON_NAME,
-} from 'src/utils/npm';
-import { ROOT_PATH } from 'src/utils/path';
+} from '#src/utils/npm.ts';
+import { ROOT_PATH } from '#src/utils/path.ts';
 
 vi.mock('node:fs/promises');
 const fspMocked = vi.mocked(fsp);
 
-vi.mock('src/utils/run-command');
+vi.mock('#src/utils/run-command.ts');
 const runCommandMocked = vi.mocked(runCommand);
 
-vi.mock('src/utils/fs');
+vi.mock('#src/utils/fs.ts');
 const fsMocked = vi.mocked(fs);
 
 beforeEach(() => {

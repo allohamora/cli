@@ -1,5 +1,5 @@
 import * as inquirer from 'inquirer';
-import { manyOf, miniumOneValidate, oneOf } from 'src/utils/prompt';
+import { manyOf, miniumOneValidate, oneOf } from '#src/utils/prompt.ts';
 
 vi.mock('inquirer', () => {
   const prompt = vi.fn();

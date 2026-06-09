@@ -1,16 +1,16 @@
-import * as fs from 'src/utils/fs';
-import * as npm from 'src/utils/npm';
-import * as config from 'src/categories/js/standard-version/standard-version.config';
-import { defaultConfig } from 'src/categories/js/standard-version/config/default.config';
-import { standardVersion } from 'src/categories/js/standard-version/standard-version.entrypoint';
+import * as fs from '#src/utils/fs.ts';
+import * as npm from '#src/utils/npm.ts';
+import * as config from '#src/categories/js/standard-version/standard-version.config.ts';
+import { defaultConfig } from '#src/categories/js/standard-version/config/default.config.ts';
+import { standardVersion } from '#src/categories/js/standard-version/standard-version.entrypoint.ts';
 
-vi.mock('src/utils/fs');
+vi.mock('#src/utils/fs.ts');
 const fsMocked = vi.mocked(fs);
 
-vi.mock('src/utils/npm');
+vi.mock('#src/utils/npm.ts');
 const npmMocked = vi.mocked(npm);
 
-vi.mock('src/categories/js/standard-version/standard-version.config');
+vi.mock('#src/categories/js/standard-version/standard-version.config.ts');
 const configMocked = vi.mocked(config);
 
 describe('standardVersion', () => {

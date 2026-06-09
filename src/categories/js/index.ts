@@ -1,18 +1,18 @@
-import { jsCategoryState } from 'src/states/categories';
-import { commitlint } from './commitlint/commitlint.entrypoint';
-import { eslint } from './eslint/eslint.entrypoint';
-import { husky } from './husky/husky.entrypoint';
-import { lintStaged } from './lint-staged/lint-staged.entrypoint';
-import { stylelint } from './stylelint/stylelint.entrypoint';
-import { prettier } from './prettier/prettier.entrypoint';
-import { standardVersion } from './standard-version/standard-version.entrypoint';
-import { jestEntrypoint } from './jest/jest.entrypoint';
-import { docker } from './docker/docker.entrypoint';
-import { releaseWorkflow } from './release-workflow/release-workflow.entrypoint';
-import { testWorkflow } from './test-workflow/test-workflow.entrypoint';
-import { buildWorkflow } from './build-workflow/build-workflow.entrypoint';
-import { codecovWorkflow } from './codecov-workflow/codecov-workflow.entrypoint';
-import { dependabot } from './dependabot/dependabot.entrypoint';
+import { jsCategoryState } from '#src/states/categories.ts';
+import { commitlint } from '#src/categories/js/commitlint/commitlint.entrypoint.ts';
+import { eslint } from '#src/categories/js/eslint/eslint.entrypoint.ts';
+import { husky } from '#src/categories/js/husky/husky.entrypoint.ts';
+import { lintStaged } from '#src/categories/js/lint-staged/lint-staged.entrypoint.ts';
+import { stylelint } from '#src/categories/js/stylelint/stylelint.entrypoint.ts';
+import { prettier } from '#src/categories/js/prettier/prettier.entrypoint.ts';
+import { standardVersion } from '#src/categories/js/standard-version/standard-version.entrypoint.ts';
+import { jestEntrypoint } from '#src/categories/js/jest/jest.entrypoint.ts';
+import { docker } from '#src/categories/js/docker/docker.entrypoint.ts';
+import { releaseWorkflow } from '#src/categories/js/release-workflow/release-workflow.entrypoint.ts';
+import { testWorkflow } from '#src/categories/js/test-workflow/test-workflow.entrypoint.ts';
+import { buildWorkflow } from '#src/categories/js/build-workflow/build-workflow.entrypoint.ts';
+import { codecovWorkflow } from '#src/categories/js/codecov-workflow/codecov-workflow.entrypoint.ts';
+import { dependabot } from '#src/categories/js/dependabot/dependabot.entrypoint.ts';
 
 // order have matter
 const options = {

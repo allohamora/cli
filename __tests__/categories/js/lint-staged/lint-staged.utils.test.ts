@@ -1,8 +1,8 @@
-import * as huskyUtils from 'src/categories/js/husky/husky.utils';
-import * as prettierUtils from 'src/categories/js/prettier/prettier.utils';
-import * as jestUtils from 'src/categories/js/jest/jest.utils';
-import * as eslintUtils from 'src/categories/js/eslint/eslint.utils';
-import * as stylelintUtils from 'src/categories/js/stylelint/stylelint.utils';
+import * as huskyUtils from '#src/categories/js/husky/husky.utils.ts';
+import * as prettierUtils from '#src/categories/js/prettier/prettier.utils.ts';
+import * as jestUtils from '#src/categories/js/jest/jest.utils.ts';
+import * as eslintUtils from '#src/categories/js/eslint/eslint.utils.ts';
+import * as stylelintUtils from '#src/categories/js/stylelint/stylelint.utils.ts';
 import {
   addOptionToLintStagedConfig,
   huskyIntegration,
@@ -10,21 +10,21 @@ import {
   eslintMutation,
   prettierMutation,
   stylelintMutation,
-} from 'src/categories/js/lint-staged/lint-staged.utils';
+} from '#src/categories/js/lint-staged/lint-staged.utils.ts';
 
-vi.mock('src/categories/js/husky/husky.utils');
+vi.mock('#src/categories/js/husky/husky.utils.ts');
 const huskyUtilsMocked = vi.mocked(huskyUtils);
 
-vi.mock('src/categories/js/prettier/prettier.utils');
+vi.mock('#src/categories/js/prettier/prettier.utils.ts');
 const prettierUtilsMocked = vi.mocked(prettierUtils);
 
-vi.mock('src/categories/js/jest/jest.utils');
+vi.mock('#src/categories/js/jest/jest.utils.ts');
 const jestUtilsMocked = vi.mocked(jestUtils);
 
-vi.mock('src/categories/js/eslint/eslint.utils');
+vi.mock('#src/categories/js/eslint/eslint.utils.ts');
 const eslintUtilsMocked = vi.mocked(eslintUtils);
 
-vi.mock('src/categories/js/stylelint/stylelint.utils');
+vi.mock('#src/categories/js/stylelint/stylelint.utils.ts');
 const stylelintUtilsMocked = vi.mocked(stylelintUtils);
 
 beforeEach(() => {
@@ -73,7 +73,7 @@ describe('addOptionToLintStagedConfig', () => {
   test('should store only unique values', () => {
     const key = '*.ts';
     const values = ['__test__'];
-    const nextValue = values[0];
+    const nextValue = values[0]!;
 
     const actual = { [key]: values };
     addOptionToLintStagedConfig(actual, key, nextValue);

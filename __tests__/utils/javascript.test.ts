@@ -1,7 +1,7 @@
 import prettier from 'prettier';
-import { getConfig } from 'src/categories/js/prettier/prettier.config';
-import { defaultConfig } from 'src/categories/js/prettier/config/default.config';
-import { format } from 'src/utils/javascript';
+import { getConfig } from '#src/categories/js/prettier/prettier.config.ts';
+import { defaultConfig } from '#src/categories/js/prettier/config/default.config.ts';
+import { format } from '#src/utils/javascript.ts';
 
 vi.mock('prettier', () => ({
   default: {
@@ -10,7 +10,7 @@ vi.mock('prettier', () => ({
 }));
 const prettierMocked = vi.mocked(prettier);
 
-vi.mock('src/categories/js/prettier/prettier.config', () => ({ getConfig: vi.fn() }));
+vi.mock('#src/categories/js/prettier/prettier.config.ts', () => ({ getConfig: vi.fn() }));
 const getConfigMocked = vi.mocked(getConfig);
 
 describe('format', () => {

@@ -1,6 +1,6 @@
 import fsp from 'node:fs/promises';
-import { rootPath } from './path';
-import { stringify } from './json';
+import { rootPath } from '#src/utils/path.ts';
+import { stringify } from '#src/utils/json.ts';
 
 export const isExistsInRoot = async (name: string) => {
   const checkPath = rootPath(name);
