@@ -1,4 +1,4 @@
-import { readableMultilineString } from '#src/utils/string.ts';
+import dedent from 'dedent';
 import { prettierMutation } from '#src/categories/js/stylelint/stylelint.utils.ts';
 import type { Config } from '#src/categories/js/stylelint/config/config.interface.ts';
 
@@ -6,7 +6,7 @@ const stylelintConfig: Config['stylelintConfig'] = {
   extends: ['stylelint-config-standard', 'stylelint-config-clean-order'],
 };
 
-const stylelintIgnore = readableMultilineString`
+const stylelintIgnore = dedent`
   node_modules
   build
   dist

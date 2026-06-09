@@ -11,7 +11,7 @@
     "#__tests__/*.ts": "./__tests__/*.ts"
   },
   "scripts": {
-    "dev": "node --watch ./src/index.ts",
+    "dev": "node ./src/index.ts",
     "prebuild": "npm run typecheck && rimraf ./bin",
     "build": "rolldown -c rolldown.config.mjs",
     "prestart": "npm run build",
@@ -83,6 +83,8 @@
     "yaml": "^2.9.0"
   },
   "dependencies": {
+    "dedent": "^1.7.2",
+    "execa": "^9.6.1",
     "inquirer": "^14.0.2",
     "ora": "^9.4.0",
     "prettier": "^3.8.3"

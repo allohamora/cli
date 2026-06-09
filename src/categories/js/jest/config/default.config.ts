@@ -1,5 +1,5 @@
+import dedent from 'dedent';
 import type { NpmScript } from '#src/utils/npm.ts';
-import { readableMultilineString } from '#src/utils/string.ts';
 import type { Config } from '#src/categories/js/jest/config/config.interface.ts';
 
 export const scripts: NpmScript[] = [
@@ -8,7 +8,7 @@ export const scripts: NpmScript[] = [
   { name: 'test:coverage', script: 'jest --coverage' },
 ];
 
-const configFileContent = readableMultilineString`
+const configFileContent = dedent`
   /** @type {import('jest').Config} */
   module.exports = {
     testEnvironment: 'node',

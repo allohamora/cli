@@ -1,6 +1,6 @@
-import { readableMultilineString } from '#src/utils/string.ts';
+import dedent from 'dedent';
 
-export const content = readableMultilineString`
+export const content = dedent`
   version: 2
   updates:
     - package-ecosystem: "github-actions"

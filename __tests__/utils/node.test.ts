@@ -1,18 +1,18 @@
-import * as runCommandUtils from '#src/utils/run-command.ts';
+import { execa } from 'execa';
 import { getNodeVersion } from '#src/utils/node.ts';
 
-vi.mock('#src/utils/run-command.ts');
-const runCommandUtilsMocked = vi.mocked(runCommandUtils);
+vi.mock('execa');
+const execaMocked = vi.mocked(execa);
 
 describe('getNodeVersion', () => {
   test('should return nodejs version', async () => {
     const expected = '16.14.2';
 
-    runCommandUtilsMocked.runCommand.mockResolvedValueOnce(`v${expected}\n`);
+    execaMocked.mockResolvedValueOnce({ stdout: `v${expected}\n` } as Awaited<ReturnType<typeof execa>>);
 
     const actual = await getNodeVersion();
 
     expect(actual).toBe(expected);
-    expect(runCommandUtilsMocked.runCommand).toHaveBeenCalledWith('node -v');
+    expect(execaMocked).toHaveBeenCalledWith(expect.arrayContaining(['node -v']));
   });
 });

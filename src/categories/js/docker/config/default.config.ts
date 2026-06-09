@@ -1,11 +1,11 @@
-import { readableMultilineString } from '#src/utils/string.ts';
+import dedent from 'dedent';
 import { FILE_NAME, IGNORE_NAME } from '#src/categories/js/docker/docker.const.ts';
 
 type GetDockerFileArgs = {
   version: string;
 };
 
-export const getDockerFile = ({ version }: GetDockerFileArgs) => readableMultilineString`
+export const getDockerFile = ({ version }: GetDockerFileArgs) => dedent`
   FROM node:${version}
   WORKDIR /app
 
@@ -21,7 +21,7 @@ export const getDockerFile = ({ version }: GetDockerFileArgs) => readableMultili
   CMD npm run start
 `;
 
-export const dockerIgnore = readableMultilineString`
+export const dockerIgnore = dedent`
   node_modules
   dist
   build

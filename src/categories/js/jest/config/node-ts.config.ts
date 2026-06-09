@@ -1,8 +1,8 @@
-import { readableMultilineString } from '#src/utils/string.ts';
+import dedent from 'dedent';
 import { scripts } from '#src/categories/js/jest/config/default.config.ts';
 import type { Config } from '#src/categories/js/jest/config/config.interface.ts';
 
-const configFileContent = readableMultilineString`
+const configFileContent = dedent`
   /** @type {import('ts-jest').JestConfigWithTsJest} */
   module.exports = {
     preset: 'ts-jest',
