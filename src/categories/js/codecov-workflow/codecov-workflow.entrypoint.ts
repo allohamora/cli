@@ -1,6 +1,6 @@
-import { addGithubWorkflow } from 'src/utils/github';
-import { getConfig } from './codecov-workflow.config';
-import { WORKFLOW_FILENAME } from './codecov-workflow.const';
+import { addGithubWorkflow } from '#src/utils/github.ts';
+import { getConfig } from '#src/categories/js/codecov-workflow/codecov-workflow.config.ts';
+import { WORKFLOW_FILENAME } from '#src/categories/js/codecov-workflow/codecov-workflow.const.ts';
 
 export const codecovWorkflow = async () => {
   const { content } = getConfig();

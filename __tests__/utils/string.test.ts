@@ -6,7 +6,7 @@ import {
   multilineStringBuilderWithMiddlewares,
   trim,
   readableMultilineString,
-} from 'src/utils/string';
+} from '#src/utils/string.ts';
 
 describe('kebablize', () => {
   test('should kebablize string', () => {

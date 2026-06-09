@@ -1,4 +1,4 @@
-import { compose } from './fp';
+import { compose } from '#src/utils/fp.ts';
 
 export const kebablize = (camel: string) => {
   return camel
@@ -13,7 +13,7 @@ export const camelize = (kebab: string) => {
     .map((word) => {
       const [first, ...rest] = word;
 
-      return [first.toUpperCase(), ...rest].join('');
+      return [first?.toUpperCase(), ...rest].join('');
     })
     .join('');
 

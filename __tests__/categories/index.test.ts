@@ -1,4 +1,4 @@
-import categories from 'src/categories';
+import categories from '#src/categories/index.ts';
 
 describe('categories', () => {
   test('should export js state', () => {

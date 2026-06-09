@@ -1,6 +1,6 @@
-import { getConfig } from 'src/categories/js/dependabot/dependabot.config';
-import { expectJsConfig } from '__tests__/test-utils/js-config';
-import { yamlParse } from '__tests__/test-utils/yaml';
+import { getConfig } from '#src/categories/js/dependabot/dependabot.config.ts';
+import { expectJsConfig } from '#__tests__/test-utils/js-config.ts';
+import { yamlParse } from '#__tests__/test-utils/yaml.ts';
 
 const expectDependaBotConfig = ({ content }: { content: string }) => {
   const parsed = yamlParse(content) as { version: number; updates: [] };

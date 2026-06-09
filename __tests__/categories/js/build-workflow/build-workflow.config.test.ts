@@ -1,5 +1,5 @@
-import { getConfig } from 'src/categories/js/build-workflow/build-workflow.config';
-import { expectGithubWorkflow } from '__tests__/test-utils/github';
-import { expectJsConfig } from '__tests__/test-utils/js-config';
+import { getConfig } from '#src/categories/js/build-workflow/build-workflow.config.ts';
+import { expectGithubWorkflow } from '#__tests__/test-utils/github.ts';
+import { expectJsConfig } from '#__tests__/test-utils/js-config.ts';
 
 expectJsConfig(getConfig, [(config) => expectGithubWorkflow(config.content)]);

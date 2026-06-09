@@ -1,5 +1,10 @@
-import { eslintMutation, jestMutation, prettierMutation, stylelintMutation } from '../lint-staged.utils';
-import { Config } from './config.interface';
+import {
+  eslintMutation,
+  jestMutation,
+  prettierMutation,
+  stylelintMutation,
+} from '#src/categories/js/lint-staged/lint-staged.utils.ts';
+import type { Config } from '#src/categories/js/lint-staged/config/config.interface.ts';
 
 export const defaultConfig: Config = {
   config: {},

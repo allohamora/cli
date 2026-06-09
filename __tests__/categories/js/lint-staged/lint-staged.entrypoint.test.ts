@@ -1,16 +1,16 @@
-import * as npm from 'src/utils/npm';
-import * as config from 'src/categories/js/lint-staged/lint-staged.config';
-import * as utils from 'src/categories/js/lint-staged/lint-staged.utils';
-import { lintStaged } from 'src/categories/js/lint-staged/lint-staged.entrypoint';
-import { Config, LintStagedConfig } from 'src/categories/js/lint-staged/config/config.interface';
+import * as npm from '#src/utils/npm.ts';
+import * as config from '#src/categories/js/lint-staged/lint-staged.config.ts';
+import * as utils from '#src/categories/js/lint-staged/lint-staged.utils.ts';
+import { lintStaged } from '#src/categories/js/lint-staged/lint-staged.entrypoint.ts';
+import type { Config, LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
 
-vi.mock('src/utils/npm');
+vi.mock('#src/utils/npm.ts');
 const npmMocked = vi.mocked(npm);
 
-vi.mock('src/categories/js/lint-staged/lint-staged.config');
+vi.mock('#src/categories/js/lint-staged/lint-staged.config.ts');
 const configMocked = vi.mocked(config);
 
-vi.mock('src/categories/js/lint-staged/lint-staged.utils');
+vi.mock('#src/categories/js/lint-staged/lint-staged.utils.ts');
 const utilsMocked = vi.mocked(utils);
 
 beforeEach(() => {

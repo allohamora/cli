@@ -1,7 +1,7 @@
-import * as runCommandUtils from 'src/utils/run-command';
-import { getNodeVersion } from 'src/utils/node';
+import * as runCommandUtils from '#src/utils/run-command.ts';
+import { getNodeVersion } from '#src/utils/node.ts';
 
-vi.mock('src/utils/run-command');
+vi.mock('#src/utils/run-command.ts');
 const runCommandUtilsMocked = vi.mocked(runCommandUtils);
 
 describe('getNodeVersion', () => {

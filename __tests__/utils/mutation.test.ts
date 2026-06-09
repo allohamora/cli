@@ -1,5 +1,5 @@
-import { applyMutations } from 'src/utils/mutation';
-import { delay } from '__tests__/test-utils/delay';
+import { applyMutations } from '#src/utils/mutation.ts';
+import { delay } from '#__tests__/test-utils/delay.ts';
 
 describe('applyMutations', () => {
   test('should apply mutations', async () => {

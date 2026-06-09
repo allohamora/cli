@@ -1,8 +1,8 @@
-import { addFileToRoot } from 'src/utils/fs';
-import { stringify } from 'src/utils/json';
-import { addScripts, installDevelopmentDependencies } from 'src/utils/npm';
-import { getConfig } from './stylelint.config';
-import { CONFIG_NAME, IGNORE_NAME } from './stylelint.const';
+import { addFileToRoot } from '#src/utils/fs.ts';
+import { stringify } from '#src/utils/json.ts';
+import { addScripts, installDevelopmentDependencies } from '#src/utils/npm.ts';
+import { getConfig } from '#src/categories/js/stylelint/stylelint.config.ts';
+import { CONFIG_NAME, IGNORE_NAME } from '#src/categories/js/stylelint/stylelint.const.ts';
 
 export const stylelint = async () => {
   const config = getConfig();

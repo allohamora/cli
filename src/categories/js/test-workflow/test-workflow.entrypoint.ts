@@ -1,6 +1,6 @@
-import { addGithubWorkflow } from 'src/utils/github';
-import { getConfig } from './test-workflow.config';
-import { WORKFLOW_FILENAME } from './test-workflow.const';
+import { addGithubWorkflow } from '#src/utils/github.ts';
+import { getConfig } from '#src/categories/js/test-workflow/test-workflow.config.ts';
+import { WORKFLOW_FILENAME } from '#src/categories/js/test-workflow/test-workflow.const.ts';
 
 export const testWorkflow = async () => {
   const { content } = getConfig();

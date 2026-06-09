@@ -1,11 +1,11 @@
-import * as config from 'src/categories/js/dependabot/dependabot.config';
-import * as github from 'src/utils/github';
-import { dependabot } from 'src/categories/js/dependabot/dependabot.entrypoint';
+import * as config from '#src/categories/js/dependabot/dependabot.config.ts';
+import * as github from '#src/utils/github.ts';
+import { dependabot } from '#src/categories/js/dependabot/dependabot.entrypoint.ts';
 
-vi.mock('src/categories/js/dependabot/dependabot.config');
+vi.mock('#src/categories/js/dependabot/dependabot.config.ts');
 const configMocked = vi.mocked(config);
 
-vi.mock('src/utils/github');
+vi.mock('#src/utils/github.ts');
 const githubMocked = vi.mocked(github);
 
 beforeEach(() => {

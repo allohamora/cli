@@ -1,5 +1,5 @@
-import { getInstalling } from 'src/states/context';
-import { isExistsInRoot } from './fs';
+import { getInstalling } from '#src/states/context.ts';
+import { isExistsInRoot } from '#src/utils/fs.ts';
 
 type AdditionalHandler = () => Promise<boolean>;
 

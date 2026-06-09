@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { rootPath, ROOT_PATH } from 'src/utils/path';
+import { rootPath, ROOT_PATH } from '#src/utils/path.ts';
 
 describe('PATHS', () => {
   test('ROOT_PATH should be process.cwd()', () => {

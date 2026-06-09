@@ -1,8 +1,8 @@
 import fsp from 'node:fs/promises';
 import type { PackageJson as BasePackageJson } from 'type-fest';
-import { rootPath } from './path';
-import { runCommand } from './run-command';
-import { addJsonFileToRoot } from './fs';
+import { rootPath } from '#src/utils/path.ts';
+import { runCommand } from '#src/utils/run-command.ts';
+import { addJsonFileToRoot } from '#src/utils/fs.ts';
 
 export const PACKAGE_JSON_NAME = 'package.json';
 export const PACKAGE_JSON_PATH = rootPath(PACKAGE_JSON_NAME);

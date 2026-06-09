@@ -1,17 +1,17 @@
-import * as fs from 'src/utils/fs';
+import * as fs from '#src/utils/fs.ts';
 import path from 'node:path';
 import {
   addGithubDirIfNotExists,
   addGithubWorkflow,
   addWorkflowsDirIfNotExists,
   addToGithubDir,
-} from 'src/utils/github';
+} from '#src/utils/github.ts';
 
 const GITHUB_DIR_NAME = '.github';
 const GITHUB_WORKFLOWS_DIR_NAME = 'workflows';
 const GITHUB_RELATIVE_WORKFLOWS_PATH = path.join(GITHUB_DIR_NAME, GITHUB_WORKFLOWS_DIR_NAME);
 
-vi.mock('src/utils/fs');
+vi.mock('#src/utils/fs.ts');
 const fsMocked = vi.mocked(fs);
 
 beforeEach(() => {

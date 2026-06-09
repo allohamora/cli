@@ -1,10 +1,10 @@
-import * as installed from 'src/utils/installed';
-import * as prettierUtils from 'src/categories/js/prettier/prettier.utils';
-import * as jestUtils from 'src/categories/js/jest/jest.utils';
-import { prettierMutation, jestMutation } from 'src/categories/js/eslint/eslint.utils';
-import { createConfig } from './eslint-test.utils';
+import * as installed from '#src/utils/installed.ts';
+import * as prettierUtils from '#src/categories/js/prettier/prettier.utils.ts';
+import * as jestUtils from '#src/categories/js/jest/jest.utils.ts';
+import { prettierMutation, jestMutation } from '#src/categories/js/eslint/eslint.utils.ts';
+import { createConfig } from '#__tests__/categories/js/eslint/eslint-test.utils.ts';
 
-vi.mock('src/utils/installed', async (importOriginal) => ({
+vi.mock('#src/utils/installed.ts', async (importOriginal) => ({
   ...(await importOriginal()),
   isInstalledAndInRootCheck: vi.fn().mockReturnValue(vi.fn()),
 }));
@@ -13,8 +13,8 @@ const installedMocked = vi.mocked(installed);
 const jestUtilsMocked = vi.mocked(jestUtils);
 const prettierUtilsMocked = vi.mocked(prettierUtils);
 
-vi.mock('src/categories/js/jest/jest.utils');
-vi.mock('src/categories/js/prettier/prettier.utils');
+vi.mock('#src/categories/js/jest/jest.utils.ts');
+vi.mock('#src/categories/js/prettier/prettier.utils.ts');
 
 describe('prettierMutation', () => {
   test('should add prettier to empty config if prettier installed', async () => {

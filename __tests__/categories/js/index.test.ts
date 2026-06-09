@@ -1,5 +1,5 @@
-import js from 'src/categories/js';
-import { jsCategoryState } from 'src/states/categories';
+import js from '#src/categories/js/index.ts';
+import { jsCategoryState } from '#src/states/categories.ts';
 
 describe('js', () => {
   test('should export state', () => {

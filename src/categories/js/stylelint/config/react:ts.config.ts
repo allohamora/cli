@@ -1,6 +1,6 @@
-import { readableMultilineString } from 'src/utils/string';
-import { prettierMutation } from '../stylelint.utils';
-import { Config } from './config.interface';
+import { readableMultilineString } from '#src/utils/string.ts';
+import { prettierMutation } from '#src/categories/js/stylelint/stylelint.utils.ts';
+import type { Config } from '#src/categories/js/stylelint/config/config.interface.ts';
 
 const stylelintConfig: Config['stylelintConfig'] = {
   extends: ['stylelint-config-standard', 'stylelint-config-clean-order'],

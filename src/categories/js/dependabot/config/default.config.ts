@@ -1,4 +1,4 @@
-import { readableMultilineString } from 'src/utils/string';
+import { readableMultilineString } from '#src/utils/string.ts';
 
 export const content = readableMultilineString`
   version: 2

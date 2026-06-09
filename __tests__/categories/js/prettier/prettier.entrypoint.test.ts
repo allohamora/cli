@@ -1,16 +1,16 @@
-import * as fs from 'src/utils/fs';
-import * as npm from 'src/utils/npm';
-import * as config from 'src/categories/js/prettier/prettier.config';
-import { defaultConfig } from 'src/categories/js/prettier/config/default.config';
-import { prettier } from 'src/categories/js/prettier/prettier.entrypoint';
+import * as fs from '#src/utils/fs.ts';
+import * as npm from '#src/utils/npm.ts';
+import * as config from '#src/categories/js/prettier/prettier.config.ts';
+import { defaultConfig } from '#src/categories/js/prettier/config/default.config.ts';
+import { prettier } from '#src/categories/js/prettier/prettier.entrypoint.ts';
 
-vi.mock('src/utils/fs');
+vi.mock('#src/utils/fs.ts');
 const fsMocked = vi.mocked(fs);
 
-vi.mock('src/utils/npm');
+vi.mock('#src/utils/npm.ts');
 const npmMocked = vi.mocked(npm);
 
-vi.mock('src/categories/js/prettier/prettier.config');
+vi.mock('#src/categories/js/prettier/prettier.config.ts');
 const configMocked = vi.mocked(config);
 
 beforeEach(() => {

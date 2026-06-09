@@ -1,5 +1,5 @@
-import { getConfig } from 'src/categories/js/docker/docker.config';
-import { expectJsConfig } from '__tests__/test-utils/js-config';
+import { getConfig } from '#src/categories/js/docker/docker.config.ts';
+import { expectJsConfig } from '#__tests__/test-utils/js-config.ts';
 
 type ExpectDockerConfigArgs = {
   getDockerFile: ({ version }: { version: string }) => string;

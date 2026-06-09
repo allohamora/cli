@@ -1,15 +1,15 @@
-import * as installed from 'src/utils/installed';
-import * as prettierUtils from 'src/categories/js/prettier/prettier.utils';
-import { prettierMutation } from 'src/categories/js/stylelint/stylelint.utils';
-import { Config } from 'src/categories/js/stylelint/config/config.interface';
+import * as installed from '#src/utils/installed.ts';
+import * as prettierUtils from '#src/categories/js/prettier/prettier.utils.ts';
+import { prettierMutation } from '#src/categories/js/stylelint/stylelint.utils.ts';
+import type { Config } from '#src/categories/js/stylelint/config/config.interface.ts';
 
-vi.mock('src/utils/installed', async (importOriginal) => ({
+vi.mock('#src/utils/installed.ts', async (importOriginal) => ({
   ...(await importOriginal()),
   isInstalledAndInRootCheck: vi.fn().mockImplementation(vi.fn()),
 }));
 const installedMocked = vi.mocked(installed);
 
-vi.mock('src/categories/js/prettier/prettier.utils', () => ({
+vi.mock('#src/categories/js/prettier/prettier.utils.ts', () => ({
   isPrettierInstalled: vi.fn(),
 }));
 const prettierUtilsMocked = vi.mocked(prettierUtils);

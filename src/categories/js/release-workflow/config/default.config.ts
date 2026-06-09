@@ -1,4 +1,4 @@
-import { readableMultilineString } from 'src/utils/string';
+import { readableMultilineString } from '#src/utils/string.ts';
 
 const content = readableMultilineString`
   name: release

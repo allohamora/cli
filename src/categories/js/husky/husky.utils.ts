@@ -1,7 +1,7 @@
 import path from 'node:path';
-import { HOOK_DIR, PACKAGE_NAME } from './husky.const';
-import { isInstalledAndInRootCheck } from 'src/utils/installed';
-import { addFileToRoot } from 'src/utils/fs';
+import { HOOK_DIR, PACKAGE_NAME } from '#src/categories/js/husky/husky.const.ts';
+import { isInstalledAndInRootCheck } from '#src/utils/installed.ts';
+import { addFileToRoot } from '#src/utils/fs.ts';
 
 export type HookName = 'pre-commit' | 'commit-msg';
 

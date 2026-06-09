@@ -1,4 +1,4 @@
-import { Config } from 'src/categories/js/eslint/config/config.interface';
+import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
 
 export const createConfig = ({
   dependencies = [],

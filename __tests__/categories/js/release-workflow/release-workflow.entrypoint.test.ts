@@ -1,11 +1,11 @@
-import * as config from 'src/categories/js/release-workflow/release-workflow.config';
-import * as github from 'src/utils/github';
-import { releaseWorkflow } from 'src/categories/js/release-workflow/release-workflow.entrypoint';
+import * as config from '#src/categories/js/release-workflow/release-workflow.config.ts';
+import * as github from '#src/utils/github.ts';
+import { releaseWorkflow } from '#src/categories/js/release-workflow/release-workflow.entrypoint.ts';
 
-vi.mock('src/categories/js/release-workflow/release-workflow.config');
+vi.mock('#src/categories/js/release-workflow/release-workflow.config.ts');
 const configMocked = vi.mocked(config);
 
-vi.mock('src/utils/github');
+vi.mock('#src/utils/github.ts');
 const githubMocked = vi.mocked(github);
 
 beforeEach(() => {

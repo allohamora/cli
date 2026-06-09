@@ -1,5 +1,5 @@
 import prettier from 'prettier';
-import { getConfig } from 'src/categories/js/prettier/prettier.config';
+import { getConfig } from '#src/categories/js/prettier/prettier.config.ts';
 
 export const format = async (input: string) => {
   const { config } = getConfig();

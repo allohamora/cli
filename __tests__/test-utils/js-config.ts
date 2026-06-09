@@ -1,4 +1,4 @@
-import { jsCategoryState } from 'src/states/categories';
+import { jsCategoryState } from '#src/states/categories.ts';
 
 type GetConfig<C> = () => C;
 type AdditionalTest<C> = (config: C) => void;

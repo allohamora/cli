@@ -1,7 +1,7 @@
 import * as childProcess from 'node:child_process';
 import { EventEmitter } from 'node:events';
-import { delay } from '__tests__/test-utils/delay';
-import { runCommand, spawnCommand } from 'src/utils/run-command';
+import { delay } from '#__tests__/test-utils/delay.ts';
+import { runCommand, spawnCommand } from '#src/utils/run-command.ts';
 
 vi.mock('node:child_process');
 const childProcessMocked = vi.mocked(childProcess);
@@ -95,6 +95,12 @@ describe('spawnCommand', () => {
 });
 
 describe('runCommand', () => {
+  test('should throw error for empty command', async () => {
+    await expect(runCommand('')).rejects.toThrow('Command cannot be empty');
+
+    expect(childProcessMocked.spawn).not.toHaveBeenCalled();
+  });
+
   test('should split full command to command name and args and spawn', async () => {
     spawnMock('exit');
 

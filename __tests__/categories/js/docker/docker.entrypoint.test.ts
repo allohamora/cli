@@ -1,15 +1,15 @@
-import * as nodeUtils from 'src/utils/node';
-import * as fsUtils from 'src/utils/fs';
-import * as config from 'src/categories/js/docker/docker.config';
-import { docker } from 'src/categories/js/docker/docker.entrypoint';
+import * as nodeUtils from '#src/utils/node.ts';
+import * as fsUtils from '#src/utils/fs.ts';
+import * as config from '#src/categories/js/docker/docker.config.ts';
+import { docker } from '#src/categories/js/docker/docker.entrypoint.ts';
 
-vi.mock('src/utils/node');
+vi.mock('#src/utils/node.ts');
 const nodeUtilsMocked = vi.mocked(nodeUtils);
 
-vi.mock('src/utils/fs');
+vi.mock('#src/utils/fs.ts');
 const fsUtilsMocked = vi.mocked(fsUtils);
 
-vi.mock('src/categories/js/docker/docker.config');
+vi.mock('#src/categories/js/docker/docker.config.ts');
 const configMocked = vi.mocked(config);
 
 describe('docker', () => {

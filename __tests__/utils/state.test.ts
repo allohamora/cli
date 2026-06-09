@@ -1,4 +1,4 @@
-import { createCategoryState, createConfigState, createTypeState } from 'src/utils/state';
+import { createCategoryState, createConfigState, createTypeState } from '#src/utils/state.ts';
 
 describe('createTypeState', () => {
   const types = ['1', '2'];
@@ -20,6 +20,7 @@ describe('createTypeState', () => {
 
   test('should set type', () => {
     const newType = types[1];
+    if (!newType) throw new Error('newType is not found');
 
     setType(newType);
 
@@ -44,7 +45,7 @@ describe('createConfigState', () => {
   });
 
   test('should return selected config value', () => {
-    setType(types[0]);
+    setType(types[0]!);
 
     const actual = getConfig();
     const expected = configValues['1'];
@@ -53,7 +54,7 @@ describe('createConfigState', () => {
   });
 
   test('should return default config if selected not found', () => {
-    setType(types[1]);
+    setType(types[1]!);
 
     const actual = getConfig();
     const expected = configValues.default;

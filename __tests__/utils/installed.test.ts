@@ -1,11 +1,11 @@
-import * as context from 'src/states/context';
-import * as fs from 'src/utils/fs';
-import { isInstalled, isInstalledAndInRootCheck, isInstalling } from 'src/utils/installed';
+import * as context from '#src/states/context.ts';
+import * as fs from '#src/utils/fs.ts';
+import { isInstalled, isInstalledAndInRootCheck, isInstalling } from '#src/utils/installed.ts';
 
-vi.mock('src/states/context');
+vi.mock('#src/states/context.ts');
 const contextMocked = vi.mocked(context);
 
-vi.mock('src/utils/fs');
+vi.mock('#src/utils/fs.ts');
 const fsMocked = vi.mocked(fs);
 
 const installingScript = '__test__';

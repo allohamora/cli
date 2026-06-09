@@ -1,6 +1,6 @@
-import { jsCategoryState } from 'src/states/categories';
-import { defaultConfig } from './config/default.config';
-import { reactTsConfig } from './config/react:ts.config';
+import { jsCategoryState } from '#src/states/categories.ts';
+import { defaultConfig } from '#src/categories/js/stylelint/config/default.config.ts';
+import { reactTsConfig } from '#src/categories/js/stylelint/config/react:ts.config.ts';
 
 export const [getConfig] = jsCategoryState.useConfigState({
   default: defaultConfig,

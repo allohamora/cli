@@ -20,6 +20,9 @@ export const spawnCommand = async (command: string, args: string[]): Promise<str
 
 export const runCommand = async (command: string) => {
   const [name, ...args] = command.split(' ');
+  if (!name) {
+    throw new Error('Command cannot be empty');
+  }
 
   return await spawnCommand(name, args);
 };

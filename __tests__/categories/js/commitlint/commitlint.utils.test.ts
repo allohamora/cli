@@ -1,7 +1,7 @@
-import * as huskyUtils from 'src/categories/js/husky/husky.utils';
-import { huskyIntegration } from 'src/categories/js/commitlint/commitlint.utils';
+import * as huskyUtils from '#src/categories/js/husky/husky.utils.ts';
+import { huskyIntegration } from '#src/categories/js/commitlint/commitlint.utils.ts';
 
-vi.mock('src/categories/js/husky/husky.utils');
+vi.mock('#src/categories/js/husky/husky.utils.ts');
 const huskyUtilsMocked = vi.mocked(huskyUtils);
 
 beforeEach(() => {

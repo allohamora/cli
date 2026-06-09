@@ -1,7 +1,7 @@
-import { addJsonFileToRoot } from 'src/utils/fs';
-import { addScripts, getPackageJson, installDevelopmentDependencies } from 'src/utils/npm';
-import { getConfig } from './standard-version.config';
-import { CONFIG_FILE_NAME, PACKAGE_NAME } from './standard-version.const';
+import { addJsonFileToRoot } from '#src/utils/fs.ts';
+import { addScripts, getPackageJson, installDevelopmentDependencies } from '#src/utils/npm.ts';
+import { getConfig } from '#src/categories/js/standard-version/standard-version.config.ts';
+import { CONFIG_FILE_NAME, PACKAGE_NAME } from '#src/categories/js/standard-version/standard-version.const.ts';
 
 export const standardVersion = async () => {
   const { createConfig, scripts } = getConfig();

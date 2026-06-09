@@ -1,7 +1,7 @@
-import * as json from 'src/utils/json';
+import * as json from '#src/utils/json.ts';
 import fsp from 'node:fs/promises';
-import { rootPath } from 'src/utils/path';
-import { addDirToRootIfNotExists, addFileToRoot, addJsonFileToRoot, isExistsInRoot } from 'src/utils/fs';
+import { rootPath } from '#src/utils/path.ts';
+import { addDirToRootIfNotExists, addFileToRoot, addJsonFileToRoot, isExistsInRoot } from '#src/utils/fs.ts';
 
 const rootFile = 'hello.json';
 const rootDir = 'test';
@@ -12,7 +12,7 @@ const rootWithPath = root.map((file) => rootPath(file));
 vi.mock('node:fs/promises');
 const fspMocked = vi.mocked(fsp);
 
-vi.mock('src/utils/json');
+vi.mock('#src/utils/json.ts');
 const jsonMocked = vi.mocked(json);
 
 beforeEach(() => {

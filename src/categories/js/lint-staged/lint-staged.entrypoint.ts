@@ -1,8 +1,8 @@
-import { applyMutations } from 'src/utils/mutation';
-import { addToPackageJson, installDevelopmentDependencies } from 'src/utils/npm';
-import { getConfig } from './lint-staged.config';
-import { PACKAGE_NAME } from './lint-staged.const';
-import { huskyIntegration } from './lint-staged.utils';
+import { applyMutations } from '#src/utils/mutation.ts';
+import { addToPackageJson, installDevelopmentDependencies } from '#src/utils/npm.ts';
+import { getConfig } from '#src/categories/js/lint-staged/lint-staged.config.ts';
+import { PACKAGE_NAME } from '#src/categories/js/lint-staged/lint-staged.const.ts';
+import { huskyIntegration } from '#src/categories/js/lint-staged/lint-staged.utils.ts';
 
 export const lintStaged = async () => {
   const { config, mutations } = getConfig();

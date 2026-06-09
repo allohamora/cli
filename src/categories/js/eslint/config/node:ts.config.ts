@@ -1,5 +1,5 @@
-import { jestMutation, prettierMutation } from '../eslint.utils';
-import { Config } from './config.interface';
+import { jestMutation, prettierMutation } from '#src/categories/js/eslint/eslint.utils.ts';
+import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
 
 export const nodeTsConfig: Config = {
   dependencies: ['globals', '@eslint/js', 'typescript-eslint', 'eslint-plugin-beautiful-sort'],

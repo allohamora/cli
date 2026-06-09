@@ -1,4 +1,4 @@
-import { runCommand } from './run-command';
+import { runCommand } from '#src/utils/run-command.ts';
 
 export const getNodeVersion = async () => {
   const versionConsoleOutput = await runCommand('node -v');

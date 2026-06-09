@@ -1,5 +1,5 @@
-import { addScripts, installDevelopmentDependencies, runScript } from 'src/utils/npm';
-import { PACKAGE_NAME } from './husky.const';
+import { addScripts, installDevelopmentDependencies, runScript } from '#src/utils/npm.ts';
+import { PACKAGE_NAME } from '#src/categories/js/husky/husky.const.ts';
 
 export const husky = async () => {
   await installDevelopmentDependencies(PACKAGE_NAME);
