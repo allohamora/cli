@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 
 export const oneOf = async <C extends string>(message: string, choices: readonly C[]) => {
   const res = await inquirer.prompt({
-    type: 'list',
+    type: 'select',
     name: message,
     message,
     choices,

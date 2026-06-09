@@ -21,7 +21,7 @@ const message = '__test__';
 const choices = ['a', 'b', 'c'];
 
 describe('oneOf', () => {
-  test('should run inquirer.prompt with type: list', async () => {
+  test('should run inquirer.prompt with type: select', async () => {
     const choice = choices[0];
     inquirerMocked.prompt.mockResolvedValueOnce({ [message]: choice });
 
@@ -29,7 +29,7 @@ describe('oneOf', () => {
     const expected = choice;
 
     const promptOptions = {
-      type: 'list',
+      type: 'select',
       name: message,
       message,
       choices,
