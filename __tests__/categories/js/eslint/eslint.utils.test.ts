@@ -52,6 +52,17 @@ describe('prettierMutation', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  test('should not add prettier if prettier is not installed', async () => {
+    prettierUtilsMocked.isPrettierInstalled.mockResolvedValueOnce(false);
+
+    const actual = createConfig();
+    const expected = createConfig();
+
+    await prettierMutation(actual);
+
+    expect(actual).toEqual(expected);
+  });
 });
 
 describe('jestMutation', () => {

@@ -41,6 +41,7 @@ export const addScripts = async (...scripts: NpmScript[]) => {
 
   scripts.forEach(({ name, script }) => {
     // type-guard
+    /* v8 ignore next 3 -- scripts is assigned above; this only narrows the package-json type. */
     if (packageJson.scripts) {
       packageJson.scripts[name] = script;
     }

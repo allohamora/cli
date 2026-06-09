@@ -13,6 +13,7 @@ export const main = async () => {
   console.log(white('Installation completed'));
 };
 
+/* v8 ignore next 3 -- CLI bootstrap path is exercised by the built binary. */
 if (require.main) {
   void main();
 }
