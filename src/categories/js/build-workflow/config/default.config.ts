@@ -1,6 +1,6 @@
-import { readableMultilineString } from '#src/utils/string.ts';
+import dedent from 'dedent';
 
-const content = readableMultilineString`
+const content = dedent`
   name: build
 
   on:

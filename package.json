@@ -83,6 +83,7 @@
     "yaml": "^2.9.0"
   },
   "dependencies": {
+    "dedent": "^1.7.2",
     "execa": "^9.6.1",
     "inquirer": "^14.0.2",
     "ora": "^9.4.0",
