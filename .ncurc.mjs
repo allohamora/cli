@@ -1,6 +1,6 @@
 const red = (log) => `\x1b[31m${log}\x1b[0m`;
 
-module.exports = {
+export default {
   deep: true,
   upgrade: true,
 
