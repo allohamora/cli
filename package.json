@@ -11,7 +11,7 @@
     "#__tests__/*.ts": "./__tests__/*.ts"
   },
   "scripts": {
-    "dev": "node --watch ./src/index.ts",
+    "dev": "node ./src/index.ts",
     "prebuild": "npm run typecheck && rimraf ./bin",
     "build": "rolldown -c rolldown.config.mjs",
     "prestart": "npm run build",
