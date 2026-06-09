@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "node --watch ./src/index.ts",
-    "prebuild": "rimraf ./bin",
+    "prebuild": "npm run typecheck && rimraf ./bin",
     "build": "rolldown -c rolldown.config.mjs",
     "prestart": "npm run build",
     "start": "chmod +x ./bin/cli.js && ./bin/cli.js",
