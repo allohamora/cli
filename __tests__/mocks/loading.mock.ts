@@ -18,21 +18,21 @@ export class Loading {
     this.spy = vi.spyOn(ora, 'default').mockImplementation((label) => {
       this.labels.push(String(label));
 
-      const { texts } = this;
+      const self = this;
 
       const spinner = {
         start: vi.fn(() => {
-          this.starts += 1;
+          self.starts += 1;
 
           return spinner;
         }),
         stop: vi.fn(() => {
-          this.finishes += 1;
+          self.finishes += 1;
 
           return spinner;
         }),
         set text(value: string) {
-          texts.push(value);
+          self.texts.push(value);
         },
       };
 

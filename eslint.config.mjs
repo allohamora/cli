@@ -36,6 +36,7 @@ export default defineConfig(
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-misused-promises': 'warn',
       '@typescript-eslint/no-deprecated': 'error',
+      '@typescript-eslint/no-this-alias': 'warn',
       'beautiful-sort/import': [
         'error',
         {
