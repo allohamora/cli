@@ -7,7 +7,7 @@ describe('index', () => {
       expect(js.state).toBe(jsCategoryState);
     });
 
-    it('exports scripts', () => {
+    it('exports options', () => {
       expect(js.options).toBeDefined();
       expect(typeof js.options).toBe('object');
     });
