@@ -11,7 +11,7 @@ describe('docker.entrypoint', () => {
     it('writes Dockerfile for the current node version and default .dockerignore', async () => {
       await docker();
 
-      expect(terminal.getCommands()).toEqual([[expect.arrayContaining(['node -v'])]]);
+      expect(terminal.getCommands()).toEqual([[['node -v']]]);
       expect(fileSystem.readFile('Dockerfile')).toBe(
         [
           'FROM node:24.14.1',
