@@ -1,5 +1,5 @@
 import { prompt } from '#__tests__/setup-test-context.ts';
-import { manyOf, miniumOneValidate, oneOf } from '#src/utils/prompt.ts';
+import { manyOf, minimumOneValidate, oneOf } from '#src/utils/prompt.ts';
 
 describe('prompt', () => {
   const message = '__test__';
@@ -25,16 +25,16 @@ describe('prompt', () => {
     });
   });
 
-  describe('miniumOneValidate', () => {
+  describe('minimumOneValidate', () => {
     it('returns true if answers contain minium one item', () => {
-      const actual = miniumOneValidate([1]);
+      const actual = minimumOneValidate([1]);
       const expected = true;
 
       expect(actual).toBe(expected);
     });
 
     it('returns false if answers contain less than one item', () => {
-      const actual = miniumOneValidate([]);
+      const actual = minimumOneValidate([]);
       const expected = false;
 
       expect(actual).toBe(expected);
@@ -54,7 +54,7 @@ describe('prompt', () => {
         name: message,
         message,
         choices,
-        validate: miniumOneValidate,
+        validate: minimumOneValidate,
       };
 
       expect(prompt.getQuestions()).toEqual([promptOptions]);
