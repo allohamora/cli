@@ -40,7 +40,6 @@ const reactTsJestConfigFile = [
   `    '^.+\\\\.(ts|tsx)$': 'ts-jest',`,
   '  },',
   `  moduleDirectories: ['<rootDir>', 'node_modules'],`,
-  `  testRegex: '.*\\\\.(spec|test)\\\\.tsx?$',`,
   `  moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],`,
   '  moduleNameMapper: {',
   `    '\\.(css|less|sass|scss|gif|ttf|eot|svg|png)$': 'identity-obj-proxy'`,
