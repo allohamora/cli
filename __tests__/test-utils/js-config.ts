@@ -13,13 +13,13 @@ export const expectJsConfig = <C>(getConfig: GetConfig<C>, additionalTests: Addi
       const config = getConfig();
 
       describe(variant, () => {
-        test(`should return config for ${variant}`, () => {
+        it(`returns config for ${variant}`, () => {
           const actual = config;
 
           expect(actual).toBeDefined();
         });
 
-        additionalTests.forEach((test) => test(config));
+        additionalTests.forEach((additionalTest) => additionalTest(config));
       });
     }
   });

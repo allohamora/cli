@@ -1,110 +1,112 @@
 import { createCategoryState, createConfigState, createTypeState } from '#src/utils/state.ts';
 
-describe('createTypeState', () => {
-  const types = ['1', '2'];
-  const createNewTypeState = () => createTypeState(types);
+describe('state', () => {
+  describe('createTypeState', () => {
+    const types = ['1', '2'];
+    const createNewTypeState = () => createTypeState(types);
 
-  let [getType, setType] = createNewTypeState();
+    let [getType, setType] = createNewTypeState();
 
-  beforeEach(() => {
-    [getType, setType] = createNewTypeState();
+    beforeEach(() => {
+      [getType, setType] = createNewTypeState();
+    });
+
+    it('returns type', () => {
+      expect(getType()).toBeDefined();
+    });
+
+    it('initializes state with first type', () => {
+      expect(getType()).toBe(types[0]);
+    });
+
+    it('sets type', () => {
+      const newType = types[1];
+      if (!newType) throw new Error('newType is not found');
+
+      setType(newType);
+
+      expect(getType()).toBe(newType);
+    });
   });
 
-  test('should return type', () => {
-    expect(getType()).toBeDefined();
+  describe('createConfigState', () => {
+    const types = ['1', '2', '3'];
+    const createNewTypeState = () => createTypeState(types);
+    let state = createNewTypeState();
+    let [, setType] = state;
+
+    const configValues = { default: 'default', '1': '1' };
+    const createNewConfigState = () => createConfigState(state, configValues);
+    let [getConfig] = createNewConfigState();
+
+    afterEach(() => {
+      state = createNewTypeState();
+      [, setType] = state;
+      [getConfig] = createNewConfigState();
+    });
+
+    it('returns selected config value', () => {
+      setType(types[0]!);
+
+      const actual = getConfig();
+      const expected = configValues['1'];
+
+      expect(actual).toBe(expected);
+    });
+
+    it('returns default config if selected not found', () => {
+      setType(types[1]!);
+
+      const actual = getConfig();
+      const expected = configValues.default;
+
+      expect(actual).toBe(expected);
+    });
   });
 
-  test('should init state with first type', () => {
-    expect(getType()).toBe(types[0]);
-  });
+  describe('createCategoryState', () => {
+    const name = '__test__';
+    const values = ['1', '2', '3'] as const;
+    const createNewCategoryState = () => createCategoryState(name, values);
 
-  test('should set type', () => {
-    const newType = types[1];
-    if (!newType) throw new Error('newType is not found');
+    let state = createNewCategoryState();
 
-    setType(newType);
+    afterEach(() => {
+      state = createNewCategoryState();
+    });
 
-    expect(getType()).toBe(newType);
-  });
-});
+    it('creates and returns configState', () => {
+      expect(state.configState).toBeDefined();
+    });
 
-describe('createConfigState', () => {
-  const types = ['1', '2', '3'];
-  const createNewTypeState = () => createTypeState(types);
-  let state = createNewTypeState();
-  let [, setType] = state;
+    it('returns category name', () => {
+      const actual = state.name;
+      const expected = name;
 
-  const configValues = { default: 'default', '1': '1' };
-  const createNewConfigState = () => createConfigState(state, configValues);
-  let [getConfig] = createNewConfigState();
+      expect(actual).toBe(expected);
+    });
 
-  afterEach(() => {
-    state = createNewTypeState();
-    [, setType] = state;
-    [getConfig] = createNewConfigState();
-  });
+    it('adds default option to configOptions', () => {
+      const actual = state.configTypes;
+      const expected = ['default', ...values];
 
-  test('should return selected config value', () => {
-    setType(types[0]!);
+      expect(actual).toEqual(expected);
+    });
 
-    const actual = getConfig();
-    const expected = configValues['1'];
+    it('returns useConfigValue', () => {
+      expect(state.useConfigState).toBeDefined();
+    });
 
-    expect(actual).toBe(expected);
-  });
+    it('returns useConfigValue that creates a local state', () => {
+      const values = { default: 'default', '1': '1' };
 
-  test('should return default config if selected not found', () => {
-    setType(types[1]!);
+      const [, setConfigKey] = state.configState;
 
-    const actual = getConfig();
-    const expected = configValues.default;
+      const [getConfig] = state.useConfigState(values);
+      expect(getConfig()).toBe(values.default);
 
-    expect(actual).toBe(expected);
-  });
-});
-
-describe('createCategoryState', () => {
-  const name = '__test__';
-  const values = ['1', '2', '3'] as const;
-  const createNewCategoryState = () => createCategoryState(name, values);
-
-  let state = createNewCategoryState();
-
-  afterEach(() => {
-    state = createNewCategoryState();
-  });
-
-  test('should create and return configState', () => {
-    expect(state.configState).toBeDefined();
-  });
-
-  test('should return category name', () => {
-    const actual = state.name;
-    const expected = name;
-
-    expect(actual).toBe(expected);
-  });
-
-  test('should add default option to configOptions', () => {
-    const actual = state.configTypes;
-    const expected = ['default', ...values];
-
-    expect(actual).toEqual(expected);
-  });
-
-  test('should return useConfigValue', () => {
-    expect(state.useConfigState).toBeDefined();
-  });
-
-  test('should return useConfigValue what creates a local state', () => {
-    const values = { default: 'default', '1': '1' };
-
-    const [, setConfigKey] = state.configState;
-
-    const [getConfig] = state.useConfigState(values);
-    expect(getConfig()).toBe(values.default);
-
-    setConfigKey('1');
-    expect(getConfig()).toBe(values['1']);
+      setConfigKey('1');
+      expect(getConfig()).toBe(values['1']);
+    });
   });
 });

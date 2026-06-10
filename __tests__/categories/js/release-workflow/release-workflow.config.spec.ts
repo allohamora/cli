@@ -2,4 +2,6 @@ import { getConfig } from '#src/categories/js/release-workflow/release-workflow.
 import { expectGithubWorkflow } from '#__tests__/test-utils/github.ts';
 import { expectJsConfig } from '#__tests__/test-utils/js-config.ts';
 
-expectJsConfig(getConfig, [(config) => expectGithubWorkflow(config.content, 'should parse config.content')]);
+describe('release-workflow.config', () => {
+  expectJsConfig(getConfig, [(config) => expectGithubWorkflow(config.content, 'parses config.content')]);
+});

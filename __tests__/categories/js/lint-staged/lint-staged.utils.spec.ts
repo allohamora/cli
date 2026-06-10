@@ -9,187 +9,189 @@ import {
 } from '#src/categories/js/lint-staged/lint-staged.utils.ts';
 import type { LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
 
-describe('addOptionToLintStagedConfig', () => {
-  test('should add string option if config[key] is undefined', () => {
-    const key = '*.ts';
-    const value = 'eslint --fix';
+describe('lint-staged.utils', () => {
+  describe('addOptionToLintStagedConfig', () => {
+    it('adds string option if config[key] is undefined', () => {
+      const key = '*.ts';
+      const value = 'eslint --fix';
 
-    const actual = {};
-    addOptionToLintStagedConfig(actual, key, value);
+      const actual = {};
+      addOptionToLintStagedConfig(actual, key, value);
 
-    const expected = { [key]: value };
+      const expected = { [key]: value };
 
-    expect(actual).toEqual(expected);
+      expect(actual).toEqual(expected);
+    });
+
+    it('adds array option if config[key] is string', () => {
+      const key = '*.js';
+      const value = 'jest --findRelatedTests';
+      const nextValue = '__test__';
+
+      const actual = { [key]: value };
+      addOptionToLintStagedConfig(actual, key, nextValue);
+
+      const expected = { [key]: [value, nextValue] };
+
+      expect(actual).toEqual(expected);
+    });
+
+    it('adds option to array if config[key] is array', () => {
+      const key = '*.js';
+      const values = ['__test__', '__test__2'];
+      const nextValue = '__test__3';
+
+      const actual = { [key]: values };
+      addOptionToLintStagedConfig(actual, key, nextValue);
+
+      const expected = { [key]: [...values, nextValue] };
+
+      expect(actual).toEqual(expected);
+    });
+
+    it('stores only unique values', () => {
+      const key = '*.ts';
+      const values = ['__test__'];
+      const nextValue = values[0]!;
+
+      const actual = { [key]: values };
+      addOptionToLintStagedConfig(actual, key, nextValue);
+
+      const expected = { [key]: [nextValue] };
+
+      expect(actual).toEqual(expected);
+    });
+
+    it('stores string option if added value is not unique', () => {
+      const key = '*.ts';
+      const value = '__test__';
+      const nextValue = value;
+
+      const actual = { [key]: value };
+      addOptionToLintStagedConfig(actual, key, nextValue);
+
+      const expected = { [key]: nextValue };
+
+      expect(actual).toEqual(expected);
+    });
+
+    it('throws error if received invalid config', () => {
+      const key = '*.ts';
+      const value = '__test__';
+      const actual = { [key]: {} } as unknown as LintStagedConfig;
+
+      expect(() => addOptionToLintStagedConfig(actual, key, value)).toThrow();
+    });
   });
 
-  test('should add array option if config[key] is string', () => {
-    const key = '*.js';
-    const value = 'jest --findRelatedTests';
-    const nextValue = '__test__';
+  describe('huskyIntegration', () => {
+    it('adds hook if husky installed', async () => {
+      contextState.setInstalling(['husky']);
 
-    const actual = { [key]: value };
-    addOptionToLintStagedConfig(actual, key, nextValue);
+      await huskyIntegration();
 
-    const expected = { [key]: [value, nextValue] };
+      expect(fileSystem.readFile('.husky/pre-commit')).toBe('npx --no-install lint-staged\n');
+    });
 
-    expect(actual).toEqual(expected);
+    it('does not add hook if husky not installed', async () => {
+      await huskyIntegration();
+
+      expect(fileSystem.readFile('.husky/pre-commit')).toBeUndefined();
+    });
   });
 
-  test('should add option to array if config[key] is array', () => {
-    const key = '*.js';
-    const values = ['__test__', '__test__2'];
-    const nextValue = '__test__3';
+  describe('jestMutation', () => {
+    it('mutates config if jest installed', async () => {
+      const ext = '*.js';
+      const actual = {};
+      contextState.setInstalling(['jest']);
 
-    const actual = { [key]: values };
-    addOptionToLintStagedConfig(actual, key, nextValue);
+      await jestMutation(ext)(actual);
 
-    const expected = { [key]: [...values, nextValue] };
+      const expected = { [ext]: 'jest --findRelatedTests' };
 
-    expect(actual).toEqual(expected);
+      expect(actual).toEqual(expected);
+    });
+
+    it('does not mutate config if jest not installed', async () => {
+      const ext = '*.js';
+      const actual = {};
+      await jestMutation(ext)(actual);
+
+      const expected = {};
+
+      expect(actual).toEqual(expected);
+    });
   });
 
-  test('should store only unique values', () => {
-    const key = '*.ts';
-    const values = ['__test__'];
-    const nextValue = values[0]!;
+  describe('eslintMutation', () => {
+    it('mutates config if eslint installed', async () => {
+      const ext = '*.js';
+      const actual = {};
+      contextState.setInstalling(['eslint']);
 
-    const actual = { [key]: values };
-    addOptionToLintStagedConfig(actual, key, nextValue);
+      await eslintMutation(ext)(actual);
 
-    const expected = { [key]: [nextValue] };
+      const expected = { [ext]: 'eslint --fix' };
 
-    expect(actual).toEqual(expected);
+      expect(actual).toEqual(expected);
+    });
+
+    it('does not mutate config if eslint not installed', async () => {
+      const ext = '*.js';
+      const actual = {};
+      await eslintMutation(ext)(actual);
+
+      const expected = {};
+
+      expect(actual).toEqual(expected);
+    });
   });
 
-  test('should store string option if added value is not unique', () => {
-    const key = '*.ts';
-    const value = '__test__';
-    const nextValue = value;
+  describe('prettierMutation', () => {
+    it('mutates config if prettier installed', async () => {
+      const ext = '*.{js,cjs,mjs,json,yml,md}';
+      const actual = {};
+      contextState.setInstalling(['prettier']);
 
-    const actual = { [key]: value };
-    addOptionToLintStagedConfig(actual, key, nextValue);
+      await prettierMutation(actual);
 
-    const expected = { [key]: nextValue };
+      const expected = { [ext]: 'prettier --write' };
 
-    expect(actual).toEqual(expected);
+      expect(actual).toEqual(expected);
+    });
+
+    it('does not mutate config if prettier not installed', async () => {
+      const actual = {};
+      await prettierMutation(actual);
+
+      const expected = {};
+
+      expect(actual).toEqual(expected);
+    });
   });
 
-  test('should throw error if received invalid config', () => {
-    const key = '*.ts';
-    const value = '__test__';
-    const actual = { [key]: {} } as unknown as LintStagedConfig;
+  describe('stylelintMutation', () => {
+    it('mutates config if stylelint installed', async () => {
+      const ext = '*.{css,ts,tsx}';
+      const actual = {};
+      contextState.setInstalling(['stylelint']);
 
-    expect(() => addOptionToLintStagedConfig(actual, key, value)).toThrow();
-  });
-});
+      await stylelintMutation(ext)(actual);
 
-describe('huskyIntegration', () => {
-  test('should add hook if husky installed', async () => {
-    contextState.setInstalling(['husky']);
+      const expected = { [ext]: 'stylelint --fix' };
 
-    await huskyIntegration();
+      expect(actual).toEqual(expected);
+    });
 
-    expect(fileSystem.readFile('.husky/pre-commit')).toBe('npx --no-install lint-staged\n');
-  });
+    it('does not mutate config if stylelint is not installed', async () => {
+      const ext = '*.{css,ts,tsx}';
+      const actual = {};
+      await stylelintMutation(ext)(actual);
 
-  test('should not add hook if husky not installed', async () => {
-    await huskyIntegration();
+      const expected = {};
 
-    expect(fileSystem.readFile('.husky/pre-commit')).toBeUndefined();
-  });
-});
-
-describe('jestMutation', () => {
-  test('should mutate config if jest installed', async () => {
-    const ext = '*.js';
-    const actual = {};
-    contextState.setInstalling(['jest']);
-
-    await jestMutation(ext)(actual);
-
-    const expected = { [ext]: 'jest --findRelatedTests' };
-
-    expect(actual).toEqual(expected);
-  });
-
-  test('should not mutate config if jest not installed', async () => {
-    const ext = '*.js';
-    const actual = {};
-    await jestMutation(ext)(actual);
-
-    const expected = {};
-
-    expect(actual).toEqual(expected);
-  });
-});
-
-describe('eslintMutation', () => {
-  test('should mutate config if eslint installed', async () => {
-    const ext = '*.js';
-    const actual = {};
-    contextState.setInstalling(['eslint']);
-
-    await eslintMutation(ext)(actual);
-
-    const expected = { [ext]: 'eslint --fix' };
-
-    expect(actual).toEqual(expected);
-  });
-
-  test('should not mutate config is eslint not installed', async () => {
-    const ext = '*.js';
-    const actual = {};
-    await eslintMutation(ext)(actual);
-
-    const expected = {};
-
-    expect(actual).toEqual(expected);
-  });
-});
-
-describe('prettierMutation', () => {
-  test('should mutate config if prettier installed', async () => {
-    const ext = '*.{js,cjs,mjs,json,yml,md}';
-    const actual = {};
-    contextState.setInstalling(['prettier']);
-
-    await prettierMutation(actual);
-
-    const expected = { [ext]: 'prettier --write' };
-
-    expect(actual).toEqual(expected);
-  });
-
-  test('should not mutate config if prettier not installed', async () => {
-    const actual = {};
-    await prettierMutation(actual);
-
-    const expected = {};
-
-    expect(actual).toEqual(expected);
-  });
-});
-
-describe('stylelintMutation', () => {
-  test('should mutate config if stylelint installed', async () => {
-    const ext = '*.{css,ts,tsx}';
-    const actual = {};
-    contextState.setInstalling(['stylelint']);
-
-    await stylelintMutation(ext)(actual);
-
-    const expected = { [ext]: 'stylelint --fix' };
-
-    expect(actual).toEqual(expected);
-  });
-
-  test('should not mutate config if stylelint is not installed', async () => {
-    const ext = '*.{css,ts,tsx}';
-    const actual = {};
-    await stylelintMutation(ext)(actual);
-
-    const expected = {};
-
-    expect(actual).toEqual(expected);
+      expect(actual).toEqual(expected);
+    });
   });
 });

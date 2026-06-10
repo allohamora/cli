@@ -2,4 +2,6 @@ import { getConfig } from '#src/categories/js/test-workflow/test-workflow.config
 import { expectGithubWorkflow } from '#__tests__/test-utils/github.ts';
 import { expectJsConfig } from '#__tests__/test-utils/js-config.ts';
 
-expectJsConfig(getConfig, [(config) => expectGithubWorkflow(config.content)]);
+describe('test-workflow.config', () => {
+  expectJsConfig(getConfig, [(config) => expectGithubWorkflow(config.content)]);
+});

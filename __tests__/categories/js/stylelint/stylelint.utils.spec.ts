@@ -2,46 +2,48 @@ import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
 import { prettierMutation, isStylelintInstalled } from '#src/categories/js/stylelint/stylelint.utils.ts';
 import type { Config } from '#src/categories/js/stylelint/config/config.interface.ts';
 
-describe('isStylelintInstalled', () => {
-  test('should return true if stylelint is installing', async () => {
-    contextState.setInstalling(['stylelint']);
+describe('stylelint.utils', () => {
+  describe('isStylelintInstalled', () => {
+    it('returns true if stylelint is installing', async () => {
+      contextState.setInstalling(['stylelint']);
 
-    expect(await isStylelintInstalled()).toBe(true);
+      expect(await isStylelintInstalled()).toBe(true);
+    });
+
+    it('returns true if stylelint config exists', async () => {
+      fileSystem.writeFile('.stylelintrc', '');
+
+      expect(await isStylelintInstalled()).toBe(true);
+    });
+
+    it('returns false if stylelint is not installing and config does not exist', async () => {
+      expect(await isStylelintInstalled()).toBe(false);
+    });
   });
 
-  test('should return true if stylelint config exists', async () => {
-    fileSystem.writeFile('.stylelintrc', '');
+  describe('prettierMutation', () => {
+    it('adds stylelint-prettier dependencies and prettier config', async () => {
+      const actual = { devDependencies: [], stylelintConfig: { extends: [] } };
+      contextState.setInstalling(['prettier']);
 
-    expect(await isStylelintInstalled()).toBe(true);
-  });
+      await prettierMutation(actual as unknown as Config);
 
-  test('should return false if stylelint is not installing and config does not exist', async () => {
-    expect(await isStylelintInstalled()).toBe(false);
-  });
-});
+      const expected = {
+        devDependencies: ['stylelint-prettier'],
+        stylelintConfig: { extends: ['stylelint-prettier/recommended'] },
+      };
 
-describe('prettierMutation', () => {
-  test('should add stylelint-prettier dependencies and prettier config', async () => {
-    const actual = { devDependencies: [], stylelintConfig: { extends: [] } };
-    contextState.setInstalling(['prettier']);
+      expect(actual).toEqual(expected);
+    });
 
-    await prettierMutation(actual as unknown as Config);
+    it('does not add stylelint-prettier dependencies and prettier config if prettier is not installed', async () => {
+      const actual = { devDependencies: [], stylelintConfig: { extends: [] } };
 
-    const expected = {
-      devDependencies: ['stylelint-prettier'],
-      stylelintConfig: { extends: ['stylelint-prettier/recommended'] },
-    };
+      await prettierMutation(actual as unknown as Config);
 
-    expect(actual).toEqual(expected);
-  });
+      const expected = { devDependencies: [], stylelintConfig: { extends: [] } };
 
-  test('should not add stylelint-prettier dependencies and prettier config if prettier is not installed', async () => {
-    const actual = { devDependencies: [], stylelintConfig: { extends: [] } };
-
-    await prettierMutation(actual as unknown as Config);
-
-    const expected = { devDependencies: [], stylelintConfig: { extends: [] } };
-
-    expect(actual).toEqual(expected);
+      expect(actual).toEqual(expected);
+    });
   });
 });

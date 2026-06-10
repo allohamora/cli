@@ -2,30 +2,32 @@ import { configState, fileSystem, terminal } from '#__tests__/setup-test-context
 import { defaultConfig } from '#src/categories/js/jest/config/default.config.ts';
 import { jestEntrypoint } from '#src/categories/js/jest/jest.entrypoint.ts';
 
-beforeEach(() => {
-  configState.setConfig('default');
-});
-
-describe('jest', () => {
-  test('installs jest dependencies and writes the default config file', async () => {
-    await jestEntrypoint();
-
-    expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', ...defaultConfig.devDependencies]]]);
-    expect(fileSystem.readFile('jest.config.cjs')).toBe(`${defaultConfig.configFileContent}\n`);
+describe('jest.entrypoint', () => {
+  beforeEach(() => {
+    configState.setConfig('default');
   });
 
-  test('adds test scripts to package.json', async () => {
-    fileSystem.seed({ packageJson: { scripts: { lint: 'eslint "**/*.js"' } } });
+  describe('jest', () => {
+    it('installs jest dependencies and writes the default config file', async () => {
+      await jestEntrypoint();
 
-    await jestEntrypoint();
+      expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', ...defaultConfig.devDependencies]]]);
+      expect(fileSystem.readFile('jest.config.cjs')).toBe(`${defaultConfig.configFileContent}\n`);
+    });
 
-    expect(fileSystem.readJson('package.json')).toEqual({
-      scripts: {
-        lint: 'eslint "**/*.js"',
-        test: 'jest',
-        'test:watch': 'jest --watch',
-        'test:coverage': 'jest --coverage',
-      },
+    it('adds test scripts to package.json', async () => {
+      fileSystem.seed({ packageJson: { scripts: { lint: 'eslint "**/*.js"' } } });
+
+      await jestEntrypoint();
+
+      expect(fileSystem.readJson('package.json')).toEqual({
+        scripts: {
+          lint: 'eslint "**/*.js"',
+          test: 'jest',
+          'test:watch': 'jest --watch',
+          'test:coverage': 'jest --coverage',
+        },
+      });
     });
   });
 });

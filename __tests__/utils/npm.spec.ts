@@ -12,105 +12,107 @@ import {
 } from '#src/utils/npm.ts';
 import { ROOT_PATH } from '#src/utils/path.ts';
 
-const returnPackageJson = <T extends Record<string, unknown>>(value: T = {} as T) => {
-  fileSystem.seed({ packageJson: value });
-};
+describe('npm', () => {
+  const returnPackageJson = <T extends Record<string, unknown>>(value: T = {} as T) => {
+    fileSystem.seed({ packageJson: value });
+  };
 
-const expectPackageJsonWasGetted = () => {
-  expect(fileSystem.exists(PACKAGE_JSON_NAME)).toBe(true);
-};
+  const expectPackageJsonWasGetted = () => {
+    expect(fileSystem.exists(PACKAGE_JSON_NAME)).toBe(true);
+  };
 
-const expectPackageJsonWasSaved = <T extends Record<string, unknown>>(target: T) => {
-  expect(fileSystem.readJson(PACKAGE_JSON_NAME)).toEqual(target);
-};
+  const expectPackageJsonWasSaved = <T extends Record<string, unknown>>(target: T) => {
+    expect(fileSystem.readJson(PACKAGE_JSON_NAME)).toEqual(target);
+  };
 
-describe('PATHS', () => {
-  test('PACKAGE_JSON_PATH should be ROOT_PATH/package.json', () => {
-    const actual = PACKAGE_JSON_PATH;
-    const expected = path.join(ROOT_PATH, 'package.json');
+  describe('PATHS', () => {
+    it('PACKAGE_JSON_PATH is ROOT_PATH/package.json', () => {
+      const actual = PACKAGE_JSON_PATH;
+      const expected = path.join(ROOT_PATH, 'package.json');
 
-    expect(actual).toBe(expected);
-  });
-});
-
-describe('getPackageJson', () => {
-  test('should return package.json', async () => {
-    returnPackageJson();
-
-    const actual = await getPackageJson();
-    const expected = {};
-
-    expect(actual).toEqual(expected);
-  });
-});
-
-describe('setPackageJson', () => {
-  test('should stringify object and set it as package.json', async () => {
-    const target = { a: 123 };
-
-    await setPackageJson(target);
-    expectPackageJsonWasSaved(target);
-  });
-});
-
-describe('addToPackageJson', () => {
-  test('should add field to package.json and save it', async () => {
-    const fieldName = '__test__';
-    const value = 123;
-
-    returnPackageJson();
-
-    await addToPackageJson(fieldName, value);
-
-    expectPackageJsonWasGetted();
-    expectPackageJsonWasSaved({ [fieldName]: value });
-  });
-});
-
-describe('addScripts', () => {
-  const npmScripts = [
-    { name: 'test', script: 'test' },
-    { name: '__test__', script: '__test__' },
-  ];
-  const scripts = npmScripts.reduce<Record<string, string>>((state, { name, script }) => {
-    state[name] = script;
-
-    return state;
-  }, {});
-
-  test('should add scripts to existed package.json scripts and save it', async () => {
-    const packageJson = { scripts: { test: '__test__' } };
-    returnPackageJson(packageJson);
-
-    await addScripts(...npmScripts);
-
-    expectPackageJsonWasGetted();
-    expectPackageJsonWasSaved({ scripts: { ...packageJson.scripts, ...scripts } });
+      expect(actual).toBe(expected);
+    });
   });
 
-  test('should add scripts to package.json and save it', async () => {
-    await addScripts(...npmScripts);
+  describe('getPackageJson', () => {
+    it('returns package.json', async () => {
+      returnPackageJson();
 
-    expectPackageJsonWasGetted();
-    expectPackageJsonWasSaved({ scripts });
+      const actual = await getPackageJson();
+      const expected = {};
+
+      expect(actual).toEqual(expected);
+    });
   });
-});
 
-describe('runScript', () => {
-  test('should run npm script', async () => {
-    const scriptName = '__test__';
-    await runScript(scriptName);
+  describe('setPackageJson', () => {
+    it('stringifies object and sets it as package.json', async () => {
+      const target = { a: 123 };
 
-    expect(terminal.getCommands()).toEqual([['npm', ['run', scriptName]]]);
+      await setPackageJson(target);
+      expectPackageJsonWasSaved(target);
+    });
   });
-});
 
-describe('installDevelopmentDependencies', () => {
-  test('should install development dependencies', async () => {
-    const dependencies = ['turbo', 'test', 'hello'];
+  describe('addToPackageJson', () => {
+    it('adds field to package.json and saves it', async () => {
+      const fieldName = '__test__';
+      const value = 123;
 
-    await installDevelopmentDependencies(...dependencies);
+      returnPackageJson();
 
-    expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', ...dependencies]]]);
+      await addToPackageJson(fieldName, value);
+
+      expectPackageJsonWasGetted();
+      expectPackageJsonWasSaved({ [fieldName]: value });
+    });
+  });
+
+  describe('addScripts', () => {
+    const npmScripts = [
+      { name: 'test', script: 'test' },
+      { name: '__test__', script: '__test__' },
+    ];
+    const scripts = npmScripts.reduce<Record<string, string>>((state, { name, script }) => {
+      state[name] = script;
+
+      return state;
+    }, {});
+
+    it('adds scripts to existing package.json scripts and saves it', async () => {
+      const packageJson = { scripts: { test: '__test__' } };
+      returnPackageJson(packageJson);
+
+      await addScripts(...npmScripts);
+
+      expectPackageJsonWasGetted();
+      expectPackageJsonWasSaved({ scripts: { ...packageJson.scripts, ...scripts } });
+    });
+
+    it('adds scripts to package.json and saves it', async () => {
+      await addScripts(...npmScripts);
+
+      expectPackageJsonWasGetted();
+      expectPackageJsonWasSaved({ scripts });
+    });
+  });
+
+  describe('runScript', () => {
+    it('runs npm script', async () => {
+      const scriptName = '__test__';
+      await runScript(scriptName);
+
+      expect(terminal.getCommands()).toEqual([['npm', ['run', scriptName]]]);
+    });
+  });
+
+  describe('installDevelopmentDependencies', () => {
+    it('installs development dependencies', async () => {
+      const dependencies = ['turbo', 'test', 'hello'];
+
+      await installDevelopmentDependencies(...dependencies);
+
+      expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', ...dependencies]]]);
+    });
   });
 });

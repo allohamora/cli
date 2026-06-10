@@ -1,31 +1,33 @@
 import { setInstalling, getInstalling } from '#src/states/context.ts';
 
-const expectSetAndGet = () => {
-  const installing = ['__test__'];
+describe('context', () => {
+  const expectSetAndGet = () => {
+    const installing = ['__test__'];
 
-  setInstalling(installing);
+    setInstalling(installing);
 
-  const actual = getInstalling();
-  const expected = installing;
-
-  expect(actual).toBe(expected);
-};
-
-beforeEach(() => {
-  setInstalling([]);
-});
-
-describe('setInstalling', () => {
-  test('should set installing', expectSetAndGet);
-});
-
-describe('getInstalling', () => {
-  test('should return empty array if not setted', () => {
     const actual = getInstalling();
-    const expected: string[] = [];
+    const expected = installing;
 
-    expect(actual).toEqual(expected);
+    expect(actual).toBe(expected);
+  };
+
+  beforeEach(() => {
+    setInstalling([]);
   });
 
-  test('should return installing', expectSetAndGet);
+  describe('setInstalling', () => {
+    it('sets installing', expectSetAndGet);
+  });
+
+  describe('getInstalling', () => {
+    it('returns empty array if not set', () => {
+      const actual = getInstalling();
+      const expected: string[] = [];
+
+      expect(actual).toEqual(expected);
+    });
+
+    it('returns installing', expectSetAndGet);
+  });
 });
