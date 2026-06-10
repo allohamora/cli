@@ -11,7 +11,7 @@ type PackageJson = Record<string, unknown>;
 type SeedProjectOptions = {
   dirs?: string[];
   files?: Record<string, string>;
-  packageJson?: PackageJson;
+  packageJson?: PackageJson | null;
 };
 
 export class FileSystem {
@@ -77,7 +77,9 @@ export class FileSystem {
       this.files.set(filename, content);
     }
 
-    this.files.set('package.json', JSON.stringify(packageJson));
+    if (packageJson !== null) {
+      this.files.set('package.json', JSON.stringify(packageJson));
+    }
   }
 
   public exists(name: string) {

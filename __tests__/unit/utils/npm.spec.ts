@@ -43,6 +43,12 @@ describe('npm', () => {
 
       expect(actual).toEqual(expected);
     });
+
+    it("rejects if package.json doesn't exist", async () => {
+      fileSystem.seed({ packageJson: null });
+
+      await expect(getPackageJson()).rejects.toThrow('package.json does not exist');
+    });
   });
 
   describe('setPackageJson', () => {
@@ -65,6 +71,13 @@ describe('npm', () => {
 
       expectPackageJsonWasGetted();
       expectPackageJsonWasSaved({ [fieldName]: value });
+    });
+
+    it("rejects if package.json doesn't exist", async () => {
+      fileSystem.seed({ packageJson: null });
+
+      await expect(addToPackageJson('__test__', 123)).rejects.toThrow('package.json does not exist');
+      expect(fileSystem.exists(PACKAGE_JSON_NAME)).toBe(false);
     });
   });
 
@@ -94,6 +107,13 @@ describe('npm', () => {
 
       expectPackageJsonWasGetted();
       expectPackageJsonWasSaved({ scripts });
+    });
+
+    it("rejects if package.json doesn't exist", async () => {
+      fileSystem.seed({ packageJson: null });
+
+      await expect(addScripts(...npmScripts)).rejects.toThrow('package.json does not exist');
+      expect(fileSystem.exists(PACKAGE_JSON_NAME)).toBe(false);
     });
   });
 
