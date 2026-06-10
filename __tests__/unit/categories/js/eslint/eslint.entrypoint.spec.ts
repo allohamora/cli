@@ -1,5 +1,5 @@
 import { configState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { createConfig } from '#__tests__/categories/js/eslint/eslint-test.utils.ts';
+import { createConfig } from '#__tests__/unit/categories/js/eslint/eslint-test.utils.ts';
 import { buildConfig, eslint } from '#src/categories/js/eslint/eslint.entrypoint.ts';
 
 describe('eslint.entrypoint', () => {
