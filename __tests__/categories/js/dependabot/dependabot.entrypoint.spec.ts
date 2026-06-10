@@ -1,5 +1,4 @@
 import { fileSystem } from '#__tests__/setup-test-context.ts';
-import { defaultConfig } from '#src/categories/js/dependabot/config/default.config.ts';
 import { dependabot } from '#src/categories/js/dependabot/dependabot.entrypoint.ts';
 
 describe('dependabot.entrypoint', () => {
@@ -8,7 +7,26 @@ describe('dependabot.entrypoint', () => {
       await dependabot();
 
       expect(fileSystem.getDirs()).toEqual(['.github']);
-      expect(fileSystem.readFile('.github/dependabot.yml')).toBe(`${defaultConfig.content}\n`);
+      expect(fileSystem.readFile('.github/dependabot.yml')).toBe(
+        [
+          'version: 2',
+          'updates:',
+          '  - package-ecosystem: "github-actions"',
+          '    directory: "/"',
+          '    schedule:',
+          '      interval: "weekly"',
+          '      day: "monday"',
+          '    open-pull-requests-limit: 10',
+          '',
+          '  - package-ecosystem: npm',
+          '    directory: "/"',
+          '    schedule:',
+          '      interval: "weekly"',
+          '      day: "monday"',
+          '    open-pull-requests-limit: 0',
+          '',
+        ].join('\n'),
+      );
     });
   });
 });

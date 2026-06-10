@@ -1,5 +1,4 @@
 import { configState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { defaultConfig } from '#src/categories/js/jest/config/default.config.ts';
 import { jestEntrypoint } from '#src/categories/js/jest/jest.entrypoint.ts';
 
 describe('jest.entrypoint', () => {
@@ -11,8 +10,19 @@ describe('jest.entrypoint', () => {
     it('installs jest dependencies and writes the default config file', async () => {
       await jestEntrypoint();
 
-      expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', ...defaultConfig.devDependencies]]]);
-      expect(fileSystem.readFile('jest.config.cjs')).toBe(`${defaultConfig.configFileContent}\n`);
+      expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', 'jest', '@types/jest']]]);
+      expect(fileSystem.readFile('jest.config.cjs')).toBe(
+        [
+          `/** @type {import('jest').Config} */`,
+          'module.exports = {',
+          `  testEnvironment: 'node',`,
+          `  testRegex: '.*\\\\.(spec|test)\\\\.js$',`,
+          `  collectCoverageFrom: ['src/**/*.js'],`,
+          '  passWithNoTests: true,',
+          '};',
+          '',
+        ].join('\n'),
+      );
     });
 
     it('adds test scripts to package.json', async () => {

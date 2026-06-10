@@ -1,7 +1,36 @@
 import { getConfig } from '#src/categories/js/build-workflow/build-workflow.config.ts';
 import { expectGithubWorkflow } from '#__tests__/test-utils/github.ts';
-import { expectJsConfig } from '#__tests__/test-utils/js-config.ts';
 
 describe('build-workflow.config', () => {
-  expectJsConfig(getConfig, [(config) => expectGithubWorkflow(config.content)]);
+  it('returns the build workflow content', () => {
+    expect(getConfig().content).toBe(
+      [
+        'name: build',
+        '',
+        'on:',
+        '  push:',
+        '    branches:',
+        '      - "**"',
+        '',
+        'jobs:',
+        '  build:',
+        '    runs-on: ubuntu-latest',
+        '    env:',
+        '      CI: true',
+        '    steps:',
+        '      - name: Checkout code',
+        '        uses: actions/checkout@v4',
+        '      - name: Install node',
+        '        uses: actions/setup-node@v4',
+        '        with:',
+        '          cache: "npm"',
+        '      - name: Install dependencies',
+        '        run: npm i',
+        '      - name: Run build',
+        '        run: npm run build',
+      ].join('\n'),
+    );
+  });
+
+  expectGithubWorkflow(getConfig().content);
 });

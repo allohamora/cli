@@ -1,5 +1,4 @@
 import { fileSystem } from '#__tests__/setup-test-context.ts';
-import { defaultConfig } from '#src/categories/js/build-workflow/config/default.config.ts';
 import { buildWorkflow } from '#src/categories/js/build-workflow/build-workflow.entrypoint.ts';
 
 describe('build-workflow.entrypoint', () => {
@@ -8,7 +7,34 @@ describe('build-workflow.entrypoint', () => {
       await buildWorkflow();
 
       expect(fileSystem.getDirs()).toEqual(['.github', '.github/workflows']);
-      expect(fileSystem.readFile('.github/workflows/build.yml')).toBe(`${defaultConfig.content}\n`);
+      expect(fileSystem.readFile('.github/workflows/build.yml')).toBe(
+        [
+          'name: build',
+          '',
+          'on:',
+          '  push:',
+          '    branches:',
+          '      - "**"',
+          '',
+          'jobs:',
+          '  build:',
+          '    runs-on: ubuntu-latest',
+          '    env:',
+          '      CI: true',
+          '    steps:',
+          '      - name: Checkout code',
+          '        uses: actions/checkout@v4',
+          '      - name: Install node',
+          '        uses: actions/setup-node@v4',
+          '        with:',
+          '          cache: "npm"',
+          '      - name: Install dependencies',
+          '        run: npm i',
+          '      - name: Run build',
+          '        run: npm run build',
+          '',
+        ].join('\n'),
+      );
     });
   });
 });

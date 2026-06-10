@@ -1,19 +1,40 @@
 import { getConfig } from '#src/categories/js/docker/docker.config.ts';
-import { expectJsConfig } from '#__tests__/test-utils/js-config.ts';
 
 describe('docker.config', () => {
-  type ExpectDockerConfigArgs = {
-    getDockerFile: ({ version }: { version: string }) => string;
-    dockerIgnore: string;
-  };
+  it('returns Dockerfile content for the requested node version', () => {
+    expect(getConfig().getDockerFile({ version: '24.14.1' })).toBe(
+      [
+        'FROM node:24.14.1',
+        'WORKDIR /app',
+        '',
+        'COPY package*.json ./',
+        'RUN npm ci',
+        '',
+        'COPY . .',
+        'ENV NODE_ENV production',
+        'RUN npm run build',
+        '',
+        'EXPOSE 3000',
+        '',
+        'CMD npm run start',
+      ].join('\n'),
+    );
+  });
 
-  const expectDockerConfig = ({ getDockerFile, dockerIgnore }: ExpectDockerConfigArgs) => {
-    const version = '16.14.2';
-    const dockerFile = getDockerFile({ version });
-
-    expect(dockerFile.startsWith(`FROM node:${version}`)).toBe(true);
-    expect(typeof dockerIgnore === 'string').toBe(true);
-  };
-
-  expectJsConfig(getConfig, [expectDockerConfig]);
+  it('returns the default docker ignore content', () => {
+    expect(getConfig().dockerIgnore).toBe(
+      [
+        'node_modules',
+        'dist',
+        'build',
+        '',
+        '.husky',
+        '.git',
+        '',
+        '.dockerignore',
+        'Dockerfile',
+        '.docker-compose.yml',
+      ].join('\n'),
+    );
+  });
 });

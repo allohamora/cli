@@ -1,8 +1,5 @@
 import { configState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { defaultConfig } from '#src/categories/js/stylelint/config/default.config.ts';
-import { reactTsConfig } from '#src/categories/js/stylelint/config/react-ts.config.ts';
 import { stylelint } from '#src/categories/js/stylelint/stylelint.entrypoint.ts';
-import { stringify } from '#src/utils/json.ts';
 
 describe('stylelint.entrypoint', () => {
   beforeEach(() => {
@@ -13,9 +10,21 @@ describe('stylelint.entrypoint', () => {
     it('installs default dependencies and writes stylelint files', async () => {
       await stylelint();
 
-      expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', ...defaultConfig.devDependencies]]]);
-      expect(fileSystem.readFile('.stylelintrc')).toBe(`${stringify(defaultConfig.stylelintConfig)}\n`);
-      expect(fileSystem.readFile('.stylelintignore')).toBe(`${defaultConfig.stylelintIgnore}\n`);
+      expect(terminal.getCommands()).toEqual([
+        ['npm', ['i', '-D', 'stylelint', 'stylelint-config-standard', 'stylelint-config-clean-order']],
+      ]);
+      expect(fileSystem.readFile('.stylelintrc')).toBe(
+        [
+          '{',
+          '  "extends": [',
+          '    "stylelint-config-standard",',
+          '    "stylelint-config-clean-order"',
+          '  ]',
+          '}',
+          '',
+        ].join('\n'),
+      );
+      expect(fileSystem.readFile('.stylelintignore')).toBe(['node_modules', 'build', 'dist', ''].join('\n'));
     });
 
     it('adds default scripts to package.json', async () => {
@@ -37,9 +46,39 @@ describe('stylelint.entrypoint', () => {
 
       await stylelint();
 
-      expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', ...reactTsConfig.devDependencies]]]);
-      expect(fileSystem.readFile('.stylelintrc')).toBe(`${stringify(reactTsConfig.stylelintConfig)}\n`);
-      expect(fileSystem.readFile('.stylelintignore')).toBe(`${reactTsConfig.stylelintIgnore}\n`);
+      expect(terminal.getCommands()).toEqual([
+        [
+          'npm',
+          [
+            'i',
+            '-D',
+            'stylelint',
+            'stylelint-config-standard',
+            'stylelint-config-clean-order',
+            'postcss-styled-syntax',
+          ],
+        ],
+      ]);
+      expect(fileSystem.readFile('.stylelintrc')).toBe(
+        [
+          '{',
+          '  "extends": [',
+          '    "stylelint-config-standard",',
+          '    "stylelint-config-clean-order"',
+          '  ],',
+          '  "overrides": [',
+          '    {',
+          '      "files": [',
+          '        "**/*.{js,jsx,ts,tsx}"',
+          '      ],',
+          '      "customSyntax": "postcss-styled-syntax"',
+          '    }',
+          '  ]',
+          '}',
+          '',
+        ].join('\n'),
+      );
+      expect(fileSystem.readFile('.stylelintignore')).toBe(['node_modules', '.next', 'build', 'dist', ''].join('\n'));
     });
 
     it('adds react typescript scripts to package.json', async () => {
