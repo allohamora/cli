@@ -1,7 +1,7 @@
 import * as fs from '#src/utils/fs.ts';
+import * as process from '#src/utils/process.ts';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
-import { execa } from 'execa';
 import {
   addScripts,
   addToPackageJson,
@@ -14,8 +14,8 @@ import {
 } from '#src/utils/npm.ts';
 import { ROOT_PATH } from '#src/utils/path.ts';
 
-vi.mock('execa');
-const execaMocked = vi.mocked(execa);
+vi.mock('#src/utils/process.ts');
+const processMocked = vi.mocked(process);
 
 vi.mock('node:fs/promises');
 const fspMocked = vi.mocked(fsp);
@@ -120,7 +120,7 @@ describe('runScript', () => {
     const scriptName = '__test__';
     await runScript(scriptName);
 
-    expect(execaMocked).toHaveBeenCalledWith(expect.arrayContaining(['npm run ', '']), scriptName);
+    expect(processMocked.runCommand).toHaveBeenCalledWith('npm', ['run', scriptName]);
   });
 });
 
@@ -130,6 +130,6 @@ describe('installDevelopmentDependencies', () => {
 
     await installDevelopmentDependencies(...dependencies);
 
-    expect(execaMocked).toHaveBeenCalledWith(expect.arrayContaining(['npm i -D ', '']), dependencies);
+    expect(processMocked.runCommand).toHaveBeenCalledWith('npm', ['i', '-D', ...dependencies]);
   });
 });
