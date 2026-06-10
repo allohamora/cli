@@ -11,7 +11,7 @@ export const oneOf = async <C extends string>(message: string, choices: readonly
   return res[message] as C;
 };
 
-export const miniumOneValidate = (answers: unknown[]) => answers.length !== 0;
+export const minimumOneValidate = (answers: unknown[]) => answers.length !== 0;
 
 export const manyOf = async <C extends string>(message: string, choices: C[]) => {
   const res = await inquirer.prompt({
@@ -19,7 +19,7 @@ export const manyOf = async <C extends string>(message: string, choices: C[]) =>
     name: message,
     message,
     choices,
-    validate: miniumOneValidate,
+    validate: minimumOneValidate,
   });
 
   return res[message] as C[];

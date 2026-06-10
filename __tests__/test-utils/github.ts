@@ -1,7 +1,7 @@
 import { yamlParse } from '#__tests__/test-utils/yaml.ts';
 
-export const expectGithubWorkflow = (yamlString: string, message = 'should be parsed') => {
-  test(message, () => {
+export const expectGithubWorkflow = (yamlString: string, message = 'is parsed') => {
+  it(message, () => {
     const parsed = yamlParse(yamlString);
     const typeofOn = typeof parsed.on;
 

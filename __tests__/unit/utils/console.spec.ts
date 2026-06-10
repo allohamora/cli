@@ -1,0 +1,14 @@
+import { white } from '#src/utils/console.ts';
+
+describe('console', () => {
+  describe('white', () => {
+    it('returns string with white and reset codes', () => {
+      const string = '__test__';
+
+      const actual = white(string);
+      const expected = `\x1b[22m\x1b[1m${string}\x1b[0m`;
+
+      expect(actual).toBe(expected);
+    });
+  });
+});
