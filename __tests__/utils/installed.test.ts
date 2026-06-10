@@ -1,23 +1,12 @@
-import * as context from '#src/states/context.ts';
-import * as fs from '#src/utils/fs.ts';
+import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
 import { isInstalled, isInstalledAndInRootCheck, isInstalling } from '#src/utils/installed.ts';
-
-vi.mock('#src/states/context.ts');
-const contextMocked = vi.mocked(context);
-
-vi.mock('#src/utils/fs.ts');
-const fsMocked = vi.mocked(fs);
 
 const installingScript = '__test__';
 const notInstallingScript = 'undefined';
 const installing = [installingScript];
 
-contextMocked.getInstalling.mockImplementation(() => {
-  return installing;
-});
-
 beforeEach(() => {
-  vi.clearAllMocks();
+  contextState.setInstalling(installing);
 });
 
 describe('isInstalling', () => {
@@ -80,35 +69,30 @@ describe('isInstalledAndInRootCheck', () => {
   const configFile = '__test__.json';
 
   test('should add isExistsInRoot handler', async () => {
-    fsMocked.isExistsInRoot.mockResolvedValueOnce(true);
+    fileSystem.writeFile(configFile, '');
 
     const actual = await isInstalledAndInRootCheck(notInstallingScript, configFile)();
     const expected = true;
 
-    expect(fsMocked.isExistsInRoot).toHaveBeenCalledWith(configFile);
     expect(actual).toBe(expected);
   });
 
   test('should add additional handlers', async () => {
     const nextHandler = vi.fn().mockResolvedValue(true);
-    fsMocked.isExistsInRoot.mockResolvedValueOnce(false);
 
     const actual = await isInstalledAndInRootCheck(notInstallingScript, configFile, [nextHandler])();
     const expected = true;
 
-    expect(fsMocked.isExistsInRoot).toHaveBeenCalled();
     expect(nextHandler).toHaveBeenCalled();
     expect(actual).toBe(expected);
   });
 
   test('should return true if installing and do not execute handlers', async () => {
     const nextHandler = vi.fn().mockResolvedValue(true);
-    fsMocked.isExistsInRoot.mockResolvedValueOnce(false);
 
     const actual = await isInstalledAndInRootCheck(installingScript, configFile, [nextHandler])();
     const expected = true;
 
-    expect(fsMocked.isExistsInRoot).not.toHaveBeenCalled();
     expect(nextHandler).not.toHaveBeenCalled();
     expect(actual).toBe(expected);
   });

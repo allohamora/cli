@@ -1,24 +1,10 @@
-import * as installed from '#src/utils/installed.ts';
-import * as prettierUtils from '#src/categories/js/prettier/prettier.utils.ts';
-import * as jestUtils from '#src/categories/js/jest/jest.utils.ts';
-import { prettierMutation, jestMutation } from '#src/categories/js/eslint/eslint.utils.ts';
+import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
+import { prettierMutation, jestMutation, isEslintInstalled } from '#src/categories/js/eslint/eslint.utils.ts';
 import { createConfig } from '#__tests__/categories/js/eslint/eslint-test.utils.ts';
-
-vi.mock('#src/utils/installed.ts', async (importOriginal) => ({
-  ...(await importOriginal()),
-  isInstalledAndInRootCheck: vi.fn().mockReturnValue(vi.fn()),
-}));
-const installedMocked = vi.mocked(installed);
-
-const jestUtilsMocked = vi.mocked(jestUtils);
-const prettierUtilsMocked = vi.mocked(prettierUtils);
-
-vi.mock('#src/categories/js/jest/jest.utils.ts');
-vi.mock('#src/categories/js/prettier/prettier.utils.ts');
 
 describe('prettierMutation', () => {
   test('should add prettier to empty config if prettier installed', async () => {
-    prettierUtilsMocked.isPrettierInstalled.mockResolvedValueOnce(true);
+    contextState.setInstalling(['prettier']);
 
     const actual = createConfig();
 
@@ -34,7 +20,7 @@ describe('prettierMutation', () => {
   });
 
   test('should add prettier to existed config if prettier installed', async () => {
-    prettierUtilsMocked.isPrettierInstalled.mockResolvedValueOnce(true);
+    contextState.setInstalling(['prettier']);
 
     const actual = createConfig({
       dependencies: ['__test__'],
@@ -54,8 +40,6 @@ describe('prettierMutation', () => {
   });
 
   test('should not add prettier if prettier is not installed', async () => {
-    prettierUtilsMocked.isPrettierInstalled.mockResolvedValueOnce(false);
-
     const actual = createConfig();
     const expected = createConfig();
 
@@ -70,7 +54,7 @@ describe('jestMutation', () => {
     const actual = createConfig({ eslintConfig: { languageOptions: { globals: [] } } });
     const expected = createConfig({ eslintConfig: { languageOptions: { globals: ['jest'] } } });
 
-    jestUtilsMocked.isJestInstalled.mockResolvedValue(true);
+    contextState.setInstalling(['jest']);
 
     await jestMutation(actual);
 
@@ -81,7 +65,7 @@ describe('jestMutation', () => {
     const actual = createConfig();
     const expected = createConfig({ eslintConfig: { languageOptions: { globals: ['jest'] } } });
 
-    jestUtilsMocked.isJestInstalled.mockResolvedValueOnce(true);
+    contextState.setInstalling(['jest']);
 
     await jestMutation(actual);
 
@@ -92,8 +76,6 @@ describe('jestMutation', () => {
     const actual = createConfig();
     const expected = createConfig();
 
-    jestUtilsMocked.isJestInstalled.mockResolvedValueOnce(false);
-
     await jestMutation(actual);
 
     expect(actual).toEqual(expected);
@@ -101,7 +83,19 @@ describe('jestMutation', () => {
 });
 
 describe('isEslintInstalled', () => {
-  test('should call isInstalledAndInRootCheck with eslint and eslint.config.mjs', () => {
-    expect(installedMocked.isInstalledAndInRootCheck).toHaveBeenCalledWith('eslint', 'eslint.config.mjs');
+  test('should return true if eslint is installing', async () => {
+    contextState.setInstalling(['eslint']);
+
+    expect(await isEslintInstalled()).toBe(true);
+  });
+
+  test('should return true if eslint config exists', async () => {
+    fileSystem.writeFile('eslint.config.mjs', '');
+
+    expect(await isEslintInstalled()).toBe(true);
+  });
+
+  test('should return false if eslint is not installing and config does not exist', async () => {
+    expect(await isEslintInstalled()).toBe(false);
   });
 });

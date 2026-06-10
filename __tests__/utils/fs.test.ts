@@ -1,29 +1,16 @@
-import * as json from '#src/utils/json.ts';
-import fsp from 'node:fs/promises';
+import { fileSystem } from '#__tests__/setup-test-context.ts';
 import { rootPath } from '#src/utils/path.ts';
 import { addDirToRootIfNotExists, addFileToRoot, addJsonFileToRoot, isExistsInRoot } from '#src/utils/fs.ts';
 
 const rootFile = 'hello.json';
 const rootDir = 'test';
 
-const root = [rootFile, rootDir];
-const rootWithPath = root.map((file) => rootPath(file));
-
-vi.mock('node:fs/promises');
-const fspMocked = vi.mocked(fsp);
-
-vi.mock('#src/utils/json.ts');
-const jsonMocked = vi.mocked(json);
-
 beforeEach(() => {
-  vi.clearAllMocks();
-
-  fspMocked.access.mockImplementation(async (path) => {
-    const isExists = rootWithPath.includes(path.toString());
-
-    if (!isExists) {
-      throw new Error();
-    }
+  fileSystem.seed({
+    dirs: [rootDir],
+    files: {
+      [rootFile]: '{}',
+    },
   });
 });
 
@@ -50,16 +37,16 @@ describe('addDirToRootIfNotExists', () => {
 
     await addDirToRootIfNotExists(dir);
 
-    expect(fspMocked.mkdir).toHaveBeenCalledWith(expected);
+    expect(fileSystem.getDirs()).toContain(dir);
+    expect(rootPath(dir)).toBe(expected);
   });
 
   test('should not create dir at root if it exists', async () => {
-    const expected = rootPath(rootDir);
+    const dirs = fileSystem.getDirs();
 
     await addDirToRootIfNotExists(rootDir);
 
-    expect(fspMocked.mkdir).not.toHaveBeenCalled();
-    expect(fspMocked.mkdir).not.toHaveBeenCalledWith(expected);
+    expect(fileSystem.getDirs()).toEqual(dirs);
   });
 });
 
@@ -72,7 +59,8 @@ describe('addFileToRoot', () => {
 
     await addFileToRoot(fileName, content);
 
-    expect(fspMocked.writeFile).toHaveBeenCalledWith(fileNameWithPath, `${content}\n`, { encoding: 'utf-8' });
+    expect(fileSystem.readFile(fileName)).toBe(`${content}\n`);
+    expect(rootPath(fileName)).toBe(fileNameWithPath);
   });
 });
 
@@ -85,9 +73,7 @@ describe('addJsonFileToRoot', () => {
 
     await addJsonFileToRoot(fileName, content);
 
-    expect(jsonMocked.stringify).toHaveBeenCalledWith(content);
-    expect(fspMocked.writeFile).toHaveBeenCalledWith(fileNameWithPath, `${json.stringify(content)}\n`, {
-      encoding: 'utf-8',
-    });
+    expect(fileSystem.readFile(fileName)).toBe(`${JSON.stringify(content, null, 2)}\n`);
+    expect(rootPath(fileName)).toBe(fileNameWithPath);
   });
 });

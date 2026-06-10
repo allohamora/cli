@@ -1,33 +1,29 @@
-import * as installed from '#src/utils/installed.ts';
-import * as prettierUtils from '#src/categories/js/prettier/prettier.utils.ts';
-import { prettierMutation } from '#src/categories/js/stylelint/stylelint.utils.ts';
+import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
+import { prettierMutation, isStylelintInstalled } from '#src/categories/js/stylelint/stylelint.utils.ts';
 import type { Config } from '#src/categories/js/stylelint/config/config.interface.ts';
 
-vi.mock('#src/utils/installed.ts', async (importOriginal) => ({
-  ...(await importOriginal()),
-  isInstalledAndInRootCheck: vi.fn().mockImplementation(vi.fn()),
-}));
-const installedMocked = vi.mocked(installed);
-
-vi.mock('#src/categories/js/prettier/prettier.utils.ts', () => ({
-  isPrettierInstalled: vi.fn(),
-}));
-const prettierUtilsMocked = vi.mocked(prettierUtils);
-
-afterEach(() => {
-  vi.clearAllMocks();
-});
-
 describe('isStylelintInstalled', () => {
-  test('should use isInstalledAndInRootCheck with stylelint and .stylelintrc', () => {
-    expect(installedMocked.isInstalledAndInRootCheck).toHaveBeenCalledWith('stylelint', '.stylelintrc');
+  test('should return true if stylelint is installing', async () => {
+    contextState.setInstalling(['stylelint']);
+
+    expect(await isStylelintInstalled()).toBe(true);
+  });
+
+  test('should return true if stylelint config exists', async () => {
+    fileSystem.writeFile('.stylelintrc', '');
+
+    expect(await isStylelintInstalled()).toBe(true);
+  });
+
+  test('should return false if stylelint is not installing and config does not exist', async () => {
+    expect(await isStylelintInstalled()).toBe(false);
   });
 });
 
 describe('prettierMutation', () => {
   test('should add stylelint-prettier dependencies and prettier config', async () => {
     const actual = { devDependencies: [], stylelintConfig: { extends: [] } };
-    prettierUtilsMocked.isPrettierInstalled.mockResolvedValueOnce(true);
+    contextState.setInstalling(['prettier']);
 
     await prettierMutation(actual as unknown as Config);
 
@@ -41,7 +37,6 @@ describe('prettierMutation', () => {
 
   test('should not add stylelint-prettier dependencies and prettier config if prettier is not installed', async () => {
     const actual = { devDependencies: [], stylelintConfig: { extends: [] } };
-    prettierUtilsMocked.isPrettierInstalled.mockResolvedValueOnce(false);
 
     await prettierMutation(actual as unknown as Config);
 

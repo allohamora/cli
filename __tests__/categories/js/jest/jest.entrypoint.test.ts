@@ -1,51 +1,31 @@
-import * as fs from '#src/utils/fs.ts';
-import * as npm from '#src/utils/npm.ts';
-import * as config from '#src/categories/js/jest/jest.config.ts';
-import type { Config } from '#src/categories/js/jest/config/config.interface.ts';
+import { configState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
+import { defaultConfig } from '#src/categories/js/jest/config/default.config.ts';
 import { jestEntrypoint } from '#src/categories/js/jest/jest.entrypoint.ts';
 
-vi.mock('#src/utils/fs.ts');
-const fsMocked = vi.mocked(fs);
-
-vi.mock('#src/utils/npm.ts');
-const npmMocked = vi.mocked(npm);
-
-vi.mock('#src/categories/js/jest/jest.config.ts');
-const configMocked = vi.mocked(config);
+beforeEach(() => {
+  configState.setConfig('default');
+});
 
 describe('jest', () => {
-  const createConfig = ({ devDependencies = [], configFileContent = '', scripts = [] }: Partial<Config> = {}) => ({
-    devDependencies,
-    configFileContent,
-    scripts,
-  });
-
-  let config = createConfig();
-
-  beforeEach(() => {
-    config = createConfig();
-    configMocked.getConfig.mockReturnValueOnce(config);
-  });
-
-  test('should get config from getConfig', async () => {
+  test('installs jest dependencies and writes the default config file', async () => {
     await jestEntrypoint();
 
-    expect(configMocked.getConfig).toHaveBeenCalled();
+    expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', ...defaultConfig.devDependencies]]]);
+    expect(fileSystem.readFile('jest.config.cjs')).toBe(`${defaultConfig.configFileContent}\n`);
   });
 
-  test('should add config file to root', async () => {
-    config.configFileContent = 'module.exports = {}';
+  test('adds test scripts to package.json', async () => {
+    fileSystem.seed({ packageJson: { scripts: { lint: 'eslint "**/*.js"' } } });
 
     await jestEntrypoint();
 
-    expect(fsMocked.addFileToRoot).toHaveBeenCalledWith('jest.config.cjs', config.configFileContent);
-  });
-
-  test('should add test scripts to package.json', async () => {
-    config.scripts = [{ name: 'test', script: '__test__' }];
-
-    await jestEntrypoint();
-
-    expect(npmMocked.addScripts).toHaveBeenCalledWith(config.scripts[0]);
+    expect(fileSystem.readJson('package.json')).toEqual({
+      scripts: {
+        lint: 'eslint "**/*.js"',
+        test: 'jest',
+        'test:watch': 'jest --watch',
+        'test:coverage': 'jest --coverage',
+      },
+    });
   });
 });

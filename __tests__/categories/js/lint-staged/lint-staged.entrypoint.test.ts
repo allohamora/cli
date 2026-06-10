@@ -1,76 +1,34 @@
-import * as npm from '#src/utils/npm.ts';
-import * as config from '#src/categories/js/lint-staged/lint-staged.config.ts';
-import * as utils from '#src/categories/js/lint-staged/lint-staged.utils.ts';
+import { configState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { lintStaged } from '#src/categories/js/lint-staged/lint-staged.entrypoint.ts';
-import type { Config, LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
-
-vi.mock('#src/utils/npm.ts');
-const npmMocked = vi.mocked(npm);
-
-vi.mock('#src/categories/js/lint-staged/lint-staged.config.ts');
-const configMocked = vi.mocked(config);
-
-vi.mock('#src/categories/js/lint-staged/lint-staged.utils.ts');
-const utilsMocked = vi.mocked(utils);
 
 beforeEach(() => {
-  vi.clearAllMocks();
-});
-
-const createConfig = ({ config = {}, mutations = [] }: Partial<Config> = {}) => ({
-  config,
-  mutations,
+  configState.setConfig('default');
 });
 
 describe('lintStaged', () => {
-  test('should get config from getConfig', async () => {
-    configMocked.getConfig.mockReturnValueOnce(createConfig());
+  test('installs lint-staged, writes package config, and adds husky hook', async () => {
+    fileSystem.seed({
+      dirs: ['.husky'],
+      files: {
+        '.prettierrc': '{}',
+        '.stylelintrc': '{}',
+        'eslint.config.mjs': '',
+        'jest.config.cjs': '',
+      },
+      packageJson: { scripts: { test: 'vitest' } },
+    });
 
     await lintStaged();
 
-    expect(configMocked.getConfig).toHaveBeenCalled();
-  });
-
-  test('should apply mutations to config', async () => {
-    const key = '*.ts';
-    const value = '__test__';
-    const testMutator = (config: LintStagedConfig) => (config[key] = value);
-    const mutators = [testMutator];
-
-    const actual = createConfig({ mutations: mutators });
-
-    configMocked.getConfig.mockReturnValueOnce(actual);
-
-    await lintStaged();
-
-    const expected = createConfig({ config: { [key]: value }, mutations: mutators });
-
-    expect(actual).toEqual(expected);
-  });
-
-  test('should install lint-staged package', async () => {
-    configMocked.getConfig.mockReturnValueOnce(createConfig());
-
-    await lintStaged();
-
-    expect(npmMocked.installDevelopmentDependencies).toHaveBeenCalledWith('lint-staged');
-  });
-
-  test('should add config to package.json', async () => {
-    const testConfig = createConfig({ config: { '*.ts': '__test__' } });
-
-    configMocked.getConfig.mockReturnValueOnce(testConfig);
-
-    await lintStaged();
-
-    expect(npmMocked.addToPackageJson).toHaveBeenCalledWith('lint-staged', testConfig.config);
-  });
-
-  test('should run huskyIntegration', async () => {
-    configMocked.getConfig.mockReturnValueOnce(createConfig());
-
-    await lintStaged();
-
-    expect(utilsMocked.huskyIntegration).toHaveBeenCalled();
+    expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', 'lint-staged']]]);
+    expect(fileSystem.readJson('package.json')).toEqual({
+      scripts: { test: 'vitest' },
+      'lint-staged': {
+        '*.{js,cjs,mjs,json,yml,md}': 'prettier --write',
+        '*.css': 'stylelint --fix',
+        '*.js': ['eslint --fix', 'jest --findRelatedTests'],
+      },
+    });
+    expect(fileSystem.readFile('.husky/pre-commit')).toBe('npx --no-install lint-staged\n');
   });
 });

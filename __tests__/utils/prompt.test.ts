@@ -1,21 +1,5 @@
-import inquirer from 'inquirer';
+import { prompt } from '#__tests__/setup-test-context.ts';
 import { manyOf, miniumOneValidate, oneOf } from '#src/utils/prompt.ts';
-
-vi.mock('inquirer', () => {
-  const prompt = vi.fn();
-
-  return {
-    prompt,
-    default: {
-      prompt,
-    },
-  };
-});
-const inquirerMocked = vi.mocked(inquirer);
-
-beforeEach(() => {
-  vi.clearAllMocks();
-});
 
 const message = '__test__';
 const choices = ['a', 'b', 'c'];
@@ -23,7 +7,7 @@ const choices = ['a', 'b', 'c'];
 describe('oneOf', () => {
   test('should run inquirer.prompt with type: select', async () => {
     const choice = choices[0];
-    inquirerMocked.prompt.mockResolvedValueOnce({ [message]: choice });
+    prompt.answer(message, choice);
 
     const actual = await oneOf(message, choices);
     const expected = choice;
@@ -35,7 +19,7 @@ describe('oneOf', () => {
       choices,
     };
 
-    expect(inquirerMocked.prompt).toHaveBeenCalledWith(promptOptions);
+    expect(prompt.getQuestions()).toEqual([promptOptions]);
     expect(actual).toBe(expected);
   });
 });
@@ -59,7 +43,7 @@ describe('miniumOneValidate', () => {
 describe('manyOf', () => {
   test('should run inquirer.prompt with type: checkbox and minium one validate rule', async () => {
     const resolvedChoices = [choices[0], choices[2]];
-    inquirerMocked.prompt.mockResolvedValueOnce({ [message]: resolvedChoices });
+    prompt.answer(message, resolvedChoices);
 
     const actual = await manyOf(message, choices);
     const expected = resolvedChoices;
@@ -72,7 +56,7 @@ describe('manyOf', () => {
       validate: miniumOneValidate,
     };
 
-    expect(inquirerMocked.prompt).toHaveBeenCalledWith(promptOptions);
+    expect(prompt.getQuestions()).toEqual([promptOptions]);
     expect(actual).toBe(expected);
   });
 });

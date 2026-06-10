@@ -1,32 +1,12 @@
-import * as config from '#src/categories/js/build-workflow/build-workflow.config.ts';
-import * as github from '#src/utils/github.ts';
+import { fileSystem } from '#__tests__/setup-test-context.ts';
+import { defaultConfig } from '#src/categories/js/build-workflow/config/default.config.ts';
 import { buildWorkflow } from '#src/categories/js/build-workflow/build-workflow.entrypoint.ts';
 
-vi.mock('#src/categories/js/build-workflow/build-workflow.config.ts');
-const configMocked = vi.mocked(config);
-
-vi.mock('#src/utils/github.ts');
-const githubMocked = vi.mocked(github);
-
-beforeEach(() => {
-  vi.clearAllMocks();
-});
-
 describe('buildWorkflow', () => {
-  test('should get config from getConfig', async () => {
-    configMocked.getConfig.mockReturnValueOnce({ content: '' });
-
+  test('writes the default build workflow', async () => {
     await buildWorkflow();
 
-    expect(configMocked.getConfig).toHaveBeenCalled();
-  });
-
-  test('should add github workflow', async () => {
-    const content = '__test__';
-    configMocked.getConfig.mockReturnValueOnce({ content });
-
-    await buildWorkflow();
-
-    expect(githubMocked.addGithubWorkflow).toHaveBeenCalledWith('build.yml', content);
+    expect(fileSystem.getDirs()).toEqual(['.github', '.github/workflows']);
+    expect(fileSystem.readFile('.github/workflows/build.yml')).toBe(`${defaultConfig.content}\n`);
   });
 });

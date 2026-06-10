@@ -1,8 +1,5 @@
-import { execa } from 'execa';
+import { terminal } from '#__tests__/setup-test-context.ts';
 import { runCommand } from '#src/utils/process.ts';
-
-vi.mock('execa');
-const execaMocked = vi.mocked(execa);
 
 describe('runCommand', () => {
   test('should run command with arguments', async () => {
@@ -11,6 +8,6 @@ describe('runCommand', () => {
 
     await runCommand(file, args);
 
-    expect(execaMocked).toHaveBeenCalledWith(file, args);
+    expect(terminal.getCommands()).toEqual([[file, args]]);
   });
 });

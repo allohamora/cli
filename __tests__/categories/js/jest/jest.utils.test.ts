@@ -1,14 +1,20 @@
-import * as installed from '#src/utils/installed.ts';
-import '#src/categories/js/jest/jest.utils.ts';
-
-vi.mock('#src/utils/installed.ts', async (importOriginal) => ({
-  ...(await importOriginal()),
-  isInstalledAndInRootCheck: vi.fn().mockImplementation(vi.fn()),
-}));
-const installedMocked = vi.mocked(installed);
+import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
+import { isJestInstalled } from '#src/categories/js/jest/jest.utils.ts';
 
 describe('isJestInstalled', () => {
-  test('should use isInstalledAndInRootCheck with jest and jest.config.cjs', () => {
-    expect(installedMocked.isInstalledAndInRootCheck).toHaveBeenCalledWith('jest', 'jest.config.cjs');
+  test('should return true if jest is installing', async () => {
+    contextState.setInstalling(['jest']);
+
+    expect(await isJestInstalled()).toBe(true);
+  });
+
+  test('should return true if jest config exists', async () => {
+    fileSystem.writeFile('jest.config.cjs', '');
+
+    expect(await isJestInstalled()).toBe(true);
+  });
+
+  test('should return false if jest is not installing and config does not exist', async () => {
+    expect(await isJestInstalled()).toBe(false);
   });
 });

@@ -1,7 +1,5 @@
-import * as fs from '#src/utils/fs.ts';
-import * as process from '#src/utils/process.ts';
-import fsp from 'node:fs/promises';
 import path from 'node:path';
+import { fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import {
   addScripts,
   addToPackageJson,
@@ -14,33 +12,16 @@ import {
 } from '#src/utils/npm.ts';
 import { ROOT_PATH } from '#src/utils/path.ts';
 
-vi.mock('#src/utils/process.ts');
-const processMocked = vi.mocked(process);
-
-vi.mock('node:fs/promises');
-const fspMocked = vi.mocked(fsp);
-
-vi.mock('#src/utils/fs.ts');
-const fsMocked = vi.mocked(fs);
-
-beforeEach(() => {
-  vi.clearAllMocks();
-});
-
 const returnPackageJson = <T extends Record<string, unknown>>(value: T = {} as T) => {
-  fspMocked.readFile.mockImplementation(async (path) => {
-    if (path === PACKAGE_JSON_PATH) return JSON.stringify(value);
-
-    return '';
-  });
+  fileSystem.seed({ packageJson: value });
 };
 
 const expectPackageJsonWasGetted = () => {
-  expect(fspMocked.readFile).toHaveBeenCalledWith(PACKAGE_JSON_PATH, { encoding: 'utf-8' });
+  expect(fileSystem.exists(PACKAGE_JSON_NAME)).toBe(true);
 };
 
 const expectPackageJsonWasSaved = <T extends Record<string, unknown>>(target: T) => {
-  expect(fsMocked.addJsonFileToRoot).toHaveBeenCalledWith(PACKAGE_JSON_NAME, target);
+  expect(fileSystem.readJson(PACKAGE_JSON_NAME)).toEqual(target);
 };
 
 describe('PATHS', () => {
@@ -99,10 +80,10 @@ describe('addScripts', () => {
 
   test('should add scripts to existed package.json scripts and save it', async () => {
     const packageJson = { scripts: { test: '__test__' } };
+    returnPackageJson(packageJson);
 
     await addScripts(...npmScripts);
 
-    returnPackageJson(packageJson);
     expectPackageJsonWasGetted();
     expectPackageJsonWasSaved({ scripts: { ...packageJson.scripts, ...scripts } });
   });
@@ -120,7 +101,7 @@ describe('runScript', () => {
     const scriptName = '__test__';
     await runScript(scriptName);
 
-    expect(processMocked.runCommand).toHaveBeenCalledWith('npm', ['run', scriptName]);
+    expect(terminal.getCommands()).toEqual([['npm', ['run', scriptName]]]);
   });
 });
 
@@ -130,6 +111,6 @@ describe('installDevelopmentDependencies', () => {
 
     await installDevelopmentDependencies(...dependencies);
 
-    expect(processMocked.runCommand).toHaveBeenCalledWith('npm', ['i', '-D', ...dependencies]);
+    expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', ...dependencies]]]);
   });
 });

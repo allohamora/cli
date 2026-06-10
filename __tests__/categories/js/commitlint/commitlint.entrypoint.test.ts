@@ -1,53 +1,18 @@
-import * as fs from '#src/utils/fs.ts';
-import * as npm from '#src/utils/npm.ts';
-import * as config from '#src/categories/js/commitlint/commitlint.config.ts';
-import * as utils from '#src/categories/js/commitlint/commitlint.utils.ts';
+import { configState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
+import { defaultConfig } from '#src/categories/js/commitlint/config/default.config.ts';
 import { commitlint } from '#src/categories/js/commitlint/commitlint.entrypoint.ts';
 
-vi.mock('#src/utils/fs.ts');
-const fsMocked = vi.mocked(fs);
-
-vi.mock('#src/utils/npm.ts');
-const npmMocked = vi.mocked(npm);
-
-vi.mock('#src/categories/js/commitlint/commitlint.config.ts');
-const configMocked = vi.mocked(config);
-
-vi.mock('#src/categories/js/commitlint/commitlint.utils.ts');
-const utilsMocked = vi.mocked(utils);
-
 beforeEach(() => {
-  vi.clearAllMocks();
+  configState.setConfig('default');
+  fileSystem.seed({ dirs: ['.husky'] });
 });
 
 describe('commitlint', () => {
-  const testConfig = { config: { extends: ['__test__'] }, rules: '__test__' };
-
-  beforeEach(() => {
-    configMocked.getConfig.mockReturnValueOnce(testConfig);
-  });
-
-  test('should get config from getConfig', async () => {
+  test('installs commitlint packages, writes config, and adds husky hook', async () => {
     await commitlint();
 
-    expect(configMocked.getConfig).toHaveBeenCalled();
-  });
-
-  test('should installs commitlint and rules', async () => {
-    await commitlint();
-
-    expect(npmMocked.installDevelopmentDependencies).toHaveBeenCalledWith('@commitlint/cli', testConfig.rules);
-  });
-
-  test('should add json config to root', async () => {
-    await commitlint();
-
-    expect(fsMocked.addJsonFileToRoot).toHaveBeenCalledWith('.commitlintrc.json', testConfig.config);
-  });
-
-  test('should run husky integration', async () => {
-    await commitlint();
-
-    expect(utilsMocked.huskyIntegration).toHaveBeenCalled();
+    expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', '@commitlint/cli', defaultConfig.rules]]]);
+    expect(fileSystem.readJson('.commitlintrc.json')).toEqual(defaultConfig.config);
+    expect(fileSystem.readFile('.husky/commit-msg')).toBe('npx --no-install -- commitlint --edit "$1"\n');
   });
 });

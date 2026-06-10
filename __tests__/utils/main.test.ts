@@ -1,136 +1,64 @@
-import * as ora from 'ora';
-import * as prompt from '#src/utils/prompt.ts';
-import * as context from '#src/states/context.ts';
 import categories from '#src/categories/index.ts';
+import { contextState, loading, prompt } from '#__tests__/setup-test-context.ts';
 import { chooseOptions, getCategory, getOptions, installOptions } from '#src/utils/main.ts';
 import type { Category } from '#src/types/category.ts';
 import { camelize, kebablize } from '#src/utils/string.ts';
-import { clearMock } from '#__tests__/test-utils/clear-mock.ts';
-import type { Mock } from 'vitest';
-
-const oraMocked = ora as unknown as {
-  oraMocked: Mock;
-  oraStart: Mock;
-  oraStop: Mock;
-  oraTextSet: Mock;
-};
-
-vi.mock('ora', () => {
-  const oraMocked = vi.fn();
-  const oraStart = vi.fn();
-  const oraStop = vi.fn();
-  const oraTextSet = vi.fn();
-
-  return {
-    __esModule: true,
-    default: oraMocked.mockReturnValue({
-      start: oraStart.mockReturnValue({
-        stop: oraStop,
-        set text(value: string) {
-          oraTextSet(value);
-        },
-      }),
-    }),
-
-    oraMocked,
-    oraStop,
-    oraStart,
-    oraTextSet,
-  };
-});
-
-vi.mock('#src/categories/index.ts', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('#src/categories/index.ts')>();
-  const js = {
-    ...actual.default.js,
-    options: {
-      jest: vi.fn(),
-      lintStaged: vi.fn(),
-    },
-  } as Category;
-
-  return { default: { js } };
-});
 
 const js = categories.js as Category;
-const categoryKeys = Object.keys(categories);
 const jsOptionKeys = Object.keys(js.options);
 
-vi.mock('#src/utils/prompt.ts');
-const promptMocked = vi.mocked(prompt);
-
-vi.mock('#src/states/context.ts');
-const contextMocked = vi.mocked(context);
-
 describe('getCategory', () => {
-  test('should return selected category', async () => {
-    promptMocked.oneOf.mockResolvedValueOnce('js');
+  test('returns the selected category', async () => {
+    prompt.selectCategory('js');
 
-    const actual = await getCategory();
-    const expected = js;
-
-    expect(actual).toBe(expected);
-    expect(promptMocked.oneOf).toHaveBeenCalledWith('choose a category', categoryKeys);
+    expect(await getCategory()).toBe(js);
   });
 });
 
 describe('getOptions', () => {
-  test('should return selected options', async () => {
-    const selectedOption = js.state.configTypes[1]!;
+  test('sets selected config and returns category options', async () => {
+    const selectedConfig = js.state.configTypes[1]!;
+    prompt.selectConfig(selectedConfig);
 
-    promptMocked.oneOf.mockResolvedValueOnce(selectedOption);
-
-    const actual = await getOptions(js);
-    const expected = js.options;
-
-    expect(actual).toBe(expected);
-    expect(js.state.configState[0]()).toBe(selectedOption);
-    expect(promptMocked.oneOf).toHaveBeenCalledWith('choose a config', js.state.configTypes);
+    expect(await getOptions(js)).toBe(js.options);
+    expect(js.state.configState[0]()).toBe(selectedConfig);
   });
 });
 
 describe('chooseOptions', () => {
-  test('should print kebablized options and return selected', async () => {
+  test('returns selected entrypoints in camelCase', async () => {
     const kebablized = jsOptionKeys.map(kebablize);
-    const selected = [kebablized[0]!];
-    const expected = selected.map(camelize);
+    const selected = [kebablized[1]!];
+    prompt.selectEntrypoints(...selected);
 
-    promptMocked.manyOf.mockResolvedValueOnce(selected);
-
-    const actual = await chooseOptions(js.options);
-
-    expect(actual).toEqual(expected);
-    expect(promptMocked.manyOf).toHaveBeenCalledWith('choose a options', kebablized);
+    expect(await chooseOptions(js.options)).toEqual(selected.map(camelize));
   });
 });
 
 describe('installOptions', () => {
-  beforeEach(() => {
-    clearMock(oraMocked);
-  });
-
-  test('should start spinner on start and stop on stop and print kebablize name', async () => {
+  test('starts and finishes loading while printing installed option names', async () => {
     const optionHello = vi.fn();
+
     await installOptions({ optionHello }, ['optionHello']);
 
     expect(optionHello).toHaveBeenCalled();
-    expect(oraMocked.oraMocked).toHaveBeenCalledWith('starting install');
-    expect(oraMocked.oraStart).toHaveBeenCalled();
-    expect(oraMocked.oraTextSet).toHaveBeenCalledWith('option-hello is installing\n');
-    expect(oraMocked.oraStop).toHaveBeenCalled();
+    expect(loading.getLabels()).toEqual(['starting install']);
+    expect(loading.getStarts()).toBe(1);
+    expect(loading.getTexts()).toEqual(['option-hello is installing\n']);
+    expect(loading.getFinishes()).toBe(1);
   });
 
-  test('should set installing options', async () => {
+  test('sets installing options', async () => {
     const option = vi.fn();
     const options = { option };
     const keys = ['option'];
 
     await installOptions(options, keys);
 
-    expect(contextMocked.setInstalling).toHaveBeenCalledWith(keys);
+    expect(contextState.getInstalling()).toEqual(keys);
   });
 
-  test('should run selected scripts', async () => {
+  test('runs selected scripts', async () => {
     const option1 = vi.fn();
     const option2 = vi.fn();
     const options = { option1, option2 };

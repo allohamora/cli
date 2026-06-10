@@ -1,48 +1,33 @@
-const log = vi.spyOn(global.console, 'log').mockImplementation(vi.fn());
-
-import * as consoleColors from '#src/utils/console.ts';
-import * as mainUtils from '#src/utils/main.ts';
+import { consoleMock, fileSystem, loading, prompt, terminal } from '#__tests__/setup-test-context.ts';
 import { main } from '#src/index.ts';
-import { createCategoryState } from '#src/utils/state.ts';
-import type { Category } from '#src/types/category.ts';
-
-vi.mock('#src/utils/console.ts');
-const consoleColorsMocked = vi.mocked(consoleColors);
-
-vi.mock('#src/utils/main.ts');
-const mainUtilsMocked = vi.mocked(mainUtils);
-
-beforeEach(() => {
-  vi.clearAllMocks();
-});
-
-beforeAll(() => {
-  log.mockReset();
-});
+import { white } from '#src/utils/console.ts';
 
 describe('main', () => {
   test('should print welcome and bye message with white color', async () => {
+    const log = vi.fn();
+    consoleMock.setLogHandler(log);
+    prompt.selectCategory('js');
+    prompt.selectConfig('node:ts');
+    prompt.selectEntrypoints();
+
     await main();
 
-    expect(consoleColorsMocked.white).toHaveBeenCalledWith(`Welcome to Allohamora's cli`);
-    expect(consoleColorsMocked.white).toHaveBeenCalledWith('Installation completed');
+    expect(log).toHaveBeenCalledWith(white(`Welcome to Allohamora's cli`));
+    expect(log).toHaveBeenCalledWith(white('Installation completed'));
   });
 
   test('should run selected scripts', async () => {
-    const options = { option: vi.fn() };
-    const optionKeys = ['option'];
-    const category = { options, state: createCategoryState('__state__', ['__test__']) } as Category;
-
-    mainUtilsMocked.getCategory.mockResolvedValueOnce(category);
-    mainUtilsMocked.getOptions.mockResolvedValueOnce(options);
-    mainUtilsMocked.chooseOptions.mockResolvedValueOnce(optionKeys);
-    mainUtilsMocked.installOptions.mockResolvedValueOnce(undefined);
+    prompt.selectCategory('js');
+    prompt.selectConfig('node:ts');
+    prompt.selectEntrypoints('husky');
 
     await main();
 
-    expect(mainUtils.getCategory).toHaveBeenCalled();
-    expect(mainUtils.getOptions).toHaveBeenCalledWith(category);
-    expect(mainUtils.chooseOptions).toHaveBeenCalledWith(options);
-    expect(mainUtils.installOptions).toHaveBeenCalledWith(options, optionKeys);
+    expect(fileSystem.readJson('package.json')).toEqual({ scripts: { prepare: 'husky' } });
+    expect(terminal.getCommands()).toEqual([
+      ['npm', ['i', '-D', 'husky']],
+      ['npm', ['run', 'prepare']],
+    ]);
+    expect(loading.getTexts()).toEqual(['husky is installing\n']);
   });
 });
