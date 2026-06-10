@@ -15,6 +15,7 @@ describe('lint-staged.config', () => {
   };
 
   beforeEach(() => {
+    configState.setConfig('default');
     contextState.setInstalling(['prettier', 'stylelint', 'eslint', 'jest']);
   });
 
