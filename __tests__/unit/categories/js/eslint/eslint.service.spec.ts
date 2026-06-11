@@ -1,8 +1,8 @@
 import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
-import { prettierMutation, jestMutation, isEslintInstalled } from '#src/categories/js/eslint/eslint.utils.ts';
+import { prettierMutation, jestMutation, isEslintInstalled } from '#src/categories/js/eslint/eslint.service.ts';
 import { createConfig } from '#__tests__/unit/categories/js/eslint/eslint-test.utils.ts';
 
-describe('eslint.utils', () => {
+describe('eslint.service', () => {
   describe('prettierMutation', () => {
     it('adds prettier to empty config if prettier installed', async () => {
       contextState.setInstalling(['prettier']);

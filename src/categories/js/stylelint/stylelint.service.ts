@@ -1,5 +1,5 @@
 import { isInstalledAndInRootCheck } from '#src/utils/installed.ts';
-import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.utils.ts';
+import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.service.ts';
 import type { Config } from '#src/categories/js/stylelint/config/config.interface.ts';
 import { PACKAGE_NAME, CONFIG_NAME } from '#src/categories/js/stylelint/stylelint.const.ts';
 

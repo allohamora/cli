@@ -6,10 +6,10 @@ import {
   eslintMutation,
   prettierMutation,
   stylelintMutation,
-} from '#src/categories/js/lint-staged/lint-staged.utils.ts';
+} from '#src/categories/js/lint-staged/lint-staged.service.ts';
 import type { LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
 
-describe('lint-staged.utils', () => {
+describe('lint-staged.service', () => {
   describe('addOptionToLintStagedConfig', () => {
     it('adds string option if config[key] is undefined', () => {
       const key = '*.ts';

@@ -1,7 +1,7 @@
 import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
-import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.utils.ts';
+import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.service.ts';
 
-describe('prettier.utils', () => {
+describe('prettier.service', () => {
   describe('isPrettierInstalled', () => {
     it('returns true if prettier is installing', async () => {
       contextState.setInstalling(['prettier']);

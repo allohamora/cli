@@ -1,8 +1,8 @@
 import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
-import { prettierMutation, isStylelintInstalled } from '#src/categories/js/stylelint/stylelint.utils.ts';
+import { prettierMutation, isStylelintInstalled } from '#src/categories/js/stylelint/stylelint.service.ts';
 import type { Config } from '#src/categories/js/stylelint/config/config.interface.ts';
 
-describe('stylelint.utils', () => {
+describe('stylelint.service', () => {
   describe('isStylelintInstalled', () => {
     it('returns true if stylelint is installing', async () => {
       contextState.setInstalling(['stylelint']);

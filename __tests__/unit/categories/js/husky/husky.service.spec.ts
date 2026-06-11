@@ -1,7 +1,7 @@
 import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
-import { addHook, isHuskyInstalled } from '#src/categories/js/husky/husky.utils.ts';
+import { addHook, isHuskyInstalled } from '#src/categories/js/husky/husky.service.ts';
 
-describe('husky.utils', () => {
+describe('husky.service', () => {
   describe('addHook', () => {
     it('creates hook with placeholder and replaces its content', async () => {
       const hookType = 'commit-msg';

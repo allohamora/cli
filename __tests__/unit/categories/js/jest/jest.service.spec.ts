@@ -1,7 +1,7 @@
 import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
-import { isJestInstalled } from '#src/categories/js/jest/jest.utils.ts';
+import { isJestInstalled } from '#src/categories/js/jest/jest.service.ts';
 
-describe('jest.utils', () => {
+describe('jest.service', () => {
   describe('isJestInstalled', () => {
     it('returns true if jest is installing', async () => {
       contextState.setInstalling(['jest']);

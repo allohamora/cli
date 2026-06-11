@@ -1,4 +1,4 @@
-import { jestMutation, prettierMutation } from '#src/categories/js/eslint/eslint.utils.ts';
+import { jestMutation, prettierMutation } from '#src/categories/js/eslint/eslint.service.ts';
 import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
 
 export const reactTsConfig: Config = {

@@ -1,13 +1,13 @@
 import type { LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
-import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.utils.ts';
-import { addHook, isHuskyInstalled } from '#src/categories/js/husky/husky.utils.ts';
+import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.service.ts';
+import { addHook, isHuskyInstalled } from '#src/categories/js/husky/husky.service.ts';
 import { CLI_NAME } from '#src/categories/js/lint-staged/lint-staged.const.ts';
 import { CLI_NAME as PRETTIER_CLI_NAME } from '#src/categories/js/prettier/prettier.const.ts';
 import { CLI_NAME as JEST_CLI_NAME } from '#src/categories/js/jest/jest.const.ts';
 import { CLI_NAME as ESLINT_CLI_NAME } from '#src/categories/js/eslint/eslint.const.ts';
-import { isJestInstalled } from '#src/categories/js/jest/jest.utils.ts';
-import { isEslintInstalled } from '#src/categories/js/eslint/eslint.utils.ts';
-import { isStylelintInstalled } from '#src/categories/js/stylelint/stylelint.utils.ts';
+import { isJestInstalled } from '#src/categories/js/jest/jest.service.ts';
+import { isEslintInstalled } from '#src/categories/js/eslint/eslint.service.ts';
+import { isStylelintInstalled } from '#src/categories/js/stylelint/stylelint.service.ts';
 import { CLI_NAME as STYLELINT_CLI_NAME } from '#src/categories/js/stylelint/stylelint.const.ts';
 
 type ScriptFileExtension = '*.js' | '*.ts' | '*.css' | '*.{ts,tsx}' | '*.{css,ts,tsx}';

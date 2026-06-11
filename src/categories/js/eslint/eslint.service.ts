@@ -1,6 +1,6 @@
 import { isInstalledAndInRootCheck } from '#src/utils/installed.ts';
-import { isJestInstalled } from '#src/categories/js/jest/jest.utils.ts';
-import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.utils.ts';
+import { isJestInstalled } from '#src/categories/js/jest/jest.service.ts';
+import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.service.ts';
 import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
 import { CONFIG_FILE_NAME, SCRIPT_NAME } from '#src/categories/js/eslint/eslint.const.ts';
 
