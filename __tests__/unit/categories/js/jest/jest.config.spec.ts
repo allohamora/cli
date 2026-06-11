@@ -1,6 +1,6 @@
 import { configState } from '#__tests__/setup-test-context.ts';
+import { parseCjsModule } from '#__tests__/utils/cjs.utils.ts';
 import { getConfig } from '#src/categories/js/jest/jest.config.ts';
-import { parse } from '#__tests__/test-utils/cjs-module.ts';
 
 const scripts = [
   { name: 'test', script: 'jest' },
@@ -91,7 +91,7 @@ describe('jest.config', () => {
   ] as const)('returns parseable config content for %s', (variant, configFile) => {
     configState.setConfig(variant);
 
-    const parsed = parse(getConfig().configFileContent);
+    const parsed = parseCjsModule(getConfig().configFileContent);
 
     expect(getConfig().configFileContent).toBe(configFile);
     expect(parsed.module.exports).toBeDefined();

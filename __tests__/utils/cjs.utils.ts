@@ -1,14 +1,14 @@
 import vm from 'node:vm';
 
-type Context = {
+type CjsContext = {
   module: {
     exports?: Record<string, unknown>;
   };
   [key: string]: unknown;
 };
 
-export const parse = (script: string) => {
-  const context: Context = { module: { exports: {} } };
+export const parseCjsModule = (script: string) => {
+  const context: CjsContext = { module: { exports: {} } };
 
   vm.createContext(context);
   vm.runInContext(script, context);

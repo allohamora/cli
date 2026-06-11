@@ -1,5 +1,5 @@
+import { scheduler } from 'node:timers/promises';
 import { applyMutations } from '#src/utils/mutation.ts';
-import { delay } from '#__tests__/test-utils/delay.ts';
 
 describe('mutation', () => {
   describe('applyMutations', () => {
@@ -22,7 +22,7 @@ describe('mutation', () => {
     it('works with async mutations', async () => {
       const actual: Record<string, boolean> = {};
       const mutationA = async (config: typeof actual) => {
-        await delay(200);
+        await scheduler.wait(200);
         config.a = true;
       };
       const mutationB = (config: typeof actual) => {

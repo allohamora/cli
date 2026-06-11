@@ -1,6 +1,6 @@
 import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
+import { createConfig } from '#__tests__/utils/eslint.utils.ts';
 import { prettierMutation, jestMutation, isEslintInstalled } from '#src/categories/js/eslint/eslint.service.ts';
-import { createConfig } from '#__tests__/unit/categories/js/eslint/eslint-test.utils.ts';
 
 describe('eslint.service', () => {
   describe('prettierMutation', () => {
