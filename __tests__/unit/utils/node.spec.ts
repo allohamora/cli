@@ -11,7 +11,7 @@ describe('node', () => {
       const actual = await getNodeVersion();
 
       expect(actual).toBe(expected);
-      expect(terminal.getCommands()).toEqual([[['node -v']]]);
+      expect(terminal.getCommands()).toEqual([['node', ['-v']]]);
     });
   });
 });
