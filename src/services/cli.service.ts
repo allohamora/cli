@@ -58,7 +58,7 @@ export const installCategoryOptions = async (options: Category['options'], keys:
 
   setSelectedInstallOptions(keys);
 
-  for await (const key of keys) {
+  for (const key of keys) {
     const kebablizeKey = toKebabCase(key);
     spinner.text = `${kebablizeKey} is installing\n`;
 
