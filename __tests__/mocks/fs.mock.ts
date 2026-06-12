@@ -1,8 +1,8 @@
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { MockInstance } from 'vitest';
 import { ROOT_PATH } from '#src/services/root.service.ts';
+import { vi, type MockInstance } from 'vitest';
 
 vi.mock('node:fs/promises');
 

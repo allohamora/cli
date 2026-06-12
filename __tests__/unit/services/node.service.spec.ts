@@ -1,5 +1,6 @@
 import { terminal } from '#__tests__/setup-test-context.ts';
 import { getNodeVersion } from '#src/services/node.service.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('node.service', () => {
   describe('getNodeVersion', () => {

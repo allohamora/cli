@@ -1,5 +1,5 @@
 import * as execa from 'execa';
-import type { MockInstance } from 'vitest';
+import { vi, type MockInstance } from 'vitest';
 
 vi.mock('execa');
 

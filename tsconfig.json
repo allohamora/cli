@@ -19,7 +19,7 @@
     "noEmit": true,
     "lib": ["ESNext"],
     "rootDir": "./",
-    "types": ["vitest/globals", "node"]
+    "types": ["node"]
   },
   "exclude": ["node_modules", "dist", "coverage"]
 }

@@ -1,5 +1,6 @@
 import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
 import { formatJavascript, isPrettierInstalled } from '#src/categories/js/prettier/prettier.service.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('prettier.service', () => {
   describe('formatJavascript', () => {

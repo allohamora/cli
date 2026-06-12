@@ -1,5 +1,6 @@
 import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { jestEntrypoint } from '#src/categories/js/jest/jest.entrypoint.ts';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 describe('jest.entrypoint', () => {
   beforeEach(() => {

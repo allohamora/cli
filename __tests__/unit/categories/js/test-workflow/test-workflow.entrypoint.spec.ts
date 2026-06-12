@@ -1,5 +1,6 @@
 import { fileSystem } from '#__tests__/setup-test-context.ts';
 import { testWorkflow } from '#src/categories/js/test-workflow/test-workflow.entrypoint.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('test-workflow.entrypoint', () => {
   describe('testWorkflow', () => {

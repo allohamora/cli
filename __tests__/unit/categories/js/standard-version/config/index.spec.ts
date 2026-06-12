@@ -1,4 +1,5 @@
 import { getConfig } from '#src/categories/js/standard-version/config/index.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('standard-version/config', () => {
   it('returns repository-aware changelog link config', () => {

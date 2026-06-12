@@ -1,5 +1,6 @@
 import { presetState } from '#__tests__/setup-test-context.ts';
 import { getConfig } from '#src/categories/js/prettier/config/index.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('prettier/config', () => {
   it('returns the default prettier config for every js variant', () => {

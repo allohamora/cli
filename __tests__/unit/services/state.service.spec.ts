@@ -1,4 +1,5 @@
 import { createCategory, createPresetState, jsCategory } from '#src/services/state.service.ts';
+import { afterEach, describe, expect, it } from 'vitest';
 
 describe('state.service', () => {
   describe('jsCategory', () => {

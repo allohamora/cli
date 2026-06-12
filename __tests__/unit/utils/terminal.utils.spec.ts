@@ -1,5 +1,6 @@
 import { terminal } from '#__tests__/setup-test-context.ts';
 import { exec } from '#src/utils/terminal.utils.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('terminal.utils', () => {
   describe('exec', () => {

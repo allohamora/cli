@@ -1,5 +1,6 @@
 import { getConfig } from '#src/categories/js/release-workflow/config/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('release-workflow/config', () => {
   it('returns the release workflow content', () => {

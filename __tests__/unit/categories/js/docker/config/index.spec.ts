@@ -1,4 +1,5 @@
 import { getConfig } from '#src/categories/js/docker/config/index.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('docker/config', () => {
   it('returns Dockerfile content for the requested node version', () => {

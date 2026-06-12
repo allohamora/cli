@@ -1,4 +1,5 @@
 import { parse } from 'yaml';
+import { expect, it } from 'vitest';
 
 export const expectGithubWorkflow = (yamlString: string, message = 'is parsed') => {
   it(message, () => {

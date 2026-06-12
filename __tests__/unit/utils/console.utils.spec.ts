@@ -1,4 +1,5 @@
 import { bold } from '#src/utils/console.utils.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('console.utils', () => {
   describe('bold', () => {

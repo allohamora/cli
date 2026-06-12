@@ -1,6 +1,7 @@
 import { presetState } from '#__tests__/setup-test-context.ts';
 import { parseCjsModule } from '#__tests__/utils/cjs.utils.ts';
 import { getConfig } from '#src/categories/js/jest/config/index.ts';
+import { describe, expect, it } from 'vitest';
 
 const scripts = [
   { name: 'test', script: 'jest' },

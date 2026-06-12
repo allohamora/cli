@@ -1,4 +1,5 @@
 import { getConfig } from '#src/categories/js/dependabot/config/index.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('dependabot/config', () => {
   it('returns the expected dependabot update schedule', () => {

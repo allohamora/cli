@@ -1,6 +1,7 @@
 import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
 import { prettierMutation, isStylelintInstalled } from '#src/categories/js/stylelint/stylelint.service.ts';
 import type { Config } from '#src/categories/js/stylelint/config/config.interface.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('stylelint.service', () => {
   describe('isStylelintInstalled', () => {

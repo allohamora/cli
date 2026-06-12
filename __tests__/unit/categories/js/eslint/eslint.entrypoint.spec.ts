@@ -1,6 +1,7 @@
 import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { createConfig } from '#__tests__/utils/eslint.utils.ts';
 import { buildConfig, eslint } from '#src/categories/js/eslint/eslint.entrypoint.ts';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 describe('eslint.entrypoint', () => {
   beforeEach(() => {

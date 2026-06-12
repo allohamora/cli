@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { fileSystem } from '#__tests__/setup-test-context.ts';
+import { describe, expect, it } from 'vitest';
 import {
   ensureGithubDir,
   ensureGithubWorkflowsDir,

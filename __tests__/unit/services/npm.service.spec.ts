@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { fileSystem, terminal } from '#__tests__/setup-test-context.ts';
+import { describe, expect, it } from 'vitest';
 import {
   addNpmScripts,
   installDevDependencies,

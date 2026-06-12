@@ -16,7 +16,6 @@ export default defineConfig(
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.vitest,
       },
       parserOptions: {
         project: true,
