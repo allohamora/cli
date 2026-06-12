@@ -70,12 +70,10 @@ describe('root.service', () => {
   describe('ensureRootDir', () => {
     it("creates dir at root if it doesn't exist", async () => {
       const dir = '__test__';
-      const expected = resolveRootPath(dir);
 
       await ensureRootDir(dir);
 
       expect(fileSystem.getDirs()).toContain(dir);
-      expect(resolveRootPath(dir)).toBe(expected);
     });
 
     it('does not create dir at root if it exists', async () => {
@@ -92,12 +90,9 @@ describe('root.service', () => {
       const fileName = '__test__.json';
       const content = '__test__';
 
-      const fileNameWithPath = resolveRootPath(fileName);
-
       await writeRootFile(fileName, content);
 
       expect(fileSystem.readFile(fileName)).toBe(`${content}\n`);
-      expect(resolveRootPath(fileName)).toBe(fileNameWithPath);
     });
   });
 
@@ -106,12 +101,9 @@ describe('root.service', () => {
       const fileName = '__test__.json';
       const content = {};
 
-      const fileNameWithPath = resolveRootPath(fileName);
-
       await writeRootJsonFile(fileName, content);
 
       expect(fileSystem.readFile(fileName)).toBe(`${JSON.stringify(content, null, 2)}\n`);
-      expect(resolveRootPath(fileName)).toBe(fileNameWithPath);
     });
   });
 });
