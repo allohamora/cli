@@ -1,4 +1,4 @@
-import { jsCategoryState } from '#src/states/categories.ts';
+import { jsCategoryState } from '#src/services/state.service.ts';
 
 type JsConfig = (typeof jsCategoryState.configTypes)[number];
 

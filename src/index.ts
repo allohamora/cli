@@ -1,5 +1,5 @@
 import { bold } from '#src/utils/console.utils.ts';
-import { getCategory, getOptions, installOptions, chooseOptions } from '#src/utils/main.ts';
+import { getCategory, getOptions, installOptions, chooseOptions } from '#src/services/cli.service.ts';
 
 export const main = async () => {
   console.log(bold(`Welcome to Allohamora's cli`));

@@ -1,4 +1,4 @@
-import { jsCategoryState } from '#src/states/categories.ts';
+import { jsCategoryState } from '#src/services/state.service.ts';
 import { commitlint } from '#src/categories/js/commitlint/commitlint.entrypoint.ts';
 import { eslint } from '#src/categories/js/eslint/eslint.entrypoint.ts';
 import { husky } from '#src/categories/js/husky/husky.entrypoint.ts';

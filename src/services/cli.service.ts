@@ -1,11 +1,36 @@
 import categories from '#src/categories/index.ts';
+import inquirer from 'inquirer';
 import ora from 'ora';
-import { chooseMany, chooseOne } from '#src/services/prompt.service.ts';
 import { setSelectedInstallOptions } from '#src/services/installation.service.ts';
 import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
-import type { Category } from '#src/types/category.ts';
+import type { Category } from '#src/services/state.service.ts';
 
 const categoriesKeys = Object.keys(categories);
+
+export const chooseOne = async <C extends string>(message: string, choices: readonly C[]) => {
+  const res = await inquirer.prompt({
+    type: 'select',
+    name: message,
+    message,
+    choices,
+  });
+
+  return res[message] as C;
+};
+
+export const requireAtLeastOneChoice = (answers: unknown[]) => answers.length !== 0;
+
+export const chooseMany = async <C extends string>(message: string, choices: readonly C[]) => {
+  const res = await inquirer.prompt({
+    type: 'checkbox',
+    name: message,
+    message,
+    choices,
+    validate: requireAtLeastOneChoice,
+  });
+
+  return res[message] as C[];
+};
 
 export const getCategory = async () => {
   const selectedCategory = (await chooseOne('choose a category', categoriesKeys)) as keyof typeof categories;

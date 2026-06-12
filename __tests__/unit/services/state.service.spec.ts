@@ -1,8 +1,21 @@
-import { createCategoryState, createConfigState, createTypeState } from '#src/utils/state.ts';
+import {
+  createCategoryState,
+  createConfigState,
+  createTypeState,
+  jsCategoryState,
+} from '#src/services/state.service.ts';
 
-describe('state', () => {
+describe('state.service', () => {
+  describe('jsCategoryState', () => {
+    it('is initialized', () => {
+      expect(jsCategoryState).toBeDefined();
+      expect(jsCategoryState.name).toBe('js');
+      expect(jsCategoryState.configTypes).toEqual(['default', 'node:ts', 'react:ts']);
+    });
+  });
+
   describe('createTypeState', () => {
-    const types = ['1', '2'];
+    const types = ['1', '2'] as const;
     const createNewTypeState = () => createTypeState(types);
 
     let [getType, setType] = createNewTypeState();
@@ -21,7 +34,6 @@ describe('state', () => {
 
     it('sets type', () => {
       const newType = types[1];
-      if (!newType) throw new Error('newType is not found');
 
       setType(newType);
 
@@ -30,7 +42,7 @@ describe('state', () => {
   });
 
   describe('createConfigState', () => {
-    const types = ['1', '2', '3'];
+    const types = ['default', '1', '2', '3'] as const;
     const createNewTypeState = () => createTypeState(types);
     let state = createNewTypeState();
     let [, setType] = state;
@@ -46,7 +58,7 @@ describe('state', () => {
     });
 
     it('returns selected config value', () => {
-      setType(types[0]!);
+      setType('1');
 
       const actual = getConfig();
       const expected = configValues['1'];
@@ -55,7 +67,7 @@ describe('state', () => {
     });
 
     it('returns default config if selected not found', () => {
-      setType(types[1]!);
+      setType('2');
 
       const actual = getConfig();
       const expected = configValues.default;
@@ -98,15 +110,15 @@ describe('state', () => {
     });
 
     it('returns useConfigValue that creates a local state', () => {
-      const values = { default: 'default', '1': '1' };
+      const configValues = { default: 'default', '1': '1' };
 
       const [, setConfigKey] = state.configState;
 
-      const [getConfig] = state.useConfigState(values);
-      expect(getConfig()).toBe(values.default);
+      const [getConfig] = state.useConfigState(configValues);
+      expect(getConfig()).toBe(configValues.default);
 
       setConfigKey('1');
-      expect(getConfig()).toBe(values['1']);
+      expect(getConfig()).toBe(configValues['1']);
     });
   });
 });

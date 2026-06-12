@@ -1,12 +1,79 @@
 import categories from '#src/categories/index.ts';
 import { installationState, loading, prompt } from '#__tests__/setup-test-context.ts';
-import { chooseOptions, getCategory, getOptions, installOptions } from '#src/utils/main.ts';
-import type { Category } from '#src/types/category.ts';
+import {
+  chooseMany,
+  chooseOne,
+  chooseOptions,
+  getCategory,
+  getOptions,
+  installOptions,
+  requireAtLeastOneChoice,
+} from '#src/services/cli.service.ts';
+import type { Category } from '#src/services/state.service.ts';
 import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
 
-describe('main', () => {
+describe('cli.service', () => {
+  const message = '__test__';
+  const choices = ['a', 'b', 'c'] as const;
   const js = categories.js as Category;
   const jsOptionKeys = Object.keys(js.options);
+
+  describe('chooseOne', () => {
+    it('runs inquirer.prompt with type: select', async () => {
+      const choice = choices[0];
+      prompt.answer(message, choice);
+
+      const actual = await chooseOne(message, choices);
+      const expected = choice;
+
+      const promptOptions = {
+        type: 'select',
+        name: message,
+        message,
+        choices,
+      };
+
+      expect(prompt.getQuestions()).toEqual([promptOptions]);
+      expect(actual).toBe(expected);
+    });
+  });
+
+  describe('requireAtLeastOneChoice', () => {
+    it('returns true if answers contain at least one item', () => {
+      const actual = requireAtLeastOneChoice([1]);
+      const expected = true;
+
+      expect(actual).toBe(expected);
+    });
+
+    it('returns false if answers contain less than one item', () => {
+      const actual = requireAtLeastOneChoice([]);
+      const expected = false;
+
+      expect(actual).toBe(expected);
+    });
+  });
+
+  describe('chooseMany', () => {
+    it('runs inquirer.prompt with type: checkbox and at least one choice validation', async () => {
+      const resolvedChoices = [choices[0], choices[2]];
+      prompt.answer(message, resolvedChoices);
+
+      const actual = await chooseMany(message, choices);
+      const expected = resolvedChoices;
+
+      const promptOptions = {
+        type: 'checkbox',
+        name: message,
+        message,
+        choices,
+        validate: requireAtLeastOneChoice,
+      };
+
+      expect(prompt.getQuestions()).toEqual([promptOptions]);
+      expect(actual).toBe(expected);
+    });
+  });
 
   describe('getCategory', () => {
     it('returns the selected category', async () => {
