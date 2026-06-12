@@ -1,16 +1,16 @@
 import { prompt } from '#__tests__/setup-test-context.ts';
-import { manyOf, minimumOneValidate, oneOf } from '#src/utils/prompt.ts';
+import { chooseMany, chooseOne, requireAtLeastOneChoice } from '#src/services/prompt.service.ts';
 
-describe('prompt', () => {
+describe('prompt.service', () => {
   const message = '__test__';
-  const choices = ['a', 'b', 'c'];
+  const choices = ['a', 'b', 'c'] as const;
 
-  describe('oneOf', () => {
+  describe('chooseOne', () => {
     it('runs inquirer.prompt with type: select', async () => {
       const choice = choices[0];
       prompt.answer(message, choice);
 
-      const actual = await oneOf(message, choices);
+      const actual = await chooseOne(message, choices);
       const expected = choice;
 
       const promptOptions = {
@@ -25,28 +25,28 @@ describe('prompt', () => {
     });
   });
 
-  describe('minimumOneValidate', () => {
-    it('returns true if answers contain minium one item', () => {
-      const actual = minimumOneValidate([1]);
+  describe('requireAtLeastOneChoice', () => {
+    it('returns true if answers contain at least one item', () => {
+      const actual = requireAtLeastOneChoice([1]);
       const expected = true;
 
       expect(actual).toBe(expected);
     });
 
     it('returns false if answers contain less than one item', () => {
-      const actual = minimumOneValidate([]);
+      const actual = requireAtLeastOneChoice([]);
       const expected = false;
 
       expect(actual).toBe(expected);
     });
   });
 
-  describe('manyOf', () => {
-    it('runs inquirer.prompt with type: checkbox and minium one validate rule', async () => {
+  describe('chooseMany', () => {
+    it('runs inquirer.prompt with type: checkbox and at least one choice validation', async () => {
       const resolvedChoices = [choices[0], choices[2]];
       prompt.answer(message, resolvedChoices);
 
-      const actual = await manyOf(message, choices);
+      const actual = await chooseMany(message, choices);
       const expected = resolvedChoices;
 
       const promptOptions = {
@@ -54,7 +54,7 @@ describe('prompt', () => {
         name: message,
         message,
         choices,
-        validate: minimumOneValidate,
+        validate: requireAtLeastOneChoice,
       };
 
       expect(prompt.getQuestions()).toEqual([promptOptions]);
