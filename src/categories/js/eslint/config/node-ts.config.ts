@@ -9,7 +9,8 @@ export const nodeTsConfig: Config = {
     `import tseslint from 'typescript-eslint'`,
     `import beautifulSort from 'eslint-plugin-beautiful-sort'`,
   ],
-  configs: ['eslint.configs.recommended', '...tseslint.configs.recommended'],
+  configs: ['eslint.configs.recommended', '...tseslint.configs.recommended', 'beautifulSort.configs.recommended'],
+  ignores: ['node_modules', 'dist'],
   eslintConfig: {
     files: ['**/*.ts'],
     languageOptions: {
@@ -17,10 +18,6 @@ export const nodeTsConfig: Config = {
       parserOptions: {
         project: true,
       },
-    },
-    ignores: ['node_modules', 'dist'],
-    plugins: {
-      'beautiful-sort': 'beautifulSort',
     },
     rules: {
       'no-use-before-define': 'error',
@@ -33,13 +30,6 @@ export const nodeTsConfig: Config = {
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-misused-promises': 'warn',
       '@typescript-eslint/no-deprecated': 'error',
-      'beautiful-sort/import': [
-        'error',
-        {
-          special: [],
-          order: ['special', 'namespace', 'default', 'defaultObj', 'obj', 'none'],
-        },
-      ],
     },
   },
   typescript: true,
