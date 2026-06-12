@@ -4,7 +4,7 @@ import { addScripts, installDevelopmentDependencies } from '#src/utils/npm.ts';
 import { CONFIG_FILE_NAME, PACKAGE_NAME } from '#src/categories/js/eslint/eslint.const.ts';
 import { applyMutations } from '#src/utils/mutation.ts';
 import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
-import { format } from '#src/utils/javascript.ts';
+import { formatJavascript } from '#src/categories/js/prettier/prettier.service.ts';
 
 const optional = <T>(value: T | undefined, map: (value: T) => string) => (value ? map(value) : '');
 
@@ -62,7 +62,7 @@ export const eslint = async () => {
 
   await installDevelopmentDependencies(PACKAGE_NAME, ...dependencies);
 
-  const eslintConfig = await format(buildConfig(config));
+  const eslintConfig = await formatJavascript(buildConfig(config));
 
   await addFileToRoot(CONFIG_FILE_NAME, eslintConfig);
   await addScripts(...scripts);
