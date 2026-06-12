@@ -1,12 +1,12 @@
 import prettier from "prettier";
-import { isInstalledAndInRootCheck } from "#src/utils/installed.ts";
 import { getConfig } from "#src/categories/js/prettier/prettier.config.ts";
 import {
   CONFIG_FILE_NAME,
   PACKAGE_NAME,
 } from "#src/categories/js/prettier/prettier.const.ts";
+import { createRootInstalledCheck } from "#src/services/installation.service.ts";
 
-export const isPrettierInstalled = isInstalledAndInRootCheck(
+export const isPrettierInstalled = createRootInstalledCheck(
   PACKAGE_NAME,
   CONFIG_FILE_NAME,
 );

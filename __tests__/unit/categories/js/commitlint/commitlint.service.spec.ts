@@ -1,4 +1,4 @@
-import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
+import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
 import { huskyIntegration } from '#src/categories/js/commitlint/commitlint.service.ts';
 
 describe('commitlint.service', () => {
@@ -10,7 +10,7 @@ describe('commitlint.service', () => {
     });
 
     it('runs addHook if husky installed', async () => {
-      contextState.setInstalling(['husky']);
+      installationState.setSelectedInstallOptions(['husky']);
 
       await huskyIntegration();
 

@@ -1,4 +1,4 @@
-import { configState, contextState } from '#__tests__/setup-test-context.ts';
+import { configState, installationState } from '#__tests__/setup-test-context.ts';
 import { getConfig } from '#src/categories/js/lint-staged/lint-staged.config.ts';
 import type { LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
 
@@ -16,7 +16,7 @@ describe('lint-staged.config', () => {
 
   beforeEach(() => {
     configState.setConfig('default');
-    contextState.setInstalling(['prettier', 'stylelint', 'eslint', 'jest']);
+    installationState.setSelectedInstallOptions(['prettier', 'stylelint', 'eslint', 'jest']);
   });
 
   it('returns default javascript lint-staged commands', async () => {

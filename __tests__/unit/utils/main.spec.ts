@@ -1,5 +1,5 @@
 import categories from '#src/categories/index.ts';
-import { contextState, loading, prompt } from '#__tests__/setup-test-context.ts';
+import { installationState, loading, prompt } from '#__tests__/setup-test-context.ts';
 import { chooseOptions, getCategory, getOptions, installOptions } from '#src/utils/main.ts';
 import type { Category } from '#src/types/category.ts';
 import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
@@ -49,14 +49,14 @@ describe('main', () => {
       expect(loading.getFinishes()).toBe(1);
     });
 
-    it('sets installing options', async () => {
+    it('sets selected install options', async () => {
       const option = vi.fn();
       const options = { option };
       const keys = ['option'];
 
       await installOptions(options, keys);
 
-      expect(contextState.getInstalling()).toEqual(keys);
+      expect(installationState.getSelectedInstallOptions()).toEqual(keys);
     });
 
     it('runs selected scripts', async () => {

@@ -1,9 +1,9 @@
 import categories from '#src/categories/index.ts';
 import ora from 'ora';
 import { chooseMany, chooseOne } from '#src/services/prompt.service.ts';
+import { setSelectedInstallOptions } from '#src/services/installation.service.ts';
 import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
 import type { Category } from '#src/types/category.ts';
-import { setInstalling } from '#src/states/context.ts';
 
 const categoriesKeys = Object.keys(categories);
 
@@ -32,7 +32,7 @@ export const chooseOptions = async (options: Category['options']) => {
 export const installOptions = async (options: Category['options'], keys: string[]) => {
   const spinner = ora('starting install').start();
 
-  setInstalling(keys);
+  setSelectedInstallOptions(keys);
 
   await keys.reduce((chain, key) => {
     return chain.then(() => {

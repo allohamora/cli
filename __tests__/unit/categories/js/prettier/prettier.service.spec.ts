@@ -1,4 +1,4 @@
-import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
+import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
 import { formatJavascript, isPrettierInstalled } from '#src/categories/js/prettier/prettier.service.ts';
 
 describe('prettier.service', () => {
@@ -15,8 +15,8 @@ describe('prettier.service', () => {
   });
 
   describe('isPrettierInstalled', () => {
-    it('returns true if prettier is installing', async () => {
-      contextState.setInstalling(['prettier']);
+    it('returns true if prettier is selected for install', async () => {
+      installationState.setSelectedInstallOptions(['prettier']);
 
       expect(await isPrettierInstalled()).toBe(true);
     });
@@ -27,7 +27,7 @@ describe('prettier.service', () => {
       expect(await isPrettierInstalled()).toBe(true);
     });
 
-    it('returns false if prettier is not installing and config does not exist', async () => {
+    it('returns false if prettier is not selected for install and config does not exist', async () => {
       expect(await isPrettierInstalled()).toBe(false);
     });
   });

@@ -1,4 +1,4 @@
-import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
+import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
 import {
   addOptionToLintStagedConfig,
   huskyIntegration,
@@ -86,7 +86,7 @@ describe('lint-staged.service', () => {
 
   describe('huskyIntegration', () => {
     it('adds hook if husky installed', async () => {
-      contextState.setInstalling(['husky']);
+      installationState.setSelectedInstallOptions(['husky']);
 
       await huskyIntegration();
 
@@ -104,7 +104,7 @@ describe('lint-staged.service', () => {
     it('mutates config if jest installed', async () => {
       const ext = '*.js';
       const actual = {};
-      contextState.setInstalling(['jest']);
+      installationState.setSelectedInstallOptions(['jest']);
 
       await jestMutation(ext)(actual);
 
@@ -128,7 +128,7 @@ describe('lint-staged.service', () => {
     it('mutates config if eslint installed', async () => {
       const ext = '*.js';
       const actual = {};
-      contextState.setInstalling(['eslint']);
+      installationState.setSelectedInstallOptions(['eslint']);
 
       await eslintMutation(ext)(actual);
 
@@ -152,7 +152,7 @@ describe('lint-staged.service', () => {
     it('mutates config if prettier installed', async () => {
       const ext = '*.{js,cjs,mjs,json,yml,md}';
       const actual = {};
-      contextState.setInstalling(['prettier']);
+      installationState.setSelectedInstallOptions(['prettier']);
 
       await prettierMutation(actual);
 
@@ -175,7 +175,7 @@ describe('lint-staged.service', () => {
     it('mutates config if stylelint installed', async () => {
       const ext = '*.{css,ts,tsx}';
       const actual = {};
-      contextState.setInstalling(['stylelint']);
+      installationState.setSelectedInstallOptions(['stylelint']);
 
       await stylelintMutation(ext)(actual);
 

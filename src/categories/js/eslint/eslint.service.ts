@@ -1,4 +1,4 @@
-import { isInstalledAndInRootCheck } from '#src/utils/installed.ts';
+import { createRootInstalledCheck } from '#src/services/installation.service.ts';
 import { isJestInstalled } from '#src/categories/js/jest/jest.service.ts';
 import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.service.ts';
 import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
@@ -34,4 +34,4 @@ export const prettierMutation = async (config: Config) => {
   }
 };
 
-export const isEslintInstalled = isInstalledAndInRootCheck(SCRIPT_NAME, CONFIG_FILE_NAME);
+export const isEslintInstalled = createRootInstalledCheck(SCRIPT_NAME, CONFIG_FILE_NAME);

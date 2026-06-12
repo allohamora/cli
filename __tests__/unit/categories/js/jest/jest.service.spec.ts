@@ -1,10 +1,10 @@
-import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
+import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
 import { isJestInstalled } from '#src/categories/js/jest/jest.service.ts';
 
 describe('jest.service', () => {
   describe('isJestInstalled', () => {
-    it('returns true if jest is installing', async () => {
-      contextState.setInstalling(['jest']);
+    it('returns true if jest is selected for install', async () => {
+      installationState.setSelectedInstallOptions(['jest']);
 
       expect(await isJestInstalled()).toBe(true);
     });
@@ -15,7 +15,7 @@ describe('jest.service', () => {
       expect(await isJestInstalled()).toBe(true);
     });
 
-    it('returns false if jest is not installing and config does not exist', async () => {
+    it('returns false if jest is not selected for install and config does not exist', async () => {
       expect(await isJestInstalled()).toBe(false);
     });
   });

@@ -1,11 +1,11 @@
-import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
+import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
 import { createConfig } from '#__tests__/utils/eslint.utils.ts';
 import { prettierMutation, jestMutation, isEslintInstalled } from '#src/categories/js/eslint/eslint.service.ts';
 
 describe('eslint.service', () => {
   describe('prettierMutation', () => {
     it('adds prettier to empty config if prettier installed', async () => {
-      contextState.setInstalling(['prettier']);
+      installationState.setSelectedInstallOptions(['prettier']);
 
       const actual = createConfig();
 
@@ -25,7 +25,7 @@ describe('eslint.service', () => {
     });
 
     it('adds prettier to existing config if prettier installed', async () => {
-      contextState.setInstalling(['prettier']);
+      installationState.setSelectedInstallOptions(['prettier']);
 
       const actual = createConfig({
         dependencies: ['__test__'],
@@ -79,7 +79,7 @@ describe('eslint.service', () => {
         mutations: [],
       };
 
-      contextState.setInstalling(['jest']);
+      installationState.setSelectedInstallOptions(['jest']);
 
       await jestMutation(actual);
 
@@ -98,7 +98,7 @@ describe('eslint.service', () => {
         mutations: [],
       };
 
-      contextState.setInstalling(['jest']);
+      installationState.setSelectedInstallOptions(['jest']);
 
       await jestMutation(actual);
 
@@ -124,8 +124,8 @@ describe('eslint.service', () => {
   });
 
   describe('isEslintInstalled', () => {
-    it('returns true if eslint is installing', async () => {
-      contextState.setInstalling(['eslint']);
+    it('returns true if eslint is selected for install', async () => {
+      installationState.setSelectedInstallOptions(['eslint']);
 
       expect(await isEslintInstalled()).toBe(true);
     });
@@ -136,7 +136,7 @@ describe('eslint.service', () => {
       expect(await isEslintInstalled()).toBe(true);
     });
 
-    it('returns false if eslint is not installing and config does not exist', async () => {
+    it('returns false if eslint is not selected for install and config does not exist', async () => {
       expect(await isEslintInstalled()).toBe(false);
     });
   });

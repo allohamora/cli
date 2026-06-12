@@ -1,4 +1,4 @@
-import { contextState, fileSystem } from '#__tests__/setup-test-context.ts';
+import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
 import { addHook, isHuskyInstalled } from '#src/categories/js/husky/husky.service.ts';
 
 describe('husky.service', () => {
@@ -14,8 +14,8 @@ describe('husky.service', () => {
   });
 
   describe('isHuskyInstalled', () => {
-    it('returns true if husky is installing', async () => {
-      contextState.setInstalling(['husky']);
+    it('returns true if husky is selected for install', async () => {
+      installationState.setSelectedInstallOptions(['husky']);
 
       expect(await isHuskyInstalled()).toBe(true);
     });
@@ -26,7 +26,7 @@ describe('husky.service', () => {
       expect(await isHuskyInstalled()).toBe(true);
     });
 
-    it('returns false if husky is not installing and dir does not exist', async () => {
+    it('returns false if husky is not selected for install and dir does not exist', async () => {
       expect(await isHuskyInstalled()).toBe(false);
     });
   });
