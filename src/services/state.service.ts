@@ -28,7 +28,11 @@ export type Category<CT extends string = string> = {
 };
 
 export const createPresetState = <T extends string>(presets: readonly T[]): PresetState<T> => {
-  let preset = presets[0]!;
+  if (!presets[0]) {
+    throw new Error('createPresetState requires at least one preset');
+  }
+
+  let preset = presets[0];
 
   const setPreset = (value: T) => {
     preset = value;

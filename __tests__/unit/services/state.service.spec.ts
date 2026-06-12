@@ -27,6 +27,10 @@ describe('state.service', () => {
 
       expect(state.getPreset()).toBe('2');
     });
+
+    it('throws for empty presets', () => {
+      expect(() => createPresetState([])).toThrow('createPresetState requires at least one preset');
+    });
   });
 
   describe('createCategory', () => {
