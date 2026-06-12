@@ -1,7 +1,7 @@
 import { presetState } from '#__tests__/setup-test-context.ts';
-import { getConfig } from '#src/categories/js/eslint/eslint.config.ts';
+import { getConfig } from '#src/categories/js/eslint/config/index.ts';
 
-describe('eslint.config', () => {
+describe('eslint/config', () => {
   it('returns the default javascript eslint config', () => {
     expect(getConfig()).toMatchObject({
       dependencies: ['globals', '@eslint/js'],

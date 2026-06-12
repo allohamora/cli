@@ -1,5 +1,5 @@
 import { writeGithubWorkflow } from '#src/services/github.service.ts';
-import { getConfig } from '#src/categories/js/codecov-workflow/codecov-workflow.config.ts';
+import { getConfig } from '#src/categories/js/codecov-workflow/config/index.ts';
 import { WORKFLOW_FILENAME } from '#src/categories/js/codecov-workflow/codecov-workflow.const.ts';
 
 export const codecovWorkflow = async () => {

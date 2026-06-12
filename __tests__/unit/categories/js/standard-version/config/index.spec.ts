@@ -1,6 +1,6 @@
-import { getConfig } from '#src/categories/js/standard-version/standard-version.config.ts';
+import { getConfig } from '#src/categories/js/standard-version/config/index.ts';
 
-describe('standard-version.config', () => {
+describe('standard-version/config', () => {
   it('returns repository-aware changelog link config', () => {
     expect(getConfig().createConfig('https://github.com/allohamora/cli')).toEqual({
       types: [

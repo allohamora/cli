@@ -1,7 +1,7 @@
-import { getConfig } from '#src/categories/js/release-workflow/release-workflow.config.ts';
+import { getConfig } from '#src/categories/js/release-workflow/config/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
 
-describe('release-workflow.config', () => {
+describe('release-workflow/config', () => {
   it('returns the release workflow content', () => {
     expect(getConfig().content).toBe(
       [

@@ -1,6 +1,6 @@
 import { presetState } from '#__tests__/setup-test-context.ts';
 import { parseCjsModule } from '#__tests__/utils/cjs.utils.ts';
-import { getConfig } from '#src/categories/js/jest/jest.config.ts';
+import { getConfig } from '#src/categories/js/jest/config/index.ts';
 
 const scripts = [
   { name: 'test', script: 'jest' },
@@ -48,7 +48,7 @@ const reactTsJestConfigFile = [
   '};',
 ].join('\n');
 
-describe('jest.config', () => {
+describe('jest/config', () => {
   it('returns the default javascript jest config', () => {
     expect(getConfig()).toEqual({
       devDependencies: ['jest', '@types/jest'],
