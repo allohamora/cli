@@ -58,14 +58,12 @@ export const installCategoryOptions = async (options: Category['options'], keys:
 
   setSelectedInstallOptions(keys);
 
-  await keys.reduce((chain, key) => {
-    return chain.then(() => {
-      const kebablizeKey = toKebabCase(key);
-      spinner.text = `${kebablizeKey} is installing\n`;
+  for await (const key of keys) {
+    const kebablizeKey = toKebabCase(key);
+    spinner.text = `${kebablizeKey} is installing\n`;
 
-      return options[key]?.();
-    });
-  }, Promise.resolve());
+    await options[key]?.();
+  }
 
   spinner.stop();
 };
