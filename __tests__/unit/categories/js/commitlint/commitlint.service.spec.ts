@@ -1,5 +1,6 @@
 import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
 import { huskyIntegration } from '#src/categories/js/commitlint/commitlint.service.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('commitlint.service', () => {
   describe('huskyIntegration', () => {

@@ -1,4 +1,5 @@
 import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('string.utils', () => {
   describe('toKebabCase', () => {

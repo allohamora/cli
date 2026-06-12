@@ -1,4 +1,4 @@
-import type { MockInstance } from 'vitest';
+import { vi, type MockInstance } from 'vitest';
 
 type LogHandler = typeof console.log;
 

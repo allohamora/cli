@@ -1,5 +1,6 @@
 import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
 import { addHook, isHuskyInstalled } from '#src/categories/js/husky/husky.service.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('husky.service', () => {
   describe('addHook', () => {

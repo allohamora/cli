@@ -1,6 +1,7 @@
 import { presetState, installationState } from '#__tests__/setup-test-context.ts';
 import { getConfig } from '#src/categories/js/lint-staged/config/index.ts';
 import type { LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 describe('lint-staged/config', () => {
   const getMutatedConfig = async () => {

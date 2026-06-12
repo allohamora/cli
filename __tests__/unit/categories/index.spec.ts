@@ -1,4 +1,5 @@
 import categories from '#src/categories/index.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('index', () => {
   describe('categories', () => {

@@ -6,7 +6,7 @@ import { lintStaged } from '#src/categories/js/lint-staged/lint-staged.entrypoin
 import { stylelint } from '#src/categories/js/stylelint/stylelint.entrypoint.ts';
 import { prettier } from '#src/categories/js/prettier/prettier.entrypoint.ts';
 import { standardVersion } from '#src/categories/js/standard-version/standard-version.entrypoint.ts';
-import { jestEntrypoint } from '#src/categories/js/jest/jest.entrypoint.ts';
+import { jest } from '#src/categories/js/jest/jest.entrypoint.ts';
 import { docker } from '#src/categories/js/docker/docker.entrypoint.ts';
 import { releaseWorkflow } from '#src/categories/js/release-workflow/release-workflow.entrypoint.ts';
 import { testWorkflow } from '#src/categories/js/test-workflow/test-workflow.entrypoint.ts';
@@ -23,8 +23,7 @@ const options = {
   eslint,
   lintStaged,
   stylelint,
-  // named jestEntrypoint because jest is reserved in the test environment
-  jest: jestEntrypoint,
+  jest,
   docker,
   releaseWorkflow,
   testWorkflow,

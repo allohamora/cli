@@ -1,5 +1,6 @@
 import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { docker } from '#src/categories/js/docker/docker.entrypoint.ts';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 describe('docker.entrypoint', () => {
   beforeEach(() => {

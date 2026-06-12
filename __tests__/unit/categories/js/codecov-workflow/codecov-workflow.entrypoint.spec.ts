@@ -1,5 +1,6 @@
 import { fileSystem } from '#__tests__/setup-test-context.ts';
 import { codecovWorkflow } from '#src/categories/js/codecov-workflow/codecov-workflow.entrypoint.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('codecov-workflow.entrypoint', () => {
   describe('codecovWorkflow', () => {

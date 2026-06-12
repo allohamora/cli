@@ -1,4 +1,5 @@
 import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   createInstalledCheck,
   createRootInstalledCheck,

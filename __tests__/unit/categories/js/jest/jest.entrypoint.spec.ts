@@ -1,5 +1,6 @@
 import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { jestEntrypoint } from '#src/categories/js/jest/jest.entrypoint.ts';
+import { jest } from '#src/categories/js/jest/jest.entrypoint.ts';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 describe('jest.entrypoint', () => {
   beforeEach(() => {
@@ -8,7 +9,7 @@ describe('jest.entrypoint', () => {
 
   describe('jest', () => {
     it('installs jest dependencies and writes the default config file', async () => {
-      await jestEntrypoint();
+      await jest();
 
       expect(terminal.getCommands()).toEqual([['npm', ['i', '-D', 'jest', '@types/jest']]]);
       expect(fileSystem.readFile('jest.config.cjs')).toBe(
@@ -28,7 +29,7 @@ describe('jest.entrypoint', () => {
     it('adds test scripts to package.json', async () => {
       fileSystem.seed({ packageJson: { scripts: { lint: 'eslint "**/*.js"' } } });
 
-      await jestEntrypoint();
+      await jest();
 
       expect(fileSystem.readJson('package.json')).toEqual({
         scripts: {

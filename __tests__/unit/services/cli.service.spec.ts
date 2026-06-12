@@ -1,5 +1,6 @@
 import categories from '#src/categories/index.ts';
 import { installationState, loading, prompt } from '#__tests__/setup-test-context.ts';
+import { describe, expect, it, vi } from 'vitest';
 import {
   chooseMany,
   chooseOne,

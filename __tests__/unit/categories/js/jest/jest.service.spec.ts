@@ -1,5 +1,6 @@
 import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
 import { isJestInstalled } from '#src/categories/js/jest/jest.service.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('jest.service', () => {
   describe('isJestInstalled', () => {

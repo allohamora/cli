@@ -1,5 +1,5 @@
 import * as ora from 'ora';
-import type { MockInstance } from 'vitest';
+import { vi, type MockInstance } from 'vitest';
 
 vi.mock('ora');
 

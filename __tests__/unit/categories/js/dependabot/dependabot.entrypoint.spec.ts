@@ -1,5 +1,6 @@
 import { fileSystem } from '#__tests__/setup-test-context.ts';
 import { dependabot } from '#src/categories/js/dependabot/dependabot.entrypoint.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('dependabot.entrypoint', () => {
   describe('dependabot', () => {

@@ -1,5 +1,6 @@
 import { scheduler } from 'node:timers/promises';
 import { applyMutations } from '#src/utils/mutation.utils.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('mutation.utils', () => {
   describe('applyMutations', () => {

@@ -1,5 +1,6 @@
 import { consoleMock, fileSystem, loading, prompt, terminal } from '#__tests__/setup-test-context.ts';
 import { main } from '#src/index.ts';
+import { describe, expect, it, vi } from 'vitest';
 
 describe('index', () => {
   describe('main', () => {

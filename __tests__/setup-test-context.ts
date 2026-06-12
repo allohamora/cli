@@ -5,6 +5,7 @@ import { Loading } from './mocks/loading.mock.ts';
 import { PresetStateMock } from './mocks/preset-state.mock.ts';
 import { Prompt } from './mocks/prompt.mock.ts';
 import { Terminal } from './mocks/terminal.mock.ts';
+import { afterEach, beforeEach } from 'vitest';
 
 export const consoleMock = new ConsoleMock();
 export const presetState = new PresetStateMock();

@@ -1,5 +1,6 @@
 import { fileSystem } from '#__tests__/setup-test-context.ts';
 import { releaseWorkflow } from '#src/categories/js/release-workflow/release-workflow.entrypoint.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('release-workflow.entrypoint', () => {
   describe('releaseWorkflow', () => {

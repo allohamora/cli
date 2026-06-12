@@ -1,5 +1,6 @@
 import { getConfig } from '#src/categories/js/codecov-workflow/config/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
+import { describe, expect, it } from 'vitest';
 
 describe('codecov-workflow/config', () => {
   it('returns the codecov workflow content', () => {

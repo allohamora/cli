@@ -1,4 +1,5 @@
 import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
+import { describe, expect, it } from 'vitest';
 import {
   addOptionToLintStagedConfig,
   huskyIntegration,
