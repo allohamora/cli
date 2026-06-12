@@ -24,7 +24,7 @@ describe('installation.service', () => {
 
       setSelectedInstallOptions(selectedInstallOptions);
 
-      expect(getSelectedInstallOptions()).toBe(selectedInstallOptions);
+      expect(getSelectedInstallOptions()).toEqual(selectedInstallOptions);
     });
   });
 
