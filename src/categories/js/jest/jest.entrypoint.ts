@@ -3,8 +3,7 @@ import { addNpmScripts, installDevDependencies } from '#src/services/npm.service
 import { getConfig } from '#src/categories/js/jest/config/index.ts';
 import { CONFIG_FILE_NAME } from '#src/categories/js/jest/jest.const.ts';
 
-// named jestEntrypoint because jest is reserved in the test environment
-export const jestEntrypoint = async () => {
+export const jest = async () => {
   const { devDependencies, configFileContent, scripts } = getConfig();
 
   await installDevDependencies(...devDependencies);
