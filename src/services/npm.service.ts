@@ -35,16 +35,11 @@ export const setPackageJsonField = async <V extends JsonValue>(name: keyof Packa
 
 export const addNpmScripts = async (...scripts: NpmScript[]) => {
   const packageJson = await readPackageJson();
+  const packageJsonScripts = (packageJson.scripts ??= {});
 
-  packageJson.scripts ??= {};
-
-  scripts.forEach(({ name, script }) => {
-    // type-guard
-    /* v8 ignore next 3 -- scripts is assigned above; this only narrows the package-json type. */
-    if (packageJson.scripts) {
-      packageJson.scripts[name] = script;
-    }
-  });
+  for (const { name, script } of scripts) {
+    packageJsonScripts[name] = script;
+  }
 
   await writePackageJson(packageJson);
 };
