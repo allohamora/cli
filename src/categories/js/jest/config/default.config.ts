@@ -1,5 +1,5 @@
 import dedent from 'dedent';
-import type { NpmScript } from '#src/utils/npm.ts';
+import type { NpmScript } from '#src/services/npm.service.ts';
 import type { Config } from '#src/categories/js/jest/config/config.interface.ts';
 
 export const scripts: NpmScript[] = [

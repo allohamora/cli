@@ -1,5 +1,5 @@
 import { writeRootFile } from '#src/services/root.service.ts';
-import { addScripts, installDevelopmentDependencies } from '#src/utils/npm.ts';
+import { addNpmScripts, installDevDependencies } from '#src/services/npm.service.ts';
 import { getConfig } from '#src/categories/js/jest/jest.config.ts';
 import { CONFIG_FILE_NAME } from '#src/categories/js/jest/jest.const.ts';
 
@@ -7,7 +7,7 @@ import { CONFIG_FILE_NAME } from '#src/categories/js/jest/jest.const.ts';
 export const jestEntrypoint = async () => {
   const { devDependencies, configFileContent, scripts } = getConfig();
 
-  await installDevelopmentDependencies(...devDependencies);
+  await installDevDependencies(...devDependencies);
   await writeRootFile(CONFIG_FILE_NAME, configFileContent);
-  await addScripts(...scripts);
+  await addNpmScripts(...scripts);
 };

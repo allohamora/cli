@@ -10,31 +10,31 @@ type PackageJson = {
   [key: string]: unknown;
 } & BasePackageJson;
 
-export const getPackageJson = async () => {
-  const json = await fsp.readFile(PACKAGE_JSON_PATH, { encoding: 'utf-8' });
-
-  return JSON.parse(json) as PackageJson;
-};
-
-export const setPackageJson = async (packageJson: PackageJson) => {
-  await writeRootJsonFile(PACKAGE_JSON_NAME, packageJson);
-};
-
-export const addToPackageJson = async <V extends JsonValue>(name: keyof PackageJson, value: V) => {
-  const packageJson = await getPackageJson();
-
-  packageJson[name] = value;
-
-  await setPackageJson(packageJson);
-};
-
 export type NpmScript = {
   name: string;
   script: string;
 };
 
-export const addScripts = async (...scripts: NpmScript[]) => {
-  const packageJson = await getPackageJson();
+export const readPackageJson = async () => {
+  const json = await fsp.readFile(PACKAGE_JSON_PATH, { encoding: 'utf-8' });
+
+  return JSON.parse(json) as PackageJson;
+};
+
+export const writePackageJson = async (packageJson: PackageJson) => {
+  await writeRootJsonFile(PACKAGE_JSON_NAME, packageJson);
+};
+
+export const setPackageJsonField = async <V extends JsonValue>(name: keyof PackageJson, value: V) => {
+  const packageJson = await readPackageJson();
+
+  packageJson[name] = value;
+
+  await writePackageJson(packageJson);
+};
+
+export const addNpmScripts = async (...scripts: NpmScript[]) => {
+  const packageJson = await readPackageJson();
 
   packageJson.scripts ??= {};
 
@@ -46,13 +46,13 @@ export const addScripts = async (...scripts: NpmScript[]) => {
     }
   });
 
-  await setPackageJson(packageJson);
+  await writePackageJson(packageJson);
 };
 
-export const runScript = async (name: string) => {
+export const runNpmScript = async (name: string) => {
   await runCommand('npm', ['run', name]);
 };
 
-export const installDevelopmentDependencies = async (...names: string[]) => {
+export const installDevDependencies = async (...names: string[]) => {
   await runCommand('npm', ['i', '-D', ...names]);
 };
