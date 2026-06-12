@@ -1,7 +1,7 @@
 import fsp from 'node:fs/promises';
 import type { JsonValue, PackageJson as BasePackageJson } from 'type-fest';
 import { resolveRootPath, writeRootJsonFile } from '#src/services/root.service.ts';
-import { runCommand } from '#src/utils/process.ts';
+import { exec } from '#src/services/terminal.service.ts';
 
 export const PACKAGE_JSON_NAME = 'package.json';
 export const PACKAGE_JSON_PATH = resolveRootPath(PACKAGE_JSON_NAME);
@@ -50,9 +50,9 @@ export const addNpmScripts = async (...scripts: NpmScript[]) => {
 };
 
 export const runNpmScript = async (name: string) => {
-  await runCommand('npm', ['run', name]);
+  await exec('npm', ['run', name]);
 };
 
 export const installDevDependencies = async (...names: string[]) => {
-  await runCommand('npm', ['i', '-D', ...names]);
+  await exec('npm', ['i', '-D', ...names]);
 };

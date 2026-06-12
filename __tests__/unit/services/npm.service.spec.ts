@@ -72,7 +72,7 @@ describe('npm.service', () => {
   });
 
   describe('npm commands', () => {
-    it('runs npm scripts and installs dev dependencies', async () => {
+    it('executes npm scripts and installs dev dependencies', async () => {
       await runNpmScript('__test__');
       await installDevDependencies('turbo', 'test', 'hello');
 

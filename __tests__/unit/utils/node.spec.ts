@@ -3,7 +3,7 @@ import { getNodeVersion } from '#src/utils/node.ts';
 
 describe('node', () => {
   describe('getNodeVersion', () => {
-    it('returns nodejs version', async () => {
+    it('returns the node version from terminal exec output', async () => {
       const expected = '16.14.2';
 
       terminal.setCommandResult({ stdout: `v${expected}\n` });
