@@ -21,7 +21,7 @@ export const ensureRootDir = async (name: string) => {
     return;
   }
 
-  await fsp.mkdir(dirPath);
+  await fsp.mkdir(dirPath, { recursive: true });
 };
 
 export const writeRootFile = async (name: string, content: string) => {
