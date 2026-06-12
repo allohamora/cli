@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { fileSystem, terminal } from '#__tests__/setup-test-context.ts';
+import { ROOT_PATH } from '#src/services/root.service.ts';
 import {
   addScripts,
   addToPackageJson,
@@ -10,7 +11,6 @@ import {
   PACKAGE_JSON_PATH,
   PACKAGE_JSON_NAME,
 } from '#src/utils/npm.ts';
-import { ROOT_PATH } from '#src/utils/path.ts';
 
 describe('npm', () => {
   const returnPackageJson = <T extends Record<string, unknown>>(value: T = {} as T) => {

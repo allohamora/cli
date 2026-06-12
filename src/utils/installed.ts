@@ -1,5 +1,5 @@
 import { getInstalling } from '#src/states/context.ts';
-import { isExistsInRoot } from '#src/utils/fs.ts';
+import { existsInRoot } from '#src/services/root.service.ts';
 
 type AdditionalHandler = () => Promise<boolean>;
 
@@ -30,7 +30,7 @@ export const isInstalledAndInRootCheck = (
   relativePath: string,
   additionalHandlers: AdditionalHandler[] = [],
 ) => {
-  const handler = async () => isExistsInRoot(relativePath);
+  const handler = async () => existsInRoot(relativePath);
 
   return isInstalled(scriptName, [handler, ...additionalHandlers]);
 };

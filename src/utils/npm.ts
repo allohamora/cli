@@ -1,11 +1,10 @@
 import fsp from 'node:fs/promises';
 import type { JsonValue, PackageJson as BasePackageJson } from 'type-fest';
-import { rootPath } from '#src/utils/path.ts';
-import { addJsonFileToRoot } from '#src/utils/fs.ts';
+import { resolveRootPath, writeRootJsonFile } from '#src/services/root.service.ts';
 import { runCommand } from '#src/utils/process.ts';
 
 export const PACKAGE_JSON_NAME = 'package.json';
-export const PACKAGE_JSON_PATH = rootPath(PACKAGE_JSON_NAME);
+export const PACKAGE_JSON_PATH = resolveRootPath(PACKAGE_JSON_NAME);
 
 type PackageJson = {
   [key: string]: unknown;
@@ -18,7 +17,7 @@ export const getPackageJson = async () => {
 };
 
 export const setPackageJson = async (packageJson: PackageJson) => {
-  await addJsonFileToRoot(PACKAGE_JSON_NAME, packageJson);
+  await writeRootJsonFile(PACKAGE_JSON_NAME, packageJson);
 };
 
 export const addToPackageJson = async <V extends JsonValue>(name: keyof PackageJson, value: V) => {

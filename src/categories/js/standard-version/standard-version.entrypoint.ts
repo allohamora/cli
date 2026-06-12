@@ -1,4 +1,4 @@
-import { addJsonFileToRoot } from '#src/utils/fs.ts';
+import { writeRootJsonFile } from '#src/services/root.service.ts';
 import { addScripts, getPackageJson, installDevelopmentDependencies } from '#src/utils/npm.ts';
 import { getConfig } from '#src/categories/js/standard-version/standard-version.config.ts';
 import { CONFIG_FILE_NAME, PACKAGE_NAME } from '#src/categories/js/standard-version/standard-version.const.ts';
@@ -12,6 +12,6 @@ export const standardVersion = async () => {
   const repositoryUrl = packageJson.homepage?.replace(/#.+$/, '') ?? '<repository url>';
   const config = createConfig(repositoryUrl);
 
-  await addJsonFileToRoot(CONFIG_FILE_NAME, config);
+  await writeRootJsonFile(CONFIG_FILE_NAME, config);
   await addScripts(...scripts);
 };

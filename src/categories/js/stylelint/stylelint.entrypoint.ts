@@ -1,4 +1,4 @@
-import { addFileToRoot } from '#src/utils/fs.ts';
+import { writeRootFile } from '#src/services/root.service.ts';
 import { stringify } from '#src/utils/json.ts';
 import { addScripts, installDevelopmentDependencies } from '#src/utils/npm.ts';
 import { getConfig } from '#src/categories/js/stylelint/stylelint.config.ts';
@@ -16,6 +16,6 @@ export const stylelint = async () => {
   await installDevelopmentDependencies(...devDependencies);
   await addScripts(...scripts);
 
-  await addFileToRoot(CONFIG_NAME, stringify(stylelintConfig));
-  await addFileToRoot(IGNORE_NAME, stylelintIgnore);
+  await writeRootFile(CONFIG_NAME, stringify(stylelintConfig));
+  await writeRootFile(IGNORE_NAME, stylelintIgnore);
 };

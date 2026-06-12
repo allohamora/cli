@@ -69,7 +69,7 @@ describe('installed', () => {
   describe('isInstalledAndInRootCheck', () => {
     const configFile = '__test__.json';
 
-    it('adds isExistsInRoot handler', async () => {
+    it('adds existsInRoot handler', async () => {
       fileSystem.writeFile(configFile, '');
 
       const actual = await isInstalledAndInRootCheck(notInstallingScript, configFile)();

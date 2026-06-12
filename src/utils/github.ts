@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { addDirToRootIfNotExists, addFileToRoot } from '#src/utils/fs.ts';
+import { ensureRootDir, writeRootFile } from '#src/services/root.service.ts';
 
 const GITHUB_DIR_NAME = '.github';
 const GITHUB_WORKFLOWS_DIR_NAME = 'workflows';
@@ -7,24 +7,24 @@ const GITHUB_WORKFLOWS_DIR_NAME = 'workflows';
 const GITHUB_RELATIVE_WORKFLOWS_PATH = path.join(GITHUB_DIR_NAME, GITHUB_WORKFLOWS_DIR_NAME);
 
 export const addGithubDirIfNotExists = async () => {
-  await addDirToRootIfNotExists(GITHUB_DIR_NAME);
+  await ensureRootDir(GITHUB_DIR_NAME);
 };
 
 export const addWorkflowsDirIfNotExists = async () => {
   await addGithubDirIfNotExists();
-  await addDirToRootIfNotExists(GITHUB_RELATIVE_WORKFLOWS_PATH);
+  await ensureRootDir(GITHUB_RELATIVE_WORKFLOWS_PATH);
 };
 
 export const addGithubWorkflow = async (filename: string, content: string) => {
   await addWorkflowsDirIfNotExists();
 
   const relativeFilePath = path.join(GITHUB_RELATIVE_WORKFLOWS_PATH, filename);
-  await addFileToRoot(relativeFilePath, content);
+  await writeRootFile(relativeFilePath, content);
 };
 
 export const addToGithubDir = async (filename: string, content: string) => {
   await addGithubDirIfNotExists();
 
   const relativeFilePath = path.join(GITHUB_DIR_NAME, filename);
-  await addFileToRoot(relativeFilePath, content);
+  await writeRootFile(relativeFilePath, content);
 };
