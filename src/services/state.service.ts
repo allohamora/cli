@@ -1,7 +1,13 @@
-export type TypeState<T extends string> = readonly [() => T, (value: T) => void];
-export type ConfigState<V> = readonly [() => V];
+export type PresetState<T extends string> = {
+  getPreset: () => T;
+  setPreset: (value: T) => void;
+};
 
-export type Values<V, K extends string = string> = {
+export type Config<V> = {
+  getConfig: () => V;
+};
+
+type Values<V, K extends string = string> = {
   default: V;
 } & {
   [key in K]?: V;
@@ -9,9 +15,9 @@ export type Values<V, K extends string = string> = {
 
 export type CategoryState<CT extends string = any, N extends string = string> = {
   name: N;
-  configTypes: readonly ('default' | CT)[];
-  configState: TypeState<'default' | CT>;
-  useConfigState: <V>(values: Values<V, CT>) => ConfigState<V>;
+  presets: readonly ('default' | CT)[];
+  presetState: PresetState<'default' | CT>;
+  useConfig: <V>(values: Values<V, CT>) => Config<V>;
 };
 
 type Handler = () => Promise<void>;
@@ -21,45 +27,49 @@ export type Category<CT extends string = any> = {
   state: CategoryState<CT>;
 };
 
-export const createTypeState = <T extends string>(types: readonly T[]): TypeState<T> => {
-  let type = types[0]!;
+export const createPresetState = <T extends string>(presets: readonly T[]): PresetState<T> => {
+  let preset = presets[0]!;
 
-  const setType = (value: T) => {
-    type = value;
+  const setPreset = (value: T) => {
+    preset = value;
   };
-  const getType = () => type;
+  const getPreset = () => preset;
 
-  return [getType, setType] as const;
+  return {
+    getPreset,
+    setPreset,
+  };
 };
 
-export const createConfigState = <V, K extends string>(
-  configState: TypeState<'default' | K>,
+const createConfig = <V, K extends string>(
+  presetState: PresetState<'default' | K>,
   values: Values<V, K>,
-): ConfigState<V> => {
+): Config<V> => {
   const getConfig = () => {
-    const [getKey] = configState;
-    const value = values[getKey() as K] ?? values.default;
+    const value = values[presetState.getPreset() as K] ?? values.default;
 
     return value;
   };
 
-  return [getConfig] as const;
-};
-
-export const createCategoryState = <N extends string, CT extends string>(
-  name: N,
-  restConfigTypes: readonly CT[],
-): CategoryState<CT, N> => {
-  const configTypes = ['default', ...restConfigTypes] as const;
-  const configState = createTypeState<(typeof configTypes)[number]>(configTypes);
-  const useConfigState = <V>(values: Values<V, CT>) => createConfigState(configState, values);
-
   return {
-    name,
-    configTypes,
-    configState,
-    useConfigState,
+    getConfig,
   };
 };
 
-export const jsCategoryState = createCategoryState('js', ['node:ts', 'react:ts']);
+export const createCategory = <N extends string, CT extends string>(
+  name: N,
+  restPresets: readonly CT[],
+): CategoryState<CT, N> => {
+  const presets = ['default', ...restPresets] as const;
+  const presetState = createPresetState<(typeof presets)[number]>(presets);
+  const useConfig = <V>(values: Values<V, CT>) => createConfig(presetState, values);
+
+  return {
+    name,
+    presets,
+    presetState,
+    useConfig,
+  };
+};
+
+export const jsCategory = createCategory('js', ['node:ts', 'react:ts']);

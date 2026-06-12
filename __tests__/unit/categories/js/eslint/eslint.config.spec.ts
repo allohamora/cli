@@ -1,4 +1,4 @@
-import { configState } from '#__tests__/setup-test-context.ts';
+import { presetState } from '#__tests__/setup-test-context.ts';
 import { getConfig } from '#src/categories/js/eslint/eslint.config.ts';
 
 describe('eslint.config', () => {
@@ -22,7 +22,7 @@ describe('eslint.config', () => {
   });
 
   it('returns the node typescript eslint config', () => {
-    configState.setConfig('node:ts');
+    presetState.setJsPreset('node:ts');
 
     expect(getConfig()).toMatchObject({
       dependencies: ['globals', '@eslint/js', 'typescript-eslint', 'eslint-plugin-beautiful-sort'],
@@ -60,7 +60,7 @@ describe('eslint.config', () => {
   });
 
   it('returns the react typescript eslint config', () => {
-    configState.setConfig('react:ts');
+    presetState.setJsPreset('react:ts');
 
     expect(getConfig()).toMatchObject({
       dependencies: [

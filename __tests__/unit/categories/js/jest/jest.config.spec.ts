@@ -1,4 +1,4 @@
-import { configState } from '#__tests__/setup-test-context.ts';
+import { presetState } from '#__tests__/setup-test-context.ts';
 import { parseCjsModule } from '#__tests__/utils/cjs.utils.ts';
 import { getConfig } from '#src/categories/js/jest/jest.config.ts';
 
@@ -58,7 +58,7 @@ describe('jest.config', () => {
   });
 
   it('returns the node typescript jest config', () => {
-    configState.setConfig('node:ts');
+    presetState.setJsPreset('node:ts');
 
     expect(getConfig()).toEqual({
       devDependencies: ['jest', '@types/jest', 'ts-jest'],
@@ -68,7 +68,7 @@ describe('jest.config', () => {
   });
 
   it('returns the react typescript jest config', () => {
-    configState.setConfig('react:ts');
+    presetState.setJsPreset('react:ts');
 
     expect(getConfig()).toEqual({
       devDependencies: [
@@ -89,7 +89,7 @@ describe('jest.config', () => {
     ['node:ts', nodeTsJestConfigFile],
     ['react:ts', reactTsJestConfigFile],
   ] as const)('returns parseable config content for %s', (variant, configFile) => {
-    configState.setConfig(variant);
+    presetState.setJsPreset(variant);
 
     const parsed = parseCjsModule(getConfig().configFileContent);
 

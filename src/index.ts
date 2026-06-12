@@ -1,14 +1,19 @@
 import { bold } from '#src/utils/console.utils.ts';
-import { getCategory, getOptions, installOptions, chooseOptions } from '#src/services/cli.service.ts';
+import {
+  chooseCategory,
+  chooseCategoryPreset,
+  installCategoryOptions,
+  chooseCategoryOptions,
+} from '#src/services/cli.service.ts';
 
 export const main = async () => {
   console.log(bold(`Welcome to Allohamora's cli`));
 
-  const category = await getCategory();
-  const options = await getOptions(category);
-  const selectedOptionKeys = await chooseOptions(options);
+  const category = await chooseCategory();
+  const options = await chooseCategoryPreset(category);
+  const selectedOptionKeys = await chooseCategoryOptions(options);
 
-  await installOptions(options, selectedOptionKeys);
+  await installCategoryOptions(options, selectedOptionKeys);
 
   console.log(bold('Installation completed'));
 };

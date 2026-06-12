@@ -1,9 +1,9 @@
-import { configState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
+import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { prettier } from '#src/categories/js/prettier/prettier.entrypoint.ts';
 
 describe('prettier.entrypoint', () => {
   beforeEach(() => {
-    configState.setConfig('default');
+    presetState.setJsPreset('default');
   });
 
   describe('prettier', () => {

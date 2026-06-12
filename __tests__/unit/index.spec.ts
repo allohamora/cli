@@ -7,8 +7,8 @@ describe('index', () => {
       const log = vi.fn();
       consoleMock.setLogHandler(log);
       prompt.selectCategory('js');
-      prompt.selectConfig('node:ts');
-      prompt.selectEntrypoints();
+      prompt.selectPreset('node:ts');
+      prompt.selectOptions();
 
       await main();
 
@@ -18,8 +18,8 @@ describe('index', () => {
 
     it('runs selected scripts', async () => {
       prompt.selectCategory('js');
-      prompt.selectConfig('node:ts');
-      prompt.selectEntrypoints('husky');
+      prompt.selectPreset('node:ts');
+      prompt.selectOptions('husky');
 
       await main();
 

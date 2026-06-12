@@ -32,29 +32,28 @@ export const chooseMany = async <C extends string>(message: string, choices: rea
   return res[message] as C[];
 };
 
-export const getCategory = async () => {
+export const chooseCategory = async () => {
   const selectedCategory = (await chooseOne('choose a category', categoriesKeys)) as keyof typeof categories;
   const category = categories[selectedCategory];
 
   return category as Category;
 };
 
-export const getOptions = async ({ state: { configState, configTypes }, options }: Category) => {
-  const [, setConfig] = configState;
-  const selectedConfig = await chooseOne('choose a config', configTypes);
-  setConfig(selectedConfig);
+export const chooseCategoryPreset = async ({ state: { presetState, presets }, options }: Category) => {
+  const selectedPreset = await chooseOne('choose a preset', presets);
+  presetState.setPreset(selectedPreset);
 
   return options;
 };
 
-export const chooseOptions = async (options: Category['options']) => {
+export const chooseCategoryOptions = async (options: Category['options']) => {
   const kebablizedOptions = Object.keys(options).map(toKebabCase);
-  const selectedKebablizedOptions = await chooseMany('choose a options', kebablizedOptions);
+  const selectedKebablizedOptions = await chooseMany('choose options', kebablizedOptions);
 
   return selectedKebablizedOptions.map(toCamelCase);
 };
 
-export const installOptions = async (options: Category['options'], keys: string[]) => {
+export const installCategoryOptions = async (options: Category['options'], keys: string[]) => {
   const spinner = ora('starting install').start();
 
   setSelectedInstallOptions(keys);

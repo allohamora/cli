@@ -1,9 +1,9 @@
-import { configState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
+import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { docker } from '#src/categories/js/docker/docker.entrypoint.ts';
 
 describe('docker.entrypoint', () => {
   beforeEach(() => {
-    configState.setConfig('default');
+    presetState.setJsPreset('default');
     terminal.setCommandResult({ stdout: 'v24.14.1\n' });
   });
 

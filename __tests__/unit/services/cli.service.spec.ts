@@ -3,10 +3,10 @@ import { installationState, loading, prompt } from '#__tests__/setup-test-contex
 import {
   chooseMany,
   chooseOne,
-  chooseOptions,
-  getCategory,
-  getOptions,
-  installOptions,
+  chooseCategoryOptions,
+  chooseCategory,
+  chooseCategoryPreset,
+  installCategoryOptions,
   requireAtLeastOneChoice,
 } from '#src/services/cli.service.ts';
 import type { Category } from '#src/services/state.service.ts';
@@ -75,39 +75,39 @@ describe('cli.service', () => {
     });
   });
 
-  describe('getCategory', () => {
+  describe('chooseCategory', () => {
     it('returns the selected category', async () => {
       prompt.selectCategory('js');
 
-      expect(await getCategory()).toBe(js);
+      expect(await chooseCategory()).toBe(js);
     });
   });
 
-  describe('getOptions', () => {
+  describe('chooseCategoryPreset', () => {
     it('sets selected config and returns category options', async () => {
-      const selectedConfig = js.state.configTypes[1]!;
-      prompt.selectConfig(selectedConfig);
+      const selectedPreset = js.state.presets[1]!;
+      prompt.selectPreset(selectedPreset);
 
-      expect(await getOptions(js)).toBe(js.options);
-      expect(js.state.configState[0]()).toBe(selectedConfig);
+      expect(await chooseCategoryPreset(js)).toBe(js.options);
+      expect(js.state.presetState.getPreset()).toBe(selectedPreset);
     });
   });
 
-  describe('chooseOptions', () => {
+  describe('chooseCategoryOptions', () => {
     it('returns selected entrypoints in camelCase', async () => {
       const kebablized = jsOptionKeys.map(toKebabCase);
       const selected = [kebablized[1]!];
-      prompt.selectEntrypoints(...selected);
+      prompt.selectOptions(...selected);
 
-      expect(await chooseOptions(js.options)).toEqual(selected.map(toCamelCase));
+      expect(await chooseCategoryOptions(js.options)).toEqual(selected.map(toCamelCase));
     });
   });
 
-  describe('installOptions', () => {
+  describe('installCategoryOptions', () => {
     it('starts and finishes loading while printing installed option names', async () => {
       const optionHello = vi.fn();
 
-      await installOptions({ optionHello }, ['optionHello']);
+      await installCategoryOptions({ optionHello }, ['optionHello']);
 
       expect(optionHello).toHaveBeenCalled();
       expect(loading.getLabels()).toEqual(['starting install']);
@@ -121,7 +121,7 @@ describe('cli.service', () => {
       const options = { option };
       const keys = ['option'];
 
-      await installOptions(options, keys);
+      await installCategoryOptions(options, keys);
 
       expect(installationState.getSelectedInstallOptions()).toEqual(keys);
     });
@@ -132,7 +132,7 @@ describe('cli.service', () => {
       const options = { option1, option2 };
       const keys = ['option1', 'option2'];
 
-      await installOptions(options, keys);
+      await installCategoryOptions(options, keys);
 
       expect(option1).toHaveBeenCalled();
       expect(option2).toHaveBeenCalled();

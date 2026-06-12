@@ -1,9 +1,9 @@
-import { configState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
+import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { stylelint } from '#src/categories/js/stylelint/stylelint.entrypoint.ts';
 
 describe('stylelint.entrypoint', () => {
   beforeEach(() => {
-    configState.setConfig('default');
+    presetState.setJsPreset('default');
   });
 
   describe('stylelint', () => {
@@ -42,7 +42,7 @@ describe('stylelint.entrypoint', () => {
     });
 
     it('installs react typescript dependencies and writes stylelint files', async () => {
-      configState.setConfig('react:ts');
+      presetState.setJsPreset('react:ts');
 
       await stylelint();
 
@@ -82,7 +82,7 @@ describe('stylelint.entrypoint', () => {
     });
 
     it('adds react typescript scripts to package.json', async () => {
-      configState.setConfig('react:ts');
+      presetState.setJsPreset('react:ts');
       fileSystem.seed({ packageJson: { scripts: { test: 'vitest' } } });
 
       await stylelint();

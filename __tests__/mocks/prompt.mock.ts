@@ -49,12 +49,12 @@ export class Prompt {
     this.answer('choose a category', category);
   }
 
-  public selectConfig(config: string) {
-    this.answer('choose a config', config);
+  public selectPreset(preset: string) {
+    this.answer('choose a preset', preset);
   }
 
-  public selectEntrypoints(...entrypoints: string[]) {
-    this.answer('choose a options', entrypoints);
+  public selectOptions(...options: string[]) {
+    this.answer('choose options', options);
   }
 
   public getAnswers() {

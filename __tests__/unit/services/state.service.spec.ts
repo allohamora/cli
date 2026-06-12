@@ -1,85 +1,38 @@
-import {
-  createCategoryState,
-  createConfigState,
-  createTypeState,
-  jsCategoryState,
-} from '#src/services/state.service.ts';
+import { createCategory, createPresetState, jsCategory } from '#src/services/state.service.ts';
 
 describe('state.service', () => {
-  describe('jsCategoryState', () => {
+  describe('jsCategory', () => {
     it('is initialized', () => {
-      expect(jsCategoryState).toBeDefined();
-      expect(jsCategoryState.name).toBe('js');
-      expect(jsCategoryState.configTypes).toEqual(['default', 'node:ts', 'react:ts']);
+      expect(jsCategory).toBeDefined();
+      expect(jsCategory.name).toBe('js');
+      expect(jsCategory.presets).toEqual(['default', 'node:ts', 'react:ts']);
     });
   });
 
-  describe('createTypeState', () => {
-    const types = ['1', '2'] as const;
-    const createNewTypeState = () => createTypeState(types);
-
-    let [getType, setType] = createNewTypeState();
-
-    beforeEach(() => {
-      [getType, setType] = createNewTypeState();
-    });
-
-    it('returns type', () => {
-      expect(getType()).toBeDefined();
-    });
-
-    it('initializes state with first type', () => {
-      expect(getType()).toBe(types[0]);
-    });
-
-    it('sets type', () => {
-      const newType = types[1];
-
-      setType(newType);
-
-      expect(getType()).toBe(newType);
-    });
-  });
-
-  describe('createConfigState', () => {
+  describe('createPresetState', () => {
     const types = ['default', '1', '2', '3'] as const;
-    const createNewTypeState = () => createTypeState(types);
-    let state = createNewTypeState();
-    let [, setType] = state;
-
-    const configValues = { default: 'default', '1': '1' };
-    const createNewConfigState = () => createConfigState(state, configValues);
-    let [getConfig] = createNewConfigState();
+    const createNewPresetState = () => createPresetState(types);
+    let state = createNewPresetState();
 
     afterEach(() => {
-      state = createNewTypeState();
-      [, setType] = state;
-      [getConfig] = createNewConfigState();
+      state = createNewPresetState();
     });
 
-    it('returns selected config value', () => {
-      setType('1');
-
-      const actual = getConfig();
-      const expected = configValues['1'];
-
-      expect(actual).toBe(expected);
+    it('returns selected preset', () => {
+      expect(state.getPreset()).toBe(types[0]);
     });
 
-    it('returns default config if selected not found', () => {
-      setType('2');
+    it('sets selected preset', () => {
+      state.setPreset('2');
 
-      const actual = getConfig();
-      const expected = configValues.default;
-
-      expect(actual).toBe(expected);
+      expect(state.getPreset()).toBe('2');
     });
   });
 
-  describe('createCategoryState', () => {
+  describe('createCategory', () => {
     const name = '__test__';
     const values = ['1', '2', '3'] as const;
-    const createNewCategoryState = () => createCategoryState(name, values);
+    const createNewCategoryState = () => createCategory(name, values);
 
     let state = createNewCategoryState();
 
@@ -87,8 +40,8 @@ describe('state.service', () => {
       state = createNewCategoryState();
     });
 
-    it('creates and returns configState', () => {
-      expect(state.configState).toBeDefined();
+    it('creates and returns presetState', () => {
+      expect(state.presetState).toBeDefined();
     });
 
     it('returns category name', () => {
@@ -98,26 +51,24 @@ describe('state.service', () => {
       expect(actual).toBe(expected);
     });
 
-    it('adds default option to configOptions', () => {
-      const actual = state.configTypes;
+    it('adds default option to presets', () => {
+      const actual = state.presets;
       const expected = ['default', ...values];
 
       expect(actual).toEqual(expected);
     });
 
-    it('returns useConfigValue', () => {
-      expect(state.useConfigState).toBeDefined();
+    it('returns useConfig', () => {
+      expect(state.useConfig).toBeDefined();
     });
 
-    it('returns useConfigValue that creates a local state', () => {
+    it('returns useConfig that reads from preset state', () => {
       const configValues = { default: 'default', '1': '1' };
+      const { getConfig } = state.useConfig(configValues);
 
-      const [, setConfigKey] = state.configState;
-
-      const [getConfig] = state.useConfigState(configValues);
       expect(getConfig()).toBe(configValues.default);
 
-      setConfigKey('1');
+      state.presetState.setPreset('1');
       expect(getConfig()).toBe(configValues['1']);
     });
   });
