@@ -1,10 +1,10 @@
-import { configState } from '#__tests__/setup-test-context.ts';
+import { presetState } from '#__tests__/setup-test-context.ts';
 import { getConfig } from '#src/categories/js/prettier/prettier.config.ts';
 
 describe('prettier.config', () => {
   it('returns the default prettier config for every js variant', () => {
     for (const variant of ['default', 'node:ts', 'react:ts'] as const) {
-      configState.setConfig(variant);
+      presetState.setJsPreset(variant);
 
       expect(getConfig()).toEqual({
         config: {

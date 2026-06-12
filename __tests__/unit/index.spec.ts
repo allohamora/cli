@@ -1,26 +1,25 @@
 import { consoleMock, fileSystem, loading, prompt, terminal } from '#__tests__/setup-test-context.ts';
 import { main } from '#src/index.ts';
-import { white } from '#src/utils/console.ts';
 
 describe('index', () => {
   describe('main', () => {
-    it('prints welcome and bye message with white color', async () => {
+    it('prints the welcome and completion messages in bold', async () => {
       const log = vi.fn();
       consoleMock.setLogHandler(log);
       prompt.selectCategory('js');
-      prompt.selectConfig('node:ts');
-      prompt.selectEntrypoints();
+      prompt.selectPreset('node:ts');
+      prompt.selectOptions();
 
       await main();
 
-      expect(log).toHaveBeenCalledWith(white(`Welcome to Allohamora's cli`));
-      expect(log).toHaveBeenCalledWith(white('Installation completed'));
+      expect(log).toHaveBeenCalledWith(`\x1b[22m\x1b[1mWelcome to Allohamora's cli\x1b[0m`);
+      expect(log).toHaveBeenCalledWith(`\x1b[22m\x1b[1mInstallation completed\x1b[0m`);
     });
 
     it('runs selected scripts', async () => {
       prompt.selectCategory('js');
-      prompt.selectConfig('node:ts');
-      prompt.selectEntrypoints('husky');
+      prompt.selectPreset('node:ts');
+      prompt.selectOptions('husky');
 
       await main();
 
@@ -29,7 +28,7 @@ describe('index', () => {
         ['npm', ['i', '-D', 'husky']],
         ['npm', ['run', 'prepare']],
       ]);
-      expect(loading.getTexts()).toEqual(['husky is installing\n']);
+      expect(loading.getTexts()).toEqual(['installing husky\n']);
     });
   });
 });

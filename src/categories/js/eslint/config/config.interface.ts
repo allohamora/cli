@@ -1,4 +1,4 @@
-import type { Mutation } from '#src/utils/mutation.ts';
+import type { Mutation } from '#src/utils/mutation.utils.ts';
 
 export type EslintConfig = {
   files?: string[];

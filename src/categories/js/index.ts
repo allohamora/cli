@@ -1,4 +1,4 @@
-import { jsCategoryState } from '#src/states/categories.ts';
+import { jsCategory } from '#src/services/state.service.ts';
 import { commitlint } from '#src/categories/js/commitlint/commitlint.entrypoint.ts';
 import { eslint } from '#src/categories/js/eslint/eslint.entrypoint.ts';
 import { husky } from '#src/categories/js/husky/husky.entrypoint.ts';
@@ -14,7 +14,7 @@ import { buildWorkflow } from '#src/categories/js/build-workflow/build-workflow.
 import { codecovWorkflow } from '#src/categories/js/codecov-workflow/codecov-workflow.entrypoint.ts';
 import { dependabot } from '#src/categories/js/dependabot/dependabot.entrypoint.ts';
 
-// order have matter
+// order matters
 const options = {
   husky,
   commitlint,
@@ -23,7 +23,7 @@ const options = {
   eslint,
   lintStaged,
   stylelint,
-  // named jestEntrypoint because in test environment jest name is reserved
+  // named jestEntrypoint because jest is reserved in the test environment
   jest: jestEntrypoint,
   docker,
   releaseWorkflow,
@@ -35,5 +35,5 @@ const options = {
 
 export default {
   options,
-  state: jsCategoryState,
+  state: jsCategory,
 };

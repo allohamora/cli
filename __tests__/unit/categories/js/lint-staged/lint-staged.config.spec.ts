@@ -1,4 +1,4 @@
-import { configState, contextState } from '#__tests__/setup-test-context.ts';
+import { presetState, installationState } from '#__tests__/setup-test-context.ts';
 import { getConfig } from '#src/categories/js/lint-staged/lint-staged.config.ts';
 import type { LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
 
@@ -15,8 +15,8 @@ describe('lint-staged.config', () => {
   };
 
   beforeEach(() => {
-    configState.setConfig('default');
-    contextState.setInstalling(['prettier', 'stylelint', 'eslint', 'jest']);
+    presetState.setJsPreset('default');
+    installationState.setSelectedInstallOptions(['prettier', 'stylelint', 'eslint', 'jest']);
   });
 
   it('returns default javascript lint-staged commands', async () => {
@@ -28,7 +28,7 @@ describe('lint-staged.config', () => {
   });
 
   it('returns node typescript lint-staged commands', async () => {
-    configState.setConfig('node:ts');
+    presetState.setJsPreset('node:ts');
 
     await expect(getMutatedConfig()).resolves.toEqual({
       '*.{js,cjs,mjs,json,yml,md}': 'prettier --write',
@@ -38,7 +38,7 @@ describe('lint-staged.config', () => {
   });
 
   it('returns react typescript lint-staged commands', async () => {
-    configState.setConfig('react:ts');
+    presetState.setJsPreset('react:ts');
 
     await expect(getMutatedConfig()).resolves.toEqual({
       '*.{js,cjs,mjs,json,yml,md}': 'prettier --write',

@@ -1,9 +1,9 @@
-import { configState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
+import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { standardVersion } from '#src/categories/js/standard-version/standard-version.entrypoint.ts';
 
 describe('standard-version.entrypoint', () => {
   beforeEach(() => {
-    configState.setConfig('default');
+    presetState.setJsPreset('default');
   });
 
   describe('standardVersion', () => {

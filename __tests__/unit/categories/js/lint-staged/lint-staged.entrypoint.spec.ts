@@ -1,9 +1,9 @@
-import { configState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
+import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { lintStaged } from '#src/categories/js/lint-staged/lint-staged.entrypoint.ts';
 
 describe('lint-staged.entrypoint', () => {
   beforeEach(() => {
-    configState.setConfig('default');
+    presetState.setJsPreset('default');
   });
 
   describe('lintStaged', () => {

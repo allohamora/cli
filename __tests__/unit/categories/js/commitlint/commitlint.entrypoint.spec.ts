@@ -1,9 +1,9 @@
-import { configState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
+import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { commitlint } from '#src/categories/js/commitlint/commitlint.entrypoint.ts';
 
 describe('commitlint.entrypoint', () => {
   beforeEach(() => {
-    configState.setConfig('default');
+    presetState.setJsPreset('default');
     fileSystem.seed({ dirs: ['.husky'] });
   });
 

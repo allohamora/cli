@@ -1,5 +1,5 @@
-import { addFileToRoot } from '#src/utils/fs.ts';
-import { getNodeVersion } from '#src/utils/node.ts';
+import { writeRootFile } from '#src/services/root.service.ts';
+import { getNodeVersion } from '#src/services/node.service.ts';
 import { getConfig } from '#src/categories/js/docker/docker.config.ts';
 import { FILE_NAME, IGNORE_NAME } from '#src/categories/js/docker/docker.const.ts';
 
@@ -8,6 +8,6 @@ export const docker = async () => {
   const version = await getNodeVersion();
   const dockerFile = getDockerFile({ version });
 
-  await addFileToRoot(FILE_NAME, dockerFile);
-  await addFileToRoot(IGNORE_NAME, dockerIgnore);
+  await writeRootFile(FILE_NAME, dockerFile);
+  await writeRootFile(IGNORE_NAME, dockerIgnore);
 };

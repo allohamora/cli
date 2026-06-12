@@ -1,5 +1,5 @@
 import dedent from 'dedent';
-import { prettierMutation } from '#src/categories/js/stylelint/stylelint.utils.ts';
+import { prettierMutation } from '#src/categories/js/stylelint/stylelint.service.ts';
 import type { Config } from '#src/categories/js/stylelint/config/config.interface.ts';
 
 const stylelintConfig: Config['stylelintConfig'] = {

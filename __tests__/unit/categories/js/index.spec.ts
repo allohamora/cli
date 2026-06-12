@@ -1,10 +1,10 @@
 import js from '#src/categories/js/index.ts';
-import { jsCategoryState } from '#src/states/categories.ts';
+import { jsCategory } from '#src/services/state.service.ts';
 
 describe('index', () => {
   describe('js', () => {
     it('exports state', () => {
-      expect(js.state).toBe(jsCategoryState);
+      expect(js.state).toBe(jsCategory);
     });
 
     it('exports options', () => {

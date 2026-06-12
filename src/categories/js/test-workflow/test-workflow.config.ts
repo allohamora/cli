@@ -1,6 +1,6 @@
-import { jsCategoryState } from '#src/states/categories.ts';
+import { jsCategory } from '#src/services/state.service.ts';
 import { defaultConfig } from '#src/categories/js/test-workflow/config/default.config.ts';
 
-export const [getConfig] = jsCategoryState.useConfigState({
+export const { getConfig } = jsCategory.useConfig({
   default: defaultConfig,
 });
