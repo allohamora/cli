@@ -61,6 +61,31 @@ describe('eslint.entrypoint', () => {
       );
     });
 
+    it('builds config with ignores between shared configs and main config', () => {
+      expect(
+        buildConfig(
+          createConfig({
+            configs: ['eslint.configs.recommended', '...tseslint.configs.recommended'],
+            ignores: ['node_modules', 'dist'],
+            eslintConfig: {
+              files: ['**/*.ts'],
+            },
+          }),
+        ),
+      ).toBe(
+        [
+          `import { defineConfig } from 'eslint/config';`,
+          '',
+          `export default defineConfig(`,
+          `eslint.configs.recommended,`,
+          `...tseslint.configs.recommended,`,
+          `{ignores: ["node_modules","dist"]},`,
+          `{files: ["**/*.ts"]}`,
+          `);`,
+        ].join('\n'),
+      );
+    });
+
     it('installs default eslint dependencies and writes formatted config', async () => {
       await eslint();
 

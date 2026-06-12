@@ -8,12 +8,12 @@ describe('eslint/config', () => {
       dependencies: ['globals', '@eslint/js'],
       imports: [`import globals from 'globals'`, `import eslint from '@eslint/js'`],
       configs: ['eslint.configs.recommended'],
+      ignores: ['node_modules', 'dist'],
       eslintConfig: {
         files: ['**/*.{js,mjs,cjs}'],
         languageOptions: {
           globals: ['node'],
         },
-        ignores: ['node_modules', 'dist'],
       },
       scripts: [
         { name: 'lint', script: 'eslint "**/*.js"' },
@@ -34,13 +34,13 @@ describe('eslint/config', () => {
         `import beautifulSort from 'eslint-plugin-beautiful-sort'`,
       ],
       configs: ['eslint.configs.recommended', '...tseslint.configs.recommended'],
+      ignores: ['node_modules', 'dist'],
       eslintConfig: {
         files: ['**/*.ts'],
         languageOptions: {
           globals: ['node'],
           parserOptions: { project: true },
         },
-        ignores: ['node_modules', 'dist'],
         plugins: { 'beautiful-sort': 'beautifulSort' },
         rules: {
           'no-use-before-define': 'error',
@@ -79,13 +79,13 @@ describe('eslint/config', () => {
         `// @ts-expect-error types are not compatible`,
         'pluginJsxA11y.flatConfigs.recommended',
       ],
+      ignores: ['node_modules', 'dist'],
       eslintConfig: {
         files: ['**/*.{ts,tsx}'],
         languageOptions: {
           globals: ['browser'],
           parserOptions: { project: true },
         },
-        ignores: ['node_modules', 'dist'],
         plugins: { 'beautiful-sort': 'beautifulSort' },
       },
       typescript: true,

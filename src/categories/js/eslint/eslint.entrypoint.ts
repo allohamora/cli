@@ -46,7 +46,7 @@ export const buildConfig = (config: Config) => {
     () => `languageOptions: {${[globals, parserOptions].filter(Boolean).join(',')}}`,
   );
 
-  const ignoresConfig = optional(config.eslintConfig.ignores, (value) => `{ignores: ${JSON.stringify(value)}},`);
+  const ignoresConfig = optional(config.ignores, (value) => `{ignores: ${JSON.stringify(value)}},`);
 
   const mainContent = [files, languageOptions, plugins, rules].filter(Boolean).join(',');
   const mainConfig = optional(mainContent, (content) => `{${content}}`);

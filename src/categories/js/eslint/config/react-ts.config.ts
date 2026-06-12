@@ -25,6 +25,7 @@ export const reactTsConfig: Config = {
     `// @ts-expect-error types are not compatible`,
     'pluginJsxA11y.flatConfigs.recommended',
   ],
+  ignores: ['node_modules', 'dist'],
   eslintConfig: {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -33,7 +34,6 @@ export const reactTsConfig: Config = {
         project: true,
       },
     },
-    ignores: ['node_modules', 'dist'],
     plugins: {
       'beautiful-sort': 'beautifulSort',
     },

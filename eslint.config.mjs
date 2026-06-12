@@ -10,9 +10,9 @@ export default defineConfig(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   eslintPluginPrettierRecommended,
+  { ignores: ['node_modules', 'dist', 'bin'] },
   {
     files: ['**/*.ts'],
-    ignores: ['node_modules', 'dist', 'bin'],
     languageOptions: {
       globals: {
         ...globals.node,

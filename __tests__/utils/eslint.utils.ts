@@ -4,10 +4,11 @@ export const createConfig = ({
   dependencies = [],
   imports = [],
   configs = [],
+  ignores,
   eslintConfig = {},
   typescript = false,
   scripts = [],
   mutations = [],
 }: Partial<Config> = {}) => {
-  return { dependencies, imports, configs, eslintConfig, typescript, scripts, mutations };
+  return { dependencies, imports, configs, ignores, eslintConfig, typescript, scripts, mutations };
 };

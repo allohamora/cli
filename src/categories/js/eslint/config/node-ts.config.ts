@@ -10,6 +10,7 @@ export const nodeTsConfig: Config = {
     `import beautifulSort from 'eslint-plugin-beautiful-sort'`,
   ],
   configs: ['eslint.configs.recommended', '...tseslint.configs.recommended'],
+  ignores: ['node_modules', 'dist'],
   eslintConfig: {
     files: ['**/*.ts'],
     languageOptions: {
@@ -18,7 +19,6 @@ export const nodeTsConfig: Config = {
         project: true,
       },
     },
-    ignores: ['node_modules', 'dist'],
     plugins: {
       'beautiful-sort': 'beautifulSort',
     },
