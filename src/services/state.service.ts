@@ -13,7 +13,7 @@ type Values<V, K extends string = string> = {
   [key in K]?: V;
 };
 
-export type CategoryState<CT extends string = any, N extends string = string> = {
+export type CategoryState<CT extends string = string, N extends string = string> = {
   name: N;
   presets: readonly ('default' | CT)[];
   presetState: PresetState<'default' | CT>;
@@ -22,7 +22,7 @@ export type CategoryState<CT extends string = any, N extends string = string> = 
 
 type Handler = () => Promise<void>;
 
-export type Category<CT extends string = any> = {
+export type Category<CT extends string = string> = {
   options: Record<string, Handler>;
   state: CategoryState<CT>;
 };
