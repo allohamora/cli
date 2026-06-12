@@ -1,19 +1,16 @@
-import { getConfig } from '#src/categories/js/build-workflow/build-workflow.config.ts';
+import { getConfig } from '#src/categories/js/codecov-workflow/config/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
 
-describe('build-workflow.config', () => {
-  it('returns the build workflow content', () => {
+describe('codecov-workflow/config', () => {
+  it('returns the codecov workflow content', () => {
     expect(getConfig().content).toBe(
       [
-        'name: build',
+        'name: codecov',
         '',
-        'on:',
-        '  push:',
-        '    branches:',
-        '      - "**"',
+        'on: [push]',
         '',
         'jobs:',
-        '  build:',
+        '  codecov:',
         '    runs-on: ubuntu-latest',
         '    env:',
         '      CI: true',
@@ -25,9 +22,11 @@ describe('build-workflow.config', () => {
         '        with:',
         '          cache: "npm"',
         '      - name: Install dependencies',
-        '        run: npm i',
-        '      - name: Run build',
-        '        run: npm run build',
+        '        run: npm ci',
+        '      - name: Collect coverage',
+        '        run: npm run test:coverage',
+        '      - name: Upload coverage to Codecov',
+        '        uses: codecov/codecov-action@v4',
       ].join('\n'),
     );
   });

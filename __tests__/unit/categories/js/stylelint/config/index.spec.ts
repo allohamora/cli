@@ -1,7 +1,7 @@
 import { presetState } from '#__tests__/setup-test-context.ts';
-import { getConfig } from '#src/categories/js/stylelint/stylelint.config.ts';
+import { getConfig } from '#src/categories/js/stylelint/config/index.ts';
 
-describe('stylelint.config', () => {
+describe('stylelint/config', () => {
   it.each(['default', 'node:ts'] as const)('returns the default stylelint config for %s', (variant) => {
     presetState.setJsPreset(variant);
 

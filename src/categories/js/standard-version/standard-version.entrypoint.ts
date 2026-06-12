@@ -1,6 +1,6 @@
 import { writeRootJsonFile } from '#src/services/root.service.ts';
 import { addNpmScripts, installDevDependencies, readPackageJson } from '#src/services/npm.service.ts';
-import { getConfig } from '#src/categories/js/standard-version/standard-version.config.ts';
+import { getConfig } from '#src/categories/js/standard-version/config/index.ts';
 import { CONFIG_FILE_NAME, PACKAGE_NAME } from '#src/categories/js/standard-version/standard-version.const.ts';
 
 export const standardVersion = async () => {

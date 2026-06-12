@@ -1,6 +1,6 @@
 import { writeRootFile } from '#src/services/root.service.ts';
 import { addNpmScripts, installDevDependencies } from '#src/services/npm.service.ts';
-import { getConfig } from '#src/categories/js/stylelint/stylelint.config.ts';
+import { getConfig } from '#src/categories/js/stylelint/config/index.ts';
 import { CONFIG_NAME, IGNORE_NAME } from '#src/categories/js/stylelint/stylelint.const.ts';
 
 export const stylelint = async () => {

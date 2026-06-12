@@ -1,11 +1,11 @@
-import { getConfig } from '#src/categories/js/test-workflow/test-workflow.config.ts';
+import { getConfig } from '#src/categories/js/build-workflow/config/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
 
-describe('test-workflow.config', () => {
-  it('returns the test workflow content', () => {
+describe('build-workflow/config', () => {
+  it('returns the build workflow content', () => {
     expect(getConfig().content).toBe(
       [
-        'name: test',
+        'name: build',
         '',
         'on:',
         '  push:',
@@ -13,7 +13,7 @@ describe('test-workflow.config', () => {
         '      - "**"',
         '',
         'jobs:',
-        '  test:',
+        '  build:',
         '    runs-on: ubuntu-latest',
         '    env:',
         '      CI: true',
@@ -25,9 +25,9 @@ describe('test-workflow.config', () => {
         '        with:',
         '          cache: "npm"',
         '      - name: Install dependencies',
-        '        run: npm ci',
-        '      - name: Run tests',
-        '        run: npm run test',
+        '        run: npm i',
+        '      - name: Run build',
+        '        run: npm run build',
       ].join('\n'),
     );
   });

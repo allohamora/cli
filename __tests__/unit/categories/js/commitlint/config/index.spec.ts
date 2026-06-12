@@ -1,6 +1,6 @@
-import { getConfig } from '#src/categories/js/commitlint/commitlint.config.ts';
+import { getConfig } from '#src/categories/js/commitlint/config/index.ts';
 
-describe('commitlint.config', () => {
+describe('commitlint/config', () => {
   it('returns conventional commitlint packages and config', () => {
     expect(getConfig()).toEqual({
       rules: '@commitlint/config-conventional',

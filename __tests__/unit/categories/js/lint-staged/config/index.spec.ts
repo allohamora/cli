@@ -1,8 +1,8 @@
 import { presetState, installationState } from '#__tests__/setup-test-context.ts';
-import { getConfig } from '#src/categories/js/lint-staged/lint-staged.config.ts';
+import { getConfig } from '#src/categories/js/lint-staged/config/index.ts';
 import type { LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
 
-describe('lint-staged.config', () => {
+describe('lint-staged/config', () => {
   const getMutatedConfig = async () => {
     const config = getConfig();
     const lintStagedConfig: LintStagedConfig = { ...config.config };

@@ -1,6 +1,6 @@
-import { getConfig } from '#src/categories/js/dependabot/dependabot.config.ts';
+import { getConfig } from '#src/categories/js/dependabot/config/index.ts';
 
-describe('dependabot.config', () => {
+describe('dependabot/config', () => {
   it('returns the expected dependabot update schedule', () => {
     expect(getConfig().content).toBe(
       [

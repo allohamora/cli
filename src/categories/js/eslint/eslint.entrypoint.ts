@@ -1,4 +1,4 @@
-import { getConfig } from '#src/categories/js/eslint/eslint.config.ts';
+import { getConfig } from '#src/categories/js/eslint/config/index.ts';
 import { writeRootFile } from '#src/services/root.service.ts';
 import { addNpmScripts, installDevDependencies } from '#src/services/npm.service.ts';
 import { CONFIG_FILE_NAME, PACKAGE_NAME } from '#src/categories/js/eslint/eslint.const.ts';

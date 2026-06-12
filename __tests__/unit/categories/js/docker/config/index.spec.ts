@@ -1,6 +1,6 @@
-import { getConfig } from '#src/categories/js/docker/docker.config.ts';
+import { getConfig } from '#src/categories/js/docker/config/index.ts';
 
-describe('docker.config', () => {
+describe('docker/config', () => {
   it('returns Dockerfile content for the requested node version', () => {
     expect(getConfig().getDockerFile({ version: '24.14.1' })).toBe(
       [
