@@ -75,7 +75,7 @@ describe('lint-staged.service', () => {
       expect(actual).toEqual(expected);
     });
 
-    it('throws error if received invalid config', () => {
+    it('throws an error if it receives an invalid config', () => {
       const key = '*.ts';
       const value = '__test__';
       const actual = { [key]: {} } as unknown as LintStagedConfig;
@@ -85,7 +85,7 @@ describe('lint-staged.service', () => {
   });
 
   describe('huskyIntegration', () => {
-    it('adds hook if husky installed', async () => {
+    it('adds a hook if husky is installed', async () => {
       installationState.setSelectedInstallOptions(['husky']);
 
       await huskyIntegration();
@@ -93,7 +93,7 @@ describe('lint-staged.service', () => {
       expect(fileSystem.readFile('.husky/pre-commit')).toBe('npx --no-install lint-staged\n');
     });
 
-    it('does not add hook if husky not installed', async () => {
+    it('does not add a hook if husky is not installed', async () => {
       await huskyIntegration();
 
       expect(fileSystem.readFile('.husky/pre-commit')).toBeUndefined();
@@ -101,7 +101,7 @@ describe('lint-staged.service', () => {
   });
 
   describe('jestMutation', () => {
-    it('mutates config if jest installed', async () => {
+    it('mutates the config if jest is installed', async () => {
       const ext = '*.js';
       const actual = {};
       installationState.setSelectedInstallOptions(['jest']);
@@ -113,7 +113,7 @@ describe('lint-staged.service', () => {
       expect(actual).toEqual(expected);
     });
 
-    it('does not mutate config if jest not installed', async () => {
+    it('does not mutate the config if jest is not installed', async () => {
       const ext = '*.js';
       const actual = {};
       await jestMutation(ext)(actual);
@@ -125,7 +125,7 @@ describe('lint-staged.service', () => {
   });
 
   describe('eslintMutation', () => {
-    it('mutates config if eslint installed', async () => {
+    it('mutates the config if eslint is installed', async () => {
       const ext = '*.js';
       const actual = {};
       installationState.setSelectedInstallOptions(['eslint']);
@@ -137,7 +137,7 @@ describe('lint-staged.service', () => {
       expect(actual).toEqual(expected);
     });
 
-    it('does not mutate config if eslint not installed', async () => {
+    it('does not mutate the config if eslint is not installed', async () => {
       const ext = '*.js';
       const actual = {};
       await eslintMutation(ext)(actual);
@@ -149,7 +149,7 @@ describe('lint-staged.service', () => {
   });
 
   describe('prettierMutation', () => {
-    it('mutates config if prettier installed', async () => {
+    it('mutates the config if prettier is installed', async () => {
       const ext = '*.{js,cjs,mjs,json,yml,md}';
       const actual = {};
       installationState.setSelectedInstallOptions(['prettier']);
@@ -161,7 +161,7 @@ describe('lint-staged.service', () => {
       expect(actual).toEqual(expected);
     });
 
-    it('does not mutate config if prettier not installed', async () => {
+    it('does not mutate the config if prettier is not installed', async () => {
       const actual = {};
       await prettierMutation(actual);
 
@@ -172,7 +172,7 @@ describe('lint-staged.service', () => {
   });
 
   describe('stylelintMutation', () => {
-    it('mutates config if stylelint installed', async () => {
+    it('mutates the config if stylelint is installed', async () => {
       const ext = '*.{css,ts,tsx}';
       const actual = {};
       installationState.setSelectedInstallOptions(['stylelint']);
@@ -184,7 +184,7 @@ describe('lint-staged.service', () => {
       expect(actual).toEqual(expected);
     });
 
-    it('does not mutate config if stylelint is not installed', async () => {
+    it('does not mutate the config if stylelint is not installed', async () => {
       const ext = '*.{css,ts,tsx}';
       const actual = {};
       await stylelintMutation(ext)(actual);

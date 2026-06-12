@@ -3,7 +3,7 @@ import { main } from '#src/index.ts';
 
 describe('index', () => {
   describe('main', () => {
-    it('prints welcome and bye message in bold', async () => {
+    it('prints the welcome and completion messages in bold', async () => {
       const log = vi.fn();
       consoleMock.setLogHandler(log);
       prompt.selectCategory('js');
@@ -28,7 +28,7 @@ describe('index', () => {
         ['npm', ['i', '-D', 'husky']],
         ['npm', ['run', 'prepare']],
       ]);
-      expect(loading.getTexts()).toEqual(['husky is installing\n']);
+      expect(loading.getTexts()).toEqual(['installing husky\n']);
     });
   });
 });

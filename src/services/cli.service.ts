@@ -54,13 +54,13 @@ export const chooseCategoryOptions = async (options: Category['options']) => {
 };
 
 export const installCategoryOptions = async (options: Category['options'], keys: string[]) => {
-  const spinner = ora('starting install').start();
+  const spinner = ora('starting installation').start();
 
   setSelectedInstallOptions(keys);
 
   for (const key of keys) {
     const kebablizeKey = toKebabCase(key);
-    spinner.text = `${kebablizeKey} is installing\n`;
+    spinner.text = `installing ${kebablizeKey}\n`;
 
     await options[key]?.();
   }

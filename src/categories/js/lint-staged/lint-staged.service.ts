@@ -46,7 +46,7 @@ export const addOptionToLintStagedConfig = (config: LintStagedConfig, key: strin
   const found = optionMutations.find(({ check }) => check(config, key, value));
 
   if (!found) {
-    throw new Error('option mutator is not found!');
+    throw new Error('option mutator not found');
   }
 
   found.mutate(config, key, value);

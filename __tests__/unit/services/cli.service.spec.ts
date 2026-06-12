@@ -46,7 +46,7 @@ describe('cli.service', () => {
       expect(actual).toBe(expected);
     });
 
-    it('returns false if answers contain less than one item', () => {
+    it('returns false if answers contain no items', () => {
       const actual = requireAtLeastOneChoice([]);
       const expected = false;
 
@@ -84,7 +84,7 @@ describe('cli.service', () => {
   });
 
   describe('chooseCategoryPreset', () => {
-    it('sets selected config and returns category options', async () => {
+    it('sets the selected preset and returns the category options', async () => {
       const selectedPreset = js.state.presets[1]!;
       prompt.selectPreset(selectedPreset);
 
@@ -94,7 +94,7 @@ describe('cli.service', () => {
   });
 
   describe('chooseCategoryOptions', () => {
-    it('returns selected entrypoints in camelCase', async () => {
+    it('returns the selected entry points in camelCase', async () => {
       const kebablized = jsOptionKeys.map(toKebabCase);
       const selected = [kebablized[1]!];
       prompt.selectOptions(...selected);
@@ -104,15 +104,15 @@ describe('cli.service', () => {
   });
 
   describe('installCategoryOptions', () => {
-    it('starts and finishes loading while printing installed option names', async () => {
+    it('starts and finishes loading while printing the installed option names', async () => {
       const optionHello = vi.fn();
 
       await installCategoryOptions({ optionHello }, ['optionHello']);
 
       expect(optionHello).toHaveBeenCalled();
-      expect(loading.getLabels()).toEqual(['starting install']);
+      expect(loading.getLabels()).toEqual(['starting installation']);
       expect(loading.getStarts()).toBe(1);
-      expect(loading.getTexts()).toEqual(['option-hello is installing\n']);
+      expect(loading.getTexts()).toEqual(['installing option-hello\n']);
       expect(loading.getFinishes()).toBe(1);
     });
 

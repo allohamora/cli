@@ -20,7 +20,7 @@ describe('github.service', () => {
   });
 
   describe('ensureGithubDir', () => {
-    it('adds .github dir to root if it does not exist', async () => {
+    it('adds the .github directory to the root if it does not exist', async () => {
       await ensureGithubDir();
 
       expect(fileSystem.getDirs()).toContain(GITHUB_DIR_NAME);
@@ -28,7 +28,7 @@ describe('github.service', () => {
   });
 
   describe('ensureGithubWorkflowsDir', () => {
-    it('adds .github/workflows to root if it does not exist', async () => {
+    it('adds .github/workflows to the root if it does not exist', async () => {
       await ensureGithubWorkflowsDir();
 
       expect(fileSystem.getDirs()).toEqual([GITHUB_DIR_NAME, GITHUB_WORKFLOWS_PATH]);

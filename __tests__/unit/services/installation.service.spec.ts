@@ -36,11 +36,11 @@ describe('installation.service', () => {
       installationState.setSelectedInstallOptions([selectedOption]);
     });
 
-    it('returns true if option was selected for install', () => {
+    it('returns true if the option was selected for installation', () => {
       expect(isSelectedForInstall(selectedOption)).toBe(true);
     });
 
-    it('returns false if option was not selected for install', () => {
+    it('returns false if the option was not selected for installation', () => {
       expect(isSelectedForInstall(notSelectedOption)).toBe(false);
     });
   });
@@ -53,15 +53,15 @@ describe('installation.service', () => {
       installationState.setSelectedInstallOptions([selectedOption]);
     });
 
-    it('returns true if option was selected for install', async () => {
+    it('returns true if the option was selected for installation', async () => {
       expect(await createInstalledCheck(selectedOption)()).toBe(true);
     });
 
-    it('returns false if option was not selected and additional checks are undefined', async () => {
+    it('returns false if the option was not selected and additional checks are undefined', async () => {
       expect(await createInstalledCheck(notSelectedOption)()).toBe(false);
     });
 
-    it('executes checks until one returns true if option was not selected for install', async () => {
+    it('executes checks until one returns true if the option was not selected for installation', async () => {
       const firstCheck = vi.fn().mockResolvedValueOnce(true);
       const secondCheck = vi.fn().mockResolvedValueOnce(true);
 
@@ -108,7 +108,7 @@ describe('installation.service', () => {
       expect(actual).toBe(true);
     });
 
-    it('returns true if option was selected for install and does not execute checks', async () => {
+    it('returns true if the option was selected for installation and does not execute checks', async () => {
       const nextCheck = vi.fn().mockResolvedValue(true);
 
       const actual = await createRootInstalledCheck(selectedOption, configFile, [nextCheck])();

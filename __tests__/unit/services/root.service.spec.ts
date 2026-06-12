@@ -68,7 +68,7 @@ describe('root.service', () => {
   });
 
   describe('ensureRootDir', () => {
-    it("creates dir at root if it doesn't exist", async () => {
+    it("creates a directory at the root if it doesn't exist", async () => {
       const dir = '__test__';
 
       await ensureRootDir(dir);
@@ -76,7 +76,7 @@ describe('root.service', () => {
       expect(fileSystem.getDirs()).toContain(dir);
     });
 
-    it('does not create dir at root if it exists', async () => {
+    it('does not create a directory at the root if it exists', async () => {
       const dirs = fileSystem.getDirs();
 
       await ensureRootDir(rootDir);

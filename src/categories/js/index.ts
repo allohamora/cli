@@ -14,7 +14,7 @@ import { buildWorkflow } from '#src/categories/js/build-workflow/build-workflow.
 import { codecovWorkflow } from '#src/categories/js/codecov-workflow/codecov-workflow.entrypoint.ts';
 import { dependabot } from '#src/categories/js/dependabot/dependabot.entrypoint.ts';
 
-// order have matter
+// order matters
 const options = {
   husky,
   commitlint,
@@ -23,7 +23,7 @@ const options = {
   eslint,
   lintStaged,
   stylelint,
-  // named jestEntrypoint because in test environment jest name is reserved
+  // named jestEntrypoint because jest is reserved in the test environment
   jest: jestEntrypoint,
   docker,
   releaseWorkflow,
