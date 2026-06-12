@@ -1,7 +1,7 @@
 import categories from '#src/categories/index.ts';
 import ora from 'ora';
 import { manyOf, oneOf } from '#src/utils/prompt.ts';
-import { camelize, kebablize } from '#src/utils/string.ts';
+import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
 import type { Category } from '#src/types/category.ts';
 import { setInstalling } from '#src/states/context.ts';
 
@@ -23,10 +23,10 @@ export const getOptions = async ({ state: { configState, configTypes }, options 
 };
 
 export const chooseOptions = async (options: Category['options']) => {
-  const kebablizedOptions = Object.keys(options).map(kebablize);
+  const kebablizedOptions = Object.keys(options).map(toKebabCase);
   const selectedKebablizedOptions = await manyOf('choose a options', kebablizedOptions);
 
-  return selectedKebablizedOptions.map(camelize);
+  return selectedKebablizedOptions.map(toCamelCase);
 };
 
 export const installOptions = async (options: Category['options'], keys: string[]) => {
@@ -36,7 +36,7 @@ export const installOptions = async (options: Category['options'], keys: string[
 
   await keys.reduce((chain, key) => {
     return chain.then(() => {
-      const kebablizeKey = kebablize(key);
+      const kebablizeKey = toKebabCase(key);
       spinner.text = `${kebablizeKey} is installing\n`;
 
       return options[key]?.();

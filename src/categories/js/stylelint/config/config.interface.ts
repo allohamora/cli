@@ -1,4 +1,4 @@
-import type { Mutation } from '#src/utils/mutation.ts';
+import type { Mutation } from '#src/utils/mutation.utils.ts';
 import type { NpmScript } from '#src/utils/npm.ts';
 
 type StylelintConfig = {

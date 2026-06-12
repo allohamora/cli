@@ -1,4 +1,4 @@
-import { applyMutations } from '#src/utils/mutation.ts';
+import { applyMutations } from '#src/utils/mutation.utils.ts';
 import { addToPackageJson, installDevelopmentDependencies } from '#src/utils/npm.ts';
 import { getConfig } from '#src/categories/js/lint-staged/lint-staged.config.ts';
 import { PACKAGE_NAME } from '#src/categories/js/lint-staged/lint-staged.const.ts';

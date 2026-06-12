@@ -1,4 +1,4 @@
-import type { Mutation } from '#src/utils/mutation.ts';
+import type { Mutation } from '#src/utils/mutation.utils.ts';
 
 export type LintStagedConfig = Record<string, string | string[]>;
 

@@ -2,7 +2,7 @@ import { getConfig } from '#src/categories/js/eslint/eslint.config.ts';
 import { addFileToRoot } from '#src/utils/fs.ts';
 import { addScripts, installDevelopmentDependencies } from '#src/utils/npm.ts';
 import { CONFIG_FILE_NAME, PACKAGE_NAME } from '#src/categories/js/eslint/eslint.const.ts';
-import { applyMutations } from '#src/utils/mutation.ts';
+import { applyMutations } from '#src/utils/mutation.utils.ts';
 import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
 import { formatJavascript } from '#src/categories/js/prettier/prettier.service.ts';
 

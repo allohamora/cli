@@ -2,7 +2,7 @@ import categories from '#src/categories/index.ts';
 import { contextState, loading, prompt } from '#__tests__/setup-test-context.ts';
 import { chooseOptions, getCategory, getOptions, installOptions } from '#src/utils/main.ts';
 import type { Category } from '#src/types/category.ts';
-import { camelize, kebablize } from '#src/utils/string.ts';
+import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
 
 describe('main', () => {
   const js = categories.js as Category;
@@ -28,11 +28,11 @@ describe('main', () => {
 
   describe('chooseOptions', () => {
     it('returns selected entrypoints in camelCase', async () => {
-      const kebablized = jsOptionKeys.map(kebablize);
+      const kebablized = jsOptionKeys.map(toKebabCase);
       const selected = [kebablized[1]!];
       prompt.selectEntrypoints(...selected);
 
-      expect(await chooseOptions(js.options)).toEqual(selected.map(camelize));
+      expect(await chooseOptions(js.options)).toEqual(selected.map(toCamelCase));
     });
   });
 

@@ -1,7 +1,7 @@
 import { scheduler } from 'node:timers/promises';
-import { applyMutations } from '#src/utils/mutation.ts';
+import { applyMutations } from '#src/utils/mutation.utils.ts';
 
-describe('mutation', () => {
+describe('mutation.utils', () => {
   describe('applyMutations', () => {
     it('applies mutations', async () => {
       const actual = { a: 1, b: 2 };
