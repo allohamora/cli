@@ -1,6 +1,5 @@
 import fsp from 'node:fs/promises';
 import path from 'node:path';
-import { stringify } from '#src/utils/json.ts';
 
 export const ROOT_PATH = process.cwd();
 
@@ -32,5 +31,5 @@ export const writeRootFile = async (name: string, content: string) => {
 };
 
 export const writeRootJsonFile = async <C>(name: string, content: C) => {
-  await writeRootFile(name, stringify(content));
+  await writeRootFile(name, JSON.stringify(content, null, 2));
 };
