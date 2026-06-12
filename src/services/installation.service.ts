@@ -14,7 +14,7 @@ export const setSelectedInstallOptions = (options: string[]) => {
   installationContext.selectedInstallOptions = [...options];
 };
 
-export const getSelectedInstallOptions = () => installationContext.selectedInstallOptions;
+export const getSelectedInstallOptions = () => [...installationContext.selectedInstallOptions];
 
 export const isSelectedForInstall = (option: string) => {
   return getSelectedInstallOptions().includes(option);
