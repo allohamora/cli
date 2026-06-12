@@ -1,7 +1,7 @@
 import fsp from 'node:fs/promises';
 import type { JsonValue, PackageJson as BasePackageJson } from 'type-fest';
 import { resolveRootPath, writeRootJsonFile } from '#src/services/root.service.ts';
-import { exec } from '#src/services/terminal.service.ts';
+import { exec } from '#src/utils/terminal.utils.ts';
 
 export const PACKAGE_JSON_NAME = 'package.json';
 export const PACKAGE_JSON_PATH = resolveRootPath(PACKAGE_JSON_NAME);

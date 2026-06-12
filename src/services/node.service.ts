@@ -1,4 +1,4 @@
-import { exec } from '#src/services/terminal.service.ts';
+import { exec } from '#src/utils/terminal.utils.ts';
 
 export const getNodeVersion = async () => {
   const { stdout } = await exec('node', ['-v']);

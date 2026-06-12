@@ -1,7 +1,7 @@
 import { terminal } from '#__tests__/setup-test-context.ts';
-import { exec } from '#src/services/terminal.service.ts';
+import { exec } from '#src/utils/terminal.utils.ts';
 
-describe('terminal.service', () => {
+describe('terminal.utils', () => {
   describe('exec', () => {
     it('executes a command with arguments', async () => {
       const command = 'npm';
