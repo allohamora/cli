@@ -33,7 +33,7 @@ describe('eslint/config', () => {
         `import tseslint from 'typescript-eslint'`,
         `import beautifulSort from 'eslint-plugin-beautiful-sort'`,
       ],
-      configs: ['eslint.configs.recommended', '...tseslint.configs.recommended'],
+      configs: ['eslint.configs.recommended', '...tseslint.configs.recommended', 'beautifulSort.configs.recommended'],
       ignores: ['node_modules', 'dist'],
       eslintConfig: {
         files: ['**/*.ts'],
@@ -41,7 +41,6 @@ describe('eslint/config', () => {
           globals: ['node'],
           parserOptions: { project: true },
         },
-        plugins: { 'beautiful-sort': 'beautifulSort' },
         rules: {
           'no-use-before-define': 'error',
           'object-shorthand': 'warn',
@@ -75,6 +74,7 @@ describe('eslint/config', () => {
       configs: [
         'eslint.configs.recommended',
         '...tseslint.configs.recommended',
+        'beautifulSort.configs.recommended',
         `pluginReact.configs.flat['jsx-runtime']`,
         `// @ts-expect-error types are not compatible`,
         'pluginJsxA11y.flatConfigs.recommended',
@@ -86,7 +86,6 @@ describe('eslint/config', () => {
           globals: ['browser'],
           parserOptions: { project: true },
         },
-        plugins: { 'beautiful-sort': 'beautifulSort' },
       },
       typescript: true,
       scripts: [

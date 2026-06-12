@@ -9,18 +9,16 @@ describe('eslint.entrypoint', () => {
   });
 
   describe('eslint', () => {
-    it('builds config with plugins and parser options', () => {
+    it('builds config with shared configs and parser options', () => {
       expect(
         buildConfig(
           createConfig({
+            configs: ['beautifulSort.configs.recommended'],
             eslintConfig: {
               languageOptions: {
                 parserOptions: {
                   project: true,
                 },
-              },
-              plugins: {
-                'beautiful-sort': 'beautifulSort',
               },
             },
           }),
@@ -30,7 +28,8 @@ describe('eslint.entrypoint', () => {
           `import { defineConfig } from 'eslint/config';`,
           '',
           `export default defineConfig(`,
-          `{languageOptions: {parserOptions: {"project":true}},plugins: {'beautiful-sort': beautifulSort}}`,
+          `beautifulSort.configs.recommended,`,
+          `{languageOptions: {parserOptions: {"project":true}}}`,
           `);`,
         ].join('\n'),
       );

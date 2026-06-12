@@ -6,7 +6,6 @@ export type EslintConfig = {
     globals?: string[];
     parserOptions?: Record<string, unknown>;
   };
-  plugins?: Record<string, string>;
   rules?: Record<string, string | unknown[]>;
 };
 

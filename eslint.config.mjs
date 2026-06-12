@@ -9,6 +9,7 @@ import { defineConfig } from 'eslint/config';
 export default defineConfig(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
+  beautifulSort.configs.recommended,
   eslintPluginPrettierRecommended,
   { ignores: ['node_modules', 'dist', 'bin'] },
   {
@@ -20,9 +21,6 @@ export default defineConfig(
       parserOptions: {
         project: true,
       },
-    },
-    plugins: {
-      'beautiful-sort': beautifulSort,
     },
     rules: {
       'no-use-before-define': 'error',
@@ -36,13 +34,6 @@ export default defineConfig(
       '@typescript-eslint/no-misused-promises': 'warn',
       '@typescript-eslint/no-deprecated': 'error',
       '@typescript-eslint/no-this-alias': 'warn',
-      'beautiful-sort/import': [
-        'error',
-        {
-          special: [],
-          order: ['special', 'namespace', 'default', 'defaultObj', 'obj', 'none'],
-        },
-      ],
     },
   },
 );

@@ -22,14 +22,6 @@ export const buildConfig = (config: Config) => {
 
   const files = optional(config.eslintConfig.files, (value) => `files: ${JSON.stringify(value)}`);
 
-  const plugins = optional(
-    config.eslintConfig.plugins,
-    (values) =>
-      `plugins: {${Object.entries(values)
-        .map(([key, value]) => `'${key}': ${value}`)
-        .join(',')}}`,
-  );
-
   const rules = optional(config.eslintConfig.rules, (value) => `rules: ${JSON.stringify(value)}`);
 
   const globals = optional(
@@ -48,7 +40,7 @@ export const buildConfig = (config: Config) => {
 
   const ignoresConfig = optional(config.ignores, (value) => `{ignores: ${JSON.stringify(value)}},`);
 
-  const mainContent = [files, languageOptions, plugins, rules].filter(Boolean).join(',');
+  const mainContent = [files, languageOptions, rules].filter(Boolean).join(',');
   const mainConfig = optional(mainContent, (content) => `{${content}}`);
 
   return [start, imports, exportStart, configs, ignoresConfig, mainConfig, exportEnd].filter(Boolean).join('\n');

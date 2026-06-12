@@ -21,6 +21,7 @@ export const reactTsConfig: Config = {
   configs: [
     'eslint.configs.recommended',
     '...tseslint.configs.recommended',
+    'beautifulSort.configs.recommended',
     `pluginReact.configs.flat['jsx-runtime']`,
     `// @ts-expect-error types are not compatible`,
     'pluginJsxA11y.flatConfigs.recommended',
@@ -34,9 +35,6 @@ export const reactTsConfig: Config = {
         project: true,
       },
     },
-    plugins: {
-      'beautiful-sort': 'beautifulSort',
-    },
     rules: {
       'no-use-before-define': 'error',
       'object-shorthand': 'warn',
@@ -48,13 +46,6 @@ export const reactTsConfig: Config = {
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-misused-promises': 'warn',
       '@typescript-eslint/no-deprecated': 'error',
-      'beautiful-sort/import': [
-        'error',
-        {
-          special: [],
-          order: ['special', 'namespace', 'default', 'defaultObj', 'obj', 'none'],
-        },
-      ],
     },
   },
   typescript: true,
