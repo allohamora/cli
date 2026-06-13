@@ -1,14 +1,14 @@
-import type { LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
+import type { LintStagedConfig } from '#src/categories/js/lint-staged/preset/preset.type.ts';
 import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.service.ts';
 import { addHook, isHuskyInstalled } from '#src/categories/js/husky/husky.service.ts';
-import { CLI_NAME } from '#src/categories/js/lint-staged/lint-staged.const.ts';
-import { CLI_NAME as PRETTIER_CLI_NAME } from '#src/categories/js/prettier/prettier.const.ts';
-import { CLI_NAME as JEST_CLI_NAME } from '#src/categories/js/jest/jest.const.ts';
-import { CLI_NAME as ESLINT_CLI_NAME } from '#src/categories/js/eslint/eslint.const.ts';
+import { LINT_STAGED_CLI_NAME } from '#src/categories/js/lint-staged/lint-staged.const.ts';
+import { PRETTIER_CLI_NAME } from '#src/categories/js/prettier/prettier.const.ts';
+import { JEST_CLI_NAME } from '#src/categories/js/jest/jest.const.ts';
+import { ESLINT_CLI_NAME } from '#src/categories/js/eslint/eslint.const.ts';
 import { isJestInstalled } from '#src/categories/js/jest/jest.service.ts';
 import { isEslintInstalled } from '#src/categories/js/eslint/eslint.service.ts';
 import { isStylelintInstalled } from '#src/categories/js/stylelint/stylelint.service.ts';
-import { CLI_NAME as STYLELINT_CLI_NAME } from '#src/categories/js/stylelint/stylelint.const.ts';
+import { STYLELINT_CLI_NAME } from '#src/categories/js/stylelint/stylelint.const.ts';
 
 type ScriptFileExtension = '*.js' | '*.ts' | '*.css' | '*.{ts,tsx}' | '*.{css,ts,tsx}';
 
@@ -54,7 +54,7 @@ export const addOptionToLintStagedConfig = (config: LintStagedConfig, key: strin
 
 export const huskyIntegration = async () => {
   if (await isHuskyInstalled()) {
-    await addHook('pre-commit', `npx --no-install ${CLI_NAME}`);
+    await addHook('pre-commit', `npx --no-install ${LINT_STAGED_CLI_NAME}`);
   }
 };
 

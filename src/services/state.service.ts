@@ -3,9 +3,7 @@ export type PresetState<T extends string> = {
   setPreset: (value: T) => void;
 };
 
-export type Config<V> = {
-  getConfig: () => V;
-};
+export type Preset<V> = () => V;
 
 type Values<V, K extends string = string> = {
   default: V;
@@ -17,7 +15,7 @@ export type CategoryState<CT extends string = string, N extends string = string>
   name: N;
   presets: readonly ('default' | CT)[];
   presetState: PresetState<'default' | CT>;
-  useConfig: <V>(values: Values<V, CT>) => Config<V>;
+  usePreset: <V>(values: Values<V, CT>) => Preset<V>;
 };
 
 type Handler = () => Promise<void>;
@@ -45,19 +43,17 @@ export const createPresetState = <T extends string>(presets: readonly T[]): Pres
   };
 };
 
-const createConfig = <V, K extends string>(
+const createPreset = <V, K extends string>(
   presetState: PresetState<'default' | K>,
   values: Values<V, K>,
-): Config<V> => {
-  const getConfig = () => {
+): Preset<V> => {
+  const getPreset = () => {
     const value = values[presetState.getPreset() as K] ?? values.default;
 
     return value;
   };
 
-  return {
-    getConfig,
-  };
+  return getPreset;
 };
 
 export const createCategory = <N extends string, CT extends string>(
@@ -66,13 +62,13 @@ export const createCategory = <N extends string, CT extends string>(
 ): CategoryState<CT, N> => {
   const presets = ['default', ...restPresets] as const;
   const presetState = createPresetState<(typeof presets)[number]>(presets);
-  const useConfig = <V>(values: Values<V, CT>) => createConfig(presetState, values);
+  const usePreset = <V>(values: Values<V, CT>) => createPreset(presetState, values);
 
   return {
     name,
     presets,
     presetState,
-    useConfig,
+    usePreset,
   };
 };
 

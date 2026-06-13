@@ -1,0 +1,101 @@
+import { presetState } from '#__tests__/setup-test-context.ts';
+import { parseCjsModule } from '#__tests__/utils/cjs.utils.ts';
+import { getJestPreset } from '#src/categories/js/jest/preset/index.ts';
+import { describe, expect, it } from 'vitest';
+
+const scripts = [
+  { name: 'test', script: 'jest' },
+  { name: 'test:watch', script: 'jest --watch' },
+  { name: 'test:coverage', script: 'jest --coverage' },
+];
+
+const defaultJestConfigFile = [
+  `/** @type {import('jest').Config} */`,
+  'module.exports = {',
+  `  testEnvironment: 'node',`,
+  `  testRegex: '.*\\\\.(spec|test)\\\\.js$',`,
+  `  collectCoverageFrom: ['src/**/*.js'],`,
+  '  passWithNoTests: true,',
+  '};',
+].join('\n');
+
+const nodeTsJestConfigFile = [
+  `/** @type {import('ts-jest').JestConfigWithTsJest} */`,
+  'module.exports = {',
+  `  preset: 'ts-jest',`,
+  `  testEnvironment: 'node',`,
+  `  moduleDirectories: ['<rootDir>', 'node_modules'],`,
+  `  testRegex: '.*\\\\.(spec|test)\\\\.ts$',`,
+  `  collectCoverageFrom: ['src/**/*.ts'],`,
+  '  passWithNoTests: true,',
+  '};',
+].join('\n');
+
+const reactTsJestConfigFile = [
+  `/** @type {import('ts-jest').JestConfigWithTsJest} */`,
+  'module.exports = {',
+  `  roots: ['<rootDir>'],`,
+  `  testEnvironment: 'jsdom',`,
+  `  testRegex: '.*\\\\.(spec|test)\\\\.ts$',`,
+  '  transform: {',
+  `    '^.+\\\\.(ts|tsx)$': 'ts-jest',`,
+  '  },',
+  `  moduleDirectories: ['<rootDir>', 'node_modules'],`,
+  `  moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],`,
+  '  moduleNameMapper: {',
+  `    '\\.(css|less|sass|scss|gif|ttf|eot|svg|png)$': 'identity-obj-proxy'`,
+  '  },',
+  '  passWithNoTests: true,',
+  '};',
+].join('\n');
+
+describe('jest/preset', () => {
+  it('returns the default javascript jest config', () => {
+    expect(getJestPreset()).toEqual({
+      devDependencies: ['jest', '@types/jest'],
+      configFileContent: defaultJestConfigFile,
+      scripts,
+    });
+  });
+
+  it('returns the node typescript jest config', () => {
+    presetState.setJsPreset('node:ts');
+
+    expect(getJestPreset()).toEqual({
+      devDependencies: ['jest', '@types/jest', 'ts-jest'],
+      configFileContent: nodeTsJestConfigFile,
+      scripts,
+    });
+  });
+
+  it('returns the react typescript jest config', () => {
+    presetState.setJsPreset('react:ts');
+
+    expect(getJestPreset()).toEqual({
+      devDependencies: [
+        'jest',
+        '@types/jest',
+        'ts-jest',
+        'jest-environment-jsdom',
+        '@testing-library/react',
+        'identity-obj-proxy',
+      ],
+      configFileContent: reactTsJestConfigFile,
+      scripts,
+    });
+  });
+
+  it.each([
+    ['default', defaultJestConfigFile],
+    ['node:ts', nodeTsJestConfigFile],
+    ['react:ts', reactTsJestConfigFile],
+  ] as const)('returns parseable config content for %s', (variant, configFile) => {
+    presetState.setJsPreset(variant);
+
+    const parsed = parseCjsModule(getJestPreset().configFileContent);
+
+    expect(getJestPreset().configFileContent).toBe(configFile);
+    expect(parsed.module.exports).toBeDefined();
+    expect(typeof parsed.module.exports).toBe('object');
+  });
+});

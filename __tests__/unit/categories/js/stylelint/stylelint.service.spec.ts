@@ -1,6 +1,6 @@
 import { fileSystem, installationState } from '#__tests__/setup-test-context.ts';
 import { prettierMutation, isStylelintInstalled } from '#src/categories/js/stylelint/stylelint.service.ts';
-import type { Config } from '#src/categories/js/stylelint/config/config.interface.ts';
+import type { Preset } from '#src/categories/js/stylelint/preset/preset.type.ts';
 import { describe, expect, it } from 'vitest';
 
 describe('stylelint.service', () => {
@@ -27,7 +27,7 @@ describe('stylelint.service', () => {
       const actual = { devDependencies: [], stylelintConfig: { extends: [] } };
       installationState.setSelectedInstallOptions(['prettier']);
 
-      await prettierMutation(actual as unknown as Config);
+      await prettierMutation(actual as unknown as Preset);
 
       const expected = {
         devDependencies: ['stylelint-prettier'],
@@ -40,7 +40,7 @@ describe('stylelint.service', () => {
     it('does not add stylelint-prettier dependencies and prettier config if prettier is not installed', async () => {
       const actual = { devDependencies: [], stylelintConfig: { extends: [] } };
 
-      await prettierMutation(actual as unknown as Config);
+      await prettierMutation(actual as unknown as Preset);
 
       const expected = { devDependencies: [], stylelintConfig: { extends: [] } };
 

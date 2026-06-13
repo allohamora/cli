@@ -1,4 +1,4 @@
-export const SCRIPT_NAME = 'commitlint';
-export const PACKAGE_NAME = '@commitlint/cli';
-export const CONFIG_FILE_NAME = '.commitlintrc.json';
-export const CLI_NAME = SCRIPT_NAME;
+export const COMMITLINT_SCRIPT_NAME = 'commitlint';
+export const COMMITLINT_PACKAGE_NAME = '@commitlint/cli';
+export const COMMITLINT_CONFIG_FILE_NAME = '.commitlintrc.json';
+export const COMMITLINT_CLI_NAME = COMMITLINT_SCRIPT_NAME;

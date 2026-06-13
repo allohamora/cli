@@ -8,7 +8,7 @@ import {
   prettierMutation,
   stylelintMutation,
 } from '#src/categories/js/lint-staged/lint-staged.service.ts';
-import type { LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
+import type { LintStagedConfig } from '#src/categories/js/lint-staged/preset/preset.type.ts';
 
 describe('lint-staged.service', () => {
   describe('addOptionToLintStagedConfig', () => {
