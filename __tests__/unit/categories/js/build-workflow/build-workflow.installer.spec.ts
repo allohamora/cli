@@ -1,21 +1,24 @@
 import { fileSystem } from '#__tests__/setup-test-context.ts';
-import { codecovWorkflow } from '#src/categories/js/codecov-workflow/codecov-workflow.entrypoint.ts';
+import { buildWorkflow } from '#src/categories/js/build-workflow/build-workflow.installer.ts';
 import { describe, expect, it } from 'vitest';
 
-describe('codecov-workflow.entrypoint', () => {
-  describe('codecovWorkflow', () => {
-    it('writes the default codecov workflow', async () => {
-      await codecovWorkflow();
+describe('build-workflow.installer', () => {
+  describe('buildWorkflow', () => {
+    it('writes the default build workflow', async () => {
+      await buildWorkflow();
 
       expect(fileSystem.getDirs()).toEqual(['.github', '.github/workflows']);
-      expect(fileSystem.readFile('.github/workflows/codecov.yml')).toBe(
+      expect(fileSystem.readFile('.github/workflows/build.yml')).toBe(
         [
-          'name: codecov',
+          'name: build',
           '',
-          'on: [push]',
+          'on:',
+          '  push:',
+          '    branches:',
+          '      - "**"',
           '',
           'jobs:',
-          '  codecov:',
+          '  build:',
           '    runs-on: ubuntu-latest',
           '    env:',
           '      CI: true',
@@ -27,11 +30,9 @@ describe('codecov-workflow.entrypoint', () => {
           '        with:',
           '          cache: "npm"',
           '      - name: Install dependencies',
-          '        run: npm ci',
-          '      - name: Collect coverage',
-          '        run: npm run test:coverage',
-          '      - name: Upload coverage to Codecov',
-          '        uses: codecov/codecov-action@v4',
+          '        run: npm i',
+          '      - name: Run build',
+          '        run: npm run build',
           '',
         ].join('\n'),
       );

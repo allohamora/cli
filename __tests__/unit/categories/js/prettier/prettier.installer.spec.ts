@@ -1,8 +1,8 @@
 import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { prettier } from '#src/categories/js/prettier/prettier.entrypoint.ts';
+import { prettier } from '#src/categories/js/prettier/prettier.installer.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-describe('prettier.entrypoint', () => {
+describe('prettier.installer', () => {
   beforeEach(() => {
     presetState.setJsPreset('default');
   });

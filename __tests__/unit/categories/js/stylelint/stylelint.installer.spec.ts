@@ -1,8 +1,8 @@
 import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { stylelint } from '#src/categories/js/stylelint/stylelint.entrypoint.ts';
+import { stylelint } from '#src/categories/js/stylelint/stylelint.installer.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-describe('stylelint.entrypoint', () => {
+describe('stylelint.installer', () => {
   beforeEach(() => {
     presetState.setJsPreset('default');
   });

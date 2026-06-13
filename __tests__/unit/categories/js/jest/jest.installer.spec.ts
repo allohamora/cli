@@ -1,8 +1,8 @@
 import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { jest } from '#src/categories/js/jest/jest.entrypoint.ts';
+import { jest } from '#src/categories/js/jest/jest.installer.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-describe('jest.entrypoint', () => {
+describe('jest.installer', () => {
   beforeEach(() => {
     presetState.setJsPreset('default');
   });

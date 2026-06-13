@@ -1,16 +1,16 @@
 import { fileSystem } from '#__tests__/setup-test-context.ts';
-import { buildWorkflow } from '#src/categories/js/build-workflow/build-workflow.entrypoint.ts';
+import { testWorkflow } from '#src/categories/js/test-workflow/test-workflow.installer.ts';
 import { describe, expect, it } from 'vitest';
 
-describe('build-workflow.entrypoint', () => {
-  describe('buildWorkflow', () => {
-    it('writes the default build workflow', async () => {
-      await buildWorkflow();
+describe('test-workflow.installer', () => {
+  describe('testWorkflow', () => {
+    it('writes the default test workflow', async () => {
+      await testWorkflow();
 
       expect(fileSystem.getDirs()).toEqual(['.github', '.github/workflows']);
-      expect(fileSystem.readFile('.github/workflows/build.yml')).toBe(
+      expect(fileSystem.readFile('.github/workflows/test.yml')).toBe(
         [
-          'name: build',
+          'name: test',
           '',
           'on:',
           '  push:',
@@ -18,7 +18,7 @@ describe('build-workflow.entrypoint', () => {
           '      - "**"',
           '',
           'jobs:',
-          '  build:',
+          '  test:',
           '    runs-on: ubuntu-latest',
           '    env:',
           '      CI: true',
@@ -30,9 +30,9 @@ describe('build-workflow.entrypoint', () => {
           '        with:',
           '          cache: "npm"',
           '      - name: Install dependencies',
-          '        run: npm i',
-          '      - name: Run build',
-          '        run: npm run build',
+          '        run: npm ci',
+          '      - name: Run tests',
+          '        run: npm run test',
           '',
         ].join('\n'),
       );

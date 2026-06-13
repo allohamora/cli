@@ -1,8 +1,8 @@
 import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { commitlint } from '#src/categories/js/commitlint/commitlint.entrypoint.ts';
+import { commitlint } from '#src/categories/js/commitlint/commitlint.installer.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-describe('commitlint.entrypoint', () => {
+describe('commitlint.installer', () => {
   beforeEach(() => {
     presetState.setJsPreset('default');
     fileSystem.seed({ dirs: ['.husky'] });

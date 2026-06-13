@@ -1,21 +1,21 @@
 import { jsCategory } from '#src/services/state.service.ts';
-import { commitlint } from '#src/categories/js/commitlint/commitlint.entrypoint.ts';
-import { eslint } from '#src/categories/js/eslint/eslint.entrypoint.ts';
-import { husky } from '#src/categories/js/husky/husky.entrypoint.ts';
-import { lintStaged } from '#src/categories/js/lint-staged/lint-staged.entrypoint.ts';
-import { stylelint } from '#src/categories/js/stylelint/stylelint.entrypoint.ts';
-import { prettier } from '#src/categories/js/prettier/prettier.entrypoint.ts';
-import { standardVersion } from '#src/categories/js/standard-version/standard-version.entrypoint.ts';
-import { jest } from '#src/categories/js/jest/jest.entrypoint.ts';
-import { docker } from '#src/categories/js/docker/docker.entrypoint.ts';
-import { releaseWorkflow } from '#src/categories/js/release-workflow/release-workflow.entrypoint.ts';
-import { testWorkflow } from '#src/categories/js/test-workflow/test-workflow.entrypoint.ts';
-import { buildWorkflow } from '#src/categories/js/build-workflow/build-workflow.entrypoint.ts';
-import { codecovWorkflow } from '#src/categories/js/codecov-workflow/codecov-workflow.entrypoint.ts';
-import { dependabot } from '#src/categories/js/dependabot/dependabot.entrypoint.ts';
+import { commitlint } from '#src/categories/js/commitlint/commitlint.installer.ts';
+import { eslint } from '#src/categories/js/eslint/eslint.installer.ts';
+import { husky } from '#src/categories/js/husky/husky.installer.ts';
+import { lintStaged } from '#src/categories/js/lint-staged/lint-staged.installer.ts';
+import { stylelint } from '#src/categories/js/stylelint/stylelint.installer.ts';
+import { prettier } from '#src/categories/js/prettier/prettier.installer.ts';
+import { standardVersion } from '#src/categories/js/standard-version/standard-version.installer.ts';
+import { jest } from '#src/categories/js/jest/jest.installer.ts';
+import { docker } from '#src/categories/js/docker/docker.installer.ts';
+import { releaseWorkflow } from '#src/categories/js/release-workflow/release-workflow.installer.ts';
+import { testWorkflow } from '#src/categories/js/test-workflow/test-workflow.installer.ts';
+import { buildWorkflow } from '#src/categories/js/build-workflow/build-workflow.installer.ts';
+import { codecovWorkflow } from '#src/categories/js/codecov-workflow/codecov-workflow.installer.ts';
+import { dependabot } from '#src/categories/js/dependabot/dependabot.installer.ts';
 
 // order matters
-const options = {
+const installers = {
   husky,
   commitlint,
   prettier,
@@ -33,6 +33,6 @@ const options = {
 };
 
 export default {
-  options,
+  options: installers,
   state: jsCategory,
 };

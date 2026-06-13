@@ -1,8 +1,8 @@
 import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { lintStaged } from '#src/categories/js/lint-staged/lint-staged.entrypoint.ts';
+import { lintStaged } from '#src/categories/js/lint-staged/lint-staged.installer.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-describe('lint-staged.entrypoint', () => {
+describe('lint-staged.installer', () => {
   beforeEach(() => {
     presetState.setJsPreset('default');
   });

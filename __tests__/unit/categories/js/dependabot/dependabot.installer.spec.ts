@@ -1,8 +1,8 @@
 import { fileSystem } from '#__tests__/setup-test-context.ts';
-import { dependabot } from '#src/categories/js/dependabot/dependabot.entrypoint.ts';
+import { dependabot } from '#src/categories/js/dependabot/dependabot.installer.ts';
 import { describe, expect, it } from 'vitest';
 
-describe('dependabot.entrypoint', () => {
+describe('dependabot.installer', () => {
   describe('dependabot', () => {
     it('writes the default dependabot config under .github', async () => {
       await dependabot();

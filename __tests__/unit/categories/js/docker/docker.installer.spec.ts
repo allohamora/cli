@@ -1,8 +1,8 @@
 import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { docker } from '#src/categories/js/docker/docker.entrypoint.ts';
+import { docker } from '#src/categories/js/docker/docker.installer.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-describe('docker.entrypoint', () => {
+describe('docker.installer', () => {
   beforeEach(() => {
     presetState.setJsPreset('default');
     terminal.setCommandResult({ stdout: 'v24.14.1\n' });

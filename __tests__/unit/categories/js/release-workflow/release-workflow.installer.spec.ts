@@ -1,8 +1,8 @@
 import { fileSystem } from '#__tests__/setup-test-context.ts';
-import { releaseWorkflow } from '#src/categories/js/release-workflow/release-workflow.entrypoint.ts';
+import { releaseWorkflow } from '#src/categories/js/release-workflow/release-workflow.installer.ts';
 import { describe, expect, it } from 'vitest';
 
-describe('release-workflow.entrypoint', () => {
+describe('release-workflow.installer', () => {
   describe('releaseWorkflow', () => {
     it('writes the default release workflow', async () => {
       await releaseWorkflow();

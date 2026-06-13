@@ -1,8 +1,8 @@
 import { presetState, fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { standardVersion } from '#src/categories/js/standard-version/standard-version.entrypoint.ts';
+import { standardVersion } from '#src/categories/js/standard-version/standard-version.installer.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-describe('standard-version.entrypoint', () => {
+describe('standard-version.installer', () => {
   beforeEach(() => {
     presetState.setJsPreset('default');
   });

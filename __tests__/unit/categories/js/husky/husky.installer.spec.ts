@@ -1,8 +1,8 @@
 import { fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { husky } from '#src/categories/js/husky/husky.entrypoint.ts';
+import { husky } from '#src/categories/js/husky/husky.installer.ts';
 import { describe, expect, it } from 'vitest';
 
-describe('husky.entrypoint', () => {
+describe('husky.installer', () => {
   describe('husky', () => {
     it('installs husky, adds prepare script, and runs prepare', async () => {
       await husky();
