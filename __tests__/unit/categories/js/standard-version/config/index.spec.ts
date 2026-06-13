@@ -1,9 +1,9 @@
-import { getConfig } from '#src/categories/js/standard-version/config/index.ts';
+import { getStandardVersionConfig } from '#src/categories/js/standard-version/config/index.ts';
 import { describe, expect, it } from 'vitest';
 
 describe('standard-version/config', () => {
   it('returns repository-aware changelog link config', () => {
-    expect(getConfig().createConfig('https://github.com/allohamora/cli')).toEqual({
+    expect(getStandardVersionConfig().createConfig('https://github.com/allohamora/cli')).toEqual({
       types: [
         { type: 'feat', section: 'Features' },
         { type: 'fix', section: 'Bug Fixes' },
@@ -20,7 +20,7 @@ describe('standard-version/config', () => {
   });
 
   it('returns release scripts', () => {
-    expect(getConfig().scripts).toEqual([
+    expect(getStandardVersionConfig().scripts).toEqual([
       { name: 'release', script: 'standard-version --tag-prefix=' },
       { name: 'release:minor', script: 'standard-version --release-as minor --tag-prefix=' },
       { name: 'release:patch', script: 'standard-version --release-as patch --tag-prefix=' },

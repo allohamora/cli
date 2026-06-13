@@ -3,9 +3,7 @@ export type PresetState<T extends string> = {
   setPreset: (value: T) => void;
 };
 
-export type Config<V> = {
-  getConfig: () => V;
-};
+export type Config<V> = [() => V];
 
 type Values<V, K extends string = string> = {
   default: V;
@@ -55,9 +53,7 @@ const createConfig = <V, K extends string>(
     return value;
   };
 
-  return {
-    getConfig,
-  };
+  return [getConfig];
 };
 
 export const createCategory = <N extends string, CT extends string>(

@@ -1,10 +1,10 @@
-import { getConfig } from '#src/categories/js/build-workflow/config/index.ts';
+import { getBuildWorkflowConfig } from '#src/categories/js/build-workflow/config/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
 import { describe, expect, it } from 'vitest';
 
 describe('build-workflow/config', () => {
   it('returns the build workflow content', () => {
-    expect(getConfig().content).toBe(
+    expect(getBuildWorkflowConfig().content).toBe(
       [
         'name: build',
         '',
@@ -33,5 +33,5 @@ describe('build-workflow/config', () => {
     );
   });
 
-  expectGithubWorkflow(getConfig().content);
+  expectGithubWorkflow(getBuildWorkflowConfig().content);
 });

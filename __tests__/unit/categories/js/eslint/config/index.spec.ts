@@ -1,10 +1,10 @@
 import { presetState } from '#__tests__/setup-test-context.ts';
-import { getConfig } from '#src/categories/js/eslint/config/index.ts';
+import { getEslintConfig } from '#src/categories/js/eslint/config/index.ts';
 import { describe, expect, it } from 'vitest';
 
 describe('eslint/config', () => {
   it('returns the default javascript eslint config', () => {
-    expect(getConfig()).toMatchObject({
+    expect(getEslintConfig()).toMatchObject({
       dependencies: ['globals', '@eslint/js'],
       imports: [`import globals from 'globals'`, `import eslint from '@eslint/js'`],
       configs: ['eslint.configs.recommended'],
@@ -25,7 +25,7 @@ describe('eslint/config', () => {
   it('returns the node typescript eslint config', () => {
     presetState.setJsPreset('node:ts');
 
-    expect(getConfig()).toMatchObject({
+    expect(getEslintConfig()).toMatchObject({
       dependencies: ['globals', '@eslint/js', 'typescript-eslint', 'eslint-plugin-beautiful-sort'],
       imports: [
         `import globals from 'globals'`,
@@ -62,7 +62,7 @@ describe('eslint/config', () => {
   it('returns the react typescript eslint config', () => {
     presetState.setJsPreset('react:ts');
 
-    expect(getConfig()).toMatchObject({
+    expect(getEslintConfig()).toMatchObject({
       dependencies: [
         'globals',
         '@eslint/js',

@@ -1,12 +1,12 @@
 import { presetState } from '#__tests__/setup-test-context.ts';
-import { getConfig } from '#src/categories/js/stylelint/config/index.ts';
+import { getStylelintConfig } from '#src/categories/js/stylelint/config/index.ts';
 import { describe, expect, it } from 'vitest';
 
 describe('stylelint/config', () => {
   it.each(['default', 'node:ts'] as const)('returns the default stylelint config for %s', (variant) => {
     presetState.setJsPreset(variant);
 
-    expect(getConfig()).toMatchObject({
+    expect(getStylelintConfig()).toMatchObject({
       devDependencies: ['stylelint', 'stylelint-config-standard', 'stylelint-config-clean-order'],
       scripts: [
         { name: 'csslint', script: 'stylelint "src/**/*.css"' },
@@ -22,7 +22,7 @@ describe('stylelint/config', () => {
   it('returns the react typescript stylelint config', () => {
     presetState.setJsPreset('react:ts');
 
-    expect(getConfig()).toMatchObject({
+    expect(getStylelintConfig()).toMatchObject({
       devDependencies: [
         'stylelint',
         'stylelint-config-standard',

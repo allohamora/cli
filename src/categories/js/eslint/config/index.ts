@@ -3,7 +3,7 @@ import { defaultConfig } from '#src/categories/js/eslint/config/default.config.t
 import { nodeTsConfig } from '#src/categories/js/eslint/config/node-ts.config.ts';
 import { reactTsConfig } from '#src/categories/js/eslint/config/react-ts.config.ts';
 
-export const { getConfig } = jsCategory.useConfig({
+export const [getEslintConfig] = jsCategory.useConfig({
   default: defaultConfig,
   'node:ts': nodeTsConfig,
   'react:ts': reactTsConfig,

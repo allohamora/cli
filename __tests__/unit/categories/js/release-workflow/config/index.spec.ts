@@ -1,10 +1,10 @@
-import { getConfig } from '#src/categories/js/release-workflow/config/index.ts';
+import { getReleaseWorkflowConfig } from '#src/categories/js/release-workflow/config/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
 import { describe, expect, it } from 'vitest';
 
 describe('release-workflow/config', () => {
   it('returns the release workflow content', () => {
-    expect(getConfig().content).toBe(
+    expect(getReleaseWorkflowConfig().content).toBe(
       [
         'name: release',
         '',
@@ -35,5 +35,5 @@ describe('release-workflow/config', () => {
     );
   });
 
-  expectGithubWorkflow(getConfig().content, 'parses config.content');
+  expectGithubWorkflow(getReleaseWorkflowConfig().content, 'parses config.content');
 });

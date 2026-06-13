@@ -1,9 +1,9 @@
-import { getConfig } from '#src/categories/js/docker/config/index.ts';
+import { getDockerConfig } from '#src/categories/js/docker/config/index.ts';
 import { describe, expect, it } from 'vitest';
 
 describe('docker/config', () => {
   it('returns Dockerfile content for the requested node version', () => {
-    expect(getConfig().getDockerFile({ version: '24.14.1' })).toBe(
+    expect(getDockerConfig().getDockerFile({ version: '24.14.1' })).toBe(
       [
         'FROM node:24.14.1',
         'WORKDIR /app',
@@ -23,7 +23,7 @@ describe('docker/config', () => {
   });
 
   it('returns the default docker ignore content', () => {
-    expect(getConfig().dockerIgnore).toBe(
+    expect(getDockerConfig().dockerIgnore).toBe(
       [
         'node_modules',
         'dist',

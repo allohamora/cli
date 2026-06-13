@@ -1,6 +1,6 @@
 import { presetState } from '#__tests__/setup-test-context.ts';
 import { parseCjsModule } from '#__tests__/utils/cjs.utils.ts';
-import { getConfig } from '#src/categories/js/jest/config/index.ts';
+import { getJestConfig } from '#src/categories/js/jest/config/index.ts';
 import { describe, expect, it } from 'vitest';
 
 const scripts = [
@@ -51,7 +51,7 @@ const reactTsJestConfigFile = [
 
 describe('jest/config', () => {
   it('returns the default javascript jest config', () => {
-    expect(getConfig()).toEqual({
+    expect(getJestConfig()).toEqual({
       devDependencies: ['jest', '@types/jest'],
       configFileContent: defaultJestConfigFile,
       scripts,
@@ -61,7 +61,7 @@ describe('jest/config', () => {
   it('returns the node typescript jest config', () => {
     presetState.setJsPreset('node:ts');
 
-    expect(getConfig()).toEqual({
+    expect(getJestConfig()).toEqual({
       devDependencies: ['jest', '@types/jest', 'ts-jest'],
       configFileContent: nodeTsJestConfigFile,
       scripts,
@@ -71,7 +71,7 @@ describe('jest/config', () => {
   it('returns the react typescript jest config', () => {
     presetState.setJsPreset('react:ts');
 
-    expect(getConfig()).toEqual({
+    expect(getJestConfig()).toEqual({
       devDependencies: [
         'jest',
         '@types/jest',
@@ -92,9 +92,9 @@ describe('jest/config', () => {
   ] as const)('returns parseable config content for %s', (variant, configFile) => {
     presetState.setJsPreset(variant);
 
-    const parsed = parseCjsModule(getConfig().configFileContent);
+    const parsed = parseCjsModule(getJestConfig().configFileContent);
 
-    expect(getConfig().configFileContent).toBe(configFile);
+    expect(getJestConfig().configFileContent).toBe(configFile);
     expect(parsed.module.exports).toBeDefined();
     expect(typeof parsed.module.exports).toBe('object');
   });

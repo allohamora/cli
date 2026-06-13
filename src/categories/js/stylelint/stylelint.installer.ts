@@ -1,10 +1,10 @@
 import { writeRootFile } from '#src/services/root.service.ts';
 import { addNpmScripts, installDevDependencies } from '#src/services/npm.service.ts';
-import { getConfig } from '#src/categories/js/stylelint/config/index.ts';
+import { getStylelintConfig } from '#src/categories/js/stylelint/config/index.ts';
 import { STYLELINT_CONFIG_NAME, STYLELINT_IGNORE_NAME } from '#src/categories/js/stylelint/stylelint.const.ts';
 
 export const stylelint = async () => {
-  const config = getConfig();
+  const config = getStylelintConfig();
 
   for (const mutation of config.mutations) {
     await mutation(config);

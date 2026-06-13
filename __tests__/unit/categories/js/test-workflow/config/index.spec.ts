@@ -1,10 +1,10 @@
-import { getConfig } from '#src/categories/js/test-workflow/config/index.ts';
+import { getTestWorkflowConfig } from '#src/categories/js/test-workflow/config/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
 import { describe, expect, it } from 'vitest';
 
 describe('test-workflow/config', () => {
   it('returns the test workflow content', () => {
-    expect(getConfig().content).toBe(
+    expect(getTestWorkflowConfig().content).toBe(
       [
         'name: test',
         '',
@@ -33,5 +33,5 @@ describe('test-workflow/config', () => {
     );
   });
 
-  expectGithubWorkflow(getConfig().content);
+  expectGithubWorkflow(getTestWorkflowConfig().content);
 });

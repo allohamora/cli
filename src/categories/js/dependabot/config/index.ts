@@ -1,6 +1,6 @@
 import { jsCategory } from '#src/services/state.service.ts';
 import { defaultConfig } from '#src/categories/js/dependabot/config/default.config.ts';
 
-export const { getConfig } = jsCategory.useConfig({
+export const [getDependabotConfig] = jsCategory.useConfig({
   default: defaultConfig,
 });

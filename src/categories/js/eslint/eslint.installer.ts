@@ -1,4 +1,4 @@
-import { getConfig } from '#src/categories/js/eslint/config/index.ts';
+import { getEslintConfig } from '#src/categories/js/eslint/config/index.ts';
 import { writeRootFile } from '#src/services/root.service.ts';
 import { addNpmScripts, installDevDependencies } from '#src/services/npm.service.ts';
 import { ESLINT_CONFIG_FILE_NAME, ESLINT_PACKAGE_NAME } from '#src/categories/js/eslint/eslint.const.ts';
@@ -47,7 +47,7 @@ export const buildConfig = (config: Config) => {
 };
 
 export const eslint = async () => {
-  const config = getConfig();
+  const config = getEslintConfig();
   await applyMutations(config, config.mutations);
 
   const { dependencies, scripts } = config;

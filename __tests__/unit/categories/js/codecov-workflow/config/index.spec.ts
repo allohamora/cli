@@ -1,10 +1,10 @@
-import { getConfig } from '#src/categories/js/codecov-workflow/config/index.ts';
+import { getCodecovWorkflowConfig } from '#src/categories/js/codecov-workflow/config/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
 import { describe, expect, it } from 'vitest';
 
 describe('codecov-workflow/config', () => {
   it('returns the codecov workflow content', () => {
-    expect(getConfig().content).toBe(
+    expect(getCodecovWorkflowConfig().content).toBe(
       [
         'name: codecov',
         '',
@@ -32,5 +32,5 @@ describe('codecov-workflow/config', () => {
     );
   });
 
-  expectGithubWorkflow(getConfig().content);
+  expectGithubWorkflow(getCodecovWorkflowConfig().content);
 });
