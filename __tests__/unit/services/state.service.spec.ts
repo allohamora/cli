@@ -69,7 +69,7 @@ describe('state.service', () => {
 
     it('returns usePreset that reads from preset state', () => {
       const configValues = { default: 'default', '1': '1' };
-      const [getPreset] = state.usePreset(configValues);
+      const getPreset = state.usePreset(configValues);
 
       expect(getPreset()).toBe(configValues.default);
 
