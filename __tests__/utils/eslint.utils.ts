@@ -1,4 +1,4 @@
-import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
+import type { Preset } from '#src/categories/js/eslint/preset/preset.type.ts';
 
 export const createConfig = ({
   dependencies = [],
@@ -9,6 +9,6 @@ export const createConfig = ({
   typescript = false,
   scripts = [],
   mutations = [],
-}: Partial<Config> = {}) => {
+}: Partial<Preset> = {}) => {
   return { dependencies, imports, configs, ignores, eslintConfig, typescript, scripts, mutations };
 };

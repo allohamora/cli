@@ -1,4 +1,4 @@
-import { getPrettierConfig } from '#src/categories/js/prettier/config/index.ts';
+import { getPrettierPreset } from '#src/categories/js/prettier/preset/index.ts';
 import {
   PRETTIER_CONFIG_FILE_NAME,
   PRETTIER_CONFIG_IGNORE_FILE_NAME,
@@ -8,7 +8,7 @@ import { writeRootFile, writeRootJsonFile } from '#src/services/root.service.ts'
 import { addNpmScripts, installDevDependencies } from '#src/services/npm.service.ts';
 
 export const prettier = async () => {
-  const { config, ignore, scripts } = getPrettierConfig();
+  const { config, ignore, scripts } = getPrettierPreset();
 
   await installDevDependencies(PRETTIER_PACKAGE_NAME);
   await writeRootJsonFile(PRETTIER_CONFIG_FILE_NAME, config);

@@ -1,4 +1,4 @@
-import type { LintStagedConfig } from '#src/categories/js/lint-staged/config/config.interface.ts';
+import type { LintStagedConfig } from '#src/categories/js/lint-staged/preset/preset.type.ts';
 import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.service.ts';
 import { addHook, isHuskyInstalled } from '#src/categories/js/husky/husky.service.ts';
 import { LINT_STAGED_CLI_NAME } from '#src/categories/js/lint-staged/lint-staged.const.ts';

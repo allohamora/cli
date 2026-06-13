@@ -63,18 +63,18 @@ describe('state.service', () => {
       expect(actual).toEqual(expected);
     });
 
-    it('returns useConfig', () => {
-      expect(state.useConfig).toBeDefined();
+    it('returns usePreset', () => {
+      expect(state.usePreset).toBeDefined();
     });
 
-    it('returns useConfig that reads from preset state', () => {
+    it('returns usePreset that reads from preset state', () => {
       const configValues = { default: 'default', '1': '1' };
-      const [getConfig] = state.useConfig(configValues);
+      const [getPreset] = state.usePreset(configValues);
 
-      expect(getConfig()).toBe(configValues.default);
+      expect(getPreset()).toBe(configValues.default);
 
       state.presetState.setPreset('1');
-      expect(getConfig()).toBe(configValues['1']);
+      expect(getPreset()).toBe(configValues['1']);
     });
   });
 });

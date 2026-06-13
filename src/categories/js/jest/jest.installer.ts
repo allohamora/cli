@@ -1,10 +1,10 @@
 import { writeRootFile } from '#src/services/root.service.ts';
 import { addNpmScripts, installDevDependencies } from '#src/services/npm.service.ts';
-import { getJestConfig } from '#src/categories/js/jest/config/index.ts';
+import { getJestPreset } from '#src/categories/js/jest/preset/index.ts';
 import { JEST_CONFIG_FILE_NAME } from '#src/categories/js/jest/jest.const.ts';
 
 export const jest = async () => {
-  const { devDependencies, configFileContent, scripts } = getJestConfig();
+  const { devDependencies, configFileContent, scripts } = getJestPreset();
 
   await installDevDependencies(...devDependencies);
   await writeRootFile(JEST_CONFIG_FILE_NAME, configFileContent);
