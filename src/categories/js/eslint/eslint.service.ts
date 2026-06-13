@@ -2,7 +2,7 @@ import { createRootInstalledCheck } from '#src/services/installation.service.ts'
 import { isJestInstalled } from '#src/categories/js/jest/jest.service.ts';
 import { isPrettierInstalled } from '#src/categories/js/prettier/prettier.service.ts';
 import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
-import { CONFIG_FILE_NAME, SCRIPT_NAME } from '#src/categories/js/eslint/eslint.const.ts';
+import { ESLINT_CONFIG_FILE_NAME, ESLINT_SCRIPT_NAME } from '#src/categories/js/eslint/eslint.const.ts';
 
 export const jestMutation = async (config: Config) => {
   if (await isJestInstalled()) {
@@ -34,4 +34,4 @@ export const prettierMutation = async (config: Config) => {
   }
 };
 
-export const isEslintInstalled = createRootInstalledCheck(SCRIPT_NAME, CONFIG_FILE_NAME);
+export const isEslintInstalled = createRootInstalledCheck(ESLINT_SCRIPT_NAME, ESLINT_CONFIG_FILE_NAME);

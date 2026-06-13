@@ -1,7 +1,7 @@
 import { getConfig } from '#src/categories/js/eslint/config/index.ts';
 import { writeRootFile } from '#src/services/root.service.ts';
 import { addNpmScripts, installDevDependencies } from '#src/services/npm.service.ts';
-import { CONFIG_FILE_NAME, PACKAGE_NAME } from '#src/categories/js/eslint/eslint.const.ts';
+import { ESLINT_CONFIG_FILE_NAME, ESLINT_PACKAGE_NAME } from '#src/categories/js/eslint/eslint.const.ts';
 import { applyMutations } from '#src/utils/mutation.utils.ts';
 import type { Config } from '#src/categories/js/eslint/config/config.interface.ts';
 import { formatJavascript } from '#src/categories/js/prettier/prettier.service.ts';
@@ -52,10 +52,10 @@ export const eslint = async () => {
 
   const { dependencies, scripts } = config;
 
-  await installDevDependencies(PACKAGE_NAME, ...dependencies);
+  await installDevDependencies(ESLINT_PACKAGE_NAME, ...dependencies);
 
   const eslintConfig = await formatJavascript(buildConfig(config));
 
-  await writeRootFile(CONFIG_FILE_NAME, eslintConfig);
+  await writeRootFile(ESLINT_CONFIG_FILE_NAME, eslintConfig);
   await addNpmScripts(...scripts);
 };

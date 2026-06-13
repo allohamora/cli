@@ -1,2 +1,2 @@
-export const PACKAGE_NAME = 'lint-staged';
-export const CLI_NAME = PACKAGE_NAME;
+export const LINT_STAGED_PACKAGE_NAME = 'lint-staged';
+export const LINT_STAGED_CLI_NAME = LINT_STAGED_PACKAGE_NAME;
