@@ -3,6 +3,7 @@ import { fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { describe, expect, it } from 'vitest';
 import {
   addNpmScripts,
+  hasNpmScript,
   installDevDependencies,
   PACKAGE_JSON_NAME,
   PACKAGE_JSON_PATH,
@@ -69,6 +70,32 @@ describe('npm.service', () => {
       seedPackageJson({ scripts: { test: 'old-test' } });
       await addNpmScripts(...npmScripts);
       expectPackageJsonToEqual({ scripts: { test: 'test', __test__: '__test__' } });
+    });
+  });
+
+  describe('hasNpmScript', () => {
+    it('returns true if the script exists', async () => {
+      seedPackageJson({ scripts: { lint: 'eslint "**/*.ts"' } });
+
+      expect(await hasNpmScript('lint')).toBe(true);
+    });
+
+    it('returns false if the script does not exist', async () => {
+      seedPackageJson({ scripts: { test: 'vitest' } });
+
+      expect(await hasNpmScript('lint')).toBe(false);
+    });
+
+    it('returns false if scripts are missing', async () => {
+      seedPackageJson({});
+
+      expect(await hasNpmScript('lint')).toBe(false);
+    });
+
+    it('rejects if package.json is missing', async () => {
+      fileSystem.seed({ packageJson: null });
+
+      await expect(hasNpmScript('lint')).rejects.toThrow('package.json does not exist');
     });
   });
 

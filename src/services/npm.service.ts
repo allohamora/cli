@@ -21,6 +21,12 @@ export const readPackageJson = async () => {
   return JSON.parse(json) as PackageJson;
 };
 
+export const hasNpmScript = async (name: string) => {
+  const packageJson = await readPackageJson();
+
+  return typeof packageJson.scripts?.[name] === 'string';
+};
+
 export const writePackageJson = async (packageJson: PackageJson) => {
   await writeRootJsonFile(PACKAGE_JSON_NAME, packageJson);
 };
