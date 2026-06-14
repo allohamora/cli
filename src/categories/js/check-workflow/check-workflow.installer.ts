@@ -1,4 +1,4 @@
-import { WORKFLOW_FILENAME } from '#src/categories/js/check-workflow/check-workflow.const.ts';
+import { CHECK_WORKFLOW_FILENAME } from '#src/categories/js/check-workflow/check-workflow.const.ts';
 import {
   CheckScriptName,
   type CheckScriptNameValue,
@@ -23,5 +23,5 @@ export const checkWorkflow = async () => {
   const scripts = await getAvailableCheckScripts();
   const workflow = [...content, ...createCheckSteps(scripts)].join('\n');
 
-  await writeGithubWorkflow(WORKFLOW_FILENAME, workflow);
+  await writeGithubWorkflow(CHECK_WORKFLOW_FILENAME, workflow);
 };
