@@ -9,6 +9,7 @@ import { standardVersion } from '#src/categories/js/standard-version/standard-ve
 import { jest } from '#src/categories/js/jest/jest.installer.ts';
 import { docker } from '#src/categories/js/docker/docker.installer.ts';
 import { releaseWorkflow } from '#src/categories/js/release-workflow/release-workflow.installer.ts';
+import { checkWorkflow } from '#src/categories/js/check-workflow/check-workflow.installer.ts';
 import { testWorkflow } from '#src/categories/js/test-workflow/test-workflow.installer.ts';
 import { buildWorkflow } from '#src/categories/js/build-workflow/build-workflow.installer.ts';
 import { codecovWorkflow } from '#src/categories/js/codecov-workflow/codecov-workflow.installer.ts';
@@ -26,6 +27,7 @@ const installers = {
   jest,
   docker,
   releaseWorkflow,
+  checkWorkflow,
   testWorkflow,
   buildWorkflow,
   codecovWorkflow,
