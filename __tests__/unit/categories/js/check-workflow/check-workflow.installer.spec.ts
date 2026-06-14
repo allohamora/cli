@@ -32,7 +32,6 @@ describe('check-workflow.installer', () => {
           '      - name: Install node',
           '        uses: actions/setup-node@v6',
           '        with:',
-          '          node-version-file: ".nvmrc"',
           '          cache: "npm"',
           '',
           '      - name: Install dependencies',
