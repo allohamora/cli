@@ -32,7 +32,7 @@ describe('check-workflow.installer', () => {
           '      - name: Install node',
           '        uses: actions/setup-node@v6',
           '        with:',
-          '          cache: "npm"',
+          '          cache: npm',
           '',
           '      - name: Install dependencies',
           '        run: npm ci',
@@ -48,6 +48,78 @@ describe('check-workflow.installer', () => {
           '',
           '      - name: Run build',
           '        run: npm run build',
+          '',
+        ].join('\n'),
+      );
+    });
+
+    it('writes node-version-file if nvmrc is installed', async () => {
+      installationState.setSelectedInstallOptions(['nvmrc']);
+
+      await checkWorkflow();
+
+      expect(fileSystem.readFile('.github/workflows/check.yml')).toBe(
+        [
+          'name: check',
+          '',
+          'on:',
+          '  push:',
+          '    branches:',
+          '      - "**"',
+          '',
+          'jobs:',
+          '  check:',
+          '    runs-on: ubuntu-latest',
+          '    env:',
+          '      CI: true',
+          '    steps:',
+          '      - name: Checkout code',
+          '        uses: actions/checkout@v6',
+          '',
+          '      - name: Install node',
+          '        uses: actions/setup-node@v6',
+          '        with:',
+          '          cache: npm',
+          '          node-version-file: .nvmrc',
+          '',
+          '      - name: Install dependencies',
+          '        run: npm ci',
+          '',
+        ].join('\n'),
+      );
+    });
+
+    it('writes node-version-file if .nvmrc exists', async () => {
+      fileSystem.writeFile('.nvmrc', '24.14.1\n');
+
+      await checkWorkflow();
+
+      expect(fileSystem.readFile('.github/workflows/check.yml')).toBe(
+        [
+          'name: check',
+          '',
+          'on:',
+          '  push:',
+          '    branches:',
+          '      - "**"',
+          '',
+          'jobs:',
+          '  check:',
+          '    runs-on: ubuntu-latest',
+          '    env:',
+          '      CI: true',
+          '    steps:',
+          '      - name: Checkout code',
+          '        uses: actions/checkout@v6',
+          '',
+          '      - name: Install node',
+          '        uses: actions/setup-node@v6',
+          '        with:',
+          '          cache: npm',
+          '          node-version-file: .nvmrc',
+          '',
+          '      - name: Install dependencies',
+          '        run: npm ci',
           '',
         ].join('\n'),
       );

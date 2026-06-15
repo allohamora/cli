@@ -8,6 +8,7 @@ import { prettier } from '#src/categories/js/prettier/prettier.installer.ts';
 import { standardVersion } from '#src/categories/js/standard-version/standard-version.installer.ts';
 import { jest } from '#src/categories/js/jest/jest.installer.ts';
 import { docker } from '#src/categories/js/docker/docker.installer.ts';
+import { nvmrc } from '#src/categories/js/nvmrc/nvmrc.installer.ts';
 import { releaseWorkflow } from '#src/categories/js/release-workflow/release-workflow.installer.ts';
 import { checkWorkflow } from '#src/categories/js/check-workflow/check-workflow.installer.ts';
 import { testWorkflow } from '#src/categories/js/test-workflow/test-workflow.installer.ts';
@@ -25,6 +26,7 @@ const installers = {
   stylelint,
   jest,
   docker,
+  nvmrc,
   releaseWorkflow,
   checkWorkflow,
   testWorkflow,

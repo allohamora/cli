@@ -1,23 +1,25 @@
-import dedent from 'dedent';
-
-export const content = dedent`
-  version: 2
-  updates:
-    - package-ecosystem: "github-actions"
-      directory: "/"
-      schedule:
-        interval: "weekly"
-        day: "monday"
-      open-pull-requests-limit: 10
-
-    - package-ecosystem: npm
-      directory: "/"
-      schedule:
-        interval: "weekly"
-        day: "monday"
-      open-pull-requests-limit: 0
-`;
-
 export const defaultPreset = {
-  content,
+  content: {
+    version: 2,
+    updates: [
+      {
+        'package-ecosystem': 'github-actions',
+        directory: '/',
+        schedule: {
+          interval: 'weekly',
+          day: 'monday',
+        },
+        'open-pull-requests-limit': 10,
+      },
+      {
+        'package-ecosystem': 'npm',
+        directory: '/',
+        schedule: {
+          interval: 'weekly',
+          day: 'monday',
+        },
+        'open-pull-requests-limit': 0,
+      },
+    ],
+  },
 };

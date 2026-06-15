@@ -38,7 +38,7 @@ describe('github.service', () => {
 
   describe('writeGithubWorkflow', () => {
     const filename = 'test.yml';
-    const content = '__test__';
+    const content = { name: '__test__', on: ['push'] };
     const filePath = path.join(GITHUB_WORKFLOWS_PATH, filename);
 
     it('creates .github/workflows if it does not exist', async () => {
@@ -50,7 +50,121 @@ describe('github.service', () => {
     it(`adds workflow to ${GITHUB_WORKFLOWS_PATH}`, async () => {
       await writeGithubWorkflow(filename, content);
 
-      expect(fileSystem.readFile(filePath)).toBe(`${content}\n`);
+      expect(fileSystem.readFile(filePath)).toBe(['name: __test__', '', 'on:', '  push:', ''].join('\n'));
+    });
+
+    it('expands multiple workflow events to a map', async () => {
+      await writeGithubWorkflow(filename, { name: '__test__', on: ['push', 'pull_request'] });
+
+      expect(fileSystem.readFile(filePath)).toBe(
+        ['name: __test__', '', 'on:', '  push:', '  pull_request:', ''].join('\n'),
+      );
+    });
+
+    it('keeps configured workflow events as a map', async () => {
+      await writeGithubWorkflow(filename, {
+        name: '__test__',
+        on: {
+          push: {
+            branches: ['main'],
+          },
+        },
+      });
+
+      expect(fileSystem.readFile(filePath)).toBe(
+        ['name: __test__', '', 'on:', '  push:', '    branches:', '      - main', ''].join('\n'),
+      );
+    });
+
+    it('expands mixed workflow events to a map', async () => {
+      await writeGithubWorkflow(filename, {
+        name: '__test__',
+        on: [
+          'push',
+          {
+            schedule: [{ cron: '0 0 * * *' }],
+          },
+        ],
+      });
+
+      expect(fileSystem.readFile(filePath)).toBe(
+        ['name: __test__', '', 'on:', '  push:', '  schedule:', '    - cron: 0 0 * * *', ''].join('\n'),
+      );
+    });
+
+    it('keeps unsupported nested workflow event sequences unchanged', async () => {
+      await writeGithubWorkflow(filename, {
+        name: '__test__',
+        on: [['push']],
+      });
+
+      expect(fileSystem.readFile(filePath)).toBe(['name: __test__', '', 'on:', '  - - push', ''].join('\n'));
+    });
+
+    it('stringifies non-map content without workflow formatting', async () => {
+      await writeGithubWorkflow(filename, ['push'] as unknown as Record<string, unknown>);
+
+      expect(fileSystem.readFile(filePath)).toBe(['- push', ''].join('\n'));
+    });
+
+    it('only adds empty lines between top-level entries', async () => {
+      await writeGithubWorkflow(filename, {
+        name: '__test__',
+        permissions: {
+          contents: 'read',
+          packages: 'write',
+        },
+        jobs: {},
+      });
+
+      expect(fileSystem.readFile(filePath)).toBe(
+        ['name: __test__', '', 'permissions:', '  contents: read', '  packages: write', '', 'jobs: {}', ''].join('\n'),
+      );
+    });
+
+    it('adds empty lines between workflow steps', async () => {
+      await writeGithubWorkflow(filename, {
+        name: '__test__',
+        jobs: {
+          test: {
+            'runs-on': 'ubuntu-latest',
+            steps: [
+              {
+                name: 'Checkout code',
+                uses: 'actions/checkout@v6',
+              },
+              {
+                name: 'Install dependencies',
+                run: 'npm ci',
+              },
+              {
+                name: 'Build',
+                run: 'npm run build',
+              },
+            ],
+          },
+        },
+      });
+
+      expect(fileSystem.readFile(filePath)).toBe(
+        [
+          'name: __test__',
+          '',
+          'jobs:',
+          '  test:',
+          '    runs-on: ubuntu-latest',
+          '    steps:',
+          '      - name: Checkout code',
+          '        uses: actions/checkout@v6',
+          '',
+          '      - name: Install dependencies',
+          '        run: npm ci',
+          '',
+          '      - name: Build',
+          '        run: npm run build',
+          '',
+        ].join('\n'),
+      );
     });
   });
 

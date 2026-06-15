@@ -101,7 +101,6 @@ describe('eslint.installer', () => {
           `  { files: ['**/*.{js,mjs,cjs}'], languageOptions: { globals: { ...globals.node } } },`,
           ');',
           '',
-          '',
         ].join('\n'),
       );
     });

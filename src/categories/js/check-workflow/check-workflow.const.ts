@@ -1,1 +1,1 @@
-export const WORKFLOW_FILENAME = 'check.yml';
+export const CHECK_WORKFLOW_FILENAME = 'check.yml';

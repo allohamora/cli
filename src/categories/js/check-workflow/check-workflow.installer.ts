@@ -1,4 +1,4 @@
-import { WORKFLOW_FILENAME } from '#src/categories/js/check-workflow/check-workflow.const.ts';
+import { CHECK_WORKFLOW_FILENAME } from '#src/categories/js/check-workflow/check-workflow.const.ts';
 import {
   CheckScriptName,
   type CheckScriptNameValue,
@@ -6,6 +6,7 @@ import {
 } from '#src/categories/js/check-workflow/check-workflow.service.ts';
 import { getCheckWorkflowPreset } from '#src/categories/js/check-workflow/preset/index.ts';
 import { writeGithubWorkflow } from '#src/services/github.service.ts';
+import { applyMutations } from '#src/utils/mutation.utils.ts';
 
 const checkStepNames = {
   [CheckScriptName.Lint]: 'Run lint',
@@ -15,13 +16,27 @@ const checkStepNames = {
 } satisfies Record<CheckScriptNameValue, string>;
 
 const createCheckSteps = (scripts: CheckScriptNameValue[]) => {
-  return scripts.flatMap((script) => ['', `      - name: ${checkStepNames[script]}`, `        run: npm run ${script}`]);
+  return scripts.map((script) => ({
+    name: checkStepNames[script],
+    run: `npm run ${script}`,
+  }));
 };
 
 export const checkWorkflow = async () => {
-  const { content } = getCheckWorkflowPreset();
-  const scripts = await getAvailableCheckScripts();
-  const workflow = [...content, ...createCheckSteps(scripts)].join('\n');
+  const preset = getCheckWorkflowPreset();
+  await applyMutations(preset, preset.mutations);
 
-  await writeGithubWorkflow(WORKFLOW_FILENAME, workflow);
+  const scripts = await getAvailableCheckScripts();
+  const workflow = {
+    ...preset.content,
+    jobs: {
+      ...preset.content.jobs,
+      check: {
+        ...preset.content.jobs.check,
+        steps: [...preset.content.jobs.check.steps, ...createCheckSteps(scripts)],
+      },
+    },
+  };
+
+  await writeGithubWorkflow(CHECK_WORKFLOW_FILENAME, workflow);
 };
