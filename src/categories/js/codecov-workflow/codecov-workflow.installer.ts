@@ -4,8 +4,7 @@ import { WORKFLOW_FILENAME } from '#src/categories/js/codecov-workflow/codecov-w
 import { applyMutations } from '#src/utils/mutation.utils.ts';
 
 export const codecovWorkflow = async () => {
-  const sourcePreset = getCodecovWorkflowPreset();
-  const preset = { ...sourcePreset, content: structuredClone(sourcePreset.content) };
+  const preset = getCodecovWorkflowPreset();
   await applyMutations(preset, preset.mutations);
 
   await writeGithubWorkflow(WORKFLOW_FILENAME, preset.content);

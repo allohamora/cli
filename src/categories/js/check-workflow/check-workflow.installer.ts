@@ -23,8 +23,7 @@ const createCheckSteps = (scripts: CheckScriptNameValue[]) => {
 };
 
 export const checkWorkflow = async () => {
-  const sourcePreset = getCheckWorkflowPreset();
-  const preset = { ...sourcePreset, content: structuredClone(sourcePreset.content) };
+  const preset = getCheckWorkflowPreset();
   await applyMutations(preset, preset.mutations);
 
   const { content } = preset;

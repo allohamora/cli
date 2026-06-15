@@ -4,8 +4,7 @@ import { WORKFLOW_FILENAME } from '#src/categories/js/test-workflow/test-workflo
 import { applyMutations } from '#src/utils/mutation.utils.ts';
 
 export const testWorkflow = async () => {
-  const sourcePreset = getTestWorkflowPreset();
-  const preset = { ...sourcePreset, content: structuredClone(sourcePreset.content) };
+  const preset = getTestWorkflowPreset();
   await applyMutations(preset, preset.mutations);
 
   await writeGithubWorkflow(WORKFLOW_FILENAME, preset.content);
