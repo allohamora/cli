@@ -31,8 +31,8 @@ export const nvmrcWorkflowMutation = async (preset: WorkflowPreset) => {
       }
 
       step.with = {
-        ...step.with,
         'node-version-file': NVMRC_FILE_NAME,
+        ...step.with,
       };
     }
   }
