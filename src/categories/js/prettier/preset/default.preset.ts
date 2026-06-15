@@ -5,14 +5,6 @@ export const defaultPreset = {
     singleQuote: true,
     printWidth: 120,
     tabWidth: 2,
-    overrides: [
-      {
-        files: '*.yml',
-        options: {
-          singleQuote: false,
-        },
-      },
-    ],
   },
   ignore: ['dist', 'node_modules', 'public', '.husky', 'package-lock.json', 'coverage'],
   scripts: [

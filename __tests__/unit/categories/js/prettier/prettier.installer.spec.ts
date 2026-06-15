@@ -18,14 +18,6 @@ describe('prettier.installer', () => {
         singleQuote: true,
         printWidth: 120,
         tabWidth: 2,
-        overrides: [
-          {
-            files: '*.yml',
-            options: {
-              singleQuote: false,
-            },
-          },
-        ],
       });
       expect(fileSystem.readFile('.prettierignore')).toBe(
         ['dist', 'node_modules', 'public', '.husky', 'package-lock.json', 'coverage', ''].join('\n'),
