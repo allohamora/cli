@@ -27,7 +27,7 @@ export const ensureRootDir = async (name: string) => {
 export const writeRootFile = async (name: string, content: string) => {
   const filePath = resolveRootPath(name);
 
-  await fsp.writeFile(filePath, `${content}\n`, { encoding: 'utf-8' });
+  await fsp.writeFile(filePath, `${content.trim()}\n`, { encoding: 'utf-8' });
 };
 
 export const writeRootJsonFile = async <C>(name: string, content: C) => {

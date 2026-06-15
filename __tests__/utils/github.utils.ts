@@ -1,13 +1,14 @@
-import { parse } from 'yaml';
 import { expect, it } from 'vitest';
 
-export const expectGithubWorkflow = (yamlString: string, message = 'is parsed') => {
+export const expectGithubWorkflow = (
+  workflow: Record<string, unknown>,
+  message = 'is valid github workflow config',
+) => {
   it(message, () => {
-    const parsed = parse(yamlString);
-    const typeofOn = typeof parsed.on;
+    const typeofOn = typeof workflow.on;
 
-    expect(typeof parsed.name).toBe('string');
+    expect(typeof workflow.name).toBe('string');
     expect(typeofOn === 'object' || typeofOn === 'string').toBeTruthy();
-    expect(typeof parsed.jobs).toBe('object');
+    expect(typeof workflow.jobs).toBe('object');
   });
 };

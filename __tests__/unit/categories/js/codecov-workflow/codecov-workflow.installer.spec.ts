@@ -11,9 +11,8 @@ describe('codecov-workflow.installer', () => {
       expect(fileSystem.readFile('.github/workflows/codecov.yml')).toBe(
         [
           'name: codecov',
-          '',
-          'on: [push]',
-          '',
+          'on:',
+          '  - push',
           'jobs:',
           '  codecov:',
           '    runs-on: ubuntu-latest',
@@ -25,7 +24,7 @@ describe('codecov-workflow.installer', () => {
           '      - name: Install node',
           '        uses: actions/setup-node@v4',
           '        with:',
-          '          cache: "npm"',
+          '          cache: npm',
           '      - name: Install dependencies',
           '        run: npm ci',
           '      - name: Collect coverage',

@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { ensureRootDir, writeRootFile } from '#src/services/root.service.ts';
+import { stringify } from 'yaml';
 
 export const GITHUB_DIR_NAME = '.github';
 export const GITHUB_WORKFLOWS_DIR_NAME = 'workflows';
@@ -14,11 +15,11 @@ export const ensureGithubWorkflowsDir = async () => {
   await ensureRootDir(GITHUB_WORKFLOWS_PATH);
 };
 
-export const writeGithubWorkflow = async (filename: string, content: string) => {
+export const writeGithubWorkflow = async (filename: string, content: Record<string, unknown>) => {
   await ensureGithubWorkflowsDir();
 
   const relativeFilePath = path.join(GITHUB_WORKFLOWS_PATH, filename);
-  await writeRootFile(relativeFilePath, content);
+  await writeRootFile(relativeFilePath, stringify(content));
 };
 
 export const writeGithubFile = async (filename: string, content: string) => {

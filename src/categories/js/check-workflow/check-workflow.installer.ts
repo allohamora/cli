@@ -15,13 +15,25 @@ const checkStepNames = {
 } satisfies Record<CheckScriptNameValue, string>;
 
 const createCheckSteps = (scripts: CheckScriptNameValue[]) => {
-  return scripts.flatMap((script) => ['', `      - name: ${checkStepNames[script]}`, `        run: npm run ${script}`]);
+  return scripts.map((script) => ({
+    name: checkStepNames[script],
+    run: `npm run ${script}`,
+  }));
 };
 
 export const checkWorkflow = async () => {
   const { content } = getCheckWorkflowPreset();
   const scripts = await getAvailableCheckScripts();
-  const workflow = [...content, ...createCheckSteps(scripts)].join('\n');
+  const workflow = {
+    ...content,
+    jobs: {
+      ...content.jobs,
+      check: {
+        ...content.jobs.check,
+        steps: [...content.jobs.check.steps, ...createCheckSteps(scripts)],
+      },
+    },
+  };
 
   await writeGithubWorkflow(CHECK_WORKFLOW_FILENAME, workflow);
 };

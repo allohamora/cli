@@ -38,7 +38,7 @@ describe('github.service', () => {
 
   describe('writeGithubWorkflow', () => {
     const filename = 'test.yml';
-    const content = '__test__';
+    const content = { name: '__test__', on: ['push'] };
     const filePath = path.join(GITHUB_WORKFLOWS_PATH, filename);
 
     it('creates .github/workflows if it does not exist', async () => {
@@ -50,7 +50,7 @@ describe('github.service', () => {
     it(`adds workflow to ${GITHUB_WORKFLOWS_PATH}`, async () => {
       await writeGithubWorkflow(filename, content);
 
-      expect(fileSystem.readFile(filePath)).toBe(`${content}\n`);
+      expect(fileSystem.readFile(filePath)).toBe(['name: __test__', 'on:', '  - push', ''].join('\n'));
     });
   });
 

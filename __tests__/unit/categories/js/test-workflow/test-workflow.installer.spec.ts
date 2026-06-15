@@ -11,12 +11,10 @@ describe('test-workflow.installer', () => {
       expect(fileSystem.readFile('.github/workflows/test.yml')).toBe(
         [
           'name: test',
-          '',
           'on:',
           '  push:',
           '    branches:',
           '      - "**"',
-          '',
           'jobs:',
           '  test:',
           '    runs-on: ubuntu-latest',
@@ -28,7 +26,7 @@ describe('test-workflow.installer', () => {
           '      - name: Install node',
           '        uses: actions/setup-node@v4',
           '        with:',
-          '          cache: "npm"',
+          '          cache: npm',
           '      - name: Install dependencies',
           '        run: npm ci',
           '      - name: Run tests',

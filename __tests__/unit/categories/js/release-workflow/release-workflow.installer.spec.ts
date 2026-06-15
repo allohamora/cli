@@ -11,15 +11,12 @@ describe('release-workflow.installer', () => {
       expect(fileSystem.readFile('.github/workflows/release.yml')).toBe(
         [
           'name: release',
-          '',
           'on:',
           '  push:',
           '    tags:',
           '      - "*.*.*"',
-          '',
           'permissions:',
           '  contents: write',
-          '',
           'jobs:',
           '  release:',
           '    runs-on: ubuntu-latest',
