@@ -7,13 +7,14 @@ describe('codecov-workflow/preset', () => {
   it('returns the codecov workflow config', () => {
     expect(getCodecovWorkflowPreset().content).toEqual({
       name: 'codecov',
-      on: ['push'],
+      on: {
+        push: {
+          branches: ['**'],
+        },
+      },
       jobs: {
         codecov: {
           'runs-on': 'ubuntu-latest',
-          env: {
-            CI: true,
-          },
           steps: [
             {
               name: 'Checkout code',

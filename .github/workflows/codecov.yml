@@ -1,12 +1,13 @@
 name: codecov
 
-on: [push]
+on:
+  push:
+    branches:
+      - '**'
 
 jobs:
   codecov:
     runs-on: ubuntu-latest
-    env:
-      CI: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -14,8 +15,8 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v6
         with:
-          node-version-file: ".nvmrc"
-          cache: "npm"
+          node-version-file: .nvmrc
+          cache: npm
 
       - name: Install dependencies
         run: npm ci

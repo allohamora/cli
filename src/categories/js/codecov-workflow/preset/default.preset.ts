@@ -3,13 +3,14 @@ import { nvmrcWorkflowMutation, type WorkflowPreset } from '#src/categories/js/n
 export const defaultPreset = {
   content: {
     name: 'codecov',
-    on: ['push'],
+    on: {
+      push: {
+        branches: ['**'],
+      },
+    },
     jobs: {
       codecov: {
         'runs-on': 'ubuntu-latest',
-        env: {
-          CI: true,
-        },
         steps: [
           {
             name: 'Checkout code',

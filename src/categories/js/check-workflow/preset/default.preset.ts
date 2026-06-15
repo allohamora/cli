@@ -11,9 +11,6 @@ export const defaultPreset = {
     jobs: {
       check: {
         'runs-on': 'ubuntu-latest',
-        env: {
-          CI: true,
-        },
         steps: [
           {
             name: 'Checkout code',

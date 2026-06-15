@@ -38,7 +38,14 @@ describe('github.service', () => {
 
   describe('writeGithubWorkflow', () => {
     const filename = 'test.yml';
-    const content = { name: '__test__', on: ['push'] };
+    const content = {
+      name: '__test__',
+      on: {
+        push: {
+          branches: ['**'],
+        },
+      },
+    };
     const filePath = path.join(GITHUB_WORKFLOWS_PATH, filename);
 
     it('creates .github/workflows if it does not exist', async () => {
@@ -50,14 +57,8 @@ describe('github.service', () => {
     it(`adds workflow to ${GITHUB_WORKFLOWS_PATH}`, async () => {
       await writeGithubWorkflow(filename, content);
 
-      expect(fileSystem.readFile(filePath)).toBe(['name: __test__', '', 'on:', '  push:', ''].join('\n'));
-    });
-
-    it('expands multiple workflow events to a map', async () => {
-      await writeGithubWorkflow(filename, { name: '__test__', on: ['push', 'pull_request'] });
-
       expect(fileSystem.readFile(filePath)).toBe(
-        ['name: __test__', '', 'on:', '  push:', '  pull_request:', ''].join('\n'),
+        ['name: __test__', '', 'on:', '  push:', '    branches:', '      - "**"', ''].join('\n'),
       );
     });
 
@@ -76,29 +77,13 @@ describe('github.service', () => {
       );
     });
 
-    it('expands mixed workflow events to a map', async () => {
+    it('keeps workflow event sequences unchanged', async () => {
       await writeGithubWorkflow(filename, {
         name: '__test__',
-        on: [
-          'push',
-          {
-            schedule: [{ cron: '0 0 * * *' }],
-          },
-        ],
+        on: ['push'],
       });
 
-      expect(fileSystem.readFile(filePath)).toBe(
-        ['name: __test__', '', 'on:', '  push:', '  schedule:', '    - cron: 0 0 * * *', ''].join('\n'),
-      );
-    });
-
-    it('keeps unsupported nested workflow event sequences unchanged', async () => {
-      await writeGithubWorkflow(filename, {
-        name: '__test__',
-        on: [['push']],
-      });
-
-      expect(fileSystem.readFile(filePath)).toBe(['name: __test__', '', 'on:', '  - - push', ''].join('\n'));
+      expect(fileSystem.readFile(filePath)).toBe(['name: __test__', '', 'on:', '  - push', ''].join('\n'));
     });
 
     it('stringifies non-map content without workflow formatting', async () => {

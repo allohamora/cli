@@ -18,6 +18,7 @@ describe('dependabot.installer', () => {
           '      interval: weekly',
           '      day: monday',
           '    open-pull-requests-limit: 10',
+          '',
           '  - package-ecosystem: npm',
           '    directory: /',
           '    schedule:',
