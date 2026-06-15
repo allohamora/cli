@@ -26,15 +26,14 @@ export const checkWorkflow = async () => {
   const preset = getCheckWorkflowPreset();
   await applyMutations(preset, preset.mutations);
 
-  const { content } = preset;
   const scripts = await getAvailableCheckScripts();
   const workflow = {
-    ...content,
+    ...preset.content,
     jobs: {
-      ...content.jobs,
+      ...preset.content.jobs,
       check: {
-        ...content.jobs.check,
-        steps: [...content.jobs.check.steps, ...createCheckSteps(scripts)],
+        ...preset.content.jobs.check,
+        steps: [...preset.content.jobs.check.steps, ...createCheckSteps(scripts)],
       },
     },
   };
