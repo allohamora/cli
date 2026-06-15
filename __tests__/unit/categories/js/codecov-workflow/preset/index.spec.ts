@@ -1,5 +1,6 @@
 import { getCodecovWorkflowPreset } from '#src/categories/js/codecov-workflow/preset/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
+import { nvmrcWorkflowMutation } from '#src/categories/js/nvmrc/nvmrc.service.ts';
 import { describe, expect, it } from 'vitest';
 
 describe('codecov-workflow/preset', () => {
@@ -41,6 +42,7 @@ describe('codecov-workflow/preset', () => {
         },
       },
     });
+    expect(getCodecovWorkflowPreset().mutations).toEqual([nvmrcWorkflowMutation]);
   });
 
   expectGithubWorkflow(getCodecovWorkflowPreset().content);

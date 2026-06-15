@@ -1,5 +1,6 @@
 import { getTestWorkflowPreset } from '#src/categories/js/test-workflow/preset/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
+import { nvmrcWorkflowMutation } from '#src/categories/js/nvmrc/nvmrc.service.ts';
 import { describe, expect, it } from 'vitest';
 
 describe('test-workflow/preset', () => {
@@ -41,6 +42,7 @@ describe('test-workflow/preset', () => {
         },
       },
     });
+    expect(getTestWorkflowPreset().mutations).toEqual([nvmrcWorkflowMutation]);
   });
 
   expectGithubWorkflow(getTestWorkflowPreset().content);

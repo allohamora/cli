@@ -1,3 +1,5 @@
+import { nvmrcWorkflowMutation, type WorkflowPreset } from '#src/categories/js/nvmrc/nvmrc.service.ts';
+
 export const defaultPreset = {
   content: {
     name: 'check',
@@ -32,4 +34,5 @@ export const defaultPreset = {
       },
     },
   },
-};
+  mutations: [nvmrcWorkflowMutation],
+} satisfies WorkflowPreset;

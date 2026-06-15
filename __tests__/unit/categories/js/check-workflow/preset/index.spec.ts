@@ -1,5 +1,6 @@
 import { getCheckWorkflowPreset } from '#src/categories/js/check-workflow/preset/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
+import { nvmrcWorkflowMutation } from '#src/categories/js/nvmrc/nvmrc.service.ts';
 import { describe, expect, it } from 'vitest';
 
 const expectedContent = {
@@ -39,6 +40,7 @@ const expectedContent = {
 describe('check-workflow/preset', () => {
   it('returns the base check workflow config', () => {
     expect(getCheckWorkflowPreset().content).toEqual(expectedContent);
+    expect(getCheckWorkflowPreset().mutations).toEqual([nvmrcWorkflowMutation]);
   });
 
   expectGithubWorkflow(getCheckWorkflowPreset().content);

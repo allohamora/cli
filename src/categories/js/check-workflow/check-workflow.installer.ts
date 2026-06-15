@@ -6,6 +6,7 @@ import {
 } from '#src/categories/js/check-workflow/check-workflow.service.ts';
 import { getCheckWorkflowPreset } from '#src/categories/js/check-workflow/preset/index.ts';
 import { writeGithubWorkflow } from '#src/services/github.service.ts';
+import { applyMutations } from '#src/utils/mutation.utils.ts';
 
 const checkStepNames = {
   [CheckScriptName.Lint]: 'Run lint',
@@ -22,7 +23,11 @@ const createCheckSteps = (scripts: CheckScriptNameValue[]) => {
 };
 
 export const checkWorkflow = async () => {
-  const { content } = getCheckWorkflowPreset();
+  const sourcePreset = getCheckWorkflowPreset();
+  const preset = { ...sourcePreset, content: structuredClone(sourcePreset.content) };
+  await applyMutations(preset, preset.mutations);
+
+  const { content } = preset;
   const scripts = await getAvailableCheckScripts();
   const workflow = {
     ...content,
