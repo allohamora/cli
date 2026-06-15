@@ -7,9 +7,6 @@ export const defaultPreset = {
     jobs: {
       codecov: {
         'runs-on': 'ubuntu-latest',
-        env: {
-          CI: true,
-        },
         steps: [
           {
             name: 'Checkout code',
