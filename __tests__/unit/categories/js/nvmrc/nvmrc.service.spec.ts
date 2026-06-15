@@ -108,5 +108,26 @@ describe('nvmrc.service', () => {
         },
       ]);
     });
+
+    it('does not mutate jobs without steps', async () => {
+      installationState.setSelectedInstallOptions(['nvmrc']);
+      const preset: WorkflowPreset = {
+        content: {
+          name: 'test',
+          jobs: {
+            test: {
+              'runs-on': 'ubuntu-latest',
+            },
+          },
+        },
+        mutations: [],
+      };
+
+      await nvmrcWorkflowMutation(preset);
+
+      expect(preset.content.jobs.test).toEqual({
+        'runs-on': 'ubuntu-latest',
+      });
+    });
   });
 });
