@@ -14,11 +14,11 @@ const createWorkflowPreset = (): WorkflowPreset => ({
         steps: [
           {
             name: 'Checkout code',
-            uses: 'actions/checkout@v4',
+            uses: 'actions/checkout@v6',
           },
           {
             name: 'Install node',
-            uses: 'actions/setup-node@v4',
+            uses: 'actions/setup-node@v6',
             with: {
               cache: 'npm',
             },
@@ -58,7 +58,7 @@ describe('nvmrc.service', () => {
 
       expect(preset.content.jobs.test?.steps?.[1]).toEqual({
         name: 'Install node',
-        uses: 'actions/setup-node@v4',
+        uses: 'actions/setup-node@v6',
         with: {
           cache: 'npm',
           'node-version-file': '.nvmrc',
@@ -73,7 +73,7 @@ describe('nvmrc.service', () => {
 
       expect(preset.content.jobs.test?.steps?.[1]).toEqual({
         name: 'Install node',
-        uses: 'actions/setup-node@v4',
+        uses: 'actions/setup-node@v6',
         with: {
           cache: 'npm',
         },
@@ -90,7 +90,7 @@ describe('nvmrc.service', () => {
               steps: [
                 {
                   name: 'Release to github',
-                  uses: 'softprops/action-gh-release@v2',
+                  uses: 'softprops/action-gh-release@v3',
                 },
               ],
             },
@@ -104,7 +104,7 @@ describe('nvmrc.service', () => {
       expect(preset.content.jobs.release?.steps).toEqual([
         {
           name: 'Release to github',
-          uses: 'softprops/action-gh-release@v2',
+          uses: 'softprops/action-gh-release@v3',
         },
       ]);
     });

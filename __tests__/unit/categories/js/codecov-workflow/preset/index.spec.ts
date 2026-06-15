@@ -17,11 +17,11 @@ describe('codecov-workflow/preset', () => {
           steps: [
             {
               name: 'Checkout code',
-              uses: 'actions/checkout@v4',
+              uses: 'actions/checkout@v6',
             },
             {
               name: 'Install node',
-              uses: 'actions/setup-node@v4',
+              uses: 'actions/setup-node@v6',
               with: {
                 cache: 'npm',
               },
@@ -36,7 +36,7 @@ describe('codecov-workflow/preset', () => {
             },
             {
               name: 'Upload coverage to Codecov',
-              uses: 'codecov/codecov-action@v4',
+              uses: 'codecov/codecov-action@v7',
             },
           ],
         },

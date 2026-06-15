@@ -20,7 +20,7 @@ describe('release-workflow/preset', () => {
           steps: [
             {
               name: 'Checkout code',
-              uses: 'actions/checkout@v4',
+              uses: 'actions/checkout@v6',
             },
             {
               name: 'Get release notes from CHANGELOG.md',
@@ -32,7 +32,7 @@ describe('release-workflow/preset', () => {
             },
             {
               name: 'Release to github',
-              uses: 'softprops/action-gh-release@v2',
+              uses: 'softprops/action-gh-release@v3',
               with: {
                 body: '${{ steps.get_release_notes.outputs.release_notes }}',
               },
