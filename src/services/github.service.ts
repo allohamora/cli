@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { ensureRootDir, writeRootFile } from '#src/services/root.service.ts';
-import { Document, isMap, isNode, isSeq, isScalar, Pair, Scalar, YAMLMap } from 'yaml';
+import { Document, isMap, isNode, isSeq, isScalar } from 'yaml';
 
 export const GITHUB_DIR_NAME = '.github';
 export const GITHUB_WORKFLOWS_DIR_NAME = 'workflows';
@@ -49,41 +49,9 @@ const addSpaceBetweenTopLevelEntries = (node: unknown) => {
   });
 };
 
-const expandWorkflowEvents = (node: unknown) => {
-  if (!isMap(node)) {
-    return;
-  }
-
-  const eventPair = node.items.find((pair) => isScalar(pair.key) && pair.key.value === 'on');
-  if (!eventPair || !isSeq(eventPair.value)) {
-    return;
-  }
-
-  const eventPairs = eventPair.value.items.flatMap((event) => {
-    if (isScalar(event)) {
-      return [new Pair(new Scalar(event.value), null)];
-    }
-
-    if (isMap(event)) {
-      return event.items;
-    }
-
-    return [];
-  });
-
-  if (eventPairs.length !== eventPair.value.items.length) {
-    return;
-  }
-
-  const eventsMap = new YAMLMap();
-  eventsMap.items = eventPairs;
-  eventPair.value = eventsMap;
-};
-
 const stringifyGithubWorkflow = (content: Record<string, unknown>) => {
   const document = new Document(content);
 
-  expandWorkflowEvents(document.contents);
   addSpaceBetweenTopLevelEntries(document.contents);
   addSpaceBetweenSteps(document.contents);
 
