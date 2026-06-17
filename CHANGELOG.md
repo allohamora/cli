@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/allohamora/cli/compare/v2.0.0...v2.1.0) (2026-06-17)
+
+### Features
+
+- Add npmrc option ([3a1ccc1](https://github.com/allohamora/cli/commit/3a1ccc109a478ed0eff83bb202e17595d67686b8))
+- Add .editorconfig ([ff6237d](https://github.com/allohamora/cli/commit/ff6237d7d3dbcf3da739134018dce67aad84bd40))
+- Add args based interface ([81891e5](https://github.com/allohamora/cli/commit/81891e5c60432da5525e262c799a390cc615c558))
+- Add --version ([ba4f01c](https://github.com/allohamora/cli/commit/ba4f01c8bbdb0f563a951c68c2bcb0d86d9dd41c))
+- Add --help ([6f13fba](https://github.com/allohamora/cli/commit/6f13fbacd60f17fb9c9cb1fe1516ca2530e9936c))
+- Remove option duplicates in args approach ([81f5f10](https://github.com/allohamora/cli/commit/81f5f109ddf4d33c94c9777c51365348411d5e4c))
+- Migrate to tsdown ([f0edfa0](https://github.com/allohamora/cli/commit/f0edfa0babe50fa4b84e318a2298304c4f311538))
+- Add dts ([1f96eeb](https://github.com/allohamora/cli/commit/1f96eeb02218371c4bee5675a4853efa8765c2d8))
+- Add prompt exit on ctrl+c ([072d4a4](https://github.com/allohamora/cli/commit/072d4a4b6a696d199906f10b08c986cc4c6c7593))
+
+### Refactor
+
+- Update editorconfig url to use https ([4b6a0ee](https://github.com/allohamora/cli/commit/4b6a0eed4a49dfd505d4936c0d32e47f173db166))
+- Add parseArgv ([6dfd6b7](https://github.com/allohamora/cli/commit/6dfd6b76b0fe31d0dbc715c9eda644c2d9e4385d))
+- Simplify parseArgv ([f5c1704](https://github.com/allohamora/cli/commit/f5c170404a69b418bc015b236d1d57b9a56b21a4))
+- Add default [] argv to main ([ce08c70](https://github.com/allohamora/cli/commit/ce08c705ad8ba497a6962694f18620e21f19817d))
+- Move yaml to dependencies ([89499f2](https://github.com/allohamora/cli/commit/89499f235b7cfda4d5ce86588ee9fd2b3abb54b3))
+- Remove constructor from CliError ([43523d3](https://github.com/allohamora/cli/commit/43523d3213214c9ac4bc46ed5f2f60983a7b48be))
+
+### Documentation
+
+- Add missing jest integration to eslint ([013ec24](https://github.com/allohamora/cli/commit/013ec24163e0745507c7871397e8a38e86beefe8))
+- Improve README.md options text ([12d5854](https://github.com/allohamora/cli/commit/12d5854eedfe527315d04e08e855d88b4e711c71))
+- Add args usage to README.md ([a0141ea](https://github.com/allohamora/cli/commit/a0141ea22511c99e6567138504e45e6c630ec1cf))
+- Add missing space to README.md ([07af3f5](https://github.com/allohamora/cli/commit/07af3f5f06a5fab34d2337ac57cbbdd616e232a6))
+
+### Continuous Integration
+
+- Remove checkout options from publish and add to release ([33e67e3](https://github.com/allohamora/cli/commit/33e67e3b319c50d919ad0a204565bd84761cc1c3))
+
+### Chores
+
+- Remove "chmod +x ./bin/cli.mjs" ([cb8a99c](https://github.com/allohamora/cli/commit/cb8a99c946c90025a39d9eca11d7a58652b9afb0))
+- Reorder tsdown config keys ([9a055c1](https://github.com/allohamora/cli/commit/9a055c15bf0c4760bda70c59c3f58de9be7738c2))
+
 ## [2.0.0](https://github.com/allohamora/cli/compare/1.22.0...v2.0.0) (2026-06-17)
 
 ### ⚠ BREAKING CHANGES
