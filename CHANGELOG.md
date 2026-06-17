@@ -3,6 +3,152 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/allohamora/cli/compare/1.22.0...v2.0.0) (2026-06-17)
+
+### ⚠ BREAKING CHANGES
+
+- Migrate to erasable syntax ([882c511](https://github.com/allohamora/cli/commit/882c511d6aa5e2db4b4932a0130cf9178b2c8e8f))
+- Update ora to 9.4.0 ([f1a4055](https://github.com/allohamora/cli/commit/f1a40559784d6e5c3e59927fc6c51cacc9e7c825))
+- Update inquirer to 14.0.2 ([05f6d91](https://github.com/allohamora/cli/commit/05f6d91a413bd4da20af4e4ff4aa5614ba20a5a0))
+- Update type-fest to 5.7.0 ([8f3e4a2](https://github.com/allohamora/cli/commit/8f3e4a24fd9bc5f1d412a21cad584da4c30a8498))
+- Remove build workflow → use check workflow instead ([f4b6432](https://github.com/allohamora/cli/commit/f4b64323dca5ea026bce82a20ad2340f36d5339d))
+
+### Features
+
+- Add pull request template ([c7a3630](https://github.com/allohamora/cli/commit/c7a3630d4d164b92fa2aa2acec442d48bf636089))
+- Make npm ci instead of npm i ([1f61836](https://github.com/allohamora/cli/commit/1f61836f8f9a27c73edf577ce59b66352f26fa3f))
+- Add execa ([33b0240](https://github.com/allohamora/cli/commit/33b02407642fab82e4cdd8cc25dd996143d2bdfb))
+- Add sort-package-json ([0fed40f](https://github.com/allohamora/cli/commit/0fed40f5d5cca49657a65d65a6d522d4dd1dbeab))
+- Add dedent ([b8afae8](https://github.com/allohamora/cli/commit/b8afae842cd46b6ffa85abf4a1582149bae162aa))
+- Add zero presets guard ([29fd893](https://github.com/allohamora/cli/commit/29fd893fee7a3e355d807334f044e9193d66fa1b))
+- Add separate ignores for eslint ([1f687ad](https://github.com/allohamora/cli/commit/1f687ad7decf8c921e01adfa885fd2a814df1680))
+- Add beautifulSort.configs.recommended usage ([5e3f39f](https://github.com/allohamora/cli/commit/5e3f39f073cfffbead639c64ad675fc0eedf0fee))
+- Add check workflow ([bda7ace](https://github.com/allohamora/cli/commit/bda7ace950f04ac1ac40ffc3d9685d626a1d28c8))
+- Add .nvmrc option ([c94e39a](https://github.com/allohamora/cli/commit/c94e39a4ac11669eedd0d6af5acbee7d0828baf8))
+- Add object based workflows ([2c26773](https://github.com/allohamora/cli/commit/2c2677321729c51f5ca3128935eed623086ba9f8))
+- Add nvmrc mutation ([803270a](https://github.com/allohamora/cli/commit/803270ab7f054c9225f2856ec206ed2c7b9ce5e5))
+- Update all step versions ([cbd6584](https://github.com/allohamora/cli/commit/cbd6584356e0748579e9b6a22fb8d761de4481b6))
+- Replace on: [push] with branches: "\*\*" in codecov ([a7ce3a7](https://github.com/allohamora/cli/commit/a7ce3a711b5fd98758acb645a065735cf08e3d29))
+- Remove yml override in prettier ([7d32454](https://github.com/allohamora/cli/commit/7d324541a3e52b09d2f67d9b90f25b6f78ed9dd9))
+
+### Bug Fixes
+
+- Remove testRegex duplicate from react-ts jest config ([af2aaea](https://github.com/allohamora/cli/commit/af2aaea4ba63452cd082a07a904724dbbcbfa65e))
+- Add correct spelling of minimumOneValidate ([5aa93b3](https://github.com/allohamora/cli/commit/5aa93b3b780e59953b587668b974a4b31b09c190))
+
+### Refactor
+
+- Add rolldown ([2254eb1](https://github.com/allohamora/cli/commit/2254eb123f4a34af58be51a2e7dff800fb652d9f))
+- Move .ncurc to mjs ([9c61e16](https://github.com/allohamora/cli/commit/9c61e169d268fb7381257524401a4490262fa254))
+- Fix node: in names ([b21209d](https://github.com/allohamora/cli/commit/b21209d821a15c5006a60df68e89fdc91f0c9560))
+- Add runCommand helper ([afa78f9](https://github.com/allohamora/cli/commit/afa78f90baaab159e26451f8eabed7a33495dd96))
+- Update command execution to use runCommand utility for consistency ([5d51e85](https://github.com/allohamora/cli/commit/5d51e857f7d878927255c9774aae17172076a915))
+- Rename category.utils to category.service ([c071b21](https://github.com/allohamora/cli/commit/c071b21af818d18d45bf92b9ac0f862779f112d2))
+- Move formatJavascript to prettier service ([bf61c6b](https://github.com/allohamora/cli/commit/bf61c6ba5514014a596ef6df9506a7e82126a1fa))
+- Add utils ([0a787cf](https://github.com/allohamora/cli/commit/0a787cf110174a64cf35f1dd4a1ddb14e316130c))
+- Add root.service ([7a37014](https://github.com/allohamora/cli/commit/7a37014dde0da535ecf857d9bd255242ce524141))
+- Add npm.service ([82d3aba](https://github.com/allohamora/cli/commit/82d3aba487941ae195f132189f5ce66166ff4243))
+- Add terminal.service ([e58a6c4](https://github.com/allohamora/cli/commit/e58a6c48755e7ded14a388e92955af5155c72129))
+- Add github service ([e443248](https://github.com/allohamora/cli/commit/e44324857694b18f3501a8712562fac02fc344cd))
+- Add node.service ([16b1e7f](https://github.com/allohamora/cli/commit/16b1e7fa525e754605f3dbb482b9dbad26837845))
+- Add prompt.service ([0c6a86e](https://github.com/allohamora/cli/commit/0c6a86ee22bdb19ec90ea2f37760bd93ce413f73))
+- Add installation.service ([fc6d63c](https://github.com/allohamora/cli/commit/fc6d63ceca6667a67f1b4637ebda2733cfcfc846))
+- Remove unused utils ([b6eaee1](https://github.com/allohamora/cli/commit/b6eaee18f394e599a0ac670bb0e1e8c3dd6dcba2))
+- Add cli.service and state.service ([e0c974c](https://github.com/allohamora/cli/commit/e0c974cd60059a52c427f1038ecbab89dc7daca6))
+- Simplify state.service ([38dec02](https://github.com/allohamora/cli/commit/38dec0286e6b7083c7d14adc93d0439fc6440bda))
+- Move terminal.service to terminal.utils ([8aa7575](https://github.com/allohamora/cli/commit/8aa757559ab011e7beadfa55652bc0c9e678b1cb))
+- Simplify installCategoryOptions function using for-await-of loop ([95ea8f2](https://github.com/allohamora/cli/commit/95ea8f2f503a8398602af0d6028dc8aa1899619a))
+- Remove useless for await ([4bc3b22](https://github.com/allohamora/cli/commit/4bc3b224c8f252838651e371f4a1c090215cc42f))
+- Replace any with string ([5131875](https://github.com/allohamora/cli/commit/5131875ee1d0a7f7bef677aff19d206f1cfd1ead))
+- Remove redundant expects in root.service.spec ([2b67943](https://github.com/allohamora/cli/commit/2b679435b99cd46ea2ad8f3644b23c64dc60b7c1))
+- Remove shared options array ([d6ad229](https://github.com/allohamora/cli/commit/d6ad229c36c848df82c8705928c21ec24a918638))
+- Remove shared selectedInstallOptions array ([6a95cb8](https://github.com/allohamora/cli/commit/6a95cb8dc541375b63652fa43354a57ccbb85efe))
+- Add recursive: true ([b0d68d0](https://github.com/allohamora/cli/commit/b0d68d002c2f424117e39ce80dc2c484e7f93db1))
+- Fix grammar mistakes ([ee7d903](https://github.com/allohamora/cli/commit/ee7d903c997f50ede0aae5ca4aff94508ec6dd39))
+- Remove type-guard from addNpmScripts ([5563620](https://github.com/allohamora/cli/commit/5563620418fc1bb003253390c78273ee0c42fcb4))
+- Make naming like config/index instead of name.config ([5d63e05](https://github.com/allohamora/cli/commit/5d63e054fd1d6c8123847f8fa6ed205a75a7e6cc))
+- Remove vitest globals ([27217f5](https://github.com/allohamora/cli/commit/27217f56fb187a57d135f3bd3d45dfbf3988786c))
+- Rename jestEntrypoint to jest for consistency ([45bbd16](https://github.com/allohamora/cli/commit/45bbd163483ab7b094378b3769b74f77bbe80ee4))
+- Rename .entrypoint to .installer ([3175cc4](https://github.com/allohamora/cli/commit/3175cc4b69fce0bced7e847f4c178f6746c385f8))
+- Standardize constant naming conventions ([8142ea9](https://github.com/allohamora/cli/commit/8142ea99ca4c724d20997e7ec22c452afb26ae23))
+- Rename config retrieval functions for clarity ([ba8705e](https://github.com/allohamora/cli/commit/ba8705e83d4d07a9286e81f0c5c43b2d3acc5b0b))
+- Rename configs to presets ([b5930d2](https://github.com/allohamora/cli/commit/b5930d225511bcca8647556580bfe164f26679b5))
+- Simplify usePreset return type ([9e7c697](https://github.com/allohamora/cli/commit/9e7c6978834f9a97e1348c8bb0bb335a473a447f))
+- Remove node-version-file: ".nvmrc"' ([40403a7](https://github.com/allohamora/cli/commit/40403a7ddf6515226e867f6869837f09f1ac48d7))
+- Rename WORKFLOW_FILENAME to CHECK_WORKFLOW_FILENAME for consistency ([ef6e1a4](https://github.com/allohamora/cli/commit/ef6e1a4485899f75cca4ecd1638389a53a03a15a))
+- Add spaces in github workflows ([632f76f](https://github.com/allohamora/cli/commit/632f76ffe6c7c337e6544305eff20972df2ec8ee))
+- Replace content.trim() with content.trimEnd() ([39841c4](https://github.com/allohamora/cli/commit/39841c4964f4eb581c9b9973e0d6f381fa943f03))
+- Remove structuredClone usage ([6d848e9](https://github.com/allohamora/cli/commit/6d848e99122eaf9fcbbc08ed65d8c0d8a37cd9b4))
+- Remove const { content } usage ([32ea005](https://github.com/allohamora/cli/commit/32ea0054e8dfbff11bf7631a3457e8c48921314a))
+- Remove CI environment variable from workflow configurations ([2cd3715](https://github.com/allohamora/cli/commit/2cd37153b5bf8dcc2bb9d641037bf8d0f94043a4))
+- Make node-version-file on top ([733bf8b](https://github.com/allohamora/cli/commit/733bf8b166e3a5f6770af9de230a74403a9c3ac5))
+- Remove quotes from node-version-file and cache in workflow configurations ([0579a3a](https://github.com/allohamora/cli/commit/0579a3a037f8fbf5fe5fe33511289b5c3f8a6a0f))
+- Add space between updates in dependabot ([37c0dd9](https://github.com/allohamora/cli/commit/37c0dd9b2fb4222c0694d4bdae17a29dce3309d5))
+
+### Documentation
+
+- Update requirements in README.md ([36451fc](https://github.com/allohamora/cli/commit/36451fc150e9dca9170eb60b176f2777848f9b21))
+- Replace build badge to check badge in README ([0bf7508](https://github.com/allohamora/cli/commit/0bf7508bd0c9fff7c8ce5b9eae8f5e62c13f7147))
+
+### Testing
+
+- Migrate to vitest ([b8b75ae](https://github.com/allohamora/cli/commit/b8b75aeb2a45dfe395b9c56d0ca61d9e9cb90273))
+- Make coverage 100% ([a036b08](https://github.com/allohamora/cli/commit/a036b0886c2d16fd7c9f08767efa099e92cbe7a7))
+- Fix type issues ([1f371bb](https://github.com/allohamora/cli/commit/1f371bba08aee4ed1013e1268707b6e228ad9993))
+- Add setup-test-context ([9cf4736](https://github.com/allohamora/cli/commit/9cf4736844f9dc34f5f32963adff6504e0227511))
+- Add setup-text-context usage ([fa581d1](https://github.com/allohamora/cli/commit/fa581d15ccfe43372b117cf56451b7be4a3d5f64))
+- Rename all .test files to .spec ([22429b2](https://github.com/allohamora/cli/commit/22429b2f3462ca27c2bcd67968315183fdc92c21))
+- Unify tests ([6bfd69d](https://github.com/allohamora/cli/commit/6bfd69d9d84d700bbc0fa4389b90c9ec37d269e1))
+- Fix entypoint typo ([26b2dfd](https://github.com/allohamora/cli/commit/26b2dfde76328f621571f3c4f42d00c50ee0ae15))
+- Add missing stylelint tests ([4612917](https://github.com/allohamora/cli/commit/46129174fbd1cdcf36e2506d55835d219f6c2f84))
+- Add inline fixtures ([1fcc239](https://github.com/allohamora/cli/commit/1fcc2398525d3bf5617ea9760e20e623d65ef0f0))
+- Move tests to **tests**/unit ([15ad1ce](https://github.com/allohamora/cli/commit/15ad1ce424afa1d06d703246b83626a8b5adb5e8))
+- Remove test duplication ([cd8aca2](https://github.com/allohamora/cli/commit/cd8aca29273fe79856f1ee01b7e7000a9a0239fb))
+- Add tests for missing package.json ([5f0125d](https://github.com/allohamora/cli/commit/5f0125d456ee425fc47e0ab311e00d96b0b82b5d))
+- Add self to Loading mock ([affe0a8](https://github.com/allohamora/cli/commit/affe0a8636be7e6c0b341ff532f1fe423a7b2205))
+- Update test description for js options export ([1032585](https://github.com/allohamora/cli/commit/1032585a1023f04ee2bb300297bdf65795692a21))
+- Ensure default config is set before each test ([c0a6888](https://github.com/allohamora/cli/commit/c0a6888884010c7eb652d89c7cec8d446793de32))
+- Remove arrayContaining from command expectations ([779bec1](https://github.com/allohamora/cli/commit/779bec18fcc9ed30b83eda9c30d463221df83311))
+- Unify test utils ([8e645b0](https://github.com/allohamora/cli/commit/8e645b0a7192cbfd73a9e65cb82a2127aed0f970))
+- Add missing toEqual ([12179e3](https://github.com/allohamora/cli/commit/12179e3084ccf1c74412ed6b874ee35eed94c227))
+- Make readable array based toBe ([b6b8985](https://github.com/allohamora/cli/commit/b6b89855740c54a02d0db60c66d201dc9d026759))
+- Add stronger checks for expectGithubWorkflow ([d3be1e2](https://github.com/allohamora/cli/commit/d3be1e2d656d72dd79ce6ce02bfb6d7c64767aa3))
+
+### Continuous Integration
+
+- Add pr-title action ([25c98b6](https://github.com/allohamora/cli/commit/25c98b6ab1e8903dddf23b52cefe810a1da16cf0))
+- Remove pr-title execution for forks ([40c9c59](https://github.com/allohamora/cli/commit/40c9c597c8c0e19bed41901e92ee671529d30307))
+- Replace build.yml with check.yml ([a965049](https://github.com/allohamora/cli/commit/a965049764df17baeff5497218a2fc3e99e00d17))
+- Add node-version-file: ".nvmrc" to workflows ([bedc39e](https://github.com/allohamora/cli/commit/bedc39e2e9fbfa3d6135922e5e509f0c74458ce2))
+- Update dependabot ([db9aaef](https://github.com/allohamora/cli/commit/db9aaefedd76398cf676f34c85b369112067af44))
+- Add publish ([f99042f](https://github.com/allohamora/cli/commit/f99042f0b1848c87ae2af06937f2fc4abcc4073e))
+- Add publish checkout options ([d7f8e34](https://github.com/allohamora/cli/commit/d7f8e34a465f8be8fc63cd2c1784b4758b57d380))
+- Add missing fetch-depth: 0 to release.yml ([8fc7eb4](https://github.com/allohamora/cli/commit/8fc7eb471d78d4dfd22a63d7cf433937e9111b43))
+
+### Chores
+
+- **deps:** Bump actions/checkout from 5 to 6 ([301a097](https://github.com/allohamora/cli/commit/301a09733d0daa66f699b715a93546f30e7bd0fe))
+- **deps:** Bump codecov/codecov-action from 5 to 6 ([f6e5025](https://github.com/allohamora/cli/commit/f6e5025cea75f292d170cac126334a9f033c1aff))
+- **deps:** Bump softprops/action-gh-release from 2 to 3 ([1d420f7](https://github.com/allohamora/cli/commit/1d420f72aa6b83f3bb050410a1b92bc9d74226e9))
+- **deps:** Bump codecov/codecov-action from 6 to 7 ([6b32e82](https://github.com/allohamora/cli/commit/6b32e82eb445dbc0a6aec3e17705f702ace7aaf3))
+- Update commitlint ([260c7a5](https://github.com/allohamora/cli/commit/260c7a5331ec59a83779c4b80c3bd7a161e76b80))
+- Update rollup ([7c0aed8](https://github.com/allohamora/cli/commit/7c0aed8811c19f2780a0ccc41b771ede20775a7d))
+- Add .npmrc with min-release-age configuration ([afc7932](https://github.com/allohamora/cli/commit/afc793234300bdedd777588d907dfaf4c31fe3a2))
+- Update engines ([95a01b6](https://github.com/allohamora/cli/commit/95a01b61cb902819b4612bdc564e7419389b3611))
+- Add typecheck script ([bdfe18f](https://github.com/allohamora/cli/commit/bdfe18f77b10f415add85f56adb18a50e92d9be8))
+- Update typescript ([a422ca1](https://github.com/allohamora/cli/commit/a422ca1825d201e100df4a06655db1e9092093ad))
+- Bump deps ([1aedd72](https://github.com/allohamora/cli/commit/1aedd72294e350f59c099ee2add106a4cc0da858))
+- Bump eslint ([2284900](https://github.com/allohamora/cli/commit/228490057dc271a2ba1f360804a3c9fa782ed4bd))
+- Apply npm audit fix ([1500d7c](https://github.com/allohamora/cli/commit/1500d7ce8051d71ae8ec7b5b6b370d5659687081))
+- Update prebuild script to include typecheck ([0bd9ed0](https://github.com/allohamora/cli/commit/0bd9ed08f363d634d5afed48969acb20e2283a4f))
+- Remove --watch from dev script ([5b5bd24](https://github.com/allohamora/cli/commit/5b5bd246f212a9d4f6bac8f00ffd139ecc7a9504))
+- Add git-cliff ([12d21e7](https://github.com/allohamora/cli/commit/12d21e7f787e9c3b9ee364d87ab2f24a7fd5fe09))
+
+### Other
+
+- Revert "feat: add sort-package-json" ([ce7a321](https://github.com/allohamora/cli/commit/ce7a321002e900a23995056beece99b6d6abfdda))
+- Revert "ci: remove pr-title execution for forks" ([f5ebac3](https://github.com/allohamora/cli/commit/f5ebac366b66d1495010d72463d1aa23de650a96))
+
 ## [1.22.0](https://github.com/allohamora/cli/compare/1.21.1...1.22.0) (2025-11-24)
 
 ### Features
