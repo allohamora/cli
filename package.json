@@ -13,7 +13,6 @@
     "dev": "node ./src/index.ts",
     "prebuild": "npm run typecheck",
     "build": "tsdown",
-    "postbuild": "chmod +x ./bin/cli.mjs",
     "prestart": "npm run build",
     "start": "./bin/cli.mjs",
     "prepare": "husky",
