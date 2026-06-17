@@ -59,6 +59,16 @@ describe('index', () => {
         expect(log).not.toHaveBeenCalled();
       });
 
+      it('prints help and returns', async () => {
+        const log = vi.fn();
+        consoleMock.setLogHandler(log);
+
+        await main(['--help']);
+
+        expect(log).toHaveBeenCalledTimes(1);
+        expect(log.mock.calls[0]?.[0]).toContain('npx @allohamora/cli <category> <preset> <...options>');
+      });
+
       it('prints version and returns', async () => {
         const log = vi.fn();
         consoleMock.setLogHandler(log);

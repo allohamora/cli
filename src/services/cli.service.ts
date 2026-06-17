@@ -1,3 +1,4 @@
+import pkg from '../../package.json' with { type: 'json' };
 import categories from '#src/categories/index.ts';
 import inquirer from 'inquirer';
 import ora from 'ora';
@@ -13,6 +14,58 @@ export class CliError extends Error {
 }
 
 const categoriesKeys = Object.keys(categories);
+
+export const toLines = (items: string[], maxLength = 60, indent = '  '): string[] => {
+  const lines: string[] = [];
+  let current = '';
+
+  for (const item of items) {
+    const next = current === '' ? item : `${current}, ${item}`;
+
+    if (next.length > maxLength && current !== '') {
+      lines.push(`${indent}${current},`);
+      current = item;
+    } else {
+      current = next;
+    }
+  }
+
+  if (current !== '') {
+    lines.push(`${indent}${current}`);
+  }
+
+  return lines;
+};
+
+export const getVersion = () => pkg.version;
+
+export const getHelp = () => {
+  const lines: string[] = [
+    'npx @allohamora/cli <category> <preset> <...options>',
+    '',
+    'Usage:',
+    '',
+    'npx @allohamora/cli js node:ts prettier eslint       install options for a js project',
+    'npx @allohamora/cli --help                           show this help message',
+    'npx @allohamora/cli --version                        print version number',
+    '',
+  ];
+
+  for (const [name, category] of Object.entries(categories)) {
+    const { state, options } = category as Category;
+
+    lines.push(`Category "${name}" presets:`);
+    lines.push('');
+    lines.push(...toLines(Object.values(state.presets)));
+    lines.push('');
+    lines.push(`Category "${name}" options:`);
+    lines.push('');
+    lines.push(...toLines(Object.keys(options).map(toKebabCase)));
+    lines.push('');
+  }
+
+  return lines.join('\n');
+};
 
 export type ResolvedArgs = {
   category: string;

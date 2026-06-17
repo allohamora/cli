@@ -1,4 +1,3 @@
-import pkg from '../package.json' with { type: 'json' };
 import categories from '#src/categories/index.ts';
 import { bold } from '#src/utils/console.utils.ts';
 import {
@@ -7,7 +6,7 @@ import {
   installCategoryOptions,
   chooseCategoryOptions,
 } from '#src/services/cli.service.ts';
-import { resolveArgs, CliError } from '#src/services/cli.service.ts';
+import { getHelp, getVersion, resolveArgs, CliError } from '#src/services/cli.service.ts';
 import type { Category } from '#src/services/state.service.ts';
 
 const runInteractive = async () => {
@@ -23,8 +22,13 @@ const runInteractive = async () => {
 };
 
 const runWithArgs = async (argv: string[]) => {
+  if (argv.includes('--help')) {
+    console.log(getHelp());
+    return;
+  }
+
   if (argv.includes('--version')) {
-    console.log(pkg.version);
+    console.log(getVersion());
     return;
   }
 
