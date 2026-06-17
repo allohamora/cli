@@ -25,6 +25,10 @@ export class Prompt {
       const index = this.answers.findIndex((answer) => answer.message === message);
       const [answer] = index === -1 ? [] : this.answers.splice(index, 1);
 
+      if (answer?.value instanceof Error) {
+        throw answer.value;
+      }
+
       return {
         [message]: answer?.value,
       } as unknown as ReturnType<typeof inquirer.prompt>;

@@ -4,6 +4,7 @@ import { installationState, loading, prompt } from '#__tests__/setup-test-contex
 import { describe, expect, it, vi } from 'vitest';
 import {
   CliError,
+  CliExitError,
   chooseMany,
   chooseOne,
   chooseCategoryOptions,
@@ -19,6 +20,7 @@ import {
 } from '#src/services/cli.service.ts';
 import type { Category } from '#src/services/state.service.ts';
 import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
+import { ExitPromptError } from '@inquirer/core';
 
 describe('cli.service', () => {
   const message = '__test__';
@@ -79,6 +81,19 @@ describe('cli.service', () => {
       expect(prompt.getQuestions()).toEqual([promptOptions]);
       expect(actual).toBe(expected);
     });
+
+    it('throws CliExitError when prompt throws ExitPromptError', async () => {
+      prompt.answer(message, new ExitPromptError('exit'));
+
+      await expect(chooseOne(message, choices)).rejects.toThrow(CliExitError);
+    });
+
+    it('rethrows non-ExitPromptError errors', async () => {
+      const error = new Error('unexpected');
+      prompt.answer(message, error);
+
+      await expect(chooseOne(message, choices)).rejects.toThrow(error);
+    });
   });
 
   describe('requireAtLeastOneChoice', () => {
@@ -115,6 +130,19 @@ describe('cli.service', () => {
 
       expect(prompt.getQuestions()).toEqual([promptOptions]);
       expect(actual).toBe(expected);
+    });
+
+    it('throws CliExitError when prompt throws ExitPromptError', async () => {
+      prompt.answer(message, new ExitPromptError('exit'));
+
+      await expect(chooseMany(message, choices)).rejects.toThrow(CliExitError);
+    });
+
+    it('rethrows non-ExitPromptError errors', async () => {
+      const error = new Error('unexpected');
+      prompt.answer(message, error);
+
+      await expect(chooseMany(message, choices)).rejects.toThrow(error);
     });
   });
 
