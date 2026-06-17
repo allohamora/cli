@@ -1,46 +1,80 @@
 import { getReleaseWorkflowPreset } from '#src/categories/js/release-workflow/preset/index.ts';
 import { expectGithubWorkflow } from '#__tests__/utils/github.utils.ts';
 import { describe, expect, it } from 'vitest';
+import { content, createCliffConfig } from '#src/categories/js/release-workflow/preset/default.preset.ts';
+
+const REPO_URL = 'https://github.com/allohamora/cli';
 
 describe('release-workflow/preset', () => {
   it('returns the release workflow config', () => {
-    expect(getReleaseWorkflowPreset().content).toEqual({
-      name: 'release',
-      on: {
-        push: {
-          tags: ['*.*.*'],
-        },
-      },
-      permissions: {
-        contents: 'write',
-      },
-      jobs: {
-        release: {
-          'runs-on': 'ubuntu-latest',
-          steps: [
-            {
-              name: 'Checkout code',
-              uses: 'actions/checkout@v6',
-            },
-            {
-              name: 'Get release notes from CHANGELOG.md',
-              uses: 'yashanand1910/standard-release-notes@v1.5.0',
-              id: 'get_release_notes',
-              with: {
-                version: '${{ github.ref }}',
-              },
-            },
-            {
-              name: 'Release to github',
-              uses: 'softprops/action-gh-release@v3',
-              with: {
-                body: '${{ steps.get_release_notes.outputs.release_notes }}',
-              },
-            },
-          ],
-        },
-      },
-    });
+    expect(getReleaseWorkflowPreset().content).toEqual(content);
+  });
+
+  it('returns createCliffConfig', () => {
+    expect(getReleaseWorkflowPreset().createCliffConfig).toBe(createCliffConfig);
+  });
+
+  it('generates cliff.toml with the repo url', () => {
+    expect(createCliffConfig(REPO_URL)).toBe(
+      [
+        '# git-cliff ~ configuration file',
+        '# https://git-cliff.org/docs/configuration',
+        '',
+        '[changelog]',
+        'header = """',
+        '# Changelog',
+        '',
+        'All notable changes to this project will be documented in this file.',
+        'See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.',
+        '"""',
+        'postprocessors = [',
+        `    { pattern = '<!-- \\d+ -->', replace = "" },`,
+        ']',
+        'body = """\\',
+        `{% set repo_url = "${REPO_URL}" %}\\`,
+        '{% if get_env(name="REMOVE_TITLE", default="") == "" %}\\',
+        '{% if version %}\\',
+        '{% if previous.version %}\\',
+        '\\n## [{{ version | trim_start_matches(pat="v") }}]({{ repo_url }}/compare/{{ previous.version }}...{{ version }}) ({{ timestamp | date(format="%Y-%m-%d") }})\\n\\n\\',
+        '{% else %}\\',
+        '\\n## {{ version | trim_start_matches(pat="v") }} ({{ timestamp | date(format="%Y-%m-%d") }})\\n\\n\\',
+        '{% endif %}\\',
+        '{% else %}\\',
+        '\\n## [Unreleased]\\n\\n\\',
+        '{% endif %}\\',
+        '{% endif %}\\',
+        '{% for group, commits in commits | group_by(attribute="group") %}\\',
+        '{% if not loop.first %}\\',
+        '\\n\\',
+        '{% endif %}\\',
+        '### {{ group | upper_first }}\\n\\',
+        '{% for commit in commits %}\\',
+        '- {% if commit.scope %}**{{ commit.scope }}:** {% endif %}{{ commit.message | split(pat="\\n") | first | upper_first }}{% if commit.breaking_description and commit.breaking_description != commit.message %} → {{ commit.breaking_description }}{% endif %} ([{{ commit.id | truncate(length=7, end="") }}]({{ repo_url }}/commit/{{ commit.id }}))\\n\\',
+        '{% endfor %}\\',
+        '{% endfor %}',
+        '"""',
+        '',
+        '[git]',
+        'filter_unconventional = false',
+        'commit_parsers = [',
+        '    { message = "^\\\\w+(\\\\([^)]*\\\\))?!:", group = "<!-- 00 -->⚠ BREAKING CHANGES" },',
+        '    { footer = "^BREAKING CHANGE:", group = "<!-- 00 -->⚠ BREAKING CHANGES" },',
+        '    { message = "^feat", group = "<!-- 01 -->Features" },',
+        '    { message = "^fix", group = "<!-- 02 -->Bug Fixes" },',
+        '    { message = "^perf", group = "<!-- 03 -->Performance" },',
+        '    { message = "^refactor", group = "<!-- 04 -->Refactor" },',
+        '    { message = "^doc", group = "<!-- 05 -->Documentation" },',
+        '    { message = "^style", group = "<!-- 06 -->Styling" },',
+        '    { message = "^test", group = "<!-- 07 -->Testing" },',
+        '    { message = "^revert", group = "<!-- 08 -->Revert" },',
+        '    { message = "^chore: release v\\\\d+\\\\.\\\\d+\\\\.\\\\d+", skip = true },',
+        '    { message = "^Merge pull request", skip = true },',
+        '    { message = "^ci", group = "<!-- 09 -->Continuous Integration" },',
+        '    { message = "^chore", group = "<!-- 10 -->Chores" },',
+        '    { message = ".*", group = "<!-- 11 -->Other" },',
+        ']',
+      ].join('\n'),
+    );
   });
 
   expectGithubWorkflow(getReleaseWorkflowPreset().content);

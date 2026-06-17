@@ -7,14 +7,7 @@ import { setSelectedInstallOptions } from '#src/services/installation.service.ts
 import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
 import { unique } from '#src/utils/array.utils.ts';
 import type { Category } from '#src/services/state.service.ts';
-
-export class CliError extends Error {
-  public override name = 'CliError';
-}
-
-export class CliExitError extends Error {
-  public override name = 'CliExitError';
-}
+import { CliError, CliExitError } from '#src/utils/error.utils.ts';
 
 const categoriesKeys = Object.keys(categories);
 
