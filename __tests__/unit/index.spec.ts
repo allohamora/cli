@@ -1,8 +1,8 @@
 import pkg from '../../package.json' with { type: 'json' };
 import { consoleMock, fileSystem, loading, prompt, terminal } from '#__tests__/setup-test-context.ts';
 import { main } from '#src/index.ts';
-import { CliError } from '#src/services/cli.service.ts';
 import { describe, expect, it, vi } from 'vitest';
+import { CliError } from '#src/utils/error.utils.ts';
 
 describe('index', () => {
   describe('main', () => {

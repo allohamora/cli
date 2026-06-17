@@ -3,8 +3,6 @@ import categories from '#src/categories/index.ts';
 import { installationState, loading, prompt } from '#__tests__/setup-test-context.ts';
 import { describe, expect, it, vi } from 'vitest';
 import {
-  CliError,
-  CliExitError,
   chooseMany,
   chooseOne,
   chooseCategoryOptions,
@@ -21,6 +19,7 @@ import {
 import type { Category } from '#src/services/state.service.ts';
 import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
 import { ExitPromptError } from '@inquirer/core';
+import { CliError, CliExitError } from '#src/utils/error.utils.ts';
 
 describe('cli.service', () => {
   const message = '__test__';
