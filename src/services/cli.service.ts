@@ -2,16 +2,18 @@ import pkg from '../../package.json' with { type: 'json' };
 import categories from '#src/categories/index.ts';
 import inquirer from 'inquirer';
 import ora from 'ora';
+import { ExitPromptError } from '@inquirer/core';
 import { setSelectedInstallOptions } from '#src/services/installation.service.ts';
 import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
 import { unique } from '#src/utils/array.utils.ts';
 import type { Category } from '#src/services/state.service.ts';
 
 export class CliError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = 'CliError';
-  }
+  public override name = 'CliError';
+}
+
+export class CliExitError extends Error {
+  public override name = 'CliExitError';
 }
 
 const categoriesKeys = Object.keys(categories);
@@ -135,28 +137,44 @@ export const parseArgv = (argv: string[]): ParsedArgv => {
 };
 
 export const chooseOne = async <C extends string>(message: string, choices: readonly C[]) => {
-  const res = await inquirer.prompt({
-    type: 'select',
-    name: message,
-    message,
-    choices,
-  });
+  try {
+    const res = await inquirer.prompt({
+      type: 'select',
+      name: message,
+      message,
+      choices,
+    });
 
-  return res[message] as C;
+    return res[message] as C;
+  } catch (error) {
+    if (error instanceof ExitPromptError) {
+      throw new CliExitError();
+    }
+
+    throw error;
+  }
 };
 
 export const requireAtLeastOneChoice = (answers: unknown[]) => answers.length !== 0;
 
 export const chooseMany = async <C extends string>(message: string, choices: readonly C[]) => {
-  const res = await inquirer.prompt({
-    type: 'checkbox',
-    name: message,
-    message,
-    choices,
-    validate: requireAtLeastOneChoice,
-  });
+  try {
+    const res = await inquirer.prompt({
+      type: 'checkbox',
+      name: message,
+      message,
+      choices,
+      validate: requireAtLeastOneChoice,
+    });
 
-  return res[message] as C[];
+    return res[message] as C[];
+  } catch (error) {
+    if (error instanceof ExitPromptError) {
+      throw new CliExitError();
+    }
+
+    throw error;
+  }
 };
 
 export const chooseCategory = async () => {

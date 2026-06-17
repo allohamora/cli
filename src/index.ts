@@ -8,6 +8,7 @@ import {
   getVersion,
   parseArgv,
   CliError,
+  CliExitError,
 } from '#src/services/cli.service.ts';
 
 const runInteractive = async () => {
@@ -52,7 +53,11 @@ if (import.meta.main) {
   main(process.argv.slice(2)).catch((error: unknown) => {
     if (error instanceof CliError) {
       console.error(error.message);
-      process.exit(1);
+      process.exit(1); // general error
+    }
+
+    if (error instanceof CliExitError) {
+      process.exit(130); // Ctrl+C / SIGINT convention
     }
 
     throw error;
