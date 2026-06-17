@@ -79,15 +79,15 @@
     "type-fest": "^5.7.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.60.1",
-    "vitest": "^4.1.8",
-    "yaml": "^2.9.0"
+    "vitest": "^4.1.8"
   },
   "dependencies": {
     "dedent": "^1.7.2",
     "execa": "^9.6.1",
     "inquirer": "^14.0.2",
     "ora": "^9.4.0",
-    "prettier": "^3.8.3"
+    "prettier": "^3.8.3",
+    "yaml": "^2.9.0"
   },
   "lint-staged": {
     "*.ts": [
