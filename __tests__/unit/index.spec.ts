@@ -1,3 +1,4 @@
+import pkg from '../../package.json' with { type: 'json' };
 import { consoleMock, fileSystem, loading, prompt, terminal } from '#__tests__/setup-test-context.ts';
 import { main } from '#src/index.ts';
 import { CliError } from '#src/services/cli.service.ts';
@@ -56,6 +57,16 @@ describe('index', () => {
         await main(['js', 'node:ts', 'husky']);
 
         expect(log).not.toHaveBeenCalled();
+      });
+
+      it('prints version and returns', async () => {
+        const log = vi.fn();
+        consoleMock.setLogHandler(log);
+
+        await main(['--version']);
+
+        expect(log).toHaveBeenCalledWith(pkg.version);
+        expect(log).toHaveBeenCalledTimes(1);
       });
 
       it('throws CliError for invalid args', async () => {

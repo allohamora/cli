@@ -1,3 +1,4 @@
+import pkg from '../package.json' with { type: 'json' };
 import categories from '#src/categories/index.ts';
 import { bold } from '#src/utils/console.utils.ts';
 import {
@@ -22,6 +23,11 @@ const runInteractive = async () => {
 };
 
 const runWithArgs = async (argv: string[]) => {
+  if (argv.includes('--version')) {
+    console.log(pkg.version);
+    return;
+  }
+
   const args = resolveArgs(argv);
   const category = categories[args.category as keyof typeof categories] as Category;
 
