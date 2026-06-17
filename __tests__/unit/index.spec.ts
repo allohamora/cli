@@ -14,7 +14,7 @@ describe('index', () => {
         prompt.selectPreset('node:ts');
         prompt.selectOptions();
 
-        await main([]);
+        await main();
 
         expect(log).toHaveBeenCalledWith(`\x1b[22m\x1b[1mWelcome to Allohamora's cli\x1b[0m`);
         expect(log).toHaveBeenCalledWith(`\x1b[22m\x1b[1mInstallation completed\x1b[0m`);
@@ -25,7 +25,7 @@ describe('index', () => {
         prompt.selectPreset('node:ts');
         prompt.selectOptions('husky');
 
-        await main([]);
+        await main();
 
         expect(fileSystem.readJson('package.json')).toEqual({ scripts: { prepare: 'husky' } });
         expect(terminal.getCommands()).toEqual([

@@ -39,7 +39,7 @@ const runWithArgs = async (argv: string[]) => {
   }
 };
 
-export const main = async (argv: string[]) => {
+export const main = async (argv: string[] = []) => {
   if (argv.length > 0) {
     await runWithArgs(argv);
   } else {
