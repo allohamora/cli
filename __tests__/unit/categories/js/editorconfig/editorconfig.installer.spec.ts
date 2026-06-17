@@ -9,7 +9,7 @@ describe('editorconfig.installer', () => {
 
       expect(fileSystem.readFile('.editorconfig')).toBe(
         [
-          '# Editor configuration, see http://editorconfig.org',
+          '# Editor configuration, see https://editorconfig.org',
           'root = true',
           '',
           '[*]',

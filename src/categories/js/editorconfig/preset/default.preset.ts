@@ -1,7 +1,7 @@
 import dedent from 'dedent';
 
 export const config = dedent`
-  # Editor configuration, see http://editorconfig.org
+  # Editor configuration, see https://editorconfig.org
   root = true
 
   [*]
