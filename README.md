@@ -17,7 +17,7 @@ npx @allohamora/cli
 # args
 npx @allohamora/cli <category> <preset> <...options>
 
-npx @allohamora/cli js node:ts prettier eslint       # install options for a js project
+npx @allohamora/cli js node:ts prettier eslint        # install options for a js project
 npx @allohamora/cli --help                            # show help message
 npx @allohamora/cli --version                         # print version number
 ```
