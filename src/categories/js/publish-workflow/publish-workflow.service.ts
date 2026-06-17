@@ -1,11 +1,14 @@
 import path from 'node:path';
-import { WORKFLOW_FILENAME } from '#src/categories/js/publish-workflow/publish-workflow.const.ts';
+import {
+  PUBLISH_WORKFLOW_OPTION_NAME,
+  WORKFLOW_FILENAME,
+} from '#src/categories/js/publish-workflow/publish-workflow.const.ts';
 import { createRootInstalledCheck } from '#src/services/installation.service.ts';
 import { GITHUB_WORKFLOWS_PATH } from '#src/services/github.service.ts';
 import type { WorkflowPreset } from '#src/categories/js/nvmrc/nvmrc.service.ts';
 
 export const isPublishWorkflowInstalled = createRootInstalledCheck(
-  'publishWorkflow',
+  PUBLISH_WORKFLOW_OPTION_NAME,
   path.join(GITHUB_WORKFLOWS_PATH, WORKFLOW_FILENAME),
 );
 
