@@ -15,6 +15,7 @@ import { checkWorkflow } from '#src/categories/js/check-workflow/check-workflow.
 import { testWorkflow } from '#src/categories/js/test-workflow/test-workflow.installer.ts';
 import { codecovWorkflow } from '#src/categories/js/codecov-workflow/codecov-workflow.installer.ts';
 import { dependabot } from '#src/categories/js/dependabot/dependabot.installer.ts';
+import { editorconfig } from '#src/categories/js/editorconfig/editorconfig.installer.ts';
 
 // order matters
 const installers = {
@@ -34,6 +35,7 @@ const installers = {
   testWorkflow,
   codecovWorkflow,
   dependabot,
+  editorconfig,
 };
 
 export default {
