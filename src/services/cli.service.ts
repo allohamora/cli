@@ -115,6 +115,26 @@ export const resolveArgs = (argv: string[]): ResolvedArgs => {
   return { category: categoryName, preset: presetName, optionKeys: optionNames.map(toCamelCase) };
 };
 
+export type ParsedArgv =
+  | { type: 'help' }
+  | { type: 'version' }
+  | { type: 'run'; category: Category; preset: string; optionKeys: string[] };
+
+export const parseArgv = (argv: string[]): ParsedArgv => {
+  if (argv.includes('--help')) {
+    return { type: 'help' };
+  }
+
+  if (argv.includes('--version')) {
+    return { type: 'version' };
+  }
+
+  const args = resolveArgs(argv);
+  const category = categories[args.category as keyof typeof categories] as Category;
+
+  return { type: 'run', category, preset: args.preset, optionKeys: args.optionKeys };
+};
+
 export const chooseOne = async <C extends string>(message: string, choices: readonly C[]) => {
   const res = await inquirer.prompt({
     type: 'select',

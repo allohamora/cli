@@ -1,13 +1,14 @@
-import categories from '#src/categories/index.ts';
 import { bold } from '#src/utils/console.utils.ts';
 import {
   chooseCategory,
   chooseCategoryPreset,
   installCategoryOptions,
   chooseCategoryOptions,
+  getHelp,
+  getVersion,
+  parseArgv,
+  CliError,
 } from '#src/services/cli.service.ts';
-import { getHelp, getVersion, resolveArgs, CliError } from '#src/services/cli.service.ts';
-import type { Category } from '#src/services/state.service.ts';
 
 const runInteractive = async () => {
   console.log(bold(`Welcome to Allohamora's cli`));
@@ -22,22 +23,20 @@ const runInteractive = async () => {
 };
 
 const runWithArgs = async (argv: string[]) => {
-  if (argv.includes('--help')) {
-    console.log(getHelp());
-    return;
+  const parsed = parseArgv(argv);
+
+  switch (parsed.type) {
+    case 'help':
+      console.log(getHelp());
+      return;
+    case 'version':
+      console.log(getVersion());
+      return;
+    case 'run': {
+      parsed.category.state.presetState.setPreset(parsed.preset);
+      await installCategoryOptions(parsed.category.options, parsed.optionKeys);
+    }
   }
-
-  if (argv.includes('--version')) {
-    console.log(getVersion());
-    return;
-  }
-
-  const args = resolveArgs(argv);
-  const category = categories[args.category as keyof typeof categories] as Category;
-
-  category.state.presetState.setPreset(args.preset);
-
-  await installCategoryOptions(category.options, args.optionKeys);
 };
 
 export const main = async (argv: string[]) => {

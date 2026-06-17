@@ -12,6 +12,7 @@ import {
   getHelp,
   getVersion,
   installCategoryOptions,
+  parseArgv,
   requireAtLeastOneChoice,
   resolveArgs,
   toLines,
@@ -192,6 +193,50 @@ describe('cli.service', () => {
       expect(() => resolveArgs(['js', 'default', 'bad'])).toThrow(
         'Unknown option "bad" for category "js". Available options:',
       );
+    });
+  });
+
+  describe('parseArgv', () => {
+    it('returns help type for --help', () => {
+      expect(parseArgv(['--help'])).toEqual({ type: 'help' });
+    });
+
+    it('returns help type when --help is mixed with other args', () => {
+      expect(parseArgv(['js', '--help'])).toEqual({ type: 'help' });
+    });
+
+    it('returns version type for --version', () => {
+      expect(parseArgv(['--version'])).toEqual({ type: 'version' });
+    });
+
+    it('returns version type when --version is mixed with other args', () => {
+      expect(parseArgv(['js', '--version'])).toEqual({ type: 'version' });
+    });
+
+    it('returns help type when both --help and --version are present', () => {
+      expect(parseArgv(['--help', '--version'])).toEqual({ type: 'help' });
+    });
+
+    it('returns run type with resolved category, preset, and optionKeys', () => {
+      const result = parseArgv(['js', 'node:ts', 'eslint']);
+
+      expect(result).toEqual({ type: 'run', category: js, preset: 'node:ts', optionKeys: ['eslint'] });
+    });
+
+    it('returns run type with multiple options', () => {
+      const result = parseArgv(['js', 'default', 'eslint', 'prettier']);
+
+      expect(result).toEqual({ type: 'run', category: js, preset: 'default', optionKeys: ['eslint', 'prettier'] });
+    });
+
+    it('converts kebab-case options to camelCase in run type', () => {
+      const result = parseArgv(['js', 'default', 'standard-version']);
+
+      expect(result).toEqual({ type: 'run', category: js, preset: 'default', optionKeys: ['standardVersion'] });
+    });
+
+    it('throws CliError for invalid args', () => {
+      expect(() => parseArgv(['unknown'])).toThrow(CliError);
     });
   });
 
