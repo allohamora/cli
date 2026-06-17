@@ -194,6 +194,22 @@ describe('cli.service', () => {
         'Unknown option "bad" for category "js". Available options:',
       );
     });
+
+    it('deduplicates repeated options', () => {
+      expect(resolveArgs(['js', 'default', 'eslint', 'eslint'])).toEqual({
+        category: 'js',
+        preset: 'default',
+        optionKeys: ['eslint'],
+      });
+    });
+
+    it('deduplicates repeated kebab-case options', () => {
+      expect(resolveArgs(['js', 'default', 'standard-version', 'standard-version'])).toEqual({
+        category: 'js',
+        preset: 'default',
+        optionKeys: ['standardVersion'],
+      });
+    });
   });
 
   describe('parseArgv', () => {

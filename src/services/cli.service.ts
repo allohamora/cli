@@ -4,6 +4,7 @@ import inquirer from 'inquirer';
 import ora from 'ora';
 import { setSelectedInstallOptions } from '#src/services/installation.service.ts';
 import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
+import { unique } from '#src/utils/array.utils.ts';
 import type { Category } from '#src/services/state.service.ts';
 
 export class CliError extends Error {
@@ -103,8 +104,9 @@ export const resolveArgs = (argv: string[]): ResolvedArgs => {
     throw new CliError(`Missing options for category "${categoryName}". Available options: ${validOptions.join(', ')}`);
   }
 
+  const uniqueOptionNames = unique(optionNames);
   const validOptions = Object.keys(category.options).map(toKebabCase);
-  for (const option of optionNames) {
+  for (const option of uniqueOptionNames) {
     if (!validOptions.includes(option)) {
       throw new CliError(
         `Unknown option "${option}" for category "${categoryName}". Available options: ${validOptions.join(', ')}`,
@@ -112,7 +114,7 @@ export const resolveArgs = (argv: string[]): ResolvedArgs => {
     }
   }
 
-  return { category: categoryName, preset: presetName, optionKeys: optionNames.map(toCamelCase) };
+  return { category: categoryName, preset: presetName, optionKeys: uniqueOptionNames.map(toCamelCase) };
 };
 
 export type ParsedArgv =
