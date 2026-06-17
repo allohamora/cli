@@ -51,6 +51,7 @@ npx @allohamora/cli
 | **test-workflow**    | setups a github test workflow that runs `npm run test` on push                                                                                                                                   | `nvmrc`                                            |
 | **codecov-workflow** | setups a codecov workflow that collects a code coverage and sends it to codecov                                                                                                                  | `nvmrc`                                            |
 | **dependabot**       | setups github [dependabot](https://github.com/dependabot) that manages dependencies                                                                                                              |                                                    |
+| **editorconfig**     | creates an [.editorconfig](https://editorconfig.org) file with the default editor config                                                                                                         |                                                    |
 
 \*_Integrations run only if the package is installing or installed._
 
