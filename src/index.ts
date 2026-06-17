@@ -1,3 +1,4 @@
+import categories from '#src/categories/index.ts';
 import { bold } from '#src/utils/console.utils.ts';
 import {
   chooseCategory,
@@ -5,8 +6,10 @@ import {
   installCategoryOptions,
   chooseCategoryOptions,
 } from '#src/services/cli.service.ts';
+import { resolveArgs, CliError } from '#src/services/cli.service.ts';
+import type { Category } from '#src/services/state.service.ts';
 
-export const main = async () => {
+const runInteractive = async () => {
   console.log(bold(`Welcome to Allohamora's cli`));
 
   const category = await chooseCategory();
@@ -18,7 +21,31 @@ export const main = async () => {
   console.log(bold('Installation completed'));
 };
 
-/* v8 ignore next 3 -- CLI bootstrap path is exercised by direct Node startup. */
+const runWithArgs = async (argv: string[]) => {
+  const args = resolveArgs(argv);
+  const category = categories[args.category as keyof typeof categories] as Category;
+
+  category.state.presetState.setPreset(args.preset);
+
+  await installCategoryOptions(category.options, args.optionKeys);
+};
+
+export const main = async (argv: string[]) => {
+  if (argv.length > 0) {
+    await runWithArgs(argv);
+  } else {
+    await runInteractive();
+  }
+};
+
+/* v8 ignore next 5 -- CLI bootstrap path is exercised by direct Node startup. */
 if (import.meta.main) {
-  void main();
+  main(process.argv.slice(2)).catch((error: unknown) => {
+    if (error instanceof CliError) {
+      console.error(error.message);
+      process.exit(1);
+    }
+
+    throw error;
+  });
 }

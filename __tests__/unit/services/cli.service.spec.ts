@@ -2,6 +2,7 @@ import categories from '#src/categories/index.ts';
 import { installationState, loading, prompt } from '#__tests__/setup-test-context.ts';
 import { describe, expect, it, vi } from 'vitest';
 import {
+  CliError,
   chooseMany,
   chooseOne,
   chooseCategoryOptions,
@@ -9,6 +10,7 @@ import {
   chooseCategoryPreset,
   installCategoryOptions,
   requireAtLeastOneChoice,
+  resolveArgs,
 } from '#src/services/cli.service.ts';
 import type { Category } from '#src/services/state.service.ts';
 import { toCamelCase, toKebabCase } from '#src/utils/string.utils.ts';
@@ -101,6 +103,56 @@ describe('cli.service', () => {
       prompt.selectOptions(...selected);
 
       expect(await chooseCategoryOptions(js.options)).toEqual(selected.map(toCamelCase));
+    });
+  });
+
+  describe('resolveArgs', () => {
+    it('resolves category, preset, and option keys', () => {
+      expect(resolveArgs(['js', 'node:ts', 'eslint', 'prettier'])).toEqual({
+        category: 'js',
+        preset: 'node:ts',
+        optionKeys: ['eslint', 'prettier'],
+      });
+    });
+
+    it('converts kebab-case options to camelCase keys', () => {
+      expect(resolveArgs(['js', 'default', 'standard-version'])).toEqual({
+        category: 'js',
+        preset: 'default',
+        optionKeys: ['standardVersion'],
+      });
+    });
+
+    it('throws CliError for missing category', () => {
+      expect(() => resolveArgs([])).toThrow(CliError);
+      expect(() => resolveArgs([])).toThrow('Missing category. Available categories: js');
+    });
+
+    it('throws CliError for unknown category', () => {
+      expect(() => resolveArgs(['python'])).toThrow(CliError);
+      expect(() => resolveArgs(['python'])).toThrow('Unknown category "python". Available categories: js');
+    });
+
+    it('throws CliError for missing preset', () => {
+      expect(() => resolveArgs(['js'])).toThrow(CliError);
+      expect(() => resolveArgs(['js'])).toThrow('Missing preset for category "js". Available presets:');
+    });
+
+    it('throws CliError for unknown preset', () => {
+      expect(() => resolveArgs(['js', 'bad'])).toThrow(CliError);
+      expect(() => resolveArgs(['js', 'bad'])).toThrow('Unknown preset "bad" for category "js". Available presets:');
+    });
+
+    it('throws CliError for missing options', () => {
+      expect(() => resolveArgs(['js', 'default'])).toThrow(CliError);
+      expect(() => resolveArgs(['js', 'default'])).toThrow('Missing options for category "js". Available options:');
+    });
+
+    it('throws CliError for unknown option', () => {
+      expect(() => resolveArgs(['js', 'default', 'bad'])).toThrow(CliError);
+      expect(() => resolveArgs(['js', 'default', 'bad'])).toThrow(
+        'Unknown option "bad" for category "js". Available options:',
+      );
     });
   });
 
