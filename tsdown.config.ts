@@ -12,4 +12,5 @@ export default defineConfig({
     neverBundle: [/^node:/, ...builtinModules, ...Object.keys(pkg.dependencies ?? {})],
   },
   clean: true,
+  dts: true,
 });
