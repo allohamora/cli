@@ -11,7 +11,15 @@ is a command line interface that helps you to initialize projects and more
 ## Usage
 
 ```bash
+# interactive
 npx @allohamora/cli
+
+# args
+npx @allohamora/cli <category> <preset> <...options>
+
+npx @allohamora/cli js node:ts prettier eslint       # install options for a js project
+npx @allohamora/cli --help                            # show help message
+npx @allohamora/cli --version                         # print version number
 ```
 
 <video src="https://github.com/allohamora/cli/assets/54174661/86239f05-d0e6-426c-b20f-490feded41e2"></video>
