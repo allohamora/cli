@@ -7,10 +7,10 @@ export default defineConfig({
   outDir: './bin',
   format: 'esm',
   sourcemap: true,
+  dts: true,
+  clean: true,
   banner: () => '#!/usr/bin/env node',
   deps: {
     neverBundle: [/^node:/, ...builtinModules, ...Object.keys(pkg.dependencies ?? {})],
   },
-  clean: true,
-  dts: true,
 });
