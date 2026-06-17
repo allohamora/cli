@@ -149,16 +149,18 @@ describe('cli.service', () => {
   describe('resolveArgs', () => {
     it('resolves category, preset, and option keys', () => {
       expect(resolveArgs(['js', 'node:ts', 'eslint', 'prettier'])).toEqual({
-        category: 'js',
-        preset: 'node:ts',
+        category: js,
+        categoryName: 'js',
+        presetName: 'node:ts',
         optionKeys: ['eslint', 'prettier'],
       });
     });
 
     it('converts kebab-case options to camelCase keys', () => {
       expect(resolveArgs(['js', 'default', 'standard-version'])).toEqual({
-        category: 'js',
-        preset: 'default',
+        category: js,
+        categoryName: 'js',
+        presetName: 'default',
         optionKeys: ['standardVersion'],
       });
     });
@@ -197,16 +199,18 @@ describe('cli.service', () => {
 
     it('deduplicates repeated options', () => {
       expect(resolveArgs(['js', 'default', 'eslint', 'eslint'])).toEqual({
-        category: 'js',
-        preset: 'default',
+        category: js,
+        categoryName: 'js',
+        presetName: 'default',
         optionKeys: ['eslint'],
       });
     });
 
     it('deduplicates repeated kebab-case options', () => {
       expect(resolveArgs(['js', 'default', 'standard-version', 'standard-version'])).toEqual({
-        category: 'js',
-        preset: 'default',
+        category: js,
+        categoryName: 'js',
+        presetName: 'default',
         optionKeys: ['standardVersion'],
       });
     });
@@ -236,19 +240,37 @@ describe('cli.service', () => {
     it('returns run type with resolved category, preset, and optionKeys', () => {
       const result = parseArgv(['js', 'node:ts', 'eslint']);
 
-      expect(result).toEqual({ type: 'run', category: js, preset: 'node:ts', optionKeys: ['eslint'] });
+      expect(result).toEqual({
+        type: 'run',
+        category: js,
+        categoryName: 'js',
+        presetName: 'node:ts',
+        optionKeys: ['eslint'],
+      });
     });
 
     it('returns run type with multiple options', () => {
       const result = parseArgv(['js', 'default', 'eslint', 'prettier']);
 
-      expect(result).toEqual({ type: 'run', category: js, preset: 'default', optionKeys: ['eslint', 'prettier'] });
+      expect(result).toEqual({
+        type: 'run',
+        category: js,
+        categoryName: 'js',
+        presetName: 'default',
+        optionKeys: ['eslint', 'prettier'],
+      });
     });
 
     it('converts kebab-case options to camelCase in run type', () => {
       const result = parseArgv(['js', 'default', 'standard-version']);
 
-      expect(result).toEqual({ type: 'run', category: js, preset: 'default', optionKeys: ['standardVersion'] });
+      expect(result).toEqual({
+        type: 'run',
+        category: js,
+        categoryName: 'js',
+        presetName: 'default',
+        optionKeys: ['standardVersion'],
+      });
     });
 
     it('throws CliError for invalid args', () => {

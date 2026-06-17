@@ -33,7 +33,7 @@ const runWithArgs = async (argv: string[]) => {
       console.log(getVersion());
       return;
     case 'run': {
-      parsed.category.state.presetState.setPreset(parsed.preset);
+      parsed.category.state.presetState.setPreset(parsed.presetName);
       await installCategoryOptions(parsed.category.options, parsed.optionKeys);
     }
   }
