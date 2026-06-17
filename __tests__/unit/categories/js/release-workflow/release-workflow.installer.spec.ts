@@ -1,4 +1,4 @@
-import { fileSystem, terminal } from '#__tests__/setup-test-context.ts';
+import { fileSystem, installationState, terminal } from '#__tests__/setup-test-context.ts';
 import { releaseWorkflow } from '#src/categories/js/release-workflow/release-workflow.installer.ts';
 import { describe, expect, it } from 'vitest';
 
@@ -62,7 +62,6 @@ describe('release-workflow.installer', () => {
           '      - name: Install node',
           '        uses: actions/setup-node@v6',
           '        with:',
-          '          node-version-file: .nvmrc',
           '          cache: npm',
           '',
           '      - name: Install dependencies',
@@ -123,6 +122,26 @@ describe('release-workflow.installer', () => {
           '',
         ].join('\n'),
       );
+    });
+
+    it('does not add trigger publish step when publish-workflow is not selected', async () => {
+      fileSystem.seed({ packageJson: { homepage: `${REPO_URL}#readme` } });
+
+      await releaseWorkflow();
+
+      const content = fileSystem.readFile('.github/workflows/release.yml');
+      expect(content).not.toContain('Trigger publish');
+    });
+
+    it('adds trigger publish step when publish-workflow is selected', async () => {
+      fileSystem.seed({ packageJson: { homepage: `${REPO_URL}#readme` } });
+      installationState.setSelectedInstallOptions(['publishWorkflow']);
+
+      await releaseWorkflow();
+
+      const content = fileSystem.readFile('.github/workflows/release.yml');
+      expect(content).toContain('name: Trigger publish');
+      expect(content).toContain('gh workflow run publish.yml --ref v${{ steps.version.outputs.version }}');
     });
 
     it('throws when homepage is missing', async () => {

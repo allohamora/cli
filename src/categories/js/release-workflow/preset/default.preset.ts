@@ -1,3 +1,6 @@
+import { nvmrcWorkflowMutation } from '#src/categories/js/nvmrc/nvmrc.service.ts';
+import { publishWorkflowReleaseMutation } from '#src/categories/js/publish-workflow/publish-workflow.service.ts';
+
 export const createCliffConfig = (repoUrl: string) =>
   String.raw`
 # git-cliff ~ configuration file
@@ -96,7 +99,6 @@ export const content = {
           name: 'Install node',
           uses: 'actions/setup-node@v6',
           with: {
-            'node-version-file': '.nvmrc',
             cache: 'npm',
           },
         },
@@ -180,4 +182,5 @@ export const content = {
 export const defaultPreset = {
   createCliffConfig,
   content,
+  mutations: [nvmrcWorkflowMutation, publishWorkflowReleaseMutation],
 };
