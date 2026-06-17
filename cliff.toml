@@ -1,0 +1,56 @@
+# git-cliff ~ configuration file
+# https://git-cliff.org/docs/configuration
+
+[changelog]
+header = """
+# Changelog
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+"""
+postprocessors = [
+    { pattern = '<!-- \d+ -->', replace = "" },
+]
+body = """\
+{% set repo_url = "https://github.com/allohamora/cli" %}\
+{% if get_env(name="REMOVE_TITLE", default="") == "" %}\
+{% if version %}\
+{% if previous.version %}\
+\n## [{{ version | trim_start_matches(pat="v") }}]({{ repo_url }}/compare/{{ previous.version }}...{{ version }}) ({{ timestamp | date(format="%Y-%m-%d") }})\n\n\
+{% else %}\
+\n## {{ version | trim_start_matches(pat="v") }} ({{ timestamp | date(format="%Y-%m-%d") }})\n\n\
+{% endif %}\
+{% else %}\
+\n## [Unreleased]\n\n\
+{% endif %}\
+{% endif %}\
+{% for group, commits in commits | group_by(attribute="group") %}\
+{% if not loop.first %}\
+\n\
+{% endif %}\
+### {{ group | upper_first }}\n\
+{% for commit in commits %}\
+- {% if commit.scope %}**{{ commit.scope }}:** {% endif %}{{ commit.message | split(pat="\n") | first | upper_first }}{% if commit.breaking_description and commit.breaking_description != commit.message %} → {{ commit.breaking_description }}{% endif %} ([{{ commit.id | truncate(length=7, end="") }}]({{ repo_url }}/commit/{{ commit.id }}))\n\
+{% endfor %}\
+{% endfor %}
+"""
+
+[git]
+filter_unconventional = false
+commit_parsers = [
+    { message = "^\\w+(\\([^)]*\\))?!:", group = "<!-- 00 -->⚠ BREAKING CHANGES" },
+    { footer = "^BREAKING CHANGE:", group = "<!-- 00 -->⚠ BREAKING CHANGES" },
+    { message = "^feat", group = "<!-- 01 -->Features" },
+    { message = "^fix", group = "<!-- 02 -->Bug Fixes" },
+    { message = "^perf", group = "<!-- 03 -->Performance" },
+    { message = "^refactor", group = "<!-- 04 -->Refactor" },
+    { message = "^doc", group = "<!-- 05 -->Documentation" },
+    { message = "^style", group = "<!-- 06 -->Styling" },
+    { message = "^test", group = "<!-- 07 -->Testing" },
+    { message = "^revert", group = "<!-- 08 -->Revert" },
+    { message = "^chore: release v\\d+\\.\\d+\\.\\d+", skip = true },
+    { message = "^Merge pull request", skip = true },
+    { message = "^ci", group = "<!-- 09 -->Continuous Integration" },
+    { message = "^chore", group = "<!-- 10 -->Chores" },
+    { message = ".*", group = "<!-- 11 -->Other" },
+]
