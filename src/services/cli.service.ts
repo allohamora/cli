@@ -8,10 +8,7 @@ import { unique } from '#src/utils/array.utils.ts';
 import type { Category } from '#src/services/state.service.ts';
 
 export class CliError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = 'CliError';
-  }
+  public override name = 'CliError';
 }
 
 const categoriesKeys = Object.keys(categories);
