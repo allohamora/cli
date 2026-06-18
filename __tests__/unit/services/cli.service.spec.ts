@@ -184,11 +184,11 @@ describe('cli.service', () => {
     });
 
     it('converts kebab-case options to camelCase keys', () => {
-      expect(resolveArgs(['js', 'default', 'standard-version'])).toEqual({
+      expect(resolveArgs(['js', 'default', 'lint-staged'])).toEqual({
         category: js,
         categoryName: 'js',
         presetName: 'default',
-        optionKeys: ['standardVersion'],
+        optionKeys: ['lintStaged'],
       });
     });
 
@@ -234,11 +234,11 @@ describe('cli.service', () => {
     });
 
     it('deduplicates repeated kebab-case options', () => {
-      expect(resolveArgs(['js', 'default', 'standard-version', 'standard-version'])).toEqual({
+      expect(resolveArgs(['js', 'default', 'lint-staged', 'lint-staged'])).toEqual({
         category: js,
         categoryName: 'js',
         presetName: 'default',
-        optionKeys: ['standardVersion'],
+        optionKeys: ['lintStaged'],
       });
     });
   });
@@ -289,14 +289,14 @@ describe('cli.service', () => {
     });
 
     it('converts kebab-case options to camelCase in run type', () => {
-      const result = parseArgv(['js', 'default', 'standard-version']);
+      const result = parseArgv(['js', 'default', 'lint-staged']);
 
       expect(result).toEqual({
         type: 'run',
         category: js,
         categoryName: 'js',
         presetName: 'default',
-        optionKeys: ['standardVersion'],
+        optionKeys: ['lintStaged'],
       });
     });
 
