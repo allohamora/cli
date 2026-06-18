@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/allohamora/cli/compare/v2.1.0...v2.2.0) (2026-06-18)
+
+### Features
+
+- Add git-cliff based release workflow ([44ccdd0](https://github.com/allohamora/cli/commit/44ccdd02a88ea0a659b61c0261b832c79f126829))
+- Add publish workflow ([7ee8e4e](https://github.com/allohamora/cli/commit/7ee8e4e889c38b565894bfd0dc1029354887cc8a))
+- Remove standard-version ([48d8612](https://github.com/allohamora/cli/commit/48d8612cacb84f01e830de467ff41db972aa6b9f))
+- Remove css-in-js configs ([05ebffe](https://github.com/allohamora/cli/commit/05ebffef9c172061c0bb5acc05f78b0c3c65609b))
+- Add temp-dir ([b99bae4](https://github.com/allohamora/cli/commit/b99bae4b6cf6c405832ece93dff29a645813c5c0))
+- Add set-pr-title workflow ([0ba0df4](https://github.com/allohamora/cli/commit/0ba0df4a023d64c09e6ea2bb1e472d9ebb70ff2e))
+- Add engines ([b367ee5](https://github.com/allohamora/cli/commit/b367ee5ee99a9f4affbf86979d013945b5f708c8))
+
+### Refactor
+
+- Add option constants ([9c54525](https://github.com/allohamora/cli/commit/9c54525daac2527a0a21da78444ee76be0665928))
+- Improve regex in getRepositoryUrl ([7d3994d](https://github.com/allohamora/cli/commit/7d3994de3ee3cef50172e5d74f3854fdc8eccca7))
+- Remove relative import in index.ts ([bf50553](https://github.com/allohamora/cli/commit/bf50553fa52acbc67e13475838ede9f27311aa78))
+- Call getRepositoryUrl() before other steps ([a53eaab](https://github.com/allohamora/cli/commit/a53eaabe72154db2523863f25eff0daf7027db66))
+- Add handling for \r\n in gitignore ([5435ffc](https://github.com/allohamora/cli/commit/5435ffcb022f8bbb7e9587bf9906894beb01c478))
+- Add TEMP_DIR_NAME ([4fa511e](https://github.com/allohamora/cli/commit/4fa511e29dd879748c5c768035cbb17120a815a9))
+
+### Documentation
+
+- Add publish workflow to README.md ([09ab90b](https://github.com/allohamora/cli/commit/09ab90ba393c01f6c91363b0d4d92d33c89531f6))
+
+### Testing
+
+- Add correct error imports ([4709c5f](https://github.com/allohamora/cli/commit/4709c5f8dbdc45dcb15b875f36e0dbd06057ba23))
+- Add inline expects for configs ([1d8d2bb](https://github.com/allohamora/cli/commit/1d8d2bbaab9b7fcf2cbb51d071451c1c5de183cc))
+
+### Continuous Integration
+
+- Remove '' from publish ([10a76ef](https://github.com/allohamora/cli/commit/10a76ef11b76889f7203d930c2eb1ae5f471c7bf))
+- Rename pr-title to set-pr-title ([adee3a2](https://github.com/allohamora/cli/commit/adee3a26c4424633fa05cdf88cd1a097ec88e803))
+
+### Chores
+
+- Apply npm audit fix ([1f78a62](https://github.com/allohamora/cli/commit/1f78a62ef0c6054eb2a41101cf31efe34f10a4a9))
+- Add types to package.json ([122a51b](https://github.com/allohamora/cli/commit/122a51bf902142db6b42aa9afa29722bc298d909))
+
 ## [2.1.0](https://github.com/allohamora/cli/compare/v2.0.0...v2.1.0) (2026-06-17)
 
 ### Features
