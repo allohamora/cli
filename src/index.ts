@@ -8,7 +8,7 @@ import {
   getVersion,
   parseArgv,
 } from '#src/services/cli.service.ts';
-import { CliError, CliExitError } from './utils/error.utils.ts';
+import { CliError, CliExitError } from '#src/utils/error.utils.ts';
 
 const runInteractive = async () => {
   console.log(bold(`Welcome to Allohamora's cli`));
