@@ -1,11 +1,11 @@
-name: pr-title
+name: set-pr-title
 
 on:
   pull_request:
     types: [opened]
 
 jobs:
-  set-title:
+  set-pr-title:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
