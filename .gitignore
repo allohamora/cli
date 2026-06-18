@@ -105,3 +105,7 @@ dist
 
 # Cli build
 bin
+
+# Temp files
+.temp/**/*
+!.temp/.gitkeep

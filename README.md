@@ -60,6 +60,7 @@ npx @allohamora/cli --version                         # print version number
 | **codecov-workflow** | sets up a codecov workflow that collects code coverage and sends it to codecov                                                                                                          | `nvmrc`                                            |
 | **dependabot**       | sets up github [dependabot](https://github.com/dependabot) that manages dependencies                                                                                                    |                                                    |
 | **editorconfig**     | creates an [.editorconfig](https://editorconfig.org) file                                                                                                                               |                                                    |
+| **temp-dir**         | creates a .temp directory with .gitkeep and adds it to .gitignore                                                                                                                       |                                                    |
 
 \*_Integrations run only if the package is installing or installed._
 
