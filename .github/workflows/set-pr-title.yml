@@ -2,7 +2,8 @@ name: set-pr-title
 
 on:
   pull_request:
-    types: [opened]
+    types:
+      - opened
 
 jobs:
   set-pr-title:
@@ -13,7 +14,7 @@ jobs:
       - name: Set PR title to branch name
         uses: actions/github-script@v9
         with:
-          script: |
+          script: |-
             const userBranchPattern = /^\w+\/.+/; // e.g. feature/my-feature, bugfix/fix
             const branch = context.payload.pull_request.head.ref;
             if (!userBranchPattern.test(branch)) {
