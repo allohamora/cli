@@ -2,6 +2,7 @@ import fsp from 'node:fs/promises';
 import type { JsonValue, PackageJson as BasePackageJson } from 'type-fest';
 import { resolveRootPath, writeRootJsonFile } from '#src/services/root.service.ts';
 import { exec } from '#src/utils/terminal.utils.ts';
+import { CliError } from '#src/utils/error.utils.ts';
 
 export const PACKAGE_JSON_NAME = 'package.json';
 export const PACKAGE_JSON_PATH = resolveRootPath(PACKAGE_JSON_NAME);
@@ -56,4 +57,14 @@ export const runNpmScript = async (name: string) => {
 
 export const installDevDependencies = async (...names: string[]) => {
   await exec('npm', ['i', '-D', ...names]);
+};
+
+export const getRepositoryUrl = async () => {
+  const packageJson = await readPackageJson();
+  const repositoryUrl = packageJson.homepage?.replace(/#.*$/, '');
+  if (!repositoryUrl) {
+    throw new CliError('homepage is missing in package.json');
+  }
+
+  return repositoryUrl;
 };

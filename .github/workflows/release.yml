@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version (e.g. 1.2.3). Leave empty to auto-calculate.'
+        description: Version (e.g. 1.2.3). Leave empty to auto-calculate.
         required: false
         type: string
 
@@ -37,7 +37,7 @@ jobs:
 
       - name: Validate version
         if: inputs.version != ''
-        run: |
+        run: |-
           if ! echo "${{ inputs.version }}" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
             echo "Error: version must be in X.Y.Z format (e.g. 1.2.3), got: ${{ inputs.version }}"
             exit 1
@@ -49,7 +49,7 @@ jobs:
 
       - name: Get version
         id: version
-        run: |
+        run: |-
           if [ -n "${{ inputs.version }}" ]; then
             echo "version=${{ inputs.version }}" >> $GITHUB_OUTPUT
           else
@@ -60,7 +60,7 @@ jobs:
         run: npx --no-install git-cliff --tag v${{ steps.version.outputs.version }} -o CHANGELOG.md
 
       - name: Configure git
-        run: |
+        run: |-
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
@@ -68,7 +68,7 @@ jobs:
         run: npm version ${{ steps.version.outputs.version }} --no-git-tag-version --workspaces --include-workspace-root
 
       - name: Commit and tag
-        run: |
+        run: |-
           git add .
           git commit -m 'chore: release v${{ steps.version.outputs.version }}'
           git tag v${{ steps.version.outputs.version }}
@@ -83,7 +83,7 @@ jobs:
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
+        run: |-
           gh release create v${{ steps.version.outputs.version }} \
             --title "${{ steps.version.outputs.version }}" \
             --notes-file release-notes.md

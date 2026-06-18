@@ -1,4 +1,4 @@
-import { NVMRC_FILE_NAME } from '#src/categories/js/nvmrc/nvmrc.const.ts';
+import { NVMRC_FILE_NAME, NVMRC_OPTION_NAME } from '#src/categories/js/nvmrc/nvmrc.const.ts';
 import { createRootInstalledCheck } from '#src/services/installation.service.ts';
 
 type WorkflowStep = Record<string, unknown> & {
@@ -17,7 +17,7 @@ export type WorkflowPreset = {
   mutations: ((preset: WorkflowPreset) => Promise<void> | void)[];
 };
 
-export const isNvmrcInstalled = createRootInstalledCheck('nvmrc', NVMRC_FILE_NAME);
+export const isNvmrcInstalled = createRootInstalledCheck(NVMRC_OPTION_NAME, NVMRC_FILE_NAME);
 
 export const nvmrcWorkflowMutation = async (preset: WorkflowPreset) => {
   if (!(await isNvmrcInstalled())) {

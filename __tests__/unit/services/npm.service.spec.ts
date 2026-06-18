@@ -3,6 +3,7 @@ import { fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { describe, expect, it } from 'vitest';
 import {
   addNpmScripts,
+  getRepositoryUrl,
   hasNpmScript,
   installDevDependencies,
   PACKAGE_JSON_NAME,
@@ -96,6 +97,26 @@ describe('npm.service', () => {
       fileSystem.seed({ packageJson: null });
 
       await expect(hasNpmScript('lint')).rejects.toThrow('package.json does not exist');
+    });
+  });
+
+  describe('getRepositoryUrl', () => {
+    it('returns the homepage url without the fragment', async () => {
+      seedPackageJson({ homepage: 'https://github.com/allohamora/cli#readme' });
+
+      await expect(getRepositoryUrl()).resolves.toBe('https://github.com/allohamora/cli');
+    });
+
+    it('returns homepage as-is when it has no fragment', async () => {
+      seedPackageJson({ homepage: 'https://github.com/allohamora/cli' });
+
+      await expect(getRepositoryUrl()).resolves.toBe('https://github.com/allohamora/cli');
+    });
+
+    it('throws when homepage is missing', async () => {
+      seedPackageJson({});
+
+      await expect(getRepositoryUrl()).rejects.toThrow('homepage is missing in package.json');
     });
   });
 
