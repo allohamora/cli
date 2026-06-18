@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/allohamora/cli/compare/v2.2.0...v2.2.1) (2026-06-18)
+
+### Features
+
+- Remove . in version description in release workflow ([1c40235](https://github.com/allohamora/cli/commit/1c4023559bfa2819875f3d71a511011d0ef3a48a))
+
 ## [2.2.0](https://github.com/allohamora/cli/compare/v2.1.0...v2.2.0) (2026-06-18)
 
 ### Features
