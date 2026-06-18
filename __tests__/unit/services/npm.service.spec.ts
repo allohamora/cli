@@ -3,6 +3,7 @@ import { fileSystem, terminal } from '#__tests__/setup-test-context.ts';
 import { describe, expect, it } from 'vitest';
 import {
   addNpmScripts,
+  getNpmVersion,
   getRepositoryUrl,
   hasNpmScript,
   installDevDependencies,
@@ -117,6 +118,19 @@ describe('npm.service', () => {
       seedPackageJson({});
 
       await expect(getRepositoryUrl()).rejects.toThrow('homepage is missing in package.json');
+    });
+  });
+
+  describe('getNpmVersion', () => {
+    it('returns the npm version from terminal exec output', async () => {
+      const expected = '11.11.0';
+
+      terminal.setCommandResult({ stdout: `${expected}\n` });
+
+      const actual = await getNpmVersion();
+
+      expect(actual).toBe(expected);
+      expect(terminal.getCommands()).toEqual([['npm', ['-v']]]);
     });
   });
 
