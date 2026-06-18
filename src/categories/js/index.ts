@@ -5,7 +5,6 @@ import { husky } from '#src/categories/js/husky/husky.installer.ts';
 import { lintStaged } from '#src/categories/js/lint-staged/lint-staged.installer.ts';
 import { stylelint } from '#src/categories/js/stylelint/stylelint.installer.ts';
 import { prettier } from '#src/categories/js/prettier/prettier.installer.ts';
-import { standardVersion } from '#src/categories/js/standard-version/standard-version.installer.ts';
 import { jest } from '#src/categories/js/jest/jest.installer.ts';
 import { docker } from '#src/categories/js/docker/docker.installer.ts';
 import { npmrc } from '#src/categories/js/npmrc/npmrc.installer.ts';
@@ -23,7 +22,6 @@ const installers = {
   husky,
   commitlint,
   prettier,
-  standardVersion,
   eslint,
   lintStaged,
   stylelint,
