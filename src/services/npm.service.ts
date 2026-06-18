@@ -59,6 +59,12 @@ export const installDevDependencies = async (...names: string[]) => {
   await exec('npm', ['i', '-D', ...names]);
 };
 
+export const getNpmVersion = async () => {
+  const { stdout } = await exec('npm', ['-v']);
+
+  return stdout.trim();
+};
+
 export const getRepositoryUrl = async () => {
   const packageJson = await readPackageJson();
   const repositoryUrl = packageJson.homepage?.replace(/#.*$/, '');
