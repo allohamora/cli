@@ -23,24 +23,13 @@ describe('stylelint/preset', () => {
     presetState.setJsPreset('react:ts');
 
     expect(getStylelintPreset()).toMatchObject({
-      devDependencies: [
-        'stylelint',
-        'stylelint-config-standard',
-        'stylelint-config-clean-order',
-        'postcss-styled-syntax',
-      ],
+      devDependencies: ['stylelint', 'stylelint-config-standard', 'stylelint-config-clean-order'],
       scripts: [
-        { name: 'csslint', script: 'stylelint "src/**/*.{css,ts,tsx}"' },
-        { name: 'csslint:fix', script: 'stylelint "src/**/*.{css,ts,tsx}" --fix' },
+        { name: 'csslint', script: 'stylelint "src/**/*.css"' },
+        { name: 'csslint:fix', script: 'stylelint "src/**/*.css" --fix' },
       ],
       stylelintConfig: {
         extends: ['stylelint-config-standard', 'stylelint-config-clean-order'],
-        overrides: [
-          {
-            files: ['**/*.{js,jsx,ts,tsx}'],
-            customSyntax: 'postcss-styled-syntax',
-          },
-        ],
       },
       stylelintIgnore: ['node_modules', '.next', 'build', 'dist'].join('\n'),
     });

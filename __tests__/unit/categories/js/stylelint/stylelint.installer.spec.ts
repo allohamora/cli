@@ -48,17 +48,7 @@ describe('stylelint.installer', () => {
       await stylelint();
 
       expect(terminal.getCommands()).toEqual([
-        [
-          'npm',
-          [
-            'i',
-            '-D',
-            'stylelint',
-            'stylelint-config-standard',
-            'stylelint-config-clean-order',
-            'postcss-styled-syntax',
-          ],
-        ],
+        ['npm', ['i', '-D', 'stylelint', 'stylelint-config-standard', 'stylelint-config-clean-order']],
       ]);
       expect(fileSystem.readFile('.stylelintrc')).toBe(
         [
@@ -66,14 +56,6 @@ describe('stylelint.installer', () => {
           '  "extends": [',
           '    "stylelint-config-standard",',
           '    "stylelint-config-clean-order"',
-          '  ],',
-          '  "overrides": [',
-          '    {',
-          '      "files": [',
-          '        "**/*.{js,jsx,ts,tsx}"',
-          '      ],',
-          '      "customSyntax": "postcss-styled-syntax"',
-          '    }',
           '  ]',
           '}',
           '',
@@ -91,8 +73,8 @@ describe('stylelint.installer', () => {
       expect(fileSystem.readJson('package.json')).toEqual({
         scripts: {
           test: 'vitest',
-          csslint: 'stylelint "src/**/*.{css,ts,tsx}"',
-          'csslint:fix': 'stylelint "src/**/*.{css,ts,tsx}" --fix',
+          csslint: 'stylelint "src/**/*.css"',
+          'csslint:fix': 'stylelint "src/**/*.css" --fix',
         },
       });
     });

@@ -8,10 +8,5 @@ import type { Preset } from '#src/categories/js/lint-staged/preset/preset.type.t
 
 export const reactTsPreset: Preset = {
   config: {},
-  mutations: [
-    prettierMutation,
-    stylelintMutation('*.{css,ts,tsx}'),
-    eslintMutation('*.{ts,tsx}'),
-    jestMutation('*.{ts,tsx}'),
-  ],
+  mutations: [prettierMutation, stylelintMutation('*.css'), eslintMutation('*.{ts,tsx}'), jestMutation('*.{ts,tsx}')],
 };

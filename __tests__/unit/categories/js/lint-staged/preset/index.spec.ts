@@ -43,7 +43,7 @@ describe('lint-staged/preset', () => {
 
     await expect(getMutatedConfig()).resolves.toEqual({
       '*.{js,cjs,mjs,json,yml,md}': 'prettier --write',
-      '*.{css,ts,tsx}': 'stylelint --fix',
+      '*.css': 'stylelint --fix',
       '*.{ts,tsx}': ['eslint --fix', 'jest --findRelatedTests'],
     });
   });
