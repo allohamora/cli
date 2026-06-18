@@ -11,7 +11,8 @@ type AddToGitignoreOptions = {
 
 export const addToGitignore = async ({ comment, rules }: AddToGitignoreOptions) => {
   const gitignoreExists = await existsInRoot(GITIGNORE_FILE_NAME);
-  const gitignoreContent = gitignoreExists ? await readRootFile(GITIGNORE_FILE_NAME) : '';
+  const rawGitignoreContent = gitignoreExists ? await readRootFile(GITIGNORE_FILE_NAME) : '';
+  const gitignoreContent = rawGitignoreContent.replace(/\r\n/g, '\n');
 
   const block = [comment, ...rules].join('\n');
   if (gitignoreContent.includes(block)) {
