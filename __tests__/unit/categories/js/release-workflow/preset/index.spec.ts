@@ -7,6 +7,123 @@ const REPO_URL = 'https://github.com/allohamora/cli';
 
 describe('release-workflow/preset', () => {
   it('returns the release workflow config', () => {
+    expect(getReleaseWorkflowPreset().content).toEqual({
+      name: 'release',
+      on: {
+        workflow_dispatch: {
+          inputs: {
+            version: {
+              description: 'Version (e.g. 1.2.3). Leave empty to auto-calculate.',
+              required: false,
+              type: 'string',
+            },
+          },
+        },
+      },
+      concurrency: {
+        group: 'release',
+        'cancel-in-progress': false,
+      },
+      jobs: {
+        release: {
+          'runs-on': 'ubuntu-latest',
+          'timeout-minutes': 15,
+          permissions: {
+            contents: 'write',
+            actions: 'write',
+          },
+          steps: [
+            {
+              name: 'Checkout code',
+              uses: 'actions/checkout@v6',
+              with: {
+                'fetch-depth': 0,
+                'fetch-tags': true,
+              },
+            },
+            {
+              name: 'Install node',
+              uses: 'actions/setup-node@v6',
+              with: {
+                cache: 'npm',
+              },
+            },
+            {
+              name: 'Install dependencies',
+              run: 'npm ci',
+            },
+            {
+              name: 'Validate version',
+              if: "inputs.version != ''",
+              run: [
+                'if ! echo "${{ inputs.version }}" | grep -qE \'^[0-9]+\\.[0-9]+\\.[0-9]+$\'; then',
+                '  echo "Error: version must be in X.Y.Z format (e.g. 1.2.3), got: ${{ inputs.version }}"',
+                '  exit 1',
+                'fi',
+                'if git tag -l "v${{ inputs.version }}" | grep -q .; then',
+                '  echo "Error: tag v${{ inputs.version }} already exists"',
+                '  exit 1',
+                'fi',
+              ].join('\n'),
+            },
+            {
+              name: 'Get version',
+              id: 'version',
+              run: [
+                'if [ -n "${{ inputs.version }}" ]; then',
+                '  echo "version=${{ inputs.version }}" >> $GITHUB_OUTPUT',
+                'else',
+                '  echo "version=$(npx --no-install git-cliff --bumped-version | sed \'s/^v//\')" >> $GITHUB_OUTPUT',
+                'fi',
+              ].join('\n'),
+            },
+            {
+              name: 'Generate changelog',
+              run: 'npx --no-install git-cliff --tag v${{ steps.version.outputs.version }} -o CHANGELOG.md',
+            },
+            {
+              name: 'Configure git',
+              run: [
+                "git config user.name 'github-actions[bot]'",
+                "git config user.email '41898282+github-actions[bot]@users.noreply.github.com'",
+              ].join('\n'),
+            },
+            {
+              name: 'Bump version in package.json',
+              run: 'npm version ${{ steps.version.outputs.version }} --no-git-tag-version --workspaces --include-workspace-root',
+            },
+            {
+              name: 'Commit and tag',
+              run: [
+                'git add .',
+                "git commit -m 'chore: release v${{ steps.version.outputs.version }}'",
+                'git tag v${{ steps.version.outputs.version }}',
+                'git push origin HEAD:${{ github.ref_name }}',
+                'git push origin v${{ steps.version.outputs.version }}',
+              ].join('\n'),
+            },
+            {
+              name: 'Generate release notes',
+              env: {
+                REMOVE_TITLE: 'true',
+              },
+              run: 'npx --no-install git-cliff --latest --strip header -o release-notes.md',
+            },
+            {
+              name: 'Create release',
+              env: {
+                GH_TOKEN: '${{ github.token }}',
+              },
+              run: [
+                'gh release create v${{ steps.version.outputs.version }} \\',
+                '  --title "${{ steps.version.outputs.version }}" \\',
+                '  --notes-file release-notes.md',
+              ].join('\n'),
+            },
+          ],
+        },
+      },
+    });
     expect(getReleaseWorkflowPreset().content).toEqual(content);
   });
 
