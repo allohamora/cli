@@ -4,12 +4,6 @@ import type { Preset } from '#src/categories/js/stylelint/preset/preset.type.ts'
 
 const stylelintConfig: Preset['stylelintConfig'] = {
   extends: ['stylelint-config-standard', 'stylelint-config-clean-order'],
-  overrides: [
-    {
-      files: ['**/*.{js,jsx,ts,tsx}'],
-      customSyntax: 'postcss-styled-syntax',
-    },
-  ],
 };
 
 const stylelintIgnore = dedent`
@@ -22,10 +16,10 @@ const stylelintIgnore = dedent`
 export const reactTsPreset: Preset = {
   stylelintConfig,
   stylelintIgnore,
-  devDependencies: ['stylelint', 'stylelint-config-standard', 'stylelint-config-clean-order', 'postcss-styled-syntax'],
+  devDependencies: ['stylelint', 'stylelint-config-standard', 'stylelint-config-clean-order'],
   scripts: [
-    { name: 'csslint', script: 'stylelint "src/**/*.{css,ts,tsx}"' },
-    { name: 'csslint:fix', script: 'stylelint "src/**/*.{css,ts,tsx}" --fix' },
+    { name: 'csslint', script: 'stylelint "src/**/*.css"' },
+    { name: 'csslint:fix', script: 'stylelint "src/**/*.css" --fix' },
   ],
   mutations: [prettierMutation],
 };

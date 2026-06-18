@@ -174,7 +174,7 @@ describe('lint-staged.service', () => {
 
   describe('stylelintMutation', () => {
     it('mutates the config if stylelint is installed', async () => {
-      const ext = '*.{css,ts,tsx}';
+      const ext = '*.css';
       const actual = {};
       installationState.setSelectedInstallOptions(['stylelint']);
 
@@ -186,7 +186,7 @@ describe('lint-staged.service', () => {
     });
 
     it('does not mutate the config if stylelint is not installed', async () => {
-      const ext = '*.{css,ts,tsx}';
+      const ext = '*.css';
       const actual = {};
       await stylelintMutation(ext)(actual);
 
