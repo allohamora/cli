@@ -13,9 +13,9 @@ export const releaseWorkflow = async () => {
   const { createCliffConfig, ...preset } = getReleaseWorkflowPreset();
   await applyMutations(preset, preset.mutations);
 
-  await installDevDependencies(GIT_CLIFF_PACKAGE_NAME);
-
   const repoUrl = await getRepositoryUrl();
+
+  await installDevDependencies(GIT_CLIFF_PACKAGE_NAME);
 
   await writeRootFile(GIT_CLIFF_CONFIG_FILE_NAME, createCliffConfig(repoUrl));
   await writeGithubWorkflow(WORKFLOW_FILENAME, preset.content);
