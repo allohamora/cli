@@ -16,6 +16,7 @@ import { codecovWorkflow } from '#src/categories/js/codecov-workflow/codecov-wor
 import { publishWorkflow } from '#src/categories/js/publish-workflow/publish-workflow.installer.ts';
 import { dependabot } from '#src/categories/js/dependabot/dependabot.installer.ts';
 import { editorconfig } from '#src/categories/js/editorconfig/editorconfig.installer.ts';
+import { setPrTitleWorkflow } from '#src/categories/js/set-pr-title-workflow/set-pr-title-workflow.installer.ts';
 import { tempDir } from '#src/categories/js/temp-dir/temp-dir.installer.ts';
 
 // order matters
@@ -35,6 +36,7 @@ const installers = {
   checkWorkflow,
   testWorkflow,
   codecovWorkflow,
+  setPrTitleWorkflow,
   dependabot,
   editorconfig,
   tempDir,
