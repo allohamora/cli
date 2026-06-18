@@ -61,8 +61,7 @@ export const installDevDependencies = async (...names: string[]) => {
 
 export const getRepositoryUrl = async () => {
   const packageJson = await readPackageJson();
-  const repositoryUrl = packageJson.homepage?.replace(/#.+$/, '');
-
+  const repositoryUrl = packageJson.homepage?.replace(/#.*$/, '');
   if (!repositoryUrl) {
     throw new CliError('homepage is missing in package.json');
   }
