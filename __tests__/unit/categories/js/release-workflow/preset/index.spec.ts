@@ -13,7 +13,7 @@ describe('release-workflow/preset', () => {
         workflow_dispatch: {
           inputs: {
             version: {
-              description: 'Version (e.g. 1.2.3). Leave empty to auto-calculate.',
+              description: 'Version (e.g. 1.2.3). Leave empty to auto-calculate',
               required: false,
               type: 'string',
             },
