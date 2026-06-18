@@ -24,6 +24,12 @@ export const ensureRootDir = async (name: string) => {
   await fsp.mkdir(dirPath, { recursive: true });
 };
 
+export const readRootFile = async (name: string) => {
+  const filePath = resolveRootPath(name);
+
+  return await fsp.readFile(filePath, { encoding: 'utf-8' });
+};
+
 export const writeRootFile = async (name: string, content: string) => {
   const filePath = resolveRootPath(name);
 

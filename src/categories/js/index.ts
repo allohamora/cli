@@ -16,6 +16,7 @@ import { codecovWorkflow } from '#src/categories/js/codecov-workflow/codecov-wor
 import { publishWorkflow } from '#src/categories/js/publish-workflow/publish-workflow.installer.ts';
 import { dependabot } from '#src/categories/js/dependabot/dependabot.installer.ts';
 import { editorconfig } from '#src/categories/js/editorconfig/editorconfig.installer.ts';
+import { tempDir } from '#src/categories/js/temp-dir/temp-dir.installer.ts';
 
 // order matters
 const installers = {
@@ -36,6 +37,7 @@ const installers = {
   codecovWorkflow,
   dependabot,
   editorconfig,
+  tempDir,
 };
 
 export default {

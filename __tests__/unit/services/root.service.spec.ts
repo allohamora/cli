@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import {
   ensureRootDir,
   existsInRoot,
+  readRootFile,
   resolveRootPath,
   ROOT_PATH,
   writeRootFile,
@@ -83,6 +84,18 @@ describe('root.service', () => {
       await ensureRootDir(rootDir);
 
       expect(fileSystem.getDirs()).toEqual(dirs);
+    });
+  });
+
+  describe('readRootFile', () => {
+    it('returns file content', async () => {
+      const actual = await readRootFile(rootFile);
+
+      expect(actual).toBe('{}');
+    });
+
+    it('throws if file does not exist', async () => {
+      await expect(readRootFile('__nonexistent__')).rejects.toThrow();
     });
   });
 
