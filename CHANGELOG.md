@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/allohamora/cli/compare/v2.2.1...v2.2.2) (2026-06-19)
+
+### Chores
+
+- Apply format:fix ([66b6ef2](https://github.com/allohamora/cli/commit/66b6ef2c85ab52c6f0d59b8cb1206161b0d2f1eb))
+
+### Other
+
+- Revert "feat: remove yml override in prettier" ([650257b](https://github.com/allohamora/cli/commit/650257ba8999c111ef8f078e03fbce74fa68db24))
+
 ## [2.2.1](https://github.com/allohamora/cli/compare/v2.2.0...v2.2.1) (2026-06-18)
 
 ### Features
