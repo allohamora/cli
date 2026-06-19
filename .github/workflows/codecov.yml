@@ -3,7 +3,7 @@ name: codecov
 on:
   push:
     branches:
-      - '**'
+      - "**"
 
 jobs:
   codecov:
