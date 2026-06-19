@@ -77,7 +77,7 @@ jobs:
 
       - name: Generate release notes
         env:
-          REMOVE_TITLE: 'true'
+          REMOVE_TITLE: "true"
         run: npx --no-install git-cliff --latest --strip header -o release-notes.md
 
       - name: Create release
