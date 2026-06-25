@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.3](https://github.com/allohamora/cli/compare/v2.2.2...v2.2.3) (2026-06-25)
+
+### Bug Fixes
+
+- Add "^docs" regex instead of "^doc" ([4c9ace5](https://github.com/allohamora/cli/commit/4c9ace5b2d27fbd359d4a3624afffca7df32d4da))
+
+### Chores
+
+- **deps:** Bump actions/checkout from 6 to 7 ([d8e5218](https://github.com/allohamora/cli/commit/d8e5218b940e3ae84fb44fb2f9d1334e674e1ba6))
+
 ## [2.2.2](https://github.com/allohamora/cli/compare/v2.2.1...v2.2.2) (2026-06-19)
 
 ### Chores
