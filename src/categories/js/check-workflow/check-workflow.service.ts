@@ -7,6 +7,7 @@ export const CheckScriptName = {
   Lint: 'lint',
   Format: 'format',
   Typecheck: 'typecheck',
+  Check: 'check',
   Build: 'build',
 } as const;
 
@@ -22,6 +23,10 @@ export const isFormatAvailable = async () => {
   return isSelectedForInstall(PRETTIER_PACKAGE_NAME) || (await hasNpmScript(CheckScriptName.Format));
 };
 
+export const isCheckAvailable = async () => {
+  return await hasNpmScript(CheckScriptName.Check);
+};
+
 export const isTypecheckAvailable = async () => {
   return await hasNpmScript(CheckScriptName.Typecheck);
 };
@@ -34,6 +39,7 @@ const availabilityChecks = {
   [CheckScriptName.Lint]: isLintAvailable,
   [CheckScriptName.Format]: isFormatAvailable,
   [CheckScriptName.Typecheck]: isTypecheckAvailable,
+  [CheckScriptName.Check]: isCheckAvailable,
   [CheckScriptName.Build]: isBuildAvailable,
 } satisfies Record<CheckScriptNameValue, () => Promise<boolean>>;
 

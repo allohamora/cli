@@ -12,6 +12,7 @@ const checkStepNames = {
   [CheckScriptName.Lint]: 'Run lint',
   [CheckScriptName.Format]: 'Run format',
   [CheckScriptName.Typecheck]: 'Run typecheck',
+  [CheckScriptName.Check]: 'Run check',
   [CheckScriptName.Build]: 'Run build',
 } satisfies Record<CheckScriptNameValue, string>;
 

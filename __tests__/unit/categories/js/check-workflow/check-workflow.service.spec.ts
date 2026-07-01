@@ -3,6 +3,7 @@ import {
   CheckScriptName,
   getAvailableCheckScripts,
   isBuildAvailable,
+  isCheckAvailable,
   isFormatAvailable,
   isLintAvailable,
   isTypecheckAvailable,
@@ -47,6 +48,14 @@ describe('check-workflow.service', () => {
       expect(await isFormatAvailable()).toBe(false);
     });
 
+    it('returns check as available only if check script exists', async () => {
+      expect(await isCheckAvailable()).toBe(false);
+
+      fileSystem.seed({ packageJson: { scripts: { check: 'astro check' } } });
+
+      expect(await isCheckAvailable()).toBe(true);
+    });
+
     it('returns typecheck as available only if typecheck script exists', async () => {
       expect(await isTypecheckAvailable()).toBe(false);
 
@@ -67,7 +76,9 @@ describe('check-workflow.service', () => {
   describe('getAvailableCheckScripts', () => {
     it('returns available scripts in check workflow order', async () => {
       installationState.setSelectedInstallOptions(['eslint', 'prettier']);
-      fileSystem.seed({ packageJson: { scripts: { typecheck: 'tsc --noEmit', build: 'rolldown -c' } } });
+      fileSystem.seed({
+        packageJson: { scripts: { check: 'astro check', typecheck: 'tsc --noEmit', build: 'rolldown -c' } },
+      });
 
       const actual = await getAvailableCheckScripts();
 
@@ -75,6 +86,7 @@ describe('check-workflow.service', () => {
         CheckScriptName.Lint,
         CheckScriptName.Format,
         CheckScriptName.Typecheck,
+        CheckScriptName.Check,
         CheckScriptName.Build,
       ]);
     });

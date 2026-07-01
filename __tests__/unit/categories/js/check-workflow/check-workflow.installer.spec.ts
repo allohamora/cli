@@ -6,7 +6,9 @@ describe('check-workflow.installer', () => {
   describe('checkWorkflow', () => {
     it('writes the default check workflow', async () => {
       installationState.setSelectedInstallOptions(['eslint', 'prettier']);
-      fileSystem.seed({ packageJson: { scripts: { typecheck: 'tsc --noEmit', build: 'rolldown -c' } } });
+      fileSystem.seed({
+        packageJson: { scripts: { check: 'astro check', typecheck: 'tsc --noEmit', build: 'rolldown -c' } },
+      });
 
       await checkWorkflow();
 
@@ -43,6 +45,9 @@ describe('check-workflow.installer', () => {
           '',
           '      - name: Run typecheck',
           '        run: npm run typecheck',
+          '',
+          '      - name: Run check',
+          '        run: npm run check',
           '',
           '      - name: Run build',
           '        run: npm run build',
