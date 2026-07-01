@@ -13,6 +13,9 @@ describe('dependabot/preset', () => {
             interval: 'weekly',
             day: 'monday',
           },
+          cooldown: {
+            'default-days': 3,
+          },
           'open-pull-requests-limit': 10,
         },
         {
@@ -21,6 +24,9 @@ describe('dependabot/preset', () => {
           schedule: {
             interval: 'weekly',
             day: 'monday',
+          },
+          cooldown: {
+            'default-days': 3,
           },
           'open-pull-requests-limit': 0,
         },

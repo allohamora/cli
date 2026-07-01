@@ -9,6 +9,9 @@ export const defaultPreset = {
           interval: 'weekly',
           day: 'monday',
         },
+        cooldown: {
+          'default-days': 3,
+        },
         'open-pull-requests-limit': 10,
       },
       {
@@ -17,6 +20,9 @@ export const defaultPreset = {
         schedule: {
           interval: 'weekly',
           day: 'monday',
+        },
+        cooldown: {
+          'default-days': 3,
         },
         'open-pull-requests-limit': 0,
       },
