@@ -87,7 +87,10 @@ describe('release-workflow/preset', () => {
             },
             {
               name: 'Update changelog',
-              run: 'npx --no-install git-cliff --tag v${{ steps.version.outputs.version }} --unreleased --prepend CHANGELOG.md',
+              run: [
+                'touch CHANGELOG.md',
+                'npx --no-install git-cliff --tag v${{ steps.version.outputs.version }} --unreleased --prepend CHANGELOG.md',
+              ].join('\n'),
             },
             {
               name: 'Configure git',
