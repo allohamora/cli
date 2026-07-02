@@ -88,6 +88,14 @@ export const content = {
       },
       steps: [
         {
+          name: 'Restrict to default branch',
+          if: 'github.ref_name != github.event.repository.default_branch',
+          run: [
+            "echo \"Error: releases can only be run from the default branch '${{ github.event.repository.default_branch }}' (got '${{ github.ref_name }}').\"",
+            'exit 1',
+          ].join('\n'),
+        },
+        {
           name: 'Checkout code',
           uses: 'actions/checkout@v6',
           with: {
