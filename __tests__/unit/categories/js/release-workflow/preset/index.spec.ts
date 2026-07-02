@@ -173,6 +173,7 @@ describe('release-workflow/preset', () => {
         '\\n\\',
         '{% endif %}\\',
         '### {{ group | upper_first }}\\n\\',
+        '\\n\\',
         '{% for commit in commits %}\\',
         '- {% if commit.scope %}**{{ commit.scope }}:** {% endif %}{{ commit.message | split(pat="\\n") | first | upper_first }}{% if commit.breaking_description and commit.breaking_description != commit.message %} → {{ commit.breaking_description }}{% endif %} ([{{ commit.id | truncate(length=7, end="") }}]({{ repo_url }}/commit/{{ commit.id }}))\\n\\',
         '{% endfor %}\\',
