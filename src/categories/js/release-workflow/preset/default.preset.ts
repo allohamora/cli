@@ -34,6 +34,7 @@ body = """\
 \n\
 {% endif %}\
 ### {{ group | upper_first }}\n\
+\n\
 {% for commit in commits %}\
 - {% if commit.scope %}**{{ commit.scope }}:** {% endif %}{{ commit.message | split(pat="\n") | first | upper_first }}{% if commit.breaking_description and commit.breaking_description != commit.message %} → {{ commit.breaking_description }}{% endif %} ([{{ commit.id | truncate(length=7, end="") }}]({{ repo_url }}/commit/{{ commit.id }}))\n\
 {% endfor %}\
@@ -55,6 +56,8 @@ commit_parsers = [
     { message = "^revert", group = "<!-- 08 -->Revert" },
     { message = "^chore: release v\\d+\\.\\d+\\.\\d+", skip = true },
     { message = "^Merge pull request", skip = true },
+    { message = "^Merge branch", skip = true },
+    { message = "^Merge remote-tracking branch", skip = true },
     { message = "^ci", group = "<!-- 09 -->Continuous Integration" },
     { message = "^chore", group = "<!-- 10 -->Chores" },
     { message = ".*", group = "<!-- 11 -->Other" },
@@ -88,8 +91,16 @@ export const content = {
       },
       steps: [
         {
+          name: 'Restrict to default branch',
+          if: 'github.ref_name != github.event.repository.default_branch',
+          run: [
+            "echo \"Error: releases can only be run from the default branch '${{ github.event.repository.default_branch }}' (got '${{ github.ref_name }}').\"",
+            'exit 1',
+          ].join('\n'),
+        },
+        {
           name: 'Checkout code',
-          uses: 'actions/checkout@v6',
+          uses: 'actions/checkout@v7',
           with: {
             'fetch-depth': 0,
             'fetch-tags': true,
@@ -132,8 +143,8 @@ export const content = {
           ].join('\n'),
         },
         {
-          name: 'Generate changelog',
-          run: 'npx --no-install git-cliff --tag v${{ steps.version.outputs.version }} -o CHANGELOG.md',
+          name: 'Update changelog',
+          run: 'npx --no-install git-cliff --tag v${{ steps.version.outputs.version }} --unreleased --prepend CHANGELOG.md',
         },
         {
           name: 'Configure git',

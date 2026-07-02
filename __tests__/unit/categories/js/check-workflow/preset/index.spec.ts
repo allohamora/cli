@@ -18,7 +18,7 @@ describe('check-workflow/preset', () => {
           steps: [
             {
               name: 'Checkout code',
-              uses: 'actions/checkout@v6',
+              uses: 'actions/checkout@v7',
             },
             {
               name: 'Install node',

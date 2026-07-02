@@ -22,6 +22,9 @@ describe('release-workflow.installer', () => {
       const cliffToml = fileSystem.readFile('cliff.toml');
       expect(cliffToml).toContain(`{% set repo_url = "${REPO_URL}" %}`);
       expect(cliffToml).toContain('filter_unconventional = false');
+      expect(cliffToml).toContain('{ message = "^Merge pull request", skip = true }');
+      expect(cliffToml).toContain('{ message = "^Merge branch", skip = true }');
+      expect(cliffToml).toContain('{ message = "^Merge remote-tracking branch", skip = true }');
     });
 
     it('writes release workflow', async () => {
@@ -53,8 +56,14 @@ describe('release-workflow.installer', () => {
           '      contents: write',
           '      actions: write',
           '    steps:',
+          '      - name: Restrict to default branch',
+          '        if: github.ref_name != github.event.repository.default_branch',
+          '        run: |-',
+          "          echo \"Error: releases can only be run from the default branch '${{ github.event.repository.default_branch }}' (got '${{ github.ref_name }}').\"",
+          '          exit 1',
+          '',
           '      - name: Checkout code',
-          '        uses: actions/checkout@v6',
+          '        uses: actions/checkout@v7',
           '        with:',
           '          fetch-depth: 0',
           '          fetch-tags: true',
@@ -88,8 +97,8 @@ describe('release-workflow.installer', () => {
           '            echo "version=$(npx --no-install git-cliff --bumped-version | sed \'s/^v//\')" >> $GITHUB_OUTPUT',
           '          fi',
           '',
-          '      - name: Generate changelog',
-          '        run: npx --no-install git-cliff --tag v${{ steps.version.outputs.version }} -o CHANGELOG.md',
+          '      - name: Update changelog',
+          '        run: npx --no-install git-cliff --tag v${{ steps.version.outputs.version }} --unreleased --prepend CHANGELOG.md',
           '',
           '      - name: Configure git',
           '        run: |-',

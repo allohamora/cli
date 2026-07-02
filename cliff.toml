@@ -29,6 +29,7 @@ body = """\
 \n\
 {% endif %}\
 ### {{ group | upper_first }}\n\
+\n\
 {% for commit in commits %}\
 - {% if commit.scope %}**{{ commit.scope }}:** {% endif %}{{ commit.message | split(pat="\n") | first | upper_first }}{% if commit.breaking_description and commit.breaking_description != commit.message %} → {{ commit.breaking_description }}{% endif %} ([{{ commit.id | truncate(length=7, end="") }}]({{ repo_url }}/commit/{{ commit.id }}))\n\
 {% endfor %}\
@@ -50,6 +51,8 @@ commit_parsers = [
     { message = "^revert", group = "<!-- 08 -->Revert" },
     { message = "^chore: release v\\d+\\.\\d+\\.\\d+", skip = true },
     { message = "^Merge pull request", skip = true },
+    { message = "^Merge branch", skip = true },
+    { message = "^Merge remote-tracking branch", skip = true },
     { message = "^ci", group = "<!-- 09 -->Continuous Integration" },
     { message = "^chore", group = "<!-- 10 -->Chores" },
     { message = ".*", group = "<!-- 11 -->Other" },
