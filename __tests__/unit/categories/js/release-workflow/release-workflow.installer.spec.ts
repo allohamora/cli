@@ -22,6 +22,9 @@ describe('release-workflow.installer', () => {
       const cliffToml = fileSystem.readFile('cliff.toml');
       expect(cliffToml).toContain(`{% set repo_url = "${REPO_URL}" %}`);
       expect(cliffToml).toContain('filter_unconventional = false');
+      expect(cliffToml).toContain('{ message = "^Merge pull request", skip = true }');
+      expect(cliffToml).toContain('{ message = "^Merge branch", skip = true }');
+      expect(cliffToml).toContain('{ message = "^Merge remote-tracking branch", skip = true }');
     });
 
     it('writes release workflow', async () => {
