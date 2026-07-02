@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.1](https://github.com/allohamora/cli/compare/v2.3.0...v2.3.1) (2026-07-02)
+
+### Bug Fixes
+
+- Add touch CHANGELOG.md to Update changelog step ([aacae98](https://github.com/allohamora/cli/commit/aacae98e79e411be3ef7742b2c1b878d24275146))
+
 ## [2.3.0](https://github.com/allohamora/cli/compare/v2.2.3...v2.3.0) (2026-07-02)
 
 ### Features
