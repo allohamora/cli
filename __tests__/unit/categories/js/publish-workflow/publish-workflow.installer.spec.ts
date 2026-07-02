@@ -27,7 +27,7 @@ describe('publish-workflow.installer', () => {
           '      contents: read',
           '    steps:',
           '      - name: Checkout code',
-          '        uses: actions/checkout@v6',
+          '        uses: actions/checkout@v7',
           '',
           '      - name: Setup Node.js',
           '        uses: actions/setup-node@v6',

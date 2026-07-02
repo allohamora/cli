@@ -100,7 +100,7 @@ export const content = {
         },
         {
           name: 'Checkout code',
-          uses: 'actions/checkout@v6',
+          uses: 'actions/checkout@v7',
           with: {
             'fetch-depth': 0,
             'fetch-tags': true,

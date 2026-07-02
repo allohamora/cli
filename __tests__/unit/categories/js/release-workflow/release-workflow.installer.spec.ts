@@ -63,7 +63,7 @@ describe('release-workflow.installer', () => {
           '          exit 1',
           '',
           '      - name: Checkout code',
-          '        uses: actions/checkout@v6',
+          '        uses: actions/checkout@v7',
           '        with:',
           '          fetch-depth: 0',
           '          fetch-tags: true',
