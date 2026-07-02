@@ -1,6 +1,6 @@
 {
   "name": "@allohamora/cli",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "cli to initialize projects and more",
   "main": "./bin/cli.mjs",
   "types": "./bin/cli.d.mts",

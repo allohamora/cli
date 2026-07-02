@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.0](https://github.com/allohamora/cli/compare/v2.2.3...v2.3.0) (2026-07-02)
+
+### Features
+
+- Add cooldown: 3 days to dependabot ([e28ec71](https://github.com/allohamora/cli/commit/e28ec71029f648d775dd921b5fa9de3f6427ba93))
+- Add check script to check workflow ([e838ccd](https://github.com/allohamora/cli/commit/e838ccdf3dfb3e4d24919b8c3dd706bb820d56d3))
+- Restrict release to default branch ([e22c6f9](https://github.com/allohamora/cli/commit/e22c6f93b91aa6fa131a5c86c7ca3259629cb3b3))
+- Add merge branch commits to changelog ignore ([ce4a096](https://github.com/allohamora/cli/commit/ce4a09695188e4319dcff1086b69feb625145b96))
+- Add space between title and commits in changelog ([4d10dd0](https://github.com/allohamora/cli/commit/4d10dd02cc11e1c6085801074706880fb90b0476))
+- Update actions/checkout to v7 ([0f31e37](https://github.com/allohamora/cli/commit/0f31e37f9ad5ede2b89e8a3eba198c4b6f43b78b))
+- Add changelog updating instead of replacing ([a9e37d3](https://github.com/allohamora/cli/commit/a9e37d3b3a461453822ba5688681c68fcbb5ab18))
+
 ## [2.2.3](https://github.com/allohamora/cli/compare/v2.2.2...v2.2.3) (2026-06-25)
 
 ### Bug Fixes
