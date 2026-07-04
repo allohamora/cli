@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.2](https://github.com/allohamora/cli/compare/v2.3.1...v2.3.2) (2026-07-04)
+
+### Features
+
+- Add end_of_line to .editorconfig ([e7b536e](https://github.com/allohamora/cli/commit/e7b536e888540f8f3cb9452b003fea4009f18f48))
+
 ## [2.3.1](https://github.com/allohamora/cli/compare/v2.3.0...v2.3.1) (2026-07-02)
 
 ### Bug Fixes
