@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.3](https://github.com/allohamora/cli/compare/v2.3.2...v2.3.3) (2026-07-07)
+
+### Bug Fixes
+
+- Add limit release notes size step ([af595b2](https://github.com/allohamora/cli/commit/af595b262e29694a4cb7f1616b97f38471f2711a))
+
+### Styling
+
+- Add two spaces to if block in limit release notes size ([0016e0c](https://github.com/allohamora/cli/commit/0016e0cbae88104e7911bea58649f8c8b4ef1066))
+
 ## [2.3.2](https://github.com/allohamora/cli/compare/v2.3.1...v2.3.2) (2026-07-04)
 
 ### Features
