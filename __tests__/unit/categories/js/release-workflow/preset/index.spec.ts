@@ -121,6 +121,17 @@ describe('release-workflow/preset', () => {
               run: 'npx --no-install git-cliff --latest --strip header -o release-notes.md',
             },
             {
+              name: 'Limit release notes size',
+              run: [
+                'MAX_CHARS=125000',
+                "CHARS=$(wc -m < release-notes.md | tr -d ' ')",
+                'if [ "$CHARS" -gt "$MAX_CHARS" ]; then',
+                'echo "Release notes are too large ($CHARS characters, max $MAX_CHARS). Linking to CHANGELOG.md instead."',
+                'echo "Release notes are too large to display here. See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/v${{ steps.version.outputs.version }}/CHANGELOG.md) for the full changelog." > release-notes.md',
+                'fi',
+              ].join('\n'),
+            },
+            {
               name: 'Create release',
               env: {
                 GH_TOKEN: '${{ github.token }}',
