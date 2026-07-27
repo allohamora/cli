@@ -18,7 +18,6 @@ import { dependabot } from '#src/categories/js/dependabot/dependabot.installer.t
 import { editorconfig } from '#src/categories/js/editorconfig/editorconfig.installer.ts';
 import { setPrTitleWorkflow } from '#src/categories/js/set-pr-title-workflow/set-pr-title-workflow.installer.ts';
 import { tempDir } from '#src/categories/js/temp-dir/temp-dir.installer.ts';
-import { engines } from '#src/categories/js/engines/engines.installer.ts';
 import { devEngines } from '#src/categories/js/dev-engines/dev-engines.installer.ts';
 
 // order matters
@@ -42,7 +41,6 @@ const installers = {
   dependabot,
   editorconfig,
   tempDir,
-  engines,
   devEngines,
 };
 
