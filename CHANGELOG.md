@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.0](https://github.com/allohamora/cli/compare/v2.3.3...v2.4.0) (2026-07-27)
+
+### Features
+
+- Add dev-engines ([db70e77](https://github.com/allohamora/cli/commit/db70e772ff97ed71293f1667f5c4629a36ebbf56))
+- Remove engines ([d506857](https://github.com/allohamora/cli/commit/d506857ebbda223125759bae4fbcb6f5dd80aede))
+
+### Chores
+
+- **deps:** Bump actions/setup-node from 6 to 7 ([5383e44](https://github.com/allohamora/cli/commit/5383e44bfad0b2c83387f28d418c1a72c87e92ec))
+- Replace engines with devEngines ([458a324](https://github.com/allohamora/cli/commit/458a3244ae924461945f947ff6888bdbfb9bf1e8))
+
 ## [2.3.3](https://github.com/allohamora/cli/compare/v2.3.2...v2.3.3) (2026-07-07)
 
 ### Bug Fixes
