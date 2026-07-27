@@ -47,9 +47,15 @@
     "url": "https://github.com/allohamora/cli/issues"
   },
   "homepage": "https://github.com/allohamora/cli#readme",
-  "engines": {
-    "node": ">=24.14.1",
-    "npm": ">=11.11.0"
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=24.14.1"
+    },
+    "packageManager": {
+      "name": "npm",
+      "version": ">=11.11.0"
+    }
   },
   "files": [
     "bin/"
