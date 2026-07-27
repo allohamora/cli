@@ -63,6 +63,7 @@ npx @allohamora/cli --version                         # print version number
 | **editorconfig**          | creates an [.editorconfig](https://editorconfig.org) file                                                                                                                                                              |                                                    |
 | **temp-dir**              | creates a .temp directory with .gitkeep and adds it to .gitignore                                                                                                                                                      |                                                    |
 | **engines**               | sets up engines in package.json with the current node and npm versions                                                                                                                                                 |                                                    |
+| **dev-engines**           | sets up devEngines in package.json with the current node and npm versions                                                                                                                                              |                                                    |
 
 \*_Integrations run only if the package is installing or installed._
 
