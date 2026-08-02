@@ -31,7 +31,7 @@ export const dockerIgnore = dedent`
 
   ${IGNORE_NAME}
   ${FILE_NAME}
-  .docker-compose.yml
+  docker-compose.yml
 `;
 
 export const defaultPreset = {

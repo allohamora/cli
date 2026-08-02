@@ -42,7 +42,7 @@ describe('docker.installer', () => {
           '',
           '.dockerignore',
           'Dockerfile',
-          '.docker-compose.yml',
+          'docker-compose.yml',
           '',
         ].join('\n'),
       );
