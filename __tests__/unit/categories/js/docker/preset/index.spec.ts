@@ -34,7 +34,7 @@ describe('docker/preset', () => {
         '',
         '.dockerignore',
         'Dockerfile',
-        '.docker-compose.yml',
+        'docker-compose.yml',
       ].join('\n'),
     );
   });
