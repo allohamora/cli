@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/allohamora/cli/compare/v2.4.0...v2.4.1) (2026-08-03)
+
+### Bug Fixes
+
+- Remove . from docker-compose in dockerignore ([05a986d](https://github.com/allohamora/cli/commit/05a986d7b457834672477e21fe862df7c7a5c6d7))
+
 ## [2.4.0](https://github.com/allohamora/cli/compare/v2.3.3...v2.4.0) (2026-07-27)
 
 ### Features
