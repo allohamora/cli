@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.2](https://github.com/allohamora/cli/compare/v2.4.1...v2.4.2) (2026-08-08)
+
+### Bug Fixes
+
+- Correct git-cliff commit group labels and add build group ([ce06686](https://github.com/allohamora/cli/commit/ce06686f101c8e8d0569173ac4cf62bc0d379a93))
+- Order style commits before test commits in changelog ([ac81737](https://github.com/allohamora/cli/commit/ac8173745424a997277bc29eca35d1b9987cb85c))
+
 ## [2.4.1](https://github.com/allohamora/cli/compare/v2.4.0...v2.4.1) (2026-08-03)
 
 ### Bug Fixes
