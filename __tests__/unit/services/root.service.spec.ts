@@ -139,5 +139,16 @@ describe('root.service', () => {
 
       expect(fileSystem.readSymlink(rootFile)).toBe(target);
     });
+
+    it('overwrites an existing dangling symlink at the symlink path', async () => {
+      const fileName = '__test__.symlink';
+      const target = '__test__.target';
+
+      await writeRootSymlink(fileName, '__test__.missing-target');
+
+      await writeRootSymlink(fileName, target);
+
+      expect(fileSystem.readSymlink(fileName)).toBe(target);
+    });
   });
 });

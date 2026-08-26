@@ -29,7 +29,7 @@ export class FileSystem {
       vi.spyOn(fsp, 'access').mockImplementation(async (filepath) => {
         const relativePath = this.toRootRelativePath(filepath);
 
-        if (this.exists(relativePath)) {
+        if (this.resolvesToExistingEntry(relativePath)) {
           return;
         }
 
@@ -62,6 +62,10 @@ export class FileSystem {
       }),
       vi.spyOn(fsp, 'unlink').mockImplementation(async (filepath) => {
         const relativePath = this.toRootRelativePath(filepath);
+
+        if (!this.exists(relativePath)) {
+          throw Object.assign(new Error(`${relativePath} does not exist`), { code: 'ENOENT' });
+        }
 
         this.files.delete(relativePath);
         this.symlinks.delete(relativePath);
@@ -123,6 +127,22 @@ export class FileSystem {
 
   public getFiles() {
     return Object.fromEntries(new Map(this.files).entries());
+  }
+
+  private resolvesToExistingEntry(name: string, seen = new Set<string>()): boolean {
+    if (this.files.has(name) || this.dirs.has(name)) {
+      return true;
+    }
+
+    const target = this.symlinks.get(name);
+
+    if (target === undefined || seen.has(name)) {
+      return false;
+    }
+
+    seen.add(name);
+
+    return this.resolvesToExistingEntry(target, seen);
   }
 
   private toRootRelativePath(value: unknown) {
