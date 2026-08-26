@@ -94,7 +94,7 @@ describe('release-workflow.installer', () => {
           '          if [ -n "${{ inputs.version }}" ]; then',
           '            echo "version=${{ inputs.version }}" >> $GITHUB_OUTPUT',
           '          else',
-          '            echo "version=$(npx --no-install git-cliff --bumped-version | sed \'s/^v//\')" >> $GITHUB_OUTPUT',
+          '            echo "version=$(npx --no-install git-cliff --bumped-version --unreleased | sed \'s/^v//\')" >> $GITHUB_OUTPUT',
           '          fi',
           '',
           '      - name: Update changelog',
