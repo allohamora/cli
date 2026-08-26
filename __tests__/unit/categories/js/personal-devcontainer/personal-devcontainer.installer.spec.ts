@@ -26,5 +26,29 @@ describe('personal-devcontainer.installer', () => {
         expect(fileSystem.readFile(path.join(featurePath, 'install.sh'))).toBe(`${feature.installScript}\n`);
       }
     });
+
+    it('mounts a node_modules volume per workspace package for a monorepo', async () => {
+      const name = 'ridge-bridge';
+      const workspacePackages = [
+        { name: 'api', dirPath: 'apps/api' },
+        { name: 'client', dirPath: 'apps/client' },
+      ];
+
+      fileSystem.seed({
+        packageJson: { name: 'ridge-bridge', workspaces: ['apps/*'] },
+        files: {
+          'apps/api/package.json': JSON.stringify({ name: 'api' }),
+          'apps/client/package.json': JSON.stringify({ name: 'client' }),
+        },
+      });
+
+      await personalDevcontainer();
+
+      const nodeFeaturePath = path.join('.devcontainer', 'features', `${name}-node`);
+      const { featureJson, installScript } = getFeatures({ name, workspacePackages })[0]!;
+
+      expect(fileSystem.readJson(path.join(nodeFeaturePath, 'devcontainer-feature.json'))).toEqual(featureJson);
+      expect(fileSystem.readFile(path.join(nodeFeaturePath, 'install.sh'))).toBe(`${installScript}\n`);
+    });
   });
 });

@@ -1,6 +1,7 @@
 import fsp from 'node:fs/promises';
+import path from 'node:path';
 import type { JsonValue, PackageJson as BasePackageJson } from 'type-fest';
-import { resolveRootPath, writeRootJsonFile } from '#src/services/root.service.ts';
+import { existsInRoot, readRootFile, resolveRootPath, writeRootJsonFile } from '#src/services/root.service.ts';
 import { exec } from '#src/utils/terminal.utils.ts';
 import { CliError } from '#src/utils/error.utils.ts';
 
@@ -111,4 +112,53 @@ export const getProjectName = async () => {
   const packageJson = await readPackageJson();
 
   return validateProjectName(extractProjectName(packageJson));
+};
+
+export type WorkspacePackage = {
+  name: string;
+  dirPath: string;
+};
+
+const getWorkspacePatterns = (packageJson: PackageJson) => {
+  const { workspaces } = packageJson;
+
+  if (Array.isArray(workspaces)) {
+    return workspaces;
+  }
+
+  if (workspaces && Array.isArray(workspaces.packages)) {
+    return workspaces.packages;
+  }
+
+  return [];
+};
+
+const extractWorkspacePackageName = (packageJson: PackageJson, dirPath: string) => {
+  const rawName = packageJson.name;
+  if (!rawName) {
+    throw new CliError(`name is missing in ${path.join(dirPath, PACKAGE_JSON_NAME)}`);
+  }
+
+  const name = rawName.startsWith('@') ? rawName.slice(1).split('/')[1] : rawName;
+
+  return validateProjectName(name);
+};
+
+export const getWorkspacePackages = async (): Promise<WorkspacePackage[]> => {
+  const packageJson = await readPackageJson();
+  const patterns = getWorkspacePatterns(packageJson).map((pattern) => `${pattern}/`);
+
+  const packages: WorkspacePackage[] = [];
+
+  for await (const dirPath of fsp.glob(patterns)) {
+    const packageJsonPath = path.join(dirPath, PACKAGE_JSON_NAME);
+    if (!(await existsInRoot(packageJsonPath))) {
+      continue;
+    }
+
+    const workspacePackageJson = JSON.parse(await readRootFile(packageJsonPath)) as PackageJson;
+    packages.push({ name: extractWorkspacePackageName(workspacePackageJson, dirPath), dirPath });
+  }
+
+  return packages;
 };

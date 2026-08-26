@@ -20,11 +20,17 @@ export const getDevcontainerJson = ({ name }: GetDevcontainerJsonArgs) => ({
   runArgs: ['--name', `${name}-devcontainer`, '--sysctl', 'net.ipv6.conf.all.disable_ipv6=1'],
 });
 
-type GetFeaturesArgs = {
+type WorkspacePackage = {
   name: string;
+  dirPath: string;
 };
 
-export const getFeatures = ({ name }: GetFeaturesArgs) => [
+type GetFeaturesArgs = {
+  name: string;
+  workspacePackages?: WorkspacePackage[];
+};
+
+export const getFeatures = ({ name, workspacePackages = [] }: GetFeaturesArgs) => [
   {
     name: `${name}-node`,
     featureJson: {
@@ -43,6 +49,11 @@ export const getFeatures = ({ name }: GetFeaturesArgs) => [
           source: `devcontainer-${name}-node-modules`,
           target: `/workspaces/${name}/node_modules`,
         },
+        ...workspacePackages.map(({ name: packageName, dirPath }) => ({
+          type: 'volume',
+          source: `devcontainer-${name}-node-modules-${packageName}`,
+          target: `/workspaces/${name}/${dirPath}/node_modules`,
+        })),
       ],
       customizations: {
         vscode: {
@@ -55,13 +66,13 @@ export const getFeatures = ({ name }: GetFeaturesArgs) => [
       'set -eu',
       '',
       'WORKSPACES_DIR="/workspaces"',
-      `NODE_MODULES_DIR="$WORKSPACES_DIR/${name}/node_modules"`,
+      `PROJECT_DIR="$WORKSPACES_DIR/${name}"`,
       'NVM_PROFILE_SCRIPT="/etc/profile.d/nvm.sh"',
       'NVM_DIR_EXPORT=\'export NVM_DIR="/usr/local/share/nvm"\'',
       'NVM_SOURCE_LINE=\'[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"\'',
       '',
-      '# Set up the node_modules volume target',
-      'mkdir -p "$NODE_MODULES_DIR"',
+      '# Set up the node_modules volume targets',
+      `mkdir -p ${['node_modules', ...workspacePackages.map(({ dirPath }) => `${dirPath}/node_modules`)].map((dir) => `"$PROJECT_DIR/${dir}"`).join(' ')}`,
       'chown -R "$_REMOTE_USER:$(id -gn "$_REMOTE_USER")" "$WORKSPACES_DIR"',
       '',
       '# The node feature only wires nvm into bashrc/zshrc, which non-interactive login',
