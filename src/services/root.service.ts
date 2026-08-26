@@ -39,3 +39,16 @@ export const writeRootFile = async (name: string, content: string) => {
 export const writeRootJsonFile = async <C>(name: string, content: C) => {
   await writeRootFile(name, JSON.stringify(content, null, 2));
 };
+
+export const writeRootSymlink = async (name: string, target: string) => {
+  const filePath = resolveRootPath(name);
+
+  // ENOENT ("no such file") is fine here — nothing to remove; other errors should still surface.
+  await fsp.unlink(filePath).catch((error) => {
+    if (error.code !== 'ENOENT') {
+      throw error;
+    }
+  });
+
+  await fsp.symlink(target, filePath);
+};

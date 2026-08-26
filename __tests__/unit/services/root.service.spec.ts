@@ -9,6 +9,7 @@ import {
   ROOT_PATH,
   writeRootFile,
   writeRootJsonFile,
+  writeRootSymlink,
 } from '#src/services/root.service.ts';
 
 describe('root.service', () => {
@@ -118,6 +119,36 @@ describe('root.service', () => {
       await writeRootJsonFile(fileName, content);
 
       expect(fileSystem.readFile(fileName)).toBe(`${JSON.stringify(content, null, 2)}\n`);
+    });
+  });
+
+  describe('writeRootSymlink', () => {
+    it('adds a symlink to root', async () => {
+      const fileName = '__test__.symlink';
+      const target = '__test__.target';
+
+      await writeRootSymlink(fileName, target);
+
+      expect(fileSystem.readSymlink(fileName)).toBe(target);
+    });
+
+    it('overwrites an existing file at the symlink path', async () => {
+      const target = '__test__.target';
+
+      await writeRootSymlink(rootFile, target);
+
+      expect(fileSystem.readSymlink(rootFile)).toBe(target);
+    });
+
+    it('overwrites an existing dangling symlink at the symlink path', async () => {
+      const fileName = '__test__.symlink';
+      const target = '__test__.target';
+
+      await writeRootSymlink(fileName, '__test__.missing-target');
+
+      await writeRootSymlink(fileName, target);
+
+      expect(fileSystem.readSymlink(fileName)).toBe(target);
     });
   });
 });

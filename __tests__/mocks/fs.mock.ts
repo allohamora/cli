@@ -19,6 +19,7 @@ export class FileSystem {
 
   private dirs = new Set<string>();
   private files = new Map<string, string>();
+  private symlinks = new Map<string, string>();
 
   public setup(options?: SeedProjectOptions) {
     this.seed(options);
@@ -28,7 +29,7 @@ export class FileSystem {
       vi.spyOn(fsp, 'access').mockImplementation(async (filepath) => {
         const relativePath = this.toRootRelativePath(filepath);
 
-        if (this.exists(relativePath)) {
+        if (this.resolvesToExistingEntry(relativePath)) {
           return;
         }
 
@@ -54,6 +55,23 @@ export class FileSystem {
 
         return undefined;
       }),
+      vi.spyOn(fsp, 'symlink').mockImplementation(async (target, filepath) => {
+        this.symlinks.set(this.toRootRelativePath(filepath), String(target));
+
+        return undefined;
+      }),
+      vi.spyOn(fsp, 'unlink').mockImplementation(async (filepath) => {
+        const relativePath = this.toRootRelativePath(filepath);
+
+        if (!this.exists(relativePath)) {
+          throw Object.assign(new Error(`${relativePath} does not exist`), { code: 'ENOENT' });
+        }
+
+        this.files.delete(relativePath);
+        this.symlinks.delete(relativePath);
+
+        return undefined;
+      }),
     ];
   }
 
@@ -68,6 +86,7 @@ export class FileSystem {
   public seed({ dirs = [], files = {}, packageJson = {} }: SeedProjectOptions = {}) {
     this.files.clear();
     this.dirs.clear();
+    this.symlinks.clear();
 
     for (const dir of dirs) {
       this.dirs.add(dir);
@@ -83,11 +102,15 @@ export class FileSystem {
   }
 
   public exists(name: string) {
-    return this.files.has(name) || this.dirs.has(name);
+    return this.files.has(name) || this.dirs.has(name) || this.symlinks.has(name);
   }
 
   public readFile(name: string) {
     return this.files.get(name);
+  }
+
+  public readSymlink(name: string) {
+    return this.symlinks.get(name);
   }
 
   public readJson<T = unknown>(name: string) {
@@ -104,6 +127,22 @@ export class FileSystem {
 
   public getFiles() {
     return Object.fromEntries(new Map(this.files).entries());
+  }
+
+  private resolvesToExistingEntry(name: string, seen = new Set<string>()): boolean {
+    if (this.files.has(name) || this.dirs.has(name)) {
+      return true;
+    }
+
+    const target = this.symlinks.get(name);
+
+    if (target === undefined || seen.has(name)) {
+      return false;
+    }
+
+    seen.add(name);
+
+    return this.resolvesToExistingEntry(target, seen);
   }
 
   private toRootRelativePath(value: unknown) {
