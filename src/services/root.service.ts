@@ -39,3 +39,13 @@ export const writeRootFile = async (name: string, content: string) => {
 export const writeRootJsonFile = async <C>(name: string, content: C) => {
   await writeRootFile(name, JSON.stringify(content, null, 2));
 };
+
+export const writeRootSymlink = async (name: string, target: string) => {
+  const filePath = resolveRootPath(name);
+
+  if (await existsInRoot(name)) {
+    await fsp.unlink(filePath);
+  }
+
+  await fsp.symlink(target, filePath);
+};

@@ -19,6 +19,7 @@ export class FileSystem {
 
   private dirs = new Set<string>();
   private files = new Map<string, string>();
+  private symlinks = new Map<string, string>();
 
   public setup(options?: SeedProjectOptions) {
     this.seed(options);
@@ -54,6 +55,19 @@ export class FileSystem {
 
         return undefined;
       }),
+      vi.spyOn(fsp, 'symlink').mockImplementation(async (target, filepath) => {
+        this.symlinks.set(this.toRootRelativePath(filepath), String(target));
+
+        return undefined;
+      }),
+      vi.spyOn(fsp, 'unlink').mockImplementation(async (filepath) => {
+        const relativePath = this.toRootRelativePath(filepath);
+
+        this.files.delete(relativePath);
+        this.symlinks.delete(relativePath);
+
+        return undefined;
+      }),
     ];
   }
 
@@ -68,6 +82,7 @@ export class FileSystem {
   public seed({ dirs = [], files = {}, packageJson = {} }: SeedProjectOptions = {}) {
     this.files.clear();
     this.dirs.clear();
+    this.symlinks.clear();
 
     for (const dir of dirs) {
       this.dirs.add(dir);
@@ -83,11 +98,15 @@ export class FileSystem {
   }
 
   public exists(name: string) {
-    return this.files.has(name) || this.dirs.has(name);
+    return this.files.has(name) || this.dirs.has(name) || this.symlinks.has(name);
   }
 
   public readFile(name: string) {
     return this.files.get(name);
+  }
+
+  public readSymlink(name: string) {
+    return this.symlinks.get(name);
   }
 
   public readJson<T = unknown>(name: string) {
