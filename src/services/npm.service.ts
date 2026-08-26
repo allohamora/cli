@@ -74,3 +74,41 @@ export const getRepositoryUrl = async () => {
 
   return repositoryUrl;
 };
+
+const VALID_PROJECT_NAME_REGEX = /^[a-zA-Z0-9][a-zA-Z0-9_.-]*$/;
+
+const extractOwner = (packageJson: PackageJson) => {
+  const repositoryUrl = packageJson.homepage?.replace(/#.*$/, '');
+
+  return repositoryUrl ? new URL(repositoryUrl).pathname.split('/').filter(Boolean)[0] : undefined;
+};
+
+const extractProjectName = (packageJson: PackageJson) => {
+  const rawName = packageJson.name;
+  if (!rawName) {
+    throw new CliError('name is missing in package.json');
+  }
+
+  if (!rawName.startsWith('@')) {
+    return rawName;
+  }
+
+  const owner = extractOwner(packageJson);
+  const [scope, name] = rawName.slice(1).split('/');
+
+  return scope === owner ? name : scope;
+};
+
+const validateProjectName = (name?: string) => {
+  if (!name || !VALID_PROJECT_NAME_REGEX.test(name)) {
+    throw new CliError(`"${name}" is not a valid devcontainer project name`);
+  }
+
+  return name;
+};
+
+export const getProjectName = async () => {
+  const packageJson = await readPackageJson();
+
+  return validateProjectName(extractProjectName(packageJson));
+};

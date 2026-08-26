@@ -18,6 +18,7 @@ import { dependabot } from '#src/categories/js/dependabot/dependabot.installer.t
 import { editorconfig } from '#src/categories/js/editorconfig/editorconfig.installer.ts';
 import { agentsMd } from '#src/categories/js/agents-md/agents-md.installer.ts';
 import { reviewCommentsSkill } from '#src/categories/js/review-comments-skill/review-comments-skill.installer.ts';
+import { personalDevcontainer } from '#src/categories/js/personal-devcontainer/personal-devcontainer.installer.ts';
 import { setPrTitleWorkflow } from '#src/categories/js/set-pr-title-workflow/set-pr-title-workflow.installer.ts';
 import { tempDir } from '#src/categories/js/temp-dir/temp-dir.installer.ts';
 import { devEngines } from '#src/categories/js/dev-engines/dev-engines.installer.ts';
@@ -46,6 +47,7 @@ const installers = {
   devEngines,
   agentsMd,
   reviewCommentsSkill,
+  personalDevcontainer,
 };
 
 export default {

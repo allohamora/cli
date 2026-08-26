@@ -65,6 +65,7 @@ npx @allohamora/cli --version                         # print version number
 | **dev-engines**           | sets up devEngines in package.json with the current node and npm versions                                                                                                                                              |                                                    |
 | **agents-md**             | creates an AGENTS.md file with agent instructions and a CLAUDE.md symlink for tools that don't support AGENTS.md                                                                                                       |                                                    |
 | **review-comments-skill** | creates a `review-comments` agent skill at `.agents/skills/review-comments/SKILL.md` (with a `.claude/skills/review-comments` symlink) that walks PR review threads one at a time with the author                      |                                                    |
+| **personal-devcontainer** | creates a `.devcontainer/` setup (Node.js, GitHub CLI, Claude Code, and Codex, config persisted via volumes) for a personal VS Code Dev Container development environment                                              |                                                    |
 
 \*_Integrations run only if the package is installing or installed._
 

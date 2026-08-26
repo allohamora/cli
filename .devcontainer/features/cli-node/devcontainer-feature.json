@@ -1,7 +1,7 @@
 {
   "id": "cli-node",
   "version": "1.0.0",
-  "name": "CLI Node",
+  "name": "Cli Node",
   "description": "Installs Node.js and persists node_modules",
   "dependsOn": {
     "ghcr.io/devcontainers/features/node:2": {

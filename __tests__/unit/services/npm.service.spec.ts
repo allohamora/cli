@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import {
   addNpmScripts,
   getNpmVersion,
+  getProjectName,
   getRepositoryUrl,
   hasNpmScript,
   installDevDependencies,
@@ -118,6 +119,44 @@ describe('npm.service', () => {
       seedPackageJson({});
 
       await expect(getRepositoryUrl()).rejects.toThrow('homepage is missing in package.json');
+    });
+  });
+
+  describe('getProjectName', () => {
+    it('returns an unscoped name as-is', async () => {
+      seedPackageJson({ name: 'my-app' });
+
+      await expect(getProjectName()).resolves.toBe('my-app');
+    });
+
+    it('returns the part after the slash when the scope matches the GitHub owner', async () => {
+      seedPackageJson({ name: '@allohamora/cli', homepage: 'https://github.com/allohamora/cli' });
+
+      await expect(getProjectName()).resolves.toBe('cli');
+    });
+
+    it('returns the scope when it does not match the GitHub owner', async () => {
+      seedPackageJson({ name: '@hello/root', homepage: 'https://github.com/allohamora/cli' });
+
+      await expect(getProjectName()).resolves.toBe('hello');
+    });
+
+    it('throws when name is missing', async () => {
+      seedPackageJson({});
+
+      await expect(getProjectName()).rejects.toThrow('name is missing in package.json');
+    });
+
+    it('falls back to the scope when the name is scoped but homepage is missing', async () => {
+      seedPackageJson({ name: '@allohamora/cli' });
+
+      await expect(getProjectName()).resolves.toBe('allohamora');
+    });
+
+    it('throws when the derived name is not a valid devcontainer project name', async () => {
+      seedPackageJson({ name: '.bad-name' });
+
+      await expect(getProjectName()).rejects.toThrow('is not a valid devcontainer project name');
     });
   });
 
