@@ -64,6 +64,7 @@ npx @allohamora/cli --version                         # print version number
 | **temp-dir**              | creates a .temp directory with .gitkeep and adds it to .gitignore                                                                                                                                                      |                                                    |
 | **dev-engines**           | sets up devEngines in package.json with the current node and npm versions                                                                                                                                              |                                                    |
 | **agents-md**             | creates an AGENTS.md file with agent instructions and a CLAUDE.md symlink for tools that don't support AGENTS.md                                                                                                       |                                                    |
+| **review-comments-skill** | creates a `review-comments` agent skill at `.agents/skills/review-comments/SKILL.md` (with a `.claude/skills/review-comments` symlink) that walks PR review threads one at a time with the author                      |                                                    |
 
 \*_Integrations run only if the package is installing or installed._
 

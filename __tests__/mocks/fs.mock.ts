@@ -20,6 +20,7 @@ export class FileSystem {
   private dirs = new Set<string>();
   private files = new Map<string, string>();
   private symlinks = new Map<string, string>();
+  private symlinkTypes = new Map<string, string>();
 
   public setup(options?: SeedProjectOptions) {
     this.seed(options);
@@ -55,8 +56,14 @@ export class FileSystem {
 
         return undefined;
       }),
-      vi.spyOn(fsp, 'symlink').mockImplementation(async (target, filepath) => {
-        this.symlinks.set(this.toRootRelativePath(filepath), String(target));
+      vi.spyOn(fsp, 'symlink').mockImplementation(async (target, filepath, type) => {
+        const relativePath = this.toRootRelativePath(filepath);
+
+        this.symlinks.set(relativePath, String(target));
+
+        if (type) {
+          this.symlinkTypes.set(relativePath, String(type));
+        }
 
         return undefined;
       }),
@@ -65,6 +72,7 @@ export class FileSystem {
 
         this.files.delete(relativePath);
         this.symlinks.delete(relativePath);
+        this.symlinkTypes.delete(relativePath);
 
         return undefined;
       }),
@@ -83,6 +91,7 @@ export class FileSystem {
     this.files.clear();
     this.dirs.clear();
     this.symlinks.clear();
+    this.symlinkTypes.clear();
 
     for (const dir of dirs) {
       this.dirs.add(dir);
@@ -107,6 +116,10 @@ export class FileSystem {
 
   public readSymlink(name: string) {
     return this.symlinks.get(name);
+  }
+
+  public readSymlinkType(name: string) {
+    return this.symlinkTypes.get(name);
   }
 
   public readJson<T = unknown>(name: string) {

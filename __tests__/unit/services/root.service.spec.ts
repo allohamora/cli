@@ -139,5 +139,14 @@ describe('root.service', () => {
 
       expect(fileSystem.readSymlink(rootFile)).toBe(target);
     });
+
+    it('forwards the symlink type', async () => {
+      const fileName = '__test__.dir-symlink';
+      const target = '__test__.target-dir';
+
+      await writeRootSymlink(fileName, target, 'dir');
+
+      expect(fileSystem.readSymlinkType(fileName)).toBe('dir');
+    });
   });
 });
