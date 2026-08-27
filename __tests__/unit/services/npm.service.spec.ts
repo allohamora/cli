@@ -154,6 +154,12 @@ describe('npm.service', () => {
       await expect(getProjectName()).resolves.toBe('allohamora');
     });
 
+    it('falls back to the scope when homepage is not a valid url', async () => {
+      seedPackageJson({ name: '@allohamora/cli', homepage: 'not-a-valid-url' });
+
+      await expect(getProjectName()).resolves.toBe('allohamora');
+    });
+
     it('throws when the derived name is not a valid devcontainer project name', async () => {
       seedPackageJson({ name: '.bad-name' });
 

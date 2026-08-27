@@ -80,8 +80,15 @@ const VALID_PROJECT_NAME_REGEX = /^[a-zA-Z0-9][a-zA-Z0-9_.-]*$/;
 
 const extractOwner = (packageJson: PackageJson) => {
   const repositoryUrl = packageJson.homepage?.replace(/#.*$/, '');
+  if (!repositoryUrl) {
+    return;
+  }
 
-  return repositoryUrl ? new URL(repositoryUrl).pathname.split('/').filter(Boolean)[0] : undefined;
+  try {
+    return new URL(repositoryUrl).pathname.split('/').filter(Boolean)[0];
+  } catch {
+    return;
+  }
 };
 
 const extractProjectName = (packageJson: PackageJson) => {
