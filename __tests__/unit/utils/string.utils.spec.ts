@@ -25,6 +25,13 @@ describe('string.utils', () => {
 
       expect(actual).toBe(expected);
     });
+
+    it('collapses repeated hyphens instead of producing empty words', () => {
+      const actual = toTitleCase('my---app');
+      const expected = 'My App';
+
+      expect(actual).toBe(expected);
+    });
   });
 
   describe('toCamelCase', () => {

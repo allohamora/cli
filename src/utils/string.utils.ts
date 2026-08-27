@@ -8,6 +8,7 @@ export const toKebabCase = (camel: string) => {
 export const toTitleCase = (kebab: string) => {
   return kebab
     .split('-')
+    .filter(Boolean)
     .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
     .join(' ');
 };
