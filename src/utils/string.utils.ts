@@ -12,6 +12,10 @@ export const toTitleCase = (kebab: string) => {
     .join(' ');
 };
 
+export const pluralize = (count: number, singular: string, plural: string) => {
+  return count === 1 ? singular : plural;
+};
+
 export const toCamelCase = (kebab: string) => {
   const [first, ...rest] = kebab.split('-');
   const capitalizedRest = rest

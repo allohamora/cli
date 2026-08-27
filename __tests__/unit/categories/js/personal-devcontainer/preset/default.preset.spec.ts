@@ -81,7 +81,7 @@ describe('personal-devcontainer/preset/default.preset', () => {
           'NVM_DIR_EXPORT=\'export NVM_DIR="/usr/local/share/nvm"\'',
           'NVM_SOURCE_LINE=\'[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"\'',
           '',
-          '# Set up the node_modules volume targets',
+          '# Set up the node_modules volume target',
           'mkdir -p "$PROJECT_DIR/node_modules"',
           'chown -R "$_REMOTE_USER:$(id -gn "$_REMOTE_USER")" "$WORKSPACES_DIR"',
           '',

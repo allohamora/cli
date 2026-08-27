@@ -1,4 +1,4 @@
-import { toTitleCase } from '#src/utils/string.utils.ts';
+import { pluralize, toTitleCase } from '#src/utils/string.utils.ts';
 
 type GetDevcontainerJsonArgs = {
   name: string;
@@ -114,7 +114,7 @@ export const getFeatures = ({ name, workspacePackages = [], hasDockerCompose = f
       'NVM_DIR_EXPORT=\'export NVM_DIR="/usr/local/share/nvm"\'',
       'NVM_SOURCE_LINE=\'[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"\'',
       '',
-      '# Set up the node_modules volume targets',
+      `# Set up the node_modules volume ${pluralize(workspacePackages.length + 1, 'target', 'targets')}`,
       `mkdir -p ${['node_modules', ...workspacePackages.map(({ dirPath }) => `${dirPath}/node_modules`)].map((dir) => `"$PROJECT_DIR/${dir}"`).join(' ')}`,
       'chown -R "$_REMOTE_USER:$(id -gn "$_REMOTE_USER")" "$WORKSPACES_DIR"',
       '',
