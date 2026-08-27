@@ -4,7 +4,9 @@ import { describe, expect, it } from 'vitest';
 import {
   addNpmScripts,
   getNpmVersion,
+  getProjectName,
   getRepositoryUrl,
+  getWorkspacePackages,
   hasNpmScript,
   installDevDependencies,
   PACKAGE_JSON_NAME,
@@ -118,6 +120,118 @@ describe('npm.service', () => {
       seedPackageJson({});
 
       await expect(getRepositoryUrl()).rejects.toThrow('homepage is missing in package.json');
+    });
+  });
+
+  describe('getProjectName', () => {
+    it('returns an unscoped name as-is', async () => {
+      seedPackageJson({ name: 'my-app' });
+
+      await expect(getProjectName()).resolves.toBe('my-app');
+    });
+
+    it('returns the part after the slash when the scope matches the GitHub owner', async () => {
+      seedPackageJson({ name: '@allohamora/cli', homepage: 'https://github.com/allohamora/cli' });
+
+      await expect(getProjectName()).resolves.toBe('cli');
+    });
+
+    it('returns the scope when it does not match the GitHub owner', async () => {
+      seedPackageJson({ name: '@hello/root', homepage: 'https://github.com/allohamora/cli' });
+
+      await expect(getProjectName()).resolves.toBe('hello');
+    });
+
+    it('throws when name is missing', async () => {
+      seedPackageJson({});
+
+      await expect(getProjectName()).rejects.toThrow('name is missing in package.json');
+    });
+
+    it('falls back to the scope when the name is scoped but homepage is missing', async () => {
+      seedPackageJson({ name: '@allohamora/cli' });
+
+      await expect(getProjectName()).resolves.toBe('allohamora');
+    });
+
+    it('falls back to the scope when homepage is not a valid url', async () => {
+      seedPackageJson({ name: '@allohamora/cli', homepage: 'not-a-valid-url' });
+
+      await expect(getProjectName()).resolves.toBe('allohamora');
+    });
+
+    it('throws when the derived name is not a valid devcontainer project name', async () => {
+      seedPackageJson({ name: '.bad-name' });
+
+      await expect(getProjectName()).rejects.toThrow('is not a valid devcontainer project name');
+    });
+  });
+
+  describe('getWorkspacePackages', () => {
+    it('returns an empty array when there is no workspaces field', async () => {
+      seedPackageJson({ name: 'root' });
+
+      await expect(getWorkspacePackages()).resolves.toEqual([]);
+    });
+
+    it('resolves a trailing "/*" glob by scanning subdirectories for a package.json', async () => {
+      fileSystem.seed({
+        packageJson: { name: 'root', workspaces: ['apps/*'] },
+        files: {
+          'apps/api/package.json': JSON.stringify({ name: 'api' }),
+          'apps/client/package.json': JSON.stringify({ name: 'client' }),
+        },
+        dirs: ['apps/empty'],
+      });
+
+      await expect(getWorkspacePackages()).resolves.toEqual([
+        { name: 'api', dirPath: 'apps/api' },
+        { name: 'client', dirPath: 'apps/client' },
+      ]);
+    });
+
+    it('supports the { packages: [...] } workspaces config form', async () => {
+      fileSystem.seed({
+        packageJson: { name: 'root', workspaces: { packages: ['apps/*'] } },
+        files: {
+          'apps/api/package.json': JSON.stringify({ name: 'api' }),
+        },
+      });
+
+      await expect(getWorkspacePackages()).resolves.toEqual([{ name: 'api', dirPath: 'apps/api' }]);
+    });
+
+    it('treats a literal (non-glob) entry as a single package path', async () => {
+      fileSystem.seed({
+        packageJson: { name: 'root', workspaces: ['tools/cli'] },
+        files: {
+          'tools/cli/package.json': JSON.stringify({ name: 'cli-tool' }),
+        },
+      });
+
+      await expect(getWorkspacePackages()).resolves.toEqual([{ name: 'cli-tool', dirPath: 'tools/cli' }]);
+    });
+
+    it('strips the scope from a scoped workspace package name', async () => {
+      fileSystem.seed({
+        packageJson: { name: 'root', workspaces: ['apps/*'] },
+        files: {
+          'apps/api/package.json': JSON.stringify({ name: '@monorepo/api' }),
+        },
+      });
+
+      await expect(getWorkspacePackages()).resolves.toEqual([{ name: 'api', dirPath: 'apps/api' }]);
+    });
+
+    it('throws when a workspace package.json is missing a name', async () => {
+      fileSystem.seed({
+        packageJson: { name: 'root', workspaces: ['apps/*'] },
+        files: {
+          'apps/api/package.json': JSON.stringify({}),
+        },
+      });
+
+      await expect(getWorkspacePackages()).rejects.toThrow('name is missing in apps/api/package.json');
     });
   });
 

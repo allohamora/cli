@@ -80,7 +80,54 @@ export class FileSystem {
 
         return undefined;
       }),
+      vi.spyOn(fsp, 'glob').mockImplementation(((patterns: string | readonly string[]) => {
+        const patternList = (Array.isArray(patterns) ? patterns : [patterns]).map((pattern: string) =>
+          pattern.replace(/\/$/, ''),
+        );
+        const matches = [...this.dirPaths()].filter((dirPath) =>
+          patternList.some((pattern) => this.matchesGlobPattern(pattern, dirPath)),
+        );
+
+        return (async function* () {
+          for (const match of matches) {
+            yield match;
+          }
+        })();
+      }) as typeof fsp.glob),
     ];
+  }
+
+  private dirPaths() {
+    const paths = new Set<string>();
+
+    const addSegments = (fullPath: string, includeSelf: boolean) => {
+      const segments = fullPath.split('/');
+      const depth = includeSelf ? segments.length : segments.length - 1;
+
+      for (let i = 1; i <= depth; i++) {
+        paths.add(segments.slice(0, i).join('/'));
+      }
+    };
+
+    for (const dir of this.dirs) {
+      addSegments(dir, true);
+    }
+
+    for (const file of this.files.keys()) {
+      addSegments(file, false);
+    }
+
+    return paths;
+  }
+
+  private matchesGlobPattern(pattern: string, candidate: string) {
+    const patternSegments = pattern.split('/');
+    const candidateSegments = candidate.split('/');
+
+    return (
+      patternSegments.length === candidateSegments.length &&
+      patternSegments.every((segment, i) => segment === '*' || segment === candidateSegments[i])
+    );
   }
 
   public clear() {

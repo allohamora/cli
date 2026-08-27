@@ -1,6 +1,7 @@
 import fsp from 'node:fs/promises';
+import path from 'node:path';
 import type { JsonValue, PackageJson as BasePackageJson } from 'type-fest';
-import { resolveRootPath, writeRootJsonFile } from '#src/services/root.service.ts';
+import { existsInRoot, readRootFile, resolveRootPath, writeRootJsonFile } from '#src/services/root.service.ts';
 import { exec } from '#src/utils/terminal.utils.ts';
 import { CliError } from '#src/utils/error.utils.ts';
 
@@ -73,4 +74,98 @@ export const getRepositoryUrl = async () => {
   }
 
   return repositoryUrl;
+};
+
+const VALID_PROJECT_NAME_REGEX = /^[a-zA-Z0-9][a-zA-Z0-9_.-]*$/;
+
+const extractOwner = (packageJson: PackageJson) => {
+  const repositoryUrl = packageJson.homepage?.replace(/#.*$/, '');
+  if (!repositoryUrl) {
+    return;
+  }
+
+  try {
+    return new URL(repositoryUrl).pathname.split('/').filter(Boolean)[0];
+  } catch {
+    return;
+  }
+};
+
+const extractProjectName = (packageJson: PackageJson) => {
+  const rawName = packageJson.name;
+  if (!rawName) {
+    throw new CliError('name is missing in package.json');
+  }
+
+  if (!rawName.startsWith('@')) {
+    return rawName;
+  }
+
+  const owner = extractOwner(packageJson);
+  const [scope, name] = rawName.slice(1).split('/');
+
+  return scope === owner ? name : scope;
+};
+
+const validateProjectName = (name?: string) => {
+  if (!name || !VALID_PROJECT_NAME_REGEX.test(name)) {
+    throw new CliError(`"${name}" is not a valid devcontainer project name`);
+  }
+
+  return name;
+};
+
+export const getProjectName = async () => {
+  const packageJson = await readPackageJson();
+
+  return validateProjectName(extractProjectName(packageJson));
+};
+
+export type WorkspacePackage = {
+  name: string;
+  dirPath: string;
+};
+
+const getWorkspacePatterns = (packageJson: PackageJson) => {
+  const { workspaces } = packageJson;
+
+  if (Array.isArray(workspaces)) {
+    return workspaces;
+  }
+
+  if (workspaces && Array.isArray(workspaces.packages)) {
+    return workspaces.packages;
+  }
+
+  return [];
+};
+
+const extractWorkspacePackageName = (packageJson: PackageJson, dirPath: string) => {
+  const rawName = packageJson.name;
+  if (!rawName) {
+    throw new CliError(`name is missing in ${path.join(dirPath, PACKAGE_JSON_NAME)}`);
+  }
+
+  const name = rawName.startsWith('@') ? rawName.slice(1).split('/')[1] : rawName;
+
+  return validateProjectName(name);
+};
+
+export const getWorkspacePackages = async (): Promise<WorkspacePackage[]> => {
+  const packageJson = await readPackageJson();
+  const patterns = getWorkspacePatterns(packageJson).map((pattern) => `${pattern}/`);
+
+  const packages: WorkspacePackage[] = [];
+
+  for await (const dirPath of fsp.glob(patterns)) {
+    const packageJsonPath = path.join(dirPath, PACKAGE_JSON_NAME);
+    if (!(await existsInRoot(packageJsonPath))) {
+      continue;
+    }
+
+    const workspacePackageJson = JSON.parse(await readRootFile(packageJsonPath)) as PackageJson;
+    packages.push({ name: extractWorkspacePackageName(workspacePackageJson, dirPath), dirPath });
+  }
+
+  return packages;
 };

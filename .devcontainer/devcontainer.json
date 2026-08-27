@@ -1,0 +1,15 @@
+{
+  "name": "cli",
+  "remoteUser": "vscode",
+  "containerUser": "vscode",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/cli,type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/cli",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "./features/personal-github-cli": {},
+    "./features/cli-node": {},
+    "./features/personal-claude-code": {},
+    "./features/personal-codex": {}
+  },
+  "runArgs": ["--name", "cli-devcontainer", "--sysctl", "net.ipv6.conf.all.disable_ipv6=1"]
+}
