@@ -1,5 +1,7 @@
 import { existsInRoot } from '#src/services/root.service.ts';
 
 export const hasDockerComposeFile = async () => {
-  return (await existsInRoot('docker-compose.yml')) || (await existsInRoot('docker-compose.yaml'));
+  const filenames = ['compose.yaml', 'compose.yml', 'docker-compose.yaml', 'docker-compose.yml'];
+
+  return (await Promise.all(filenames.map(existsInRoot))).some(Boolean);
 };

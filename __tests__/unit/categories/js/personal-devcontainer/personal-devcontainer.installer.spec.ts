@@ -51,7 +51,7 @@ describe('personal-devcontainer.installer', () => {
       expect(fileSystem.readFile(path.join(nodeFeaturePath, 'install.sh'))).toBe(`${installScript}\n`);
     });
 
-    it.each(['docker-compose.yml', 'docker-compose.yaml'])(
+    it.each(['compose.yaml', 'compose.yml', 'docker-compose.yaml', 'docker-compose.yml'])(
       'adds the docker-in-docker feature and privileged mode when %s exists',
       async (composeFileName) => {
         const name = 'my-app';

@@ -10,16 +10,13 @@ describe('docker.service', () => {
       expect(await hasDockerComposeFile()).toBe(false);
     });
 
-    it('returns true when docker-compose.yml exists', async () => {
-      fileSystem.seed({ files: { 'docker-compose.yml': 'services: {}' } });
+    it.each(['compose.yaml', 'compose.yml', 'docker-compose.yaml', 'docker-compose.yml'])(
+      'returns true when %s exists',
+      async (composeFileName) => {
+        fileSystem.seed({ files: { [composeFileName]: 'services: {}' } });
 
-      expect(await hasDockerComposeFile()).toBe(true);
-    });
-
-    it('returns true when docker-compose.yaml exists', async () => {
-      fileSystem.seed({ files: { 'docker-compose.yaml': 'services: {}' } });
-
-      expect(await hasDockerComposeFile()).toBe(true);
-    });
+        expect(await hasDockerComposeFile()).toBe(true);
+      },
+    );
   });
 });
