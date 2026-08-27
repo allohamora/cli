@@ -21,7 +21,7 @@ import { reviewCommentsSkill } from '#src/categories/js/review-comments-skill/re
 import { personalDevcontainer } from '#src/categories/js/personal-devcontainer/personal-devcontainer.installer.ts';
 import { setPrTitleWorkflow } from '#src/categories/js/set-pr-title-workflow/set-pr-title-workflow.installer.ts';
 import { tempDir } from '#src/categories/js/temp-dir/temp-dir.installer.ts';
-import { devEngines } from '#src/categories/js/dev-engines/dev-engines.installer.ts';
+import { engines } from '#src/categories/js/engines/engines.installer.ts';
 
 // order matters
 const installers = {
@@ -44,7 +44,7 @@ const installers = {
   dependabot,
   editorconfig,
   tempDir,
-  devEngines,
+  engines,
   agentsMd,
   reviewCommentsSkill,
   personalDevcontainer,
