@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.0](https://github.com/allohamora/cli/compare/v2.5.0...v2.6.0) (2026-08-27)
+
+### Features
+
+- Replace devEngines with engines and packageManager ([b39c14b](https://github.com/allohamora/cli/commit/b39c14b74e31e52794ae1135bc4ce40ef84f4be9))
+- Bump actions/setup-node to v7 in workflow presets ([287c9da](https://github.com/allohamora/cli/commit/287c9da7ef27afd50ed57711f993ac915b50e492))
+
 ## [2.5.0](https://github.com/allohamora/cli/compare/v2.4.2...v2.5.0) (2026-08-27)
 
 ### Features
