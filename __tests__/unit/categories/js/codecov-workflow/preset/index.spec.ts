@@ -22,7 +22,7 @@ describe('codecov-workflow/preset', () => {
             },
             {
               name: 'Install node',
-              uses: 'actions/setup-node@v6',
+              uses: 'actions/setup-node@v7',
               with: {
                 cache: 'npm',
               },

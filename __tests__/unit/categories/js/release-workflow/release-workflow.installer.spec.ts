@@ -69,7 +69,7 @@ describe('release-workflow.installer', () => {
           '          fetch-tags: true',
           '',
           '      - name: Install node',
-          '        uses: actions/setup-node@v6',
+          '        uses: actions/setup-node@v7',
           '        with:',
           '          cache: npm',
           '',
