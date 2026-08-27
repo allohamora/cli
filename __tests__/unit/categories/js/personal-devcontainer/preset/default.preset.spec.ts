@@ -169,6 +169,17 @@ describe('personal-devcontainer/preset/default.preset', () => {
       );
     });
 
+    it('escapes shell metacharacters in a workspace package dirPath', () => {
+      const [nodeFeature] = getFeatures({
+        name: 'my-app',
+        workspacePackages: [{ name: 'evil', dirPath: 'apps/$(touch pwned)' }],
+      });
+
+      expect(nodeFeature?.installScript).toContain(
+        'mkdir -p "$PROJECT_DIR/node_modules" "$PROJECT_DIR/apps/\\$(touch pwned)/node_modules"',
+      );
+    });
+
     it('returns the personal-github-cli, personal-claude-code, and personal-codex features unchanged by name', () => {
       const [, githubCliFeature, claudeCodeFeature, codexFeature] = getFeatures({ name: 'my-app' });
 

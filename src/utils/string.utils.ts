@@ -17,6 +17,10 @@ export const pluralize = (count: number, singular: string, plural: string) => {
   return count === 1 ? singular : plural;
 };
 
+export const escapeForDoubleQuotedShell = (value: string) => {
+  return value.replace(/[\\"$`]/g, '\\$&');
+};
+
 export const toCamelCase = (kebab: string) => {
   const [first, ...rest] = kebab.split('-');
   const capitalizedRest = rest
