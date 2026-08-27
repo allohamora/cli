@@ -20,6 +20,26 @@ describe('personal-devcontainer/preset/default.preset', () => {
         runArgs: ['--name', 'my-app-devcontainer', '--sysctl', 'net.ipv6.conf.all.disable_ipv6=1'],
       });
     });
+
+    it('adds the docker-in-docker feature and privileged mode when a docker-compose file exists', () => {
+      expect(getDevcontainerJson({ name: 'my-app', hasDockerCompose: true })).toEqual({
+        name: 'my-app',
+        remoteUser: 'vscode',
+        containerUser: 'vscode',
+        workspaceMount: 'source=${localWorkspaceFolder},target=/workspaces/my-app,type=bind,consistency=cached',
+        workspaceFolder: '/workspaces/my-app',
+        image: 'mcr.microsoft.com/devcontainers/base:ubuntu-24.04',
+        features: {
+          './features/personal-docker-in-docker': {},
+          './features/personal-github-cli': {},
+          './features/my-app-node': {},
+          './features/personal-claude-code': {},
+          './features/personal-codex': {},
+        },
+        runArgs: ['--name', 'my-app-devcontainer', '--sysctl', 'net.ipv6.conf.all.disable_ipv6=1'],
+        privileged: true,
+      });
+    });
   });
 
   describe('getFeatures', () => {
@@ -294,6 +314,52 @@ describe('personal-devcontainer/preset/default.preset', () => {
           '',
           '# Verify the native installation',
           '"${_REMOTE_USER_HOME}/.local/bin/codex" --version',
+        ].join('\n'),
+      );
+    });
+
+    it('does not return the docker-in-docker feature when there is no docker-compose file', () => {
+      expect(getFeatures({ name: 'my-app' })).toHaveLength(4);
+    });
+
+    it('returns the docker-in-docker feature first when there is a docker-compose file', () => {
+      const features = getFeatures({ name: 'my-app', hasDockerCompose: true });
+      const dockerFeature = features[0];
+
+      expect(features).toHaveLength(5);
+      expect(dockerFeature?.name).toBe('personal-docker-in-docker');
+      expect(dockerFeature?.featureJson).toEqual({
+        id: 'personal-docker-in-docker',
+        version: '1.0.0',
+        name: 'Personal Docker-in-Docker',
+        description: 'Installs Docker-in-Docker with persistent Docker data',
+        dependsOn: {
+          'ghcr.io/devcontainers/features/docker-in-docker:4': {},
+        },
+        mounts: [
+          {
+            type: 'volume',
+            source: 'devcontainer-personal-docker-in-docker-data',
+            target: '/var/lib/docker',
+          },
+          {
+            type: 'volume',
+            source: 'devcontainer-personal-docker-in-docker-containerd',
+            target: '/var/lib/containerd',
+          },
+        ],
+        customizations: {
+          vscode: {
+            extensions: ['docker.docker', 'ms-azuretools.vscode-containers', 'ms-azuretools.vscode-docker'],
+          },
+        },
+      });
+      expect(dockerFeature?.installScript).toBe(
+        [
+          '#!/bin/sh',
+          'set -eu',
+          '',
+          '# Docker installation is provided by the official Docker-in-Docker Feature dependency.',
         ].join('\n'),
       );
     });

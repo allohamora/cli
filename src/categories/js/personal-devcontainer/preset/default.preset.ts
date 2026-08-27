@@ -2,9 +2,10 @@ import { toTitleCase } from '#src/utils/string.utils.ts';
 
 type GetDevcontainerJsonArgs = {
   name: string;
+  hasDockerCompose?: boolean;
 };
 
-export const getDevcontainerJson = ({ name }: GetDevcontainerJsonArgs) => ({
+export const getDevcontainerJson = ({ name, hasDockerCompose = false }: GetDevcontainerJsonArgs) => ({
   name,
   remoteUser: 'vscode',
   containerUser: 'vscode',
@@ -12,12 +13,14 @@ export const getDevcontainerJson = ({ name }: GetDevcontainerJsonArgs) => ({
   workspaceFolder: `/workspaces/${name}`,
   image: 'mcr.microsoft.com/devcontainers/base:ubuntu-24.04',
   features: {
+    ...(hasDockerCompose ? { './features/personal-docker-in-docker': {} } : {}),
     './features/personal-github-cli': {},
     [`./features/${name}-node`]: {},
     './features/personal-claude-code': {},
     './features/personal-codex': {},
   },
   runArgs: ['--name', `${name}-devcontainer`, '--sysctl', 'net.ipv6.conf.all.disable_ipv6=1'],
+  ...(hasDockerCompose ? { privileged: true } : {}),
 });
 
 type WorkspacePackage = {
@@ -28,9 +31,49 @@ type WorkspacePackage = {
 type GetFeaturesArgs = {
   name: string;
   workspacePackages?: WorkspacePackage[];
+  hasDockerCompose?: boolean;
 };
 
-export const getFeatures = ({ name, workspacePackages = [] }: GetFeaturesArgs) => [
+export const getFeatures = ({ name, workspacePackages = [], hasDockerCompose = false }: GetFeaturesArgs) => [
+  ...(hasDockerCompose
+    ? [
+        {
+          name: 'personal-docker-in-docker',
+          featureJson: {
+            id: 'personal-docker-in-docker',
+            version: '1.0.0',
+            name: 'Personal Docker-in-Docker',
+            description: 'Installs Docker-in-Docker with persistent Docker data',
+            dependsOn: {
+              'ghcr.io/devcontainers/features/docker-in-docker:4': {},
+            },
+            mounts: [
+              {
+                type: 'volume',
+                source: 'devcontainer-personal-docker-in-docker-data',
+                target: '/var/lib/docker',
+              },
+              {
+                type: 'volume',
+                source: 'devcontainer-personal-docker-in-docker-containerd',
+                target: '/var/lib/containerd',
+              },
+            ],
+            customizations: {
+              vscode: {
+                extensions: ['docker.docker', 'ms-azuretools.vscode-containers', 'ms-azuretools.vscode-docker'],
+              },
+            },
+          },
+          installScript: [
+            '#!/bin/sh',
+            'set -eu',
+            '',
+            '# Docker installation is provided by the official Docker-in-Docker Feature dependency.',
+          ].join('\n'),
+        },
+      ]
+    : []),
   {
     name: `${name}-node`,
     featureJson: {

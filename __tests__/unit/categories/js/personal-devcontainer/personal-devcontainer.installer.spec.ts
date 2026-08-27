@@ -50,5 +50,33 @@ describe('personal-devcontainer.installer', () => {
       expect(fileSystem.readJson(path.join(nodeFeaturePath, 'devcontainer-feature.json'))).toEqual(featureJson);
       expect(fileSystem.readFile(path.join(nodeFeaturePath, 'install.sh'))).toBe(`${installScript}\n`);
     });
+
+    it.each(['docker-compose.yml', 'docker-compose.yaml'])(
+      'adds the docker-in-docker feature and privileged mode when %s exists',
+      async (composeFileName) => {
+        const name = 'my-app';
+
+        fileSystem.seed({
+          packageJson: { name: '@allohamora/my-app', homepage: 'https://github.com/allohamora/my-app' },
+          files: { [composeFileName]: 'services: {}' },
+        });
+
+        await personalDevcontainer();
+
+        expect(fileSystem.readJson(path.join('.devcontainer', 'devcontainer.json'))).toEqual(
+          getDevcontainerJson({ name, hasDockerCompose: true }),
+        );
+
+        const dockerFeaturePath = path.join('.devcontainer', 'features', 'personal-docker-in-docker');
+        const [dockerFeature] = getFeatures({ name, hasDockerCompose: true });
+
+        expect(fileSystem.readJson(path.join(dockerFeaturePath, 'devcontainer-feature.json'))).toEqual(
+          dockerFeature?.featureJson,
+        );
+        expect(fileSystem.readFile(path.join(dockerFeaturePath, 'install.sh'))).toBe(
+          `${dockerFeature?.installScript}\n`,
+        );
+      },
+    );
   });
 });
