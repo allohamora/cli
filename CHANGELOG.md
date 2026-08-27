@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.0](https://github.com/allohamora/cli/compare/v2.4.2...v2.5.0) (2026-08-27)
+
+### Features
+
+- Add agents-md option to scaffold AGENTS.md and CLAUDE.md symlink ([5475e3b](https://github.com/allohamora/cli/commit/5475e3b0db1adbae4e20f60a528ec3d674765168))
+- Add review-comments-skill option to scaffold a review-comments agent skill ([414e0c4](https://github.com/allohamora/cli/commit/414e0c42fed661f9ffea834ea14c30f6dd173d5e))
+- Add devcontainer config with node, github cli, claude code, and codex features ([ba1b7bb](https://github.com/allohamora/cli/commit/ba1b7bb248ad0e0eb1fd0dd2edaed6962e25977f))
+- Add personal-devcontainer option to scaffold a .devcontainer/ setup ([888bcd6](https://github.com/allohamora/cli/commit/888bcd6e96c71e1bd5d4006e830a42658be8e68d))
+- Add per-workspace node_modules volumes to personal-devcontainer ([a007869](https://github.com/allohamora/cli/commit/a007869eba5438b39d8f7f9dbc98e1bef5391dc1))
+- Add docker-in-docker feature to personal-devcontainer ([7841e1b](https://github.com/allohamora/cli/commit/7841e1b618b24fcef319ecd1fc20a1c910e03aec))
+- Pluralize node_modules volume target comment based on package count ([4302fa9](https://github.com/allohamora/cli/commit/4302fa97acc1c04dc5cbb4d05ad09b1f35a89846))
+
+### Bug Fixes
+
+- Add --unreleased flag to git-cliff bumped-version calculation ([061715d](https://github.com/allohamora/cli/commit/061715d517b19f40679fd88baeb725156d76aa95))
+- Unlink dangling symlinks before recreating them at the same path ([7805e56](https://github.com/allohamora/cli/commit/7805e56a0e975ec50a5eaac34fd096835c3365e9))
+- Annotate reply-format code fences with a language in the review-comments skill ([1c80d68](https://github.com/allohamora/cli/commit/1c80d68444bb7a9df69c6ddb9d1121374a7c645a))
+- Expose pageInfo on comments in the review-comments skill query ([bc33509](https://github.com/allohamora/cli/commit/bc335097ecc7cf6486c75421ff800a17e9fe0a23))
+- Prevent extractOwner from throwing on invalid homepage url ([38a0cd9](https://github.com/allohamora/cli/commit/38a0cd96e8bb4aa54c998bf7b54036259daa872e))
+- Collapse repeated hyphens in toTitleCase ([27a8555](https://github.com/allohamora/cli/commit/27a8555650ba589f6656e88a8d1d52f14724d088))
+- Shell-escape workspace dirPath in generated mkdir command ([149bc92](https://github.com/allohamora/cli/commit/149bc92437e7be4374580e7c4a925de1334e2bb4))
+- Detect canonical compose.yaml/compose.yml filenames ([5d292b6](https://github.com/allohamora/cli/commit/5d292b66aa14920b66e2d1ba18baed0815aa1dbc))
+
+### Code Refactoring
+
+- Rename hasDockerComposeYml to hasDockerComposeFile ([87cfefd](https://github.com/allohamora/cli/commit/87cfefd69bcf9a5f8e713f0d9d9803d8c067ba3b))
+
+### Tests
+
+- Assert real markdown content in agents-md default preset spec ([8ba6386](https://github.com/allohamora/cli/commit/8ba63869006990368cf7140635552b64bf7e834c))
+- Assert agents-md markdown independently of the preset it tests ([0fb0af4](https://github.com/allohamora/cli/commit/0fb0af4649ff9d2e1feba04784c49f49f7f55bfa))
+- Inline expected review-comments skill markdown as line arrays ([ce27ab7](https://github.com/allohamora/cli/commit/ce27ab7a4dabb8d5255cf0652ad708486439a769))
+
+### Continuous Integration
+
+- Add devcontainer-lock.json ([f4a88ad](https://github.com/allohamora/cli/commit/f4a88ad5e431ab53028cb9fcb8d7f3da35b36da7))
+
+### Miscellaneous Chores
+
+- Apply npm audit fix ([81dbf31](https://github.com/allohamora/cli/commit/81dbf3112ff81a773b742f98865e3f44934bb08e))
+
 ## [2.4.2](https://github.com/allohamora/cli/compare/v2.4.1...v2.4.2) (2026-08-08)
 
 ### Bug Fixes
