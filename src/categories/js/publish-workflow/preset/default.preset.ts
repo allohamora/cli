@@ -25,7 +25,7 @@ export const defaultPreset = {
           },
           {
             name: 'Setup Node.js',
-            uses: 'actions/setup-node@v6',
+            uses: 'actions/setup-node@v7',
             with: {
               'registry-url': 'https://registry.npmjs.org',
               'package-manager-cache': false,

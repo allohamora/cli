@@ -30,7 +30,7 @@ describe('publish-workflow.installer', () => {
           '        uses: actions/checkout@v7',
           '',
           '      - name: Setup Node.js',
-          '        uses: actions/setup-node@v6',
+          '        uses: actions/setup-node@v7',
           '        with:',
           '          registry-url: https://registry.npmjs.org',
           '          package-manager-cache: false',
