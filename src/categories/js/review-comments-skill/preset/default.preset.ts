@@ -67,6 +67,7 @@ export const content = dedent(`
             path
             line
             comments(first: 10) {
+              pageInfo { hasNextPage endCursor }
               nodes {
                 url
                 body

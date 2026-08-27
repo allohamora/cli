@@ -67,6 +67,7 @@ gh api graphql -f query='{
           path
           line
           comments(first: 10) {
+            pageInfo { hasNextPage endCursor }
             nodes {
               url
               body
