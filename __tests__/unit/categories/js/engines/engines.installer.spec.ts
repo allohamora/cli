@@ -1,11 +1,11 @@
 import { fileSystem, terminal } from '#__tests__/setup-test-context.ts';
-import { devEngines } from '#src/categories/js/dev-engines/dev-engines.installer.ts';
+import { engines } from '#src/categories/js/engines/engines.installer.ts';
 import { PACKAGE_JSON_NAME } from '#src/services/npm.service.ts';
 import { describe, expect, it } from 'vitest';
 
-describe('dev-engines.installer', () => {
-  describe('devEngines', () => {
-    it('sets devEngines field with the current node and npm versions', async () => {
+describe('engines.installer', () => {
+  describe('engines', () => {
+    it('sets engines and packageManager fields with the current node and npm versions', async () => {
       fileSystem.seed({ packageJson: {} });
       terminal.setCommandHandler((bin, args) => {
         if (bin === 'node' && args[0] === '-v') {
@@ -19,23 +19,18 @@ describe('dev-engines.installer', () => {
         return { stdout: '' };
       });
 
-      await devEngines();
+      await engines();
 
       expect(terminal.getCommands()).toEqual([
         ['node', ['-v']],
         ['npm', ['-v']],
       ]);
       expect(fileSystem.readJson(PACKAGE_JSON_NAME)).toEqual({
-        devEngines: {
-          runtime: {
-            name: 'node',
-            version: '>=24.14.1',
-          },
-          packageManager: {
-            name: 'npm',
-            version: '>=11.11.0',
-          },
+        engines: {
+          node: '>=24.14.1',
+          npm: '>=11.11.0',
         },
+        packageManager: 'npm@11.11.0',
       });
     });
   });
