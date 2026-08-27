@@ -31,7 +31,7 @@ description: Walk through PR review comments one at a time with the author - ass
 
 Fixed with a commit:
 
-\`\`\`
+\`\`\`text
 <commit-url>
 \`\`\`
 
@@ -39,7 +39,7 @@ e.g. \`https://github.com/<owner>/<repo>/commit/<sha>\`
 
 Declined with a reason:
 
-\`\`\`
+\`\`\`text
 <Reason why this is not needed.>
 \`\`\`
 

@@ -31,7 +31,7 @@ export const content = dedent(`
 
   Fixed with a commit:
 
-  \`\`\`
+  \`\`\`text
   <commit-url>
   \`\`\`
 
@@ -39,7 +39,7 @@ export const content = dedent(`
 
   Declined with a reason:
 
-  \`\`\`
+  \`\`\`text
   <Reason why this is not needed.>
   \`\`\`
 
