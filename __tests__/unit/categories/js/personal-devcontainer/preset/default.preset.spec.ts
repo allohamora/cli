@@ -54,7 +54,7 @@ describe('personal-devcontainer/preset/default.preset', () => {
         description: 'Installs Node.js and persists node_modules',
         dependsOn: {
           'ghcr.io/devcontainers/features/node:2': {
-            version: '24.14.1',
+            version: '24.22.1',
           },
         },
         mounts: [
