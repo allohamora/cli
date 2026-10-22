@@ -28,8 +28,8 @@ npx @allohamora/cli --version                         # print version number
 
 ```json
 {
-  "node": ">=24.14.1",
-  "npm": ">=11.11.0"
+  "node": ">=24.22.1",
+  "npm": ">=11.19.1"
 }
 ```
 
